@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+  <!-- regular spring configuration file defining the beans for this
+       bundle. The configuration of OSGi definitions is kept in a separate 
+       configuration file so that this file can easily be used
+       for integration testing outside of an OSGi environment -->
+       
+    <!-- Active @Autowired spring annotation -->
+    <context:annotation-config/>
+    
+    <!-- Activate OSGi configuration for the Load Time Weaver -->
+    <context:load-time-weaver aspectj-weaving="on" />
+
+    <!-- Aspects configuration -->
+    <aop:config proxy-target-class="false">
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* *..*ServiceImpl.*(..))"/>
+    </aop:config>
+               
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" rollback-for="java.lang.Exception"/>
+            <tx:method name="add*" rollback-for="java.lang.Exception"/>
+            <tx:method name="set*" rollback-for="java.lang.Exception"/>
+            <tx:method name="delete*" rollback-for="java.lang.Exception"/>
+            <tx:method name="*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+        
+	<bean id="actionService" class="com.thingtrack.konekti.service.impl.internal.ActionServiceImpl"/>
+	<bean id="addressService" class="com.thingtrack.konekti.service.impl.internal.AddressServiceImpl"/>
+	<bean id="alarmService" class="com.thingtrack.konekti.service.impl.internal.AlarmServiceImpl"/>
+	<bean id="alarmJobService" class="com.thingtrack.konekti.service.impl.internal.AlarmJobServiceImpl"/>
+	<bean id="alarmTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.AlarmTriggerTypeServiceImpl"/>  
+	<bean id="alarmStatusService" class="com.thingtrack.konekti.service.impl.internal.AlarmStatusServiceImpl"/>
+	<bean id="alarmTypeService" class="com.thingtrack.konekti.service.impl.internal.AlarmTypeServiceImpl"/>
+	<bean id="attachmentService" class="com.thingtrack.konekti.service.impl.internal.AttachmentServiceImpl"/>
+	<bean id="calendarService" class="com.thingtrack.konekti.service.impl.internal.CalendarServiceImpl"/>
+	<bean id="calendarCardService" class="com.thingtrack.konekti.service.impl.internal.CalendarCardServiceImpl"/>	 
+	<bean id="calendarDetailService" class="com.thingtrack.konekti.service.impl.internal.CalendarDetailServiceImpl"/>
+	<bean id="calendarGroupService" class="com.thingtrack.konekti.service.impl.internal.CalendarGroupServiceImpl"/>
+	<bean id="calendarTypeService" class="com.thingtrack.konekti.service.impl.internal.CalendarTypeServiceImpl"/>
+	<bean id="clientService" class="com.thingtrack.konekti.service.impl.internal.ClientServiceImpl"/>	
+	<bean id="clientAgentService" class="com.thingtrack.konekti.service.impl.internal.ClientAgentServiceImpl"/>
+	<bean id="clientAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.ClientAgentTypeServiceImpl"/>
+	<bean id="clientGroupService" class="com.thingtrack.konekti.service.impl.internal.ClientGroupServiceImpl"/>	 		 			
+	<bean id="clientTypeService" class="com.thingtrack.konekti.service.impl.internal.ClientTypeServiceImpl"/>
+	<bean id="employeeAgentService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentServiceImpl"/>
+	<bean id="employeeAgentStatusService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentStatusServiceImpl"/>	
+	<bean id="employeeAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentTypeServiceImpl"/>
+	<bean id="feedbackService" class="com.thingtrack.konekti.service.impl.internal.FeedbackServiceImpl"/>
+	<bean id="feedbackStatusService" class="com.thingtrack.konekti.service.impl.internal.FeedbackStatusServiceImpl"/>
+	<bean id="feedbackTypeService" class="com.thingtrack.konekti.service.impl.internal.FeedbackTypeServiceImpl"/>
+	<bean id="invoiceService" class="com.thingtrack.konekti.service.impl.internal.InvoiceServiceImpl"/>
+	<bean id="invoiceLineService" class="com.thingtrack.konekti.service.impl.internal.InvoiceLineServiceImpl"/>
+	<bean id="invoiceLineStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceLineStatusServiceImpl"/>	
+	<bean id="invoiceStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceStatusServiceImpl"/>
+	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>
+	<bean id="ivaService" class="com.thingtrack.konekti.service.impl.internal.IvaServiceImpl"/>				
+	<bean id="locationService" class="com.thingtrack.konekti.service.impl.internal.LocationServiceImpl"/>					 					
+	<bean id="locationTypeService" class="com.thingtrack.konekti.service.impl.internal.LocationTypeServiceImpl"/>
+	<bean id="menuFolderResourceService" class="com.thingtrack.konekti.service.impl.internal.MenuFolderResourceServiceImpl"/>
+	<bean id="menuCommandResourceService" class="com.thingtrack.konekti.service.impl.internal.MenuCommandResourceServiceImpl"/>
+	<bean id="menuWorkbenchService" class="com.thingtrack.konekti.service.impl.internal.MenuWorkbenchServiceImpl"/>
+	<bean id="offerService" class="com.thingtrack.konekti.service.impl.internal.OfferServiceImpl"/>	
+	<bean id="offerLineService" class="com.thingtrack.konekti.service.impl.internal.OfferLineServiceImpl"/>
+	<bean id="offerLineStatusService" class="com.thingtrack.konekti.service.impl.internal.OfferLineStatusServiceImpl"/>	
+	<bean id="offerRequestService" class="com.thingtrack.konekti.service.impl.internal.OfferRequestServiceImpl"/>
+	<bean id="offerRequestLineService" class="com.thingtrack.konekti.service.impl.internal.OfferRequestLineServiceImpl"/>
+	<bean id="offerRequestLineStatusService" class="com.thingtrack.konekti.service.impl.internal.OfferRequestLineStatusServiceImpl"/>
+	<bean id="offerRequestStatusService" class="com.thingtrack.konekti.service.impl.internal.OfferRequestStatusServiceImpl"/>
+	<bean id="offerRequestTypeService" class="com.thingtrack.konekti.service.impl.internal.OfferRequestTypeServiceImpl"/>	
+	<bean id="offerStatusService" class="com.thingtrack.konekti.service.impl.internal.OfferStatusServiceImpl"/>
+	<bean id="offerTypeService" class="com.thingtrack.konekti.service.impl.internal.OfferTypeServiceImpl"/>	
+	<bean id="organizationService" class="com.thingtrack.konekti.service.impl.internal.OrganizationServiceImpl"/>
+	<bean id="organizationTypeService" class="com.thingtrack.konekti.service.impl.internal.OrganizationTypeServiceImpl"/>
+	<bean id="permissionService" class="com.thingtrack.konekti.service.impl.internal.PermissionServiceImpl"/>	
+	<bean id="productService" class="com.thingtrack.konekti.service.impl.internal.ProductServiceImpl"/>
+	<bean id="productTypeService" class="com.thingtrack.konekti.service.impl.internal.ProductTypeServiceImpl"/>
+	<bean id="productUnitService" class="com.thingtrack.konekti.service.impl.internal.ProductUnitServiceImpl"/>	
+	<bean id="resourceService" class="com.thingtrack.konekti.service.impl.internal.ResourceServiceImpl"/>
+	<bean id="reportService" class="com.thingtrack.konekti.service.impl.internal.ReportServiceImpl"/>
+	<bean id="roleService" class="com.thingtrack.konekti.service.impl.internal.RoleServiceImpl"/>
+	<bean id="sequenceService" class="com.thingtrack.konekti.service.impl.internal.SequenceServiceImpl"/>
+	<bean id="serviceService" class="com.thingtrack.konekti.service.impl.internal.ServiceServiceImpl"/>	
+	<bean id="serviceStatusService" class="com.thingtrack.konekti.service.impl.internal.ServiceStatusServiceImpl"/>
+	<bean id="serviceTypeService" class="com.thingtrack.konekti.service.impl.internal.ServiceTypeServiceImpl"/>	
+	<bean id="stockService" class="com.thingtrack.konekti.service.impl.internal.StockServiceImpl"/>
+	<bean id="stockStatusService" class="com.thingtrack.konekti.service.impl.internal.StockStatusServiceImpl"/>
+	<bean id="supplierService" class="com.thingtrack.konekti.service.impl.internal.SupplierServiceImpl"/>	
+	<bean id="supplierAgentService" class="com.thingtrack.konekti.service.impl.internal.SupplierAgentServiceImpl"/>
+	<bean id="supplierAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.SupplierAgentTypeServiceImpl"/>
+	<bean id="supplierGroupService" class="com.thingtrack.konekti.service.impl.internal.SupplierGroupServiceImpl"/>	
+	<bean id="supplierTypeService" class="com.thingtrack.konekti.service.impl.internal.SupplierTypeServiceImpl"/>
+	<bean id="userService" class="com.thingtrack.konekti.service.impl.internal.UserServiceImpl"/>						
+	<bean id="warehouseService" class="com.thingtrack.konekti.service.impl.internal.WarehouseServiceImpl"/>
+	<bean id="warehouseTypeService" class="com.thingtrack.konekti.service.impl.internal.WarehouseTypeServiceImpl"/>
+	<bean id="workshopService" class="com.thingtrack.konekti.service.impl.internal.WorkshopServiceImpl"/>
+	<bean id="workshopTypeService" class="com.thingtrack.konekti.service.impl.internal.WorkshopTypeServiceImpl"/>
+	
+	<bean id="filterClientService" class="com.thingtrack.konekti.filter.service.impl.internal.FilterClientServiceImpl"/>
+																
+</beans>

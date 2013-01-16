@@ -1,0 +1,6 @@
+Import-Bundle: org.springframework.security.config
+Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+Excluded-Exports: 
+ *.internal*
+Unversioned-Imports: 
+ *

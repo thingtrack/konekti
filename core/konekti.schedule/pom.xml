@@ -1,24 +1,140 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>core</artifactId>
-    <groupId>com.thingtrack</groupId>
-    <version>0.0.1.SNAPSHOT</version>
-  </parent>
-  <artifactId>konekti.schedule</artifactId>
-  <name>konekti.schedule</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+    	<groupId>com.thingtrack</groupId>
+    	<artifactId>core</artifactId>
+    	<version>0.0.1.SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>konekti.schedule</artifactId>
+    <packaging>jar</packaging>
+    
+    <name>Konekti Schedule</name>
+    <description>Konekti Schedule</description>
+    
+    <dependencies>
+        <!-- Equinox OSGi platform -->
+		<dependency>
+		    <groupId>org.eclipse.osgi</groupId>
+		    <artifactId>org.eclipse.osgi</artifactId>
+		    <version>3.4.0.v20080326</version>
+		    <scope>provided</scope>    
+		</dependency>
+        
+		<dependency>
+		    <groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.1.6</version>
+		    <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.osgi</groupId>
+			<artifactId>org.springframework.osgi.core</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+    </dependencies>
+
+	<!-- ================================================ -->
+	<!-- Buil Configuration 				  			  -->
+	<!-- ================================================ -->
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		<plugins>
+          <plugin>
+                <groupId>org.eclipse.virgo.bundlor</groupId>
+                <artifactId>org.eclipse.virgo.bundlor.maven</artifactId>
+                <version>1.1.1.RELEASE</version>
+                <configuration>
+                    <outputPath>${basedir}/src/main/resources</outputPath>
+                    <manifestTemplate>
+                    <![CDATA[
+Bundle-ManifestVersion: 2
+Bundle-Name: ${project.name}
+Bundle-Description: ${description}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Built-By: ${organization.name}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Activator: com.thingtrack.konekti.schedule.ScheduleActivator
+Import-Package: org.springframework.context.weaving,
+ org.aspectj.lang
+]]>
+                    </manifestTemplate>
+                </configuration>
+                <!-- generate the manifest automatically during packaging -->
+                <executions>
+                    <execution>
+                        <id>bundlor</id>
+                        <goals>
+                            <goal>bundlor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <archive>
+                        <manifestFile>
+                            src/main/resources/META-INF/MANIFEST.MF
+                        </manifestFile>
+                    </archive>
+                </configuration>
+            </plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.virgo.bundlor
+										</groupId>
+										<artifactId>
+											org.eclipse.virgo.bundlor.maven
+										</artifactId>
+										<versionRange>
+											[1.1.1.RELEASE,)
+										</versionRange>
+										<goals>
+											<goal>bundlor</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>     	
 </project>

@@ -281,5 +281,13 @@
     <module>konekti.view.web.workbench</module>
     <module>konekti.service.sensor.api</module>
     <module>konekti.service.sensor.impl</module>
+    <module>konekti.view.addon</module>
+    <module>konekti.view.kernel</module>
+    <module>konekti.view.layout</module>
+    <module>konekti.view.layout.footer</module>
+    <module>konekti.view.layout.header</module>
+    <module>konekti.view.layout.toolbar</module>
+    <module>konekti.view.layout.menu</module>
+    <module>konekti.view.layout.workbench</module>
   </modules>
 </project>

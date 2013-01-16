@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="com.thingtrack.konekti.kernel.service.PlatformAdmin">
+
+  <implementation class="com.thingtrack.konekti.kernel.internal.service.PlatformAdminImpl"/>
+  
+  <service>
+      <provide interface="com.thingtrack.konekti.kernel.service.PlatformAdmin"/>
+  </service>
+   
+</component>

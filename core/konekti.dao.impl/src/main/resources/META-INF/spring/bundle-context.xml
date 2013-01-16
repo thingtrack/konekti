@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"	
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring/ehcache-spring-1.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- regular spring configuration file defining the beans for this
+       bundle. The configuration of OSGi definitions is kept in a separate 
+       configuration file so that this file can easily be used
+       for integration testing outside of an OSGi environment -->
+       		 
+    <!-- Activate EHCache Spring annotations in Dao Layer -->       		    	
+	<ehcache:annotation-driven cache-manager="cacheManager"/>
+		
+	<!-- Define Cache Manager -->
+    <ehcache:config cache-manager="cacheManager">
+        <ehcache:evict-expired-elements interval="60" />
+    </ehcache:config>
+        
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+    	<property name="configLocation"  value="META-INF/ehcache.xml"/>
+ 	</bean> 
+ 
+ 	<!-- Activate JPA annotations in Dao Layer -->
+	<context:annotation-config/>
+         
+ 	<!-- Define JPA Transaction Manager -->      
+    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+    </bean>
+        
+    <!-- Define Dao Layer-->
+	<bean id="actionDao" class="com.thingtrack.konekti.dao.impl.internal.ActionDaoImpl" />
+	<bean id="addressDao" class="com.thingtrack.konekti.dao.impl.internal.AddressDaoImpl" />
+	<bean id="alarmDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmDaoImpl" />
+	<bean id="alarmJobDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmJobDaoImpl" />
+	<bean id="alarmTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTriggerTypeDaoImpl" />
+	<bean id="alarmStatusDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmStatusDaoImpl" />
+	<bean id="alarmTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTypeDaoImpl" />
+	<bean id="attachmentDao" class="com.thingtrack.konekti.dao.impl.internal.AttachmentDaoImpl" />
+	<bean id="calendarDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarDaoImpl" />
+	<bean id="calendarCardDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarCardDaoImpl" />
+	<bean id="calendarDetailDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarDetailDaoImpl" />
+	<bean id="calendarGroupDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarGroupDaoImpl" />
+	<bean id="calendarTypeDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarTypeDaoImpl" />
+	<bean id="clientDao" class="com.thingtrack.konekti.dao.impl.internal.ClientDaoImpl" />			
+	<bean id="clientAgentDao" class="com.thingtrack.konekti.dao.impl.internal.ClientAgentDaoImpl" />
+	<bean id="clientAgentTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ClientAgentTypeDaoImpl" />	
+	<bean id="clientGroupDao" class="com.thingtrack.konekti.dao.impl.internal.ClientGroupDaoImpl" />
+	<bean id="clientTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ClientTypeDaoImpl" />
+	<bean id="employeeAgentDao" class="com.thingtrack.konekti.dao.impl.internal.EmployeeAgentDaoImpl" />
+	<bean id="employeeAgentStatusDao" class="com.thingtrack.konekti.dao.impl.internal.EmployeeAgentStatusDaoImpl" />
+	<bean id="employeeAgentTypeDao" class="com.thingtrack.konekti.dao.impl.internal.EmployeeAgentTypeDaoImpl" />
+	<bean id="feedbackDao" class="com.thingtrack.konekti.dao.impl.internal.FeedbackDaoImpl" />
+	<bean id="feedbackStatusDao" class="com.thingtrack.konekti.dao.impl.internal.FeedbackStatusDaoImpl" />												
+	<bean id="feedbackTypeDao" class="com.thingtrack.konekti.dao.impl.internal.FeedbackTypeDaoImpl" />
+	<bean id="invoiceDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceDaoImpl" />
+	<bean id="invoiceLineDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceLineDaoImpl" />
+	<bean id="invoiceLineStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceLineStatusDaoImpl" />
+	<bean id="invoiceStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceStatusDaoImpl" />		
+	<bean id="invoiceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceTypeDaoImpl" />
+	<bean id="ivaDao" class="com.thingtrack.konekti.dao.impl.internal.IvaDaoImpl" />	
+	<bean id="locationDao" class="com.thingtrack.konekti.dao.impl.internal.LocationDaoImpl" />
+	<bean id="locationTypeDao" class="com.thingtrack.konekti.dao.impl.internal.LocationTypeDaoImpl" />	
+	<bean id="offerDao" class="com.thingtrack.konekti.dao.impl.internal.OfferDaoImpl" />
+	<bean id="offerLineDao" class="com.thingtrack.konekti.dao.impl.internal.OfferLineDaoImpl" />
+	<bean id="offerLineStatusDao" class="com.thingtrack.konekti.dao.impl.internal.OfferLineStatusDaoImpl" />
+	<bean id="offerRequestDao" class="com.thingtrack.konekti.dao.impl.internal.OfferRequestDaoImpl"/>
+	<bean id="offerRequestLineDao" class="com.thingtrack.konekti.dao.impl.internal.OfferRequestLineDaoImpl"/>
+	<bean id="offerRequestLineStatusDao" class="com.thingtrack.konekti.dao.impl.internal.OfferRequestLineStatusDaoImpl"/>				
+	<bean id="offerRequestStatusDao" class="com.thingtrack.konekti.dao.impl.internal.OfferRequestStatusDaoImpl" />
+	<bean id="offerRequestTypeDao" class="com.thingtrack.konekti.dao.impl.internal.OfferRequestTypeDaoImpl" />				
+	<bean id="offerStatusDao" class="com.thingtrack.konekti.dao.impl.internal.OfferStatusDaoImpl" />	
+	<bean id="offerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.OfferTypeDaoImpl" />		
+	<bean id="organizationDao" class="com.thingtrack.konekti.dao.impl.internal.OrganizationDaoImpl" />
+	<bean id="organizationTypeDao" class="com.thingtrack.konekti.dao.impl.internal.OrganizationTypeDaoImpl" />
+	<bean id="menuFolderResourceDao" class="com.thingtrack.konekti.dao.impl.internal.MenuFolderResourceDaoImpl" />
+	<bean id="menuCommandResourceDao" class="com.thingtrack.konekti.dao.impl.internal.MenuCommandResourceDaoImpl" />
+	<bean id="menuWorkbenchDao" class="com.thingtrack.konekti.dao.impl.internal.MenuWorkbenchDaoImpl" />
+	<bean id="permissionDao" class="com.thingtrack.konekti.dao.impl.internal.PermissionDaoImpl" />
+	<bean id="productDao" class="com.thingtrack.konekti.dao.impl.internal.ProductDaoImpl" />	
+	<bean id="productTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ProductTypeDaoImpl" />	
+	<bean id="productUnitDao" class="com.thingtrack.konekti.dao.impl.internal.ProductUnitDaoImpl" />
+	<bean id="resourceDao" class="com.thingtrack.konekti.dao.impl.internal.ResourceDaoImpl" />
+	<bean id="reportDao" class="com.thingtrack.konekti.dao.impl.internal.ReportDaoImpl" />
+	<bean id="roleDao" class="com.thingtrack.konekti.dao.impl.internal.RoleDaoImpl" />
+	<bean id="sequenceDao" class="com.thingtrack.konekti.dao.impl.internal.SequenceDaoImpl"/>
+	<bean id="serviceDao" class="com.thingtrack.konekti.dao.impl.internal.ServiceDaoImpl"/>
+    <bean id="serviceStatusDao" class="com.thingtrack.konekti.dao.impl.internal.ServiceStatusDaoImpl"/>
+	<bean id="serviceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ServiceTypeDaoImpl"/>
+	<bean id="stockDao" class="com.thingtrack.konekti.dao.impl.internal.StockDaoImpl" />
+	<bean id="stockStatusDao" class="com.thingtrack.konekti.dao.impl.internal.StockStatusDaoImpl" />
+	<bean id="supplierDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierDaoImpl" />	
+	<bean id="supplierAgentDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierAgentDaoImpl" />
+	<bean id="supplierAgentTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierAgentTypeDaoImpl" />
+	<bean id="supplierGroupDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierGroupDaoImpl" />					
+	<bean id="supplierTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierTypeDaoImpl" />
+	<bean id="userDao" class="com.thingtrack.konekti.dao.impl.internal.UserDaoImpl" />
+	<bean id="warehouseDao" class="com.thingtrack.konekti.dao.impl.internal.WarehouseDaoImpl" />
+	<bean id="warehouseTypeDao" class="com.thingtrack.konekti.dao.impl.internal.WarehouseTypeDaoImpl" />
+	<bean id="workshopDao" class="com.thingtrack.konekti.dao.impl.internal.WorkshopDaoImpl" />
+	<bean id="workshopTypeDao" class="com.thingtrack.konekti.dao.impl.internal.WorkshopTypeDaoImpl" />
+</beans>

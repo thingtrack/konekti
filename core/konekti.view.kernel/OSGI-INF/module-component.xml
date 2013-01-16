@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="com.thingtrack.konekti.view.kernel.internal.ModuleServiceImpl" immediate="true">
+
+	<implementation class="com.thingtrack.konekti.view.kernel.internal.ModuleServiceImpl" />
+	
+	<service>				
+		<provide interface="com.thingtrack.konekti.view.kernel.IModuleService" />
+	</service>
+	
+	<reference bind="registerModule" cardinality="0..n"
+		interface="com.thingtrack.konekti.view.kernel.IModule"
+		name="module-lifecycle" policy="dynamic" unbind="unregisterModule" />
+	 	
+</component>

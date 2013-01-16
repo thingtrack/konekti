@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_itemsAItem" structureRef="java.util.List" />
+  <itemDefinition id="_itemsBItem" structureRef="java.util.List" />
+
+  <itemDefinition id="_5_multiInstanceItemType" />
+
+  <itemDefinition id="_7_multiInstanceItemType" />
+
+  <process processType="Private" isExecutable="true" id="com.konekti.knowledge.bpmn2.test01" name="TEST 01" tns:packageName="com.konekti.knowledge.bpmn2" tns:version="1.0.0" >
+
+    <extensionElements>
+     <tns:import name="java.util.List" />
+    </extensionElements>
+    <!-- process variables -->
+    <property id="itemsA" itemSubjectRef="_itemsAItem"/>
+    <property id="itemsB" itemSubjectRef="_itemsBItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="PreProcess" >
+      <script>System.out.println("TASK: PreProcess");</script>
+    </scriptTask>
+    <endEvent id="_3" name="EndProcess" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <scriptTask id="_4" name="PostProcess" scriptFormat="http://www.java.com/java" >
+      <script>System.out.println("TASK: PostProcess");</script>
+    </scriptTask>
+    <subProcess id="_5" name="Process A"  >
+      <ioSpecification>
+        <dataInput id="_5_input" name="MultiInstanceInput" />
+        <inputSet/>
+        <outputSet/>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>itemsA</sourceRef>
+        <targetRef>_5_input</targetRef>
+      </dataInputAssociation>
+      <multiInstanceLoopCharacteristics>
+        <loopDataInputRef>_5_input</loopDataInputRef>
+        <inputDataItem id="itemA" itemSubjectRef="_5_multiInstanceItemType"/>
+      </multiInstanceLoopCharacteristics>
+    <!-- nodes -->
+    <startEvent id="_5-2-1" name="Start" />
+    <endEvent id="_5-2-2" name="End" />
+    <scriptTask id="_5-2-3" name="Process A" scriptFormat="http://www.java.com/java" >
+      <script>String value = (String)itemA;
+
+System.out.println("TASK: Process A: " + value);</script>
+    </scriptTask>
+    <!-- connections -->
+    <sequenceFlow id="_5-2-3-_5-2-2" sourceRef="_5-2-3" targetRef="_5-2-2" />
+    <sequenceFlow id="_5-2-1-_5-2-3" sourceRef="_5-2-1" targetRef="_5-2-3" />
+    </subProcess>
+    <parallelGateway id="_6" name="Gateway" gatewayDirection="Diverging" />
+    <subProcess id="_7" name="Process B"  >
+      <ioSpecification>
+        <dataInput id="_7_input" name="MultiInstanceInput" />
+        <inputSet/>
+        <outputSet/>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>itemsB</sourceRef>
+        <targetRef>_7_input</targetRef>
+      </dataInputAssociation>
+      <multiInstanceLoopCharacteristics>
+        <loopDataInputRef>_7_input</loopDataInputRef>
+        <inputDataItem id="itemB" itemSubjectRef="_7_multiInstanceItemType"/>
+      </multiInstanceLoopCharacteristics>
+    <!-- nodes -->
+    <startEvent id="_7-2-1" name="Start" />
+    <scriptTask id="_7-2-2" name="Process B" >
+      <script>String value = (String)itemB;
+
+System.out.println("TASK: Process B: " + value);</script>
+    </scriptTask>
+    <endEvent id="_7-2-3" name="End" />
+    <!-- connections -->
+    <sequenceFlow id="_7-2-1-_7-2-2" sourceRef="_7-2-1" targetRef="_7-2-2" />
+    <sequenceFlow id="_7-2-2-_7-2-3" sourceRef="_7-2-2" targetRef="_7-2-3" />
+    </subProcess>
+    <parallelGateway id="_8" name="Gateway" gatewayDirection="Converging" />
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_4-_3" sourceRef="_4" targetRef="_3" />
+    <sequenceFlow id="_8-_4" sourceRef="_8" targetRef="_4" />
+    <sequenceFlow id="_6-_5" sourceRef="_6" targetRef="_5" />
+    <sequenceFlow id="_2-_6" sourceRef="_2" targetRef="_6" />
+    <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7" />
+    <sequenceFlow id="_5-_8" sourceRef="_5" targetRef="_8" />
+    <sequenceFlow id="_7-_8" sourceRef="_7" targetRef="_8" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.konekti.knowledge.bpmn2.test01" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="36" y="228" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="132" y="228" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="876" y="228" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="744" y="228" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5" >
+        <dc:Bounds x="360" y="24" width="253" height="157" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5-2-1" >
+        <dc:Bounds x="369" y="78" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5-2-2" >
+        <dc:Bounds x="554" y="75" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_5-2-3" >
+        <dc:Bounds x="446" y="74" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="264" y="228" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="360" y="312" width="253" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-1" >
+        <dc:Bounds x="368" y="384" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-2" >
+        <dc:Bounds x="444" y="380" width="80" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-3" >
+        <dc:Bounds x="562" y="383" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="636" y="228" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_5-2-3-_5-2-2" >
+        <di:waypoint x="126" y="74" />
+        <di:waypoint x="218" y="75" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-2-1-_5-2-3" >
+        <di:waypoint x="33" y="78" />
+        <di:waypoint x="126" y="74" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-2-1-_7-2-2" >
+        <di:waypoint x="32" y="96" />
+        <di:waypoint x="124" y="92" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-2-2-_7-2-3" >
+        <di:waypoint x="124" y="92" />
+        <di:waypoint x="226" y="95" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="60" y="252" />
+        <di:waypoint x="172" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_3" >
+        <di:waypoint x="784" y="252" />
+        <di:waypoint x="900" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_8-_4" >
+        <di:waypoint x="660" y="252" />
+        <di:waypoint x="784" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_5" >
+        <di:waypoint x="288" y="252" />
+        <di:waypoint x="486" y="102" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_6" >
+        <di:waypoint x="172" y="252" />
+        <di:waypoint x="288" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_7" >
+        <di:waypoint x="288" y="252" />
+        <di:waypoint x="486" y="387" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_5-_8" >
+        <di:waypoint x="486" y="102" />
+        <di:waypoint x="660" y="252" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_8" >
+        <di:waypoint x="486" y="387" />
+        <di:waypoint x="660" y="252" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

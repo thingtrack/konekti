@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+  <!-- regular spring configuration file defining the beans for this
+       bundle. The configuration of OSGi definitions is kept in a separate 
+       configuration file so that this file can easily be used
+       for integration testing outside of an OSGi environment -->
+    <!-- Activate JPA annotations in Dao Layer -->
+	<context:annotation-config/>
+	   
+ 	<!-- Define JPA Transaction Manager -->      
+    <bean id="jpaTransactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"></property>
+    </bean>
+
+    <!-- Define Dao Layer-->
+	<bean id="sensorDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorDaoImpl" />
+	<bean id="sensorStatusDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorStatusDaoImpl" />
+	<bean id="sensorTypeDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorTypeDaoImpl" />
+	<bean id="sensorLocationDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorLocationDaoImpl" />
+	<bean id="sensorTelemetryDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorTelemetryDaoImpl" />
+	<bean id="sensorMessageDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.SensorMessageDaoImpl" />    
+	<bean id="captureDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.CaptureDaoImpl" />
+	<bean id="captureLocationDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.CaptureLocationDaoImpl" />
+	<bean id="captureTelemetryDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.CaptureTelemetryDaoImpl" />
+	<bean id="captureMessageDao" class="com.thingtrack.konekti.dao.sensor.impl.internal.CaptureMessageDaoImpl" />
+</beans>

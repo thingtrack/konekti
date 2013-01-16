@@ -1,24 +1,293 @@
-<?xml version="1.0"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>core</artifactId>
-    <groupId>com.thingtrack</groupId>
-    <version>0.0.1.SNAPSHOT</version>
-  </parent>
-  <artifactId>konekti.view.web.workbench</artifactId>
-  <name>konekti.view.web.workbench</name>
-  <url>http://maven.apache.org</url>
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.thingtrack</groupId>
+		<version>0.0.1.SNAPSHOT</version>
+		<artifactId>core</artifactId>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>konekti.view.web.workbench</artifactId>
+	<packaging>war</packaging>
+	<name>Konekti View Web Workbench</name>
+	<description>Konekti View Web Workbench</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gwt.version>2.3.0</gwt.version>
+		<gwt.plugin.version>2.2.0</gwt.plugin.version>
+		<slf4j.version>1.5.0</slf4j.version>
+		<spring.maven.artifact.version>3.0.5.RELEASE</spring.maven.artifact.version>
+	</properties>
+
+	<!-- ================================================ -->
+	<!-- Dependencies Configuration -->
+	<!-- ================================================ -->
+	<dependencies>
+
+
+		<!-- Vaadin Dependency -->
+
+		<dependency>
+			<groupId>org.dellroad</groupId>
+			<artifactId>dellroad-stuff-vaadin</artifactId>
+			<version>1.0.284</version>
+			<type>jar</type>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin</groupId>
+			<artifactId>dontpush-addon-ozonelayer</artifactId>
+			<version>0.4.6</version>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- Vaadin Addon Component Dependencies -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>com.vaadin.addons.osgi</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Thingtrack Backend Dependencies -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.dao.template</artifactId>
+			<version>${org.konekti.version}</version>
+
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.sensor.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.kernel</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.layout</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.security</artifactId>
+			<version>${org.konekti.version}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>${org.konekti.version}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>formbinder</artifactId>
+			<version>2.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.security</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- ================================================ -->
+	<!-- Build Configuration -->
+	<!-- ================================================ -->
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.virgo.bundlor</groupId>
+				<artifactId>org.eclipse.virgo.bundlor.maven</artifactId>
+				<version>1.1.1.RELEASE</version>
+				<configuration>
+					<outputPath>${basedir}/src/main/resources</outputPath>
+					<manifestTemplate>
+					<![CDATA[
+Bundle-ManifestVersion: 2
+Bundle-Name: ${project.name}
+Bundle-Description: ${description}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Built-By: ${organization.name}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.eclipse.virgo.web.dm, 
+ com.vaadin.terminal.gwt.server,
+ com.vaadin.terminal.gwt.client.ui.dd,
+ com.vaadin.terminal, 
+ com.vaadin.tools,
+ com.vaadin.event, 
+ com.vaadin.event.dd, 
+ com.vaadin.event.dd.acceptcriteria,
+ com.vaadin.data,
+ com.vaadin.data.util,
+ com.vaadin.data.validator,
+ com.vaadin.ui,
+ com.vaadin.annotations,
+ com.thingtrack.konekti.service.api, 
+ com.thingtrack.konekti.filter.service.api,
+ com.thingtrack.konekti.domain,
+ org.aspectj.lang,
+ org.aspectj.lang.annotation,
+ org.aspectj.runtime.reflect,
+ org.slf4j;version="[1.6.1,2)",
+ org.slf4j.helpers;version="[1.6.1,2)",
+ org.slf4j.spi;version="[1.6.1,2)",
+ org.slf4j.impl;version="[1.6.1,2)",
+ org.apache.log4j,
+ javax.persistence.metamodel,
+ net.sf.jasperreports.j2ee.servlets,
+ net.sf.jasperreports.extensions, 
+ VAADIN.themes.konekti;version="[0.0,1)",
+ VAADIN.widgetsets.com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet;version="[0.0,1)"
+Web-ContextPath: konekti.view.web.workbench
+Bundle-Classpath: WEB-INF/classes,
+ WEB-INF/lib/dontpush-addon-ozonelayer-0.4.6.jar,
+ WEB-INF/lib/atmosphere-gwt-client-0.8.6.jar,
+ WEB-INF/lib/atmosphere-gwt-server-0.8.6.jar,
+ WEB-INF/lib/atmosphere-gwt-common-0.8.6.jar,
+ WEB-INF/lib/atmopshere-gwt-poll-0.8.6.jar,
+ WEB-INF/lib/atmosphere-runtime-0.8.6.jar,
+ WEB-INF/lib/atmosphere-compat-jbossweb-0.8.6.jar,
+ WEB-INF/lib/atmopshere-compat-tomcat-0.8.6.jar,
+ WEB-INF/lib/atmopshere-compat-jetty-0.8.6.jar,
+ WEB-INF/lib/atmopshere-compat-weblogic-0.8.6.jar,
+ WEB-INF/lib/gwt-user-2.3.0.jar,
+ WEB-INF/lib/gwt-servlet-2.3.0.jar
+Excluded-Exports: 
+ *.internal*
+Unversioned-Imports: 
+ *
+Import-Library: 
+ org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+Excluded-Imports: 
+ org.vaadin.dontpush.server
+]]>
+					</manifestTemplate>
+				</configuration>
+				<!-- generate the manifest automatically during packaging -->
+				<executions>
+					<execution>
+						<id>bundlor</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+					</archive>
+					<webResources>
+						<webResource>
+							<directory>src/main/resources</directory>
+							<filtering>true</filtering>
+							<includes>
+								<include>META-INF/MANIFEST.MF</include>
+								<include>META-INF/*.xml</include>
+							</includes>
+						</webResource>
+					</webResources>
+				</configuration>
+			</plugin>
+
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.virgo.bundlor
+										</groupId>
+										<artifactId>
+											org.eclipse.virgo.bundlor.maven
+										</artifactId>
+										<versionRange>
+											[1.1.1.RELEASE,)
+										</versionRange>
+										<goals>
+											<goal>bundlor</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
 </project>

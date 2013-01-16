@@ -1,0 +1,9 @@
+Excluded-Exports: 
+ com.thingtrack.konekti.view.web.widgetset.*,
+ VAADIN.js.*,
+ VAADIN.themes.konekti.images,
+ VAADIN.widgetsets.com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet.*
+Excluded-Imports: 
+ com.google.gwt.*
+Unversioned-Imports: 
+ *

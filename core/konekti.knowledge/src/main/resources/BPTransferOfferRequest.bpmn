@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_offerRequestServiceItem" structureRef="com.thingtrack.konekti.service.api.OfferRequestService" />
+  <itemDefinition id="_offerRequestLineFixServiceServiceItem" structureRef="com.thingtrack.bustrack.service.api.OfferRequestLineFixServiceService" />
+  <itemDefinition id="_offerRequestLineRegularServiceServiceItem" structureRef="com.thingtrack.bustrack.service.api.OfferRequestLineRegularServiceService" />
+  <itemDefinition id="_offerRequestItem" structureRef="com.thingtrack.konekti.domain.OfferRequest" />
+  <itemDefinition id="_offerRequestLineFixServicesItem" structureRef="java.util.List" />
+  <itemDefinition id="_offerRequestLineRegularServicesItem" structureRef="java.util.List" />
+  <itemDefinition id="_organizationItem" structureRef="com.thingtrack.konekti.domain.Organization" />
+  <itemDefinition id="_numberFixItem" structureRef="Integer" />
+  <itemDefinition id="_numberRegularItem" structureRef="Integer" />
+  <itemDefinition id="_offerItem" structureRef="com.thingtrack.konekti.domain.Offer" />
+  <itemDefinition id="_offerServiceItem" structureRef="com.thingtrack.konekti.service.api.OfferService" />
+
+  <itemDefinition id="_6_multiInstanceItemType" />
+
+  <itemDefinition id="_7_multiInstanceItemType" />
+
+  <process processType="Private" isExecutable="true" id="com.konekti.knowledge.bpmn2.bptransferofferrequest" name="Transfer Offer Request Head" tns:packageName="com.konekti.knowledge.bpmn2" tns:version="1.0.0" >
+
+    <extensionElements>
+     <tns:import name="java.util.ArrayList" />
+     <tns:import name="java.util.List" />
+     <tns:import name="com.thingtrack.konekti.domain.Offer" />
+     <tns:import name="com.thingtrack.konekti.domain.OfferRequestLineStatus" />
+     <tns:import name="com.thingtrack.bustrack.domain.OfferRequestLineFixService" />
+     <tns:import name="com.thingtrack.bustrack.domain.OfferRequestLineRegularService" />
+    </extensionElements>
+    <!-- process variables -->
+    <property id="offerRequestService" itemSubjectRef="_offerRequestServiceItem"/>
+    <property id="offerRequestLineFixServiceService" itemSubjectRef="_offerRequestLineFixServiceServiceItem"/>
+    <property id="offerRequestLineRegularServiceService" itemSubjectRef="_offerRequestLineRegularServiceServiceItem"/>
+    <property id="offerRequest" itemSubjectRef="_offerRequestItem"/>
+    <property id="offerRequestLineFixServices" itemSubjectRef="_offerRequestLineFixServicesItem"/>
+    <property id="offerRequestLineRegularServices" itemSubjectRef="_offerRequestLineRegularServicesItem"/>
+    <property id="organization" itemSubjectRef="_organizationItem"/>
+    <property id="numberFix" itemSubjectRef="_numberFixItem"/>
+    <property id="numberRegular" itemSubjectRef="_numberRegularItem"/>
+    <property id="offer" itemSubjectRef="_offerItem"/>
+    <property id="offerService" itemSubjectRef="_offerServiceItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <scriptTask id="_2" name="set Offer Request TRANSFERRED Status" scriptFormat="http://www.java.com/java" >
+      <script>offerRequestService.setTransferredStatus(offerRequest);
+
+System.out.println("TASK: set Offer Request TRANSFERRED Status");</script>
+    </scriptTask>
+    <endEvent id="_3" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <scriptTask id="_4" name="Recover PENDING Offer Request Lines" scriptFormat="http://www.java.com/java" >
+      <script>// query OfferRequest Fix Lines
+kcontext.setVariable("offerRequestLineFixServices", offerRequestLineFixServiceService.getByPendingStatus(offerRequest));
+
+// query OfferRequest Regular Lines
+kcontext.setVariable("offerRequestLineRegularServices", offerRequestLineRegularServiceService.getByPendingStatus(offerRequest));
+
+System.out.println("TASK: Recover PENDING Offer Request Lines");</script>
+    </scriptTask>
+    <subProcess id="_6" name="Create Offer Lines"  >
+      <ioSpecification>
+        <dataInput id="_6_input" name="MultiInstanceInput" />
+        <inputSet/>
+        <outputSet/>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>offerRequestLineFixServices</sourceRef>
+        <targetRef>_6_input</targetRef>
+      </dataInputAssociation>
+      <multiInstanceLoopCharacteristics>
+        <loopDataInputRef>_6_input</loopDataInputRef>
+        <inputDataItem id="itemFix" itemSubjectRef="_6_multiInstanceItemType"/>
+      </multiInstanceLoopCharacteristics>
+    <!-- nodes -->
+    <startEvent id="_6-2-1" name="Start" />
+    <scriptTask id="_6-2-2" name="From Offer Request Fix Lines" scriptFormat="http://www.java.com/java" >
+      <script>// recover the OfferRequest Line Fix to update
+OfferRequestLineFixService itemOfferRequestLineFixService = (OfferRequestLineFixService)itemFix;
+
+// create offer line
+offer = offerRequestLineFixServiceService.createOfferLine(organization, offer, itemOfferRequestLineFixService, numberFix);
+
+// next offer line
+numberFix++;
+
+// update Offer Entity
+kcontext.setVariable("offer", offer);
+
+// update number Fix
+kcontext.setVariable("numberFix", numberFix);
+
+System.out.println("SUBTASK: Create Offer Lines From Offer Request Fix Lines");</script>
+    </scriptTask>
+    <endEvent id="_6-2-3" name="End" />
+    <!-- connections -->
+    <sequenceFlow id="_6-2-1-_6-2-2" sourceRef="_6-2-1" targetRef="_6-2-2" />
+    <sequenceFlow id="_6-2-2-_6-2-3" sourceRef="_6-2-2" targetRef="_6-2-3" />
+    </subProcess>
+    <subProcess id="_7" name="Create Offer Lines"  >
+      <ioSpecification>
+        <dataInput id="_7_input" name="MultiInstanceInput" />
+        <inputSet/>
+        <outputSet/>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>offerRequestLineRegularServices</sourceRef>
+        <targetRef>_7_input</targetRef>
+      </dataInputAssociation>
+      <multiInstanceLoopCharacteristics>
+        <loopDataInputRef>_7_input</loopDataInputRef>
+        <inputDataItem id="itemRegular" itemSubjectRef="_7_multiInstanceItemType"/>
+      </multiInstanceLoopCharacteristics>
+    <!-- nodes -->
+    <startEvent id="_7-2-1" name="Start" />
+    <scriptTask id="_7-2-2" name="From Offer Request Regular Lines" scriptFormat="http://www.java.com/java" >
+      <script>// recover the OfferRequest Line Regular to transfer
+OfferRequestLineRegularService itemOfferRequestLineRegularService = (OfferRequestLineRegularService)itemRegular;
+
+// create offer line
+offer = offerRequestLineRegularServiceService.createOfferLine(organization, offer, itemOfferRequestLineRegularService, numberFix);
+
+// next offer line
+numberRegular++;
+
+// update Offer Entity
+kcontext.setVariable("offer", offer);
+
+// update number Fix
+kcontext.setVariable("numberRegular", numberRegular);
+
+System.out.println("SUBTASK: Create Offer Lines From Offer Request Regular Lines");</script>
+    </scriptTask>
+    <endEvent id="_7-2-3" name="End" />
+    <!-- connections -->
+    <sequenceFlow id="_7-2-1-_7-2-2" sourceRef="_7-2-1" targetRef="_7-2-2" />
+    <sequenceFlow id="_7-2-2-_7-2-3" sourceRef="_7-2-2" targetRef="_7-2-3" />
+    </subProcess>
+    <scriptTask id="_9" name="Create Offer Header" scriptFormat="http://www.java.com/java" >
+      <script>offer = offerService.createOffer(organization, offerRequest);
+
+// update Offer Entity
+kcontext.setVariable("offer", offer);
+
+// initialize number Fix
+kcontext.setVariable("numberFix", 1);
+kcontext.setVariable("numberRegular", 1);
+
+System.out.println("TASK: Create Offer Header");</script>
+    </scriptTask>
+    <scriptTask id="_10" name="Save Offer" scriptFormat="http://www.java.com/java" >
+      <script>// save the Offer
+offerService.save(offer);
+
+System.out.println("TASK: Save Offer");</script>
+    </scriptTask>
+
+    <!-- connections -->
+    <sequenceFlow id="_1-_2" sourceRef="_1" targetRef="_2" />
+    <sequenceFlow id="_10-_3" sourceRef="_10" targetRef="_3" />
+    <sequenceFlow id="_2-_4" sourceRef="_2" targetRef="_4" />
+    <sequenceFlow id="_9-_6" sourceRef="_9" targetRef="_6" />
+    <sequenceFlow id="_6-_7" sourceRef="_6" targetRef="_7" />
+    <sequenceFlow id="_4-_9" sourceRef="_4" targetRef="_9" />
+    <sequenceFlow id="_7-_10" sourceRef="_7" targetRef="_10" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.konekti.knowledge.bpmn2.bptransferofferrequest" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="348" y="24" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_2" >
+        <dc:Bounds x="252" y="96" width="241" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="348" y="960" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="264" y="180" width="217" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="264" y="348" width="217" height="229" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6-2-1" >
+        <dc:Bounds x="340" y="377" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6-2-2" >
+        <dc:Bounds x="269" y="442" width="184" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6-2-3" >
+        <dc:Bounds x="338" y="511" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="264" y="612" width="217" height="229" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-1" >
+        <dc:Bounds x="342" y="642" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-2" >
+        <dc:Bounds x="276" y="710" width="179" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7-2-3" >
+        <dc:Bounds x="343" y="776" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="288" y="264" width="169" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" >
+        <dc:Bounds x="324" y="876" width="97" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_6-2-1-_6-2-2" >
+        <di:waypoint x="100" y="53" />
+        <di:waypoint x="97" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-2-2-_6-2-3" >
+        <di:waypoint x="97" y="118" />
+        <di:waypoint x="98" y="187" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-2-1-_7-2-2" >
+        <di:waypoint x="102" y="54" />
+        <di:waypoint x="101" y="122" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-2-2-_7-2-3" >
+        <di:waypoint x="101" y="122" />
+        <di:waypoint x="103" y="188" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_2" >
+        <di:waypoint x="372" y="48" />
+        <di:waypoint x="372" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10-_3" >
+        <di:waypoint x="372" y="900" />
+        <di:waypoint x="372" y="984" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_2-_4" >
+        <di:waypoint x="372" y="120" />
+        <di:waypoint x="372" y="204" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_9-_6" >
+        <di:waypoint x="372" y="288" />
+        <di:waypoint x="372" y="462" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_7" >
+        <di:waypoint x="372" y="462" />
+        <di:waypoint x="372" y="726" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_9" >
+        <di:waypoint x="372" y="204" />
+        <di:waypoint x="372" y="288" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_10" >
+        <di:waypoint x="372" y="726" />
+        <di:waypoint x="372" y="900" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

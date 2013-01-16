@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+    	<groupId>com.thingtrack</groupId>
+    	<artifactId>core</artifactId>
+    	<version>0.0.1.SNAPSHOT</version>
+    </parent>
+    
+    <artifactId>konekti.view.addon</artifactId>
+    <packaging>jar</packaging>
+    
+    <name>Koneki View Addon</name>
+    <description>Koneki View Addon</description>
+
+    <dependencies>												
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>formbinder</artifactId>
+		   <version>2.1.2</version>
+		   <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>buttongroup</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>org.vaadin.hene.splitbutton</groupId>
+			<artifactId>splitbutton</artifactId>
+			<version>0.9.7</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>ar.com.fdvs</groupId>
+			<artifactId>DynamicJasper</artifactId>
+			<version>4.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+	        <groupId>org.vaadin.addon</groupId>
+	        <artifactId>confirmdialog</artifactId>
+	        <version>1.2.1</version>
+	        <scope>provided</scope>
+        </dependency>
+
+		<dependency>
+			<groupId>org.dellroad</groupId>
+			<artifactId>dellroad-stuff-vaadin</artifactId>
+			<version>1.0.284</version>
+			<type>jar</type>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		    								
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>com.vaadin.addons.sliderlayout</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		    
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>org.tepi.filtertable</artifactId>
+			<version>0.7.3</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.kernel</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+				
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+						
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.report</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+    </dependencies>
+
+	<repositories>
+	    <repository>
+	      <id>fdvsolution.public</id>
+	      <url>http://archiva.fdvs.com.ar/repository/public1/</url>
+	    </repository>
+	 </repositories>
+ 
+    <build>
+        <plugins>
+        		<plugin>
+				<groupId>org.eclipse.virgo.bundlor</groupId>
+				<artifactId>org.eclipse.virgo.bundlor.maven</artifactId>
+				<version>1.1.1.RELEASE</version>
+				<configuration>
+					<outputPath>${basedir}/src/main/resources</outputPath>
+					<manifestTemplate>
+					<![CDATA[
+Bundle-ManifestVersion: 2
+Bundle-Name: ${project.name}
+Bundle-Description: ${description}
+Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
+Bundle-Version: ${project.version}
+Built-By: ${organization.name}
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.aspectj.lang,
+ org.aspectj.lang.annotation,
+ org.aspectj.runtime.reflect
+Import-Library: 
+ org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+]]>
+					</manifestTemplate>
+				</configuration>
+				<!-- Import-Package: com.lowagie.text -->
+				<!-- generate the manifest automatically during packaging -->
+				<executions>
+					<execution>
+						<id>bundlor</id>
+						<goals>
+							<goal>bundlor</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<archive>
+						<manifestFile>
+							src/main/resources/META-INF/MANIFEST.MF
+						</manifestFile>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.eclipse.virgo.bundlor
+        								</groupId>
+        								<artifactId>
+        									org.eclipse.virgo.bundlor.maven
+        								</artifactId>
+        								<versionRange>
+        									[1.1.1.RELEASE,)
+        								</versionRange>
+        								<goals>
+        									<goal>bundlor</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
+    </build>
+</project>

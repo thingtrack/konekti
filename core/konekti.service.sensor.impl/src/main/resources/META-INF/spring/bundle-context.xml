@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+						http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+  <!-- regular spring configuration file defining the beans for this
+       bundle. The configuration of OSGi definitions is kept in a separate 
+       configuration file so that this file can easily be used
+       for integration testing outside of an OSGi environment -->
+       
+    <!-- Active @Autowired spring annotation -->
+    <context:annotation-config/>
+    
+    <!-- Activate OSGi configuration for the Load Time Weaver -->
+    <context:load-time-weaver aspectj-weaving="on" />
+    
+	<!-- Aspects configuration -->
+    <aop:config proxy-target-class="false">
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* *..*ServiceImpl.*(..))"/>
+    </aop:config>
+    
+    <tx:advice id="txAdvice" transaction-manager="jpaTransactionManager">
+        <tx:attributes>
+            <tx:method name="save*" rollback-for="Exception.class"/>
+            <tx:method name="add*" rollback-for="Exception.class"/>
+            <tx:method name="set*" rollback-for="Exception.class"/>
+            <tx:method name="delete*" rollback-for="Exception.class"/>
+            <tx:method name="*" read-only="true" propagation="SUPPORTS"/>
+        </tx:attributes>
+    </tx:advice>
+
+	<bean id="sensorService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorServiceImpl"/>
+	<bean id="sensorStatusService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorStatusServiceImpl"/>
+	<bean id="sensorTypeService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorTypeServiceImpl"/>
+	<bean id="sensorLocationService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorLocationServiceImpl"/>
+	<bean id="sensorTelemetryService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorTelemetryServiceImpl"/>
+	<bean id="sensorMessageService" class="com.thingtrack.konekti.service.sensor.impl.internal.SensorMessageServiceImpl"/>
+	<bean id="captureService" class="com.thingtrack.konekti.service.sensor.impl.internal.CaptureServiceImpl"/>
+	<bean id="captureLocationService" class="com.thingtrack.konekti.service.sensor.impl.internal.CaptureLocationServiceImpl"/>
+	<bean id="captureTelemetryService" class="com.thingtrack.konekti.service.sensor.impl.internal.CaptureTelemetryServiceImpl"/>
+	<bean id="captureMessageService" class="com.thingtrack.konekti.service.sensor.impl.internal.CaptureMessageServiceImpl"/>
+	        
+</beans>

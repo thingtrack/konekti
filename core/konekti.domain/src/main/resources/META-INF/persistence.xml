@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" 
+    		 xmlns="http://java.sun.com/xml/ns/persistence"
+    		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    		 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+    <persistence-unit name="konekti" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+	
+	    <!-- Koneti Domain -->
+		<class>com.thingtrack.konekti.domain.Action</class>
+	    <class>com.thingtrack.konekti.domain.Address</class>
+	    <class>com.thingtrack.konekti.domain.Alarm</class>
+	    <class>com.thingtrack.konekti.domain.AlarmJob</class>
+	    <class>com.thingtrack.konekti.domain.AlarmStatus</class>
+	    <class>com.thingtrack.konekti.domain.AlarmTriggerType</class>	    
+	    <class>com.thingtrack.konekti.domain.AlarmType</class>
+	    <class>com.thingtrack.konekti.domain.Attachment</class>
+	    <class>com.thingtrack.konekti.domain.Calendar</class>
+	    <class>com.thingtrack.konekti.domain.CalendarCard</class>
+	    <class>com.thingtrack.konekti.domain.CalendarDetail</class>
+	    <class>com.thingtrack.konekti.domain.CalendarGroup</class>
+	    <class>com.thingtrack.konekti.domain.CalendarType</class>
+		<class>com.thingtrack.konekti.domain.Client</class>
+		<class>com.thingtrack.konekti.domain.ClientAgent</class>
+		<class>com.thingtrack.konekti.domain.ClientAgentType</class>
+		<class>com.thingtrack.konekti.domain.ClientGroup</class>		
+		<class>com.thingtrack.konekti.domain.ClientType</class>
+		<class>com.thingtrack.konekti.domain.EmployeeAgent</class>
+		<class>com.thingtrack.konekti.domain.EmployeeAgentStatus</class>
+		<class>com.thingtrack.konekti.domain.EmployeeAgentType</class>
+		<class>com.thingtrack.konekti.domain.Feedback</class>
+		<class>com.thingtrack.konekti.domain.FeedbackStatus</class>
+		<class>com.thingtrack.konekti.domain.FeedbackType</class>
+		<class>com.thingtrack.konekti.domain.Invoice</class>
+		<class>com.thingtrack.konekti.domain.InvoiceLine</class>
+		<class>com.thingtrack.konekti.domain.InvoiceLineStatus</class>
+		<class>com.thingtrack.konekti.domain.InvoiceStatus</class>
+		<class>com.thingtrack.konekti.domain.InvoiceType</class>
+		<class>com.thingtrack.konekti.domain.Iva</class>
+	    <class>com.thingtrack.konekti.domain.Location</class>
+	    <class>com.thingtrack.konekti.domain.LocationType</class>
+	    <class>com.thingtrack.konekti.domain.MenuWorkbench</class>
+	    <class>com.thingtrack.konekti.domain.MenuResource</class>
+	    <class>com.thingtrack.konekti.domain.MenuFolderResource</class>
+	    <class>com.thingtrack.konekti.domain.MenuCommandResource</class>
+	    <class>com.thingtrack.konekti.domain.Offer</class>
+	    <class>com.thingtrack.konekti.domain.OfferLine</class>
+	    <class>com.thingtrack.konekti.domain.OfferLineStatus</class>
+	    <class>com.thingtrack.konekti.domain.OfferRequest</class>
+	    <class>com.thingtrack.konekti.domain.OfferRequestLine</class>
+	    <class>com.thingtrack.konekti.domain.OfferRequestLineStatus</class>
+	    <class>com.thingtrack.konekti.domain.OfferRequestStatus</class>
+	    <class>com.thingtrack.konekti.domain.OfferRequestType</class>
+	    <class>com.thingtrack.konekti.domain.OfferStatus</class>
+	    <class>com.thingtrack.konekti.domain.OfferType</class>
+	    <class>com.thingtrack.konekti.domain.Organization</class>
+	    <class>com.thingtrack.konekti.domain.OrganizationType</class>
+		<class>com.thingtrack.konekti.domain.Permission</class>
+		<class>com.thingtrack.konekti.domain.Product</class>
+		<class>com.thingtrack.konekti.domain.ProductType</class>
+		<class>com.thingtrack.konekti.domain.ProductUnit</class>				
+		<class>com.thingtrack.konekti.domain.Resource</class>
+		<class>com.thingtrack.konekti.domain.Report</class>
+	    <class>com.thingtrack.konekti.domain.Role</class>
+	    <class>com.thingtrack.konekti.domain.Sequence</class>
+	    <class>com.thingtrack.konekti.domain.Service</class>
+	    <class>com.thingtrack.konekti.domain.ServiceStatus</class>
+	    <class>com.thingtrack.konekti.domain.ServiceType</class>
+	    <class>com.thingtrack.konekti.domain.Stock</class>
+	    <class>com.thingtrack.konekti.domain.StockStatus</class>
+	    <class>com.thingtrack.konekti.domain.Supplier</class>
+	    <class>com.thingtrack.konekti.domain.SupplierAgent</class>
+	    <class>com.thingtrack.konekti.domain.SupplierAgentType</class>
+	    <class>com.thingtrack.konekti.domain.SupplierGroup</class>
+	    <class>com.thingtrack.konekti.domain.SupplierType</class>	    	    
+	    <class>com.thingtrack.konekti.domain.User</class>
+	    <class>com.thingtrack.konekti.domain.Warehouse</class>
+	    <class>com.thingtrack.konekti.domain.WarehouseType</class>
+	    <class>com.thingtrack.konekti.domain.Workshop</class>
+	    <class>com.thingtrack.konekti.domain.WorkshopType</class>
+	    
+	    <!-- Bustrack Domain -->
+	    <class>com.thingtrack.bustrack.domain.BulletinBoard</class>
+	    <class>com.thingtrack.bustrack.domain.BulletinType</class>
+		<class>com.thingtrack.bustrack.domain.GasStation</class>
+		<class>com.thingtrack.bustrack.domain.GasStationRegister</class>
+	    <class>com.thingtrack.bustrack.domain.GasStationStatus</class>
+		<class>com.thingtrack.bustrack.domain.GasStationType</class>
+		<class>com.thingtrack.bustrack.domain.GasType</class>		
+		<class>com.thingtrack.bustrack.domain.JobOffer</class>
+		<class>com.thingtrack.bustrack.domain.JobOfferType</class>
+		<class>com.thingtrack.bustrack.domain.JobOfferStatus</class>
+	    <class>com.thingtrack.bustrack.domain.OfferRequestLineFixService</class>
+	    <class>com.thingtrack.bustrack.domain.OfferRequestLineRegularService</class>									    
+	    <class>com.thingtrack.bustrack.domain.Route</class>
+	    <class>com.thingtrack.bustrack.domain.RouteStatus</class>
+	    <class>com.thingtrack.bustrack.domain.Stop</class>
+	    <class>com.thingtrack.bustrack.domain.Tire</class>
+	    <class>com.thingtrack.bustrack.domain.TireStatus</class>
+	    <class>com.thingtrack.bustrack.domain.TireType</class>
+	    <class>com.thingtrack.bustrack.domain.Turn</class>
+	    <class>com.thingtrack.bustrack.domain.Vehicle</class>	    
+		<class>com.thingtrack.bustrack.domain.VehicleStatus</class>
+		<class>com.thingtrack.bustrack.domain.VehicleType</class>
+		<class>com.thingtrack.bustrack.domain.Worksheet</class>
+		<class>com.thingtrack.bustrack.domain.WorksheetLine</class>
+		<class>com.thingtrack.bustrack.domain.WorksheetStatus</class>
+		
+		<!-- Sensor Domain -->
+	    <class>com.thingtrack.konekti.domain.sensor.Sensor</class>
+	    <class>com.thingtrack.konekti.domain.sensor.SensorType</class>
+	    <class>com.thingtrack.konekti.domain.sensor.SensorStatus</class>
+	    <class>com.thingtrack.konekti.domain.sensor.SensorLocation</class>
+	    <class>com.thingtrack.konekti.domain.sensor.SensorTelemetry</class>
+	    <class>com.thingtrack.konekti.domain.sensor.SensorMessage</class> 
+		<class>com.thingtrack.konekti.domain.sensor.Capture</class>
+		<class>com.thingtrack.konekti.domain.sensor.CaptureLocation</class>
+		<class>com.thingtrack.konekti.domain.sensor.CaptureTelemetry</class>
+		<class>com.thingtrack.konekti.domain.sensor.CaptureMessage</class>
+			    
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+				
+		<shared-cache-mode>NONE</shared-cache-mode>
+		
+	   	<properties>
+            <!--
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/bustrackdb"/>
+            <property name="javax.persistence.jdbc.user" value="konekti"/>
+            <property name="javax.persistence.jdbc.password" value="B33982307"/> 
+            -->
+							
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/bustrackdb"/>
+            <property name="javax.persistence.jdbc.user" value="konekti"/>
+            <property name="javax.persistence.jdbc.password" value="B33982307"/>
+                        
+            <property name="eclipselink.target-database" value="MySQL"/> 
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.timestamp" value="false"/>
+            <property name="eclipselink.logging.thread" value="false"/>
+            <property name="eclipselink.logging.exceptions" value="true"/>
+            <property name="eclipselink.orm.throw.exceptions" value="true"/>
+            <property name="eclipselink.jdbc.read-connections.min" value="1"/>
+            <property name="eclipselink.jdbc.write-connections.min" value="1"/>    
+            <property name="eclipselink.ddl-generation" value="create-tables"/>
+<!-- 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/> -->
+            <property name="eclipselink.ddl-generation.output-mode" value="both"/>            
+            <property name="eclipselink.weaving" value="false"/>	
+        </properties>
+    </persistence-unit>
+</persistence>

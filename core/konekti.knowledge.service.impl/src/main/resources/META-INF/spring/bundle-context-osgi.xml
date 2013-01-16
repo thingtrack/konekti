@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:osgi="http://www.springframework.org/schema/osgi"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
+
+  <!-- definitions using elements of the osgi namespace can be included
+       in this file. There is no requirement to keep these definitions
+       in a separate file if you do not want to. The rationale for 
+       keeping these definitions separate is to facilitate integration
+       testing of the bundle outside of an OSGi container -->
+       
+       <osgi:reference id="transactionManager" interface="org.springframework.transaction.PlatformTransactionManager" />
+       
+       <!-- Konekti Dao services -->
+       <osgi:reference id="actionDao" interface="com.thingtrack.konekti.dao.api.ActionDao" />
+       <osgi:reference id="addressDao" interface="com.thingtrack.konekti.dao.api.AddressDao" />
+       <osgi:reference id="alarmDao" interface="com.thingtrack.konekti.dao.api.AlarmDao" />
+       <osgi:reference id="alarmStatusDao" interface="com.thingtrack.konekti.dao.api.AlarmStatusDao" />
+       <osgi:reference id="alarmTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTypeDao" />
+       <osgi:reference id="calendarDao" interface="com.thingtrack.konekti.dao.api.CalendarDao" />
+       <osgi:reference id="calendarCardDao" interface="com.thingtrack.konekti.dao.api.CalendarCardDao" />
+       <osgi:reference id="calendarDetailDao" interface="com.thingtrack.konekti.dao.api.CalendarDetailDao" />
+       <osgi:reference id="calendarGroupDao" interface="com.thingtrack.konekti.dao.api.CalendarGroupDao" />
+       <osgi:reference id="calendarTypeDao" interface="com.thingtrack.konekti.dao.api.CalendarTypeDao" />
+       <osgi:reference id="clientDao" interface="com.thingtrack.konekti.dao.api.ClientDao" />       
+       <osgi:reference id="clientAgentDao" interface="com.thingtrack.konekti.dao.api.ClientAgentDao" />
+       <osgi:reference id="clientAgentTypeDao" interface="com.thingtrack.konekti.dao.api.ClientAgentTypeDao" />
+       <osgi:reference id="clientGroupDao" interface="com.thingtrack.konekti.dao.api.ClientGroupDao" />
+       <osgi:reference id="clientTypeDao" interface="com.thingtrack.konekti.dao.api.ClientTypeDao" />
+       <osgi:reference id="employeeAgentDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentDao" />
+       <osgi:reference id="employeeAgentStatusDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentStatusDao" />
+       <osgi:reference id="employeeAgentTypeDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentTypeDao" />
+       <osgi:reference id="feedbackDao" interface="com.thingtrack.konekti.dao.api.FeedbackDao" />
+       <osgi:reference id="feedbackStatusDao" interface="com.thingtrack.konekti.dao.api.FeedbackStatusDao" />
+       <osgi:reference id="feedbackTypeDao" interface="com.thingtrack.konekti.dao.api.FeedbackTypeDao" />
+       <osgi:reference id="invoiceDao" interface="com.thingtrack.konekti.dao.api.InvoiceDao" />
+       <osgi:reference id="invoiceLineDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineDao" />
+       <osgi:reference id="invoiceLineStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineStatusDao" />
+       <osgi:reference id="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao" />
+       <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />
+       <osgi:reference id="ivaDao" interface="com.thingtrack.konekti.dao.api.IvaDao" />
+       <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
+       <osgi:reference id="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao" />
+       <osgi:reference id="menuFolderResourceDao" interface="com.thingtrack.konekti.dao.api.MenuFolderResourceDao" />
+       <osgi:reference id="menuCommandResourceDao" interface="com.thingtrack.konekti.dao.api.MenuCommandResourceDao" />
+       <osgi:reference id="menuWorkbenchDao" interface="com.thingtrack.konekti.dao.api.MenuWorkbenchDao" />
+       <osgi:reference id="offerDao" interface="com.thingtrack.konekti.dao.api.OfferDao" />       
+       <osgi:reference id="offerLineDao" interface="com.thingtrack.konekti.dao.api.OfferLineDao" />
+       <osgi:reference id="offerLineStatusDao" interface="com.thingtrack.konekti.dao.api.OfferLineStatusDao" />
+       <osgi:reference id="offerRequestDao" interface="com.thingtrack.konekti.dao.api.OfferRequestDao" />
+       <osgi:reference id="offerRequestLineDao" interface="com.thingtrack.konekti.dao.api.OfferRequestLineDao" />
+       <osgi:reference id="offerRequestLineStatusDao" interface="com.thingtrack.konekti.dao.api.OfferRequestLineStatusDao" />
+       <osgi:reference id="offerRequestStatusDao" interface="com.thingtrack.konekti.dao.api.OfferRequestStatusDao" />
+       <osgi:reference id="offerRequestTypeDao" interface="com.thingtrack.konekti.dao.api.OfferRequestTypeDao" />
+       <osgi:reference id="offerStatusDao" interface="com.thingtrack.konekti.dao.api.OfferStatusDao" />
+       <osgi:reference id="offerTypeDao" interface="com.thingtrack.konekti.dao.api.OfferTypeDao" />
+       <osgi:reference id="organizationDao" interface="com.thingtrack.konekti.dao.api.OrganizationDao" />
+       <osgi:reference id="organizationTypeDao" interface="com.thingtrack.konekti.dao.api.OrganizationTypeDao" />
+       <osgi:reference id="permissionDao" interface="com.thingtrack.konekti.dao.api.PermissionDao" />	          
+       <osgi:reference id="productDao" interface="com.thingtrack.konekti.dao.api.ProductDao" />
+       <osgi:reference id="productTypeDao" interface="com.thingtrack.konekti.dao.api.ProductTypeDao" />       
+       <osgi:reference id="productUnitDao" interface="com.thingtrack.konekti.dao.api.ProductUnitDao" />
+       <osgi:reference id="resourceDao" interface="com.thingtrack.konekti.dao.api.ResourceDao" />
+       <osgi:reference id="roleDao" interface="com.thingtrack.konekti.dao.api.RoleDao" />
+       <osgi:reference id="serviceDao" interface="com.thingtrack.konekti.dao.api.ServiceDao" />
+       <osgi:reference id="serviceStatusDao" interface="com.thingtrack.konekti.dao.api.ServiceStatusDao" />
+       <osgi:reference id="serviceTypeDao" interface="com.thingtrack.konekti.dao.api.ServiceTypeDao" />       
+       <osgi:reference id="stockDao" interface="com.thingtrack.konekti.dao.api.StockDao" />
+       <osgi:reference id="stockStatusDao" interface="com.thingtrack.konekti.dao.api.StockStatusDao" />    
+	   <osgi:reference id="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao" />          
+       <osgi:reference id="supplierAgentDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentDao" />
+       <osgi:reference id="supplierAgentTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentTypeDao" />
+       <osgi:reference id="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao" />       
+       <osgi:reference id="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao" />
+       <osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />
+       <osgi:reference id="warehouseDao" interface="com.thingtrack.konekti.dao.api.WarehouseDao" />
+       <osgi:reference id="warehouseTypeDao" interface="com.thingtrack.konekti.dao.api.WarehouseTypeDao" />
+       <osgi:reference id="workshopDao" interface="com.thingtrack.konekti.dao.api.WorkshopDao" />
+       <osgi:reference id="workshopTypeDao" interface="com.thingtrack.konekti.dao.api.WorkshopTypeDao" />
+       	   
+	   
+	   <!-- Konekti services -->
+	   <osgi:reference id="actionService" interface="com.thingtrack.konekti.service.api.ActionService"/>
+       <osgi:reference id="addressService" interface="com.thingtrack.konekti.service.api.AddressService" />
+       <osgi:reference id="alarmService" interface="com.thingtrack.konekti.service.api.AlarmService" />
+       <osgi:reference id="alarmStatusService" interface="com.thingtrack.konekti.service.api.AlarmStatusService" />
+       <osgi:reference id="alarmTypeService" interface="com.thingtrack.konekti.service.api.AlarmTypeService" />
+       <osgi:reference id="calendarService" interface="com.thingtrack.konekti.service.api.CalendarService" />
+       <osgi:reference id="calendarCardService" interface="com.thingtrack.konekti.service.api.CalendarCardService" />
+       <osgi:reference id="calendarDetailService" interface="com.thingtrack.konekti.service.api.CalendarDetailService" />
+       <osgi:reference id="calendarGroupService" interface="com.thingtrack.konekti.service.api.CalendarGroupService" />
+       <osgi:reference id="calendarTypeService" interface="com.thingtrack.konekti.service.api.CalendarTypeService" />
+       <osgi:reference id="clientService" interface="com.thingtrack.konekti.service.api.ClientService" />       
+       <osgi:reference id="clientAgentService" interface="com.thingtrack.konekti.service.api.ClientAgentService" />
+       <osgi:reference id="clientAgentTypeService" interface="com.thingtrack.konekti.service.api.ClientAgentTypeService" />
+       <osgi:reference id="clientGroupService" interface="com.thingtrack.konekti.service.api.ClientGroupService" />
+       <osgi:reference id="clientTypeService" interface="com.thingtrack.konekti.service.api.ClientTypeService" />
+       <osgi:reference id="employeeAgentService" interface="com.thingtrack.konekti.service.api.EmployeeAgentService" />       
+       <osgi:reference id="employeeAgentStatusService" interface="com.thingtrack.konekti.service.api.EmployeeAgentStatusService" />
+       <osgi:reference id="employeeAgentTypeService" interface="com.thingtrack.konekti.service.api.EmployeeAgentTypeService" />
+       <osgi:reference id="feedbackService" interface="com.thingtrack.konekti.service.api.FeedbackService" />
+       <osgi:reference id="feedbackStatusService" interface="com.thingtrack.konekti.service.api.FeedbackStatusService" />
+       <osgi:reference id="feedbackTypeService" interface="com.thingtrack.konekti.service.api.FeedbackTypeService" />
+       <osgi:reference id="invoiceService" interface="com.thingtrack.konekti.service.api.InvoiceService" />
+       <osgi:reference id="invoiceLineService" interface="com.thingtrack.konekti.service.api.InvoiceLineService" />
+       <osgi:reference id="invoiceLineStatusService" interface="com.thingtrack.konekti.service.api.InvoiceLineStatusService" />
+       <osgi:reference id="invoiceStatusService" interface="com.thingtrack.konekti.service.api.InvoiceStatusService" />
+       <osgi:reference id="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
+       <osgi:reference id="ivaService" interface="com.thingtrack.konekti.service.api.IvaService" />
+       <osgi:reference id="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
+       <osgi:reference id="locationTypeService" interface="com.thingtrack.konekti.service.api.LocationTypeService" />
+       <osgi:reference id="menuFolderResourceService" interface="com.thingtrack.konekti.service.api.MenuFolderResourceService" />
+       <osgi:reference id="menuCommandResourceService" interface="com.thingtrack.konekti.service.api.MenuCommandResourceService" />
+       <osgi:reference id="menuWorkbenchService" interface="com.thingtrack.konekti.service.api.MenuWorkbenchService" />
+       <osgi:reference id="offerService" interface="com.thingtrack.konekti.service.api.OfferService" />       
+       <osgi:reference id="offerLineService" interface="com.thingtrack.konekti.service.api.OfferLineService" />
+       <osgi:reference id="offerLineStatusService" interface="com.thingtrack.konekti.service.api.OfferLineStatusService" />
+       <osgi:reference id="offerRequestService" interface="com.thingtrack.konekti.service.api.OfferRequestService" />
+       <osgi:reference id="offerRequestLineService" interface="com.thingtrack.konekti.service.api.OfferRequestLineService" />
+	   <osgi:reference id="offerRequestLineStatusService" interface="com.thingtrack.konekti.service.api.OfferRequestLineStatusService" />       
+       <osgi:reference id="offerRequestStatusService" interface="com.thingtrack.konekti.service.api.OfferRequestStatusService" />       
+       <osgi:reference id="offerRequestTypeService" interface="com.thingtrack.konekti.service.api.OfferRequestTypeService" />
+       <osgi:reference id="offerStatusService" interface="com.thingtrack.konekti.service.api.OfferStatusService" />
+       <osgi:reference id="offerTypeService" interface="com.thingtrack.konekti.service.api.OfferTypeService" />
+       <osgi:reference id="organizationService" interface="com.thingtrack.konekti.service.api.OrganizationService" />
+       <osgi:reference id="organizationTypeService" interface="com.thingtrack.konekti.service.api.OrganizationTypeService" />
+       <osgi:reference id="permissionService" interface="com.thingtrack.konekti.service.api.PermissionService" />
+       <osgi:reference id="productService" interface="com.thingtrack.konekti.service.api.ProductService" />
+       <osgi:reference id="productTypeService" interface="com.thingtrack.konekti.service.api.ProductTypeService" />       
+       <osgi:reference id="productUnitService" interface="com.thingtrack.konekti.service.api.ProductUnitService" />
+       <osgi:reference id="resourceService" interface="com.thingtrack.konekti.service.api.ResourceService" />
+       <osgi:reference id="roleService" interface="com.thingtrack.konekti.service.api.RoleService" />
+       <osgi:reference id="sequenceService" interface="com.thingtrack.konekti.service.api.SequenceService" />       
+       <osgi:reference id="serviceService" interface="com.thingtrack.konekti.service.api.ServiceService" />
+       <osgi:reference id="serviceStatusService" interface="com.thingtrack.konekti.service.api.ServiceStatusService" />
+       <osgi:reference id="serviceTypeService" interface="com.thingtrack.konekti.service.api.ServiceTypeService" />       
+       <osgi:reference id="stockService" interface="com.thingtrack.konekti.service.api.StockService" />
+       <osgi:reference id="stockStatusService" interface="com.thingtrack.konekti.service.api.StockStatusService" />
+       <osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />       
+       <osgi:reference id="supplierAgentService" interface="com.thingtrack.konekti.service.api.SupplierAgentService" />
+       <osgi:reference id="supplierAgentTypeService" interface="com.thingtrack.konekti.service.api.SupplierAgentTypeService" />
+       <osgi:reference id="supplierGroupService" interface="com.thingtrack.konekti.service.api.SupplierGroupService" />
+       <osgi:reference id="supplierTypeService" interface="com.thingtrack.konekti.service.api.SupplierTypeService" />
+       <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />
+       <osgi:reference id="warehouseService" interface="com.thingtrack.konekti.service.api.WarehouseService" />
+       <osgi:reference id="warehouseTypeService" interface="com.thingtrack.konekti.service.api.WarehouseTypeService" />
+       <osgi:reference id="workshopService" interface="com.thingtrack.konekti.service.api.WorkshopService" />
+       <osgi:reference id="workshopTypeService" interface="com.thingtrack.konekti.service.api.WorkshopTypeService" />
+	   	   	   	   
+	   	   
+       <!-- Knowledge service -->
+       <osgi:reference id="statefulKnowledgeSession" interface="org.drools.runtime.StatefulKnowledgeSession" />
+       
+       <!-- Konekti Knowledge Engine service -->
+       <osgi:service ref="calendarKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.CalendarKnowledgeService" />
+       
+</beans>

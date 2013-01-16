@@ -1,0 +1,109 @@
+@CHARSET "UTF-8";
+
+@import "../reindeer/styles.css";
+
+/* Application background */
+.background {
+	background: url("images/whitey.png") repeat scroll 0 0 #F7F5F5;
+}
+
+/* Menu styles */
+.v-menubar {
+	height: 40px;
+	background: url("common/img/vertical-sprites.png") repeat-x scroll left -383px #323336;
+}
+
+.konekti_logo {	
+	background: url("common/img/vertical-sprites.png") repeat-x scroll left -383px #323336;	
+}
+
+.konekti_logon {
+	background: url("common/img/vertical-sprites.png") repeat-x scroll left -383px #323336;	
+}
+
+.v-popupbutton.v-button-link .v.button.wrap{
+	
+	color: #D1D3D6;
+	text-shadow: 0 1px 0 rgba (0,0,0,0.9);
+	text-decoration: none;
+}
+
+.v-menubar-menuitem {
+	margin-top: 10px;	
+}
+
+.v-menubar-menuitem-help {
+	margin-top: 0px;
+}
+
+/* Workbench Header styles */
+.v-panel-content-header {
+    background: url("common/img/vertical-sprites.png") repeat-x scroll left -383px #323336;
+    border: medium none;
+}
+
+.v-customcomponent-toolbarLayout {
+	padding: 0 16px;
+}
+
+.v-panel-content-header > div {
+	background: transparent;
+}
+
+.v-label-header-konekti {
+	color: white;
+	font-size: 20px;
+	font-family: verdana;
+}
+
+.v-label-header-version {
+	color: white;
+}
+
+.v-label-header-logon {
+	color: white;
+	font-style: italic;
+}
+
+.v-label-nav-toolbar-separator {
+	text-align: center;
+}
+
+/* Toolbars styles */
+.toolbar_layout{
+	display: inline-block;
+	background-color: #F5F5F5;	
+	border-bottom: 0.5px solid #BFBFBF;
+	box-shadow: 0 -2.5px 0 rgba(0, 0, 0, 0.1) inset;
+	min-height:36px;
+    height:auto !important;
+    height:36px; 
+}
+
+.toolbar {
+	padding: 2.5px;
+	float: left;
+}
+
+.toolbar .v-captiontext {
+	width: 100%;
+	text-align: center;
+}
+
+.v-disabled.counter{
+	opacity: 1.0;
+}
+
+.calendar_card .working_day {
+	background-color: white;
+}
+
+.calendar_card .holiday_day {
+	background-color: red;
+}
+
+/* .filter-pressed { */
+/* 	background-image: url("../reindeer/button/img/button-sprintes.png"); */
+/* 	background-position: left -52px; */
+/* 	outline: medium none;   */
+/* } */

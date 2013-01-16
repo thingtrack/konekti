@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<process xmlns="http://drools.org/drools-5.0/process"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+         xs:schemaLocation="http://drools.org/drools-5.0/process drools-processes-5.0.xsd"
+         type="RuleFlow" name="TEST 04" id="com.konekti.knowledge.bpmn2.test04" package-name="com.konekti.knowledge.bpmn2" version="1.0.0" >
+
+  <header>
+    <variables>
+      <variable name="itemsA" >
+        <type name="org.drools.process.core.datatype.impl.type.ObjectDataType" className="java.util.List" />
+      </variable>
+      <variable name="itemsB" >
+        <type name="org.drools.process.core.datatype.impl.type.ObjectDataType" className="java.util.List" />
+      </variable>
+    </variables>
+  </header>
+
+  <nodes>
+    <start id="1" name="Start" x="24" y="168" width="48" height="48" />
+    <actionNode id="2" name="PreProcess" x="108" y="168" width="80" height="48" >
+        <action type="expression" dialect="java" >System.out.println("TASK: PreProcess");</action>
+    </actionNode>
+    <actionNode id="3" name="PostProcess" x="672" y="168" width="80" height="48" >
+        <action type="expression" dialect="java" >System.out.println("TASK: PostProcess");</action>
+    </actionNode>
+    <end id="4" name="End" x="780" y="168" width="48" height="48" />
+    <split id="5" name="Gateway" x="228" y="168" width="49" height="49" type="1" />
+    <join id="6" name="Gateway" x="588" y="168" width="49" height="49" type="1" />
+    <forEach id="7" name="Process A" x="312" y="12" width="253" height="150" variableName="itemA" collectionExpression="itemsA" >
+      <nodes>
+    <start id="1" name="Start" x="11" y="50" width="48" height="48" />
+    <end id="2" name="End" x="196" y="49" width="48" height="48" terminate="false" />
+    <actionNode id="3" name="Process A" x="91" y="50" width="80" height="48" >
+        <action type="expression" dialect="java" >String value = (String)itemA;
+
+System.out.println("TASK: Process A: " + value);</action>
+    </actionNode>
+      </nodes>
+      <connections>
+    <connection from="3" to="2" />
+    <connection from="1" to="3" />
+      </connections>
+      <in-ports>
+      </in-ports>
+      <out-ports>
+      </out-ports>
+    </forEach>
+    <forEach id="8" name="Process B" x="312" y="216" width="253" height="150" variableName="itemB" collectionExpression="itemsB" >
+      <nodes>
+    <start id="1" name="Start" x="7" y="58" width="48" height="48" />
+    <end id="2" name="End" x="196" y="59" width="48" height="48" terminate="false" />
+    <actionNode id="3" name="ProcessB" x="92" y="57" width="80" height="48" >
+        <action type="expression" dialect="java" >String value = (String)itemB;
+
+System.out.println("TASK: Process B: " + value);</action>
+    </actionNode>
+      </nodes>
+      <connections>
+    <connection from="3" to="2" />
+    <connection from="1" to="3" />
+      </connections>
+      <in-ports>
+      </in-ports>
+      <out-ports>
+      </out-ports>
+    </forEach>
+  </nodes>
+
+  <connections>
+    <connection from="1" to="2" />
+    <connection from="6" to="3" />
+    <connection from="3" to="4" />
+    <connection from="2" to="5" />
+    <connection from="7" to="6" />
+    <connection from="8" to="6" />
+    <connection from="5" to="7" />
+    <connection from="5" to="8" />
+  </connections>
+
+</process>
