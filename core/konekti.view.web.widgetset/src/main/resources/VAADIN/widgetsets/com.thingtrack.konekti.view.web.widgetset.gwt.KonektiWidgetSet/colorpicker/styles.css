@@ -1,0 +1,214 @@
+.v-colorpicker{
+	width: 70px;
+	height: 70px;	
+}
+
+.v-colorpicker-button-color{
+	border: 1px solid silver;
+	float: left;
+	margin-top: 2px;
+	margin-right: 5px;
+}
+
+.v-colorpicker-button-area{	
+	border: 1px solid silver;
+	margin:1px;
+}
+
+/***************** COLOR HISTORY COMPONENT *****************************/
+
+.v-colorpicker-history{
+	margin:5px;
+}
+
+.v-colorpicker-history td
+{
+	border:1px solid silver !important;	
+}
+
+/***********************************************************************/
+
+/**************** COLOR POPUP COMPONENT ********************************/
+.v-colorpicker-popup{
+	background-color: #dddddd;	
+}
+
+.v-colorpicker-popup .v-window-contents{
+	background: none;	
+}
+
+.v-colorpicker-popup .v-tabsheet-content{
+	background-color: #eaeaea;	
+}
+
+.v-colorpicker-popup .v-tabsheet-content .v-tabsheet-tabsheetpanel{
+	background: none;		
+}
+
+.v-colorpicker-popup .resize-button{
+	border: 0px solid silver;
+	background:url("images/resizebg.png");	
+	_behavior: expression(  /* IE6 only - transparency with proper handling of relative URLs */
+             this.colorpickerresize = this.colorpickerresize ? this.colorpickerresize : this.currentStyle.backgroundImage.split('"')[1],
+             this.style.background = "none",
+             this.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + this.colorpickerresize + ")");	
+   
+}
+
+.v-colorpicker-popup .resize-button:hover
+{
+	background:url("images/resizebg-selected.png");			
+}
+
+.v-colorpicker-popup .resize-button .v-button-caption
+{
+	background:none;
+}
+
+.v-colorpicker-popup .resize-button .v-button-wrap{
+	background:none;	
+}
+
+/***********************************************************************/ 
+
+/*********************** COLOR GRADIENT *******************************/
+
+.v-colorpicker-gradient
+{
+	margin-left:10px;
+	margin-top:0px;	
+}
+
+.v-colorpicker-gradient .v-colorpicker-gradient-clicklayer
+{
+	background-color: white;
+	filter: alpha(opacity=0);
+	opacity: 0;
+}
+
+.v-colorpicker-popup #rgb-gradient .v-colorpicker-gradient-background
+{
+	width: 220px;
+	height: 220px;
+	background:url("images/gradient2.png");	
+	_behavior: expression(  /* IE6 only - transparency with proper handling of relative URLs */
+              this.colorpickergradient2 = this.colorpickergradient2 ? this.colorpickergradient2 : this.currentStyle.backgroundImage.split('"')[1],
+              this.style.background = "none",
+              this.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + this.colorpickergradient2 + ")");
+}
+
+.v-colorpicker-popup #hsv-gradient .v-colorpicker-gradient-foreground
+{
+	width: 220px;
+	height: 220px;
+	background:url("images/gradient.png");
+	_behavior: expression(  /* IE6 only - transparency with proper handling of relative URLs */
+              this.colorpickergradient1 = this.colorpickergradient1 ? this.colorpickergradient1 : this.currentStyle.backgroundImage.split('"')[1],
+              this.style.background = "none",
+              this.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + this.colorpickergradient1 + ")");
+}
+
+.v-colorpicker-popup .v-colorpicker-gradient-lowerbox
+{
+	border-right: 1px solid white;
+	border-top: 1px solid white;	
+}
+
+.v-colorpicker-popup .v-colorpicker-gradient-higherbox
+{
+	border-left: 1px solid white;
+	border-bottom: 1px solid white;	
+}
+	
+/**********************************************************************/
+
+/************************ COLOR SLIDER ********************************/
+
+.v-colorpicker-popup .rgb-sliders{
+	margin-left:10px;	
+	color: #444444;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.v-colorpicker-popup .rgb-sliders .red .v-slider-base{
+	background-color: red;	
+}
+
+.v-colorpicker-popup .rgb-sliders .green .v-slider-base{
+	background-color: green;	
+}
+
+.v-colorpicker-popup .rgb-sliders .blue .v-slider-base{
+	background-color: blue;	
+}
+
+.v-colorpicker-popup .hsv-sliders{
+	margin-left:10px;	
+	color: #444444;
+	text-shadow: 0 1px 0 #FFFFFF;
+}
+
+.v-colorpicker-popup .hue-slider{	
+	height: 10px;
+	width: 220px;
+	border:0px solid silver;	
+	background-image: url("images/slider_hue_bg.png");
+	background-color: transparent;
+	background-repeat: no-repeat;	
+	background-position: 0 3px;
+	margin-top: 0px;	
+}
+
+.v-colorpicker-popup .hue-slider .v-slider-handle{
+	margin-top: -2px;
+}
+
+.v-colorpicker-popup .hue-slider .v-slider-base{
+	border:0px none;
+	height:0px;	
+	background-color: transparent;
+}
+
+/****************************************************************/
+
+/****************** COLOR PREVIEW *******************************/
+
+.v-colorpicker-popup .v-colorpicker-preview
+{
+	margin-top:5px;
+	margin-left:10px;
+	margin-bottom:0px;
+}
+
+.v-colorpicker-popup .v-absolutelayout-wrapper
+{
+	width:100%;	
+	height:100%;
+}
+
+.v-colorpicker-popup .v-colorpicker-preview-textfield
+{
+	background:none;	
+	overflow:hidden;
+	overflow-y: hidden;
+	overflow-x: hidden; 
+}
+
+.v-colorpicker-popup .v-textfield-dark{
+	color: #FFFFFF;
+}
+
+.v-colorpicker-popup .v-textfield-light{
+	color: #000000;
+}
+
+/****************************************************************/
+
+/*************** COLOR SELECT ***********************************/
+
+.v-colorpicker-popup .colorselect{
+	margin-top:5px;
+	margin-left:10px;	
+}
+
+/****************************************************************/

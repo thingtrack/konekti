@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.dao.api.ClientDao;
 import com.thingtrack.konekti.service.api.ClientService;
 import com.thingtrack.konekti.service.api.SequenceService;
@@ -78,5 +79,11 @@ public class ClientServiceImpl implements ClientService {
 		client.setActive(true);
 		
 		return client;
+	}
+	
+	@Override
+	public Client getByUser(User user) throws Exception {
+		return this.clientDao.getByUser(user);
+		
 	}
 }

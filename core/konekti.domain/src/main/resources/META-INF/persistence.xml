@@ -22,8 +22,6 @@
 	    <class>com.thingtrack.konekti.domain.CalendarGroup</class>
 	    <class>com.thingtrack.konekti.domain.CalendarType</class>
 		<class>com.thingtrack.konekti.domain.Client</class>
-		<class>com.thingtrack.konekti.domain.ClientAgent</class>
-		<class>com.thingtrack.konekti.domain.ClientAgentType</class>
 		<class>com.thingtrack.konekti.domain.ClientGroup</class>		
 		<class>com.thingtrack.konekti.domain.ClientType</class>
 		<class>com.thingtrack.konekti.domain.EmployeeAgent</class>
@@ -70,8 +68,6 @@
 	    <class>com.thingtrack.konekti.domain.Stock</class>
 	    <class>com.thingtrack.konekti.domain.StockStatus</class>
 	    <class>com.thingtrack.konekti.domain.Supplier</class>
-	    <class>com.thingtrack.konekti.domain.SupplierAgent</class>
-	    <class>com.thingtrack.konekti.domain.SupplierAgentType</class>
 	    <class>com.thingtrack.konekti.domain.SupplierGroup</class>
 	    <class>com.thingtrack.konekti.domain.SupplierType</class>	    	    
 	    <class>com.thingtrack.konekti.domain.User</class>
@@ -95,6 +91,7 @@
 	    <class>com.thingtrack.bustrack.domain.OfferRequestLineRegularService</class>									    
 	    <class>com.thingtrack.bustrack.domain.Route</class>
 	    <class>com.thingtrack.bustrack.domain.RouteStatus</class>
+	    <class>com.thingtrack.bustrack.domain.ServiceTemplate</class>
 	    <class>com.thingtrack.bustrack.domain.Stop</class>
 	    <class>com.thingtrack.bustrack.domain.Tire</class>
 	    <class>com.thingtrack.bustrack.domain.TireStatus</class>

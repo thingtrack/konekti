@@ -1,12 +1,339 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-        <artifactId>konekti.platform</artifactId>
-        <groupId>com.thingtrack</groupId>
-        <version>0.0.1.SNAPSHOT</version>
-    </parent>
-  <artifactId>modules</artifactId>
-  <packaging>pom</packaging>
-  <name>modules</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>konekti.platform</artifactId>
+		<groupId>com.thingtrack</groupId>
+		<version>0.0.1.SNAPSHOT</version>
+	</parent>
+	<artifactId>modules</artifactId>
+	<packaging>pom</packaging>
+	<name>modules</name>
+
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Shared version number properties -->
+		<org.konekti.version>0.0.1.SNAPSHOT</org.konekti.version>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+		<com.vaadin.version>6.8.5</com.vaadin.version>
+		<org.osgi.core.version>4.3.0</org.osgi.core.version>
+		<javax.persistence.version>2.0.0</javax.persistence.version>
+		<javax.validation.version>1.0.0.GA</javax.validation.version>
+	</properties>
+
+	<modules>
+		<module>konekti.view.module.mananger</module>
+		<module>konekti.view.module.product</module>
+		<module>konekti.view.module.feedback</module>
+		<module>konekti.view.module.address</module>
+		<module>konekti.view.module.stock</module>
+		<module>konekti.view.module.bundle</module>
+		<module>konekti.view.module.alarm</module>
+		<module>konekti.view.web.client</module>
+		<module>konekti.view.web.supplier</module>
+		<module>konekti.view.web.employee</module>
+		<module>konekti.view.module.sensor</module>
+		<module>konekti.view.module.dashboard</module>
+		<module>konekti.view.module.calendar</module>
+	</modules>
+
+	<build>
+		<finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<!-- Core utilities used by other modules. Define this if you use Spring 
+			Utility APIs (org.springframework.core.*/org.springframework.util.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.core</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Expression Language (depends on core) Define this if you use Spring 
+			Expression APIs (org.springframework.expression.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.expression</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Bean Factory and JavaBeans utilities (depends on core) Define this 
+			if you use Spring Bean APIs (org.springframework.beans.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.beans</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Aspect Oriented Programming (AOP) Framework (depends on core, beans) 
+			Define this if you use Spring AOP APIs (org.springframework.aop.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.aop</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Application Context (depends on core, expression, aop, beans) This 
+			is the central artifact for Spring's Dependency Injection Container and is 
+			generally always defined -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.context</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Various Application Context utilities, including EhCache, JavaMail, 
+			Quartz, and Freemarker integration Define this if you need any of these integrations -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.context.support</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Transaction Management Abstraction (depends on core, beans, aop, context) 
+			Define this if you use Spring Transactions or DAO Exception Hierarchy (org.springframework.transaction.*/org.springframework.dao.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.transaction</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JDBC Data Access Library (depends on core, beans, context, transaction) 
+			Define this if you use Spring's JdbcTemplate API (org.springframework.jdbc.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.jdbc</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, 
+			and iBatis. (depends on core, beans, context, transaction) Define this if 
+			you need ORM (org.springframework.orm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.orm</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Object-to-XML Mapping (OXM) abstraction and integration with JAXB, 
+			JiBX, Castor, XStream, and XML Beans. (depends on core, beans, context) Define 
+			this if you need OXM (org.springframework.oxm.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.oxm</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Web app development utilities common across Servlet/Portlet environments 
+			(depends on core, beans, context) Define this if you use Spring MVC, or wish 
+			to use Struts, JSF, or another web framework with Spring (org.springframework.web.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Spring MVC for Servlet Environments (depends on core, beans, context, 
+			web) Define this if you use Spring MVC with a Servlet Container such as Apache 
+			Tomcat (org.springframework.web.servlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web.servlet</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Spring MVC for Portlet Environments (depends on core, beans, context, 
+			web) Define this if you use Spring MVC with a Portlet Container (org.springframework.web.portlet.*) -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.web.portlet</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Support for testing Spring applications with tools such as JUnit and 
+			TestNG This artifact is generally always defined with a 'test' scope for 
+			the integration testing framework and unit testing stubs -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>org.springframework.test</artifactId>
+			<version>${org.springframework.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Vaadin is an open source Web application framework for rich Internet 
+			applications -->
+		<dependency>
+			<groupId>com.vaadin</groupId>
+			<artifactId>vaadin</artifactId>
+			<version>${com.vaadin.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JPA API -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>com.springsource.javax.persistence</artifactId>
+			<version>${javax.persistence.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JPA Bean Validation API -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>com.springsource.javax.validation</artifactId>
+			<version>${javax.validation.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- OSGI Core API -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${org.osgi.core.version}</version>
+		</dependency>
+
+
+		<!-- EclipseRT Virgo Bundlor -->
+		<dependency>
+			<groupId>org.eclipse.virgo.bundlor</groupId>
+			<artifactId>org.eclipse.virgo.bundlor.maven</artifactId>
+			<version>1.1.1.RELEASE</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>formbinder</artifactId>
+			<version>2.1.2</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addon</groupId>
+			<artifactId>confirmdialog</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>filteringtable</artifactId>
+			<version>0.7.3</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Domain Layer -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Service API -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Kernel -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.kernel</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Custom Addons -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Konekti Forms -->
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.web.form</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<!-- ================================================ -->
+	<!-- Repository Configuration -->
+	<!-- ================================================ -->
+
+	<repositories>
+
+		<!-- SpringSource Enterprise Bundle Repository (EBR) -->
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>EBR Spring Release Repository</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>EBR External Release Repository</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+
+		<!-- Vaadin Addons Repository -->
+		<repository>
+			<id>vaadin-addons</id>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+
+		<!-- EclipseRT Virgo Bundlor -->
+		<repository>
+			<id>virgo</id>
+			<url>http://build.eclipse.org/rt/virgo/maven/bundles/release</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<!-- EclipseRT Maven Plugin Repository -->
+		<pluginRepository>
+			<id>eclipse.virgo.build.bundles.release</id>
+			<name>Eclipse Virgo Build</name>
+			<url>http://build.eclipse.org/rt/virgo/maven/bundles/release</url>
+		</pluginRepository>
+
+		<pluginRepository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 </project>

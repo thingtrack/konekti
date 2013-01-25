@@ -37,6 +37,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.thingtrack.bustrack.domain.Route;
+import com.thingtrack.bustrack.domain.ServiceTemplate;
 import com.thingtrack.bustrack.domain.Turn;
 import com.thingtrack.bustrack.domain.VehicleType;
 import com.thingtrack.bustrack.domain.WorksheetLine;
@@ -160,6 +161,13 @@ public class Service implements Serializable {
 
 	@Column(name="ROUTE_AVOIDS")
 	private String routeAvoids;
+	
+	@ManyToOne(optional=false)
+	@JoinColumn(name="SERVICE_TEMPLATE_ID", nullable=false)
+	private ServiceTemplate serviceTemplate;
+	
+	@Column(name="TEMPLATE")
+	private boolean Template;
 	
 	public enum STATUS {        
         OPENED,
@@ -771,5 +779,34 @@ public class Service implements Serializable {
 		}
 		
 		
+	}
+
+
+	/**
+	 * @return the serviceTemplate
+	 */
+	public ServiceTemplate getServiceTemplate() {
+		return serviceTemplate;
+	}
+
+	/**
+	 * @param serviceTemplate the serviceTemplate to set
+	 */
+	public void setServiceTemplate(ServiceTemplate serviceTemplate) {
+		this.serviceTemplate = serviceTemplate;
+	}
+
+	/**
+	 * @return the template
+	 */
+	public boolean isTemplate() {
+		return Template;
+	}
+
+	/**
+	 * @param template the template to set
+	 */
+	public void setTemplate(boolean template) {
+		Template = template;
 	}
 }

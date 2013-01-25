@@ -17,6 +17,7 @@ import java.util.List;
 
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -30,4 +31,5 @@ public interface ClientService {
 	public Client save(Client client) throws Exception;
 	public void delete(Client client) throws Exception;
 	public Client createNewClient(Organization organization) throws Exception;
+	public Client getByUser(User user) throws Exception;
 }

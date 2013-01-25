@@ -29,8 +29,6 @@
 		<osgi:service ref="calendarGroupDao" interface="com.thingtrack.konekti.dao.api.CalendarGroupDao"/>
 		<osgi:service ref="calendarTypeDao" interface="com.thingtrack.konekti.dao.api.CalendarTypeDao"/>
 		<osgi:service ref="clientDao" interface="com.thingtrack.konekti.dao.api.ClientDao"/>		
-		<osgi:service ref="clientAgentDao" interface="com.thingtrack.konekti.dao.api.ClientAgentDao"/>
-		<osgi:service ref="clientAgentTypeDao" interface="com.thingtrack.konekti.dao.api.ClientAgentTypeDao"/>
 		<osgi:service ref="clientGroupDao" interface="com.thingtrack.konekti.dao.api.ClientGroupDao"/>
 		<osgi:service ref="clientTypeDao" interface="com.thingtrack.konekti.dao.api.ClientTypeDao"/>
 		<osgi:service ref="employeeAgentDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentDao"/>
@@ -76,8 +74,6 @@
 		<osgi:service ref="stockDao" interface="com.thingtrack.konekti.dao.api.StockDao"/>
 		<osgi:service ref="stockStatusDao" interface="com.thingtrack.konekti.dao.api.StockStatusDao"/>	    		
 		<osgi:service ref="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao"/>		
-		<osgi:service ref="supplierAgentDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentDao"/>
-		<osgi:service ref="supplierAgentTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentTypeDao"/>
 		<osgi:service ref="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao"/>
 		<osgi:service ref="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao"/>				
 		<osgi:service ref="userDao" interface="com.thingtrack.konekti.dao.api.UserDao"/>

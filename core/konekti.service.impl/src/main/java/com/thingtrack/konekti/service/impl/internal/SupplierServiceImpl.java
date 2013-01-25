@@ -17,10 +17,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Supplier;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.dao.api.SupplierDao;
 import com.thingtrack.konekti.service.api.SequenceService;
 import com.thingtrack.konekti.service.api.SupplierService;
@@ -76,4 +76,9 @@ public class SupplierServiceImpl implements SupplierService {
 		return supplier;
 	}
 
+	@Override
+	public Supplier getByUser(User user) throws Exception {
+		return this.supplierDao.getByUser(user);
+		
+	}
 }

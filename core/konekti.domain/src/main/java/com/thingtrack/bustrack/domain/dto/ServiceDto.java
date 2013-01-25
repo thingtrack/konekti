@@ -62,6 +62,7 @@ public class ServiceDto implements Serializable {
 		this.offerLineNumber = offerLineNumber;
 		this.offerLineStatusDescription = offerLineStatusDescription;
 		this.serviceCode = serviceCode;
+		this.service = service;
 	}
 	
 	/**

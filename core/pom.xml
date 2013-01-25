@@ -276,7 +276,6 @@
     <module>konekti.service.impl</module>
     <module>konekti.service.security</module>
     <module>konekti.view.web.form</module>
-    <module>konketi.view.web.widgetset</module>
     <module>konekti.view.web.widgetset</module>
     <module>konekti.view.web.workbench</module>
     <module>konekti.service.sensor.api</module>
@@ -289,5 +288,6 @@
     <module>konekti.view.layout.toolbar</module>
     <module>konekti.view.layout.menu</module>
     <module>konekti.view.layout.workbench</module>
+    <module>konekti.view.security</module>
   </modules>
 </project>

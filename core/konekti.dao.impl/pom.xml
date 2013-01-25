@@ -12,12 +12,6 @@
 	<name>Konekti Dao Layer Implementation</name>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.googlecode.ehcache-spring-annotations</groupId>
-			<artifactId>ehcache-spring-annotations</artifactId>
-			<version>1.2.0</version>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>com.thingtrack</groupId>

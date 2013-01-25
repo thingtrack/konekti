@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Location;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Warehouse;
 import com.thingtrack.konekti.dao.api.WarehouseDao;
@@ -74,5 +75,11 @@ public class WarehouseServiceImpl implements WarehouseService {
 		warehouse.setActive(true);
 		
 		return warehouse;
+	}
+
+	@Override
+	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception {
+		return this.warehouseDao.getWarehousesFromOrganization(organization);
+		
 	}
 }

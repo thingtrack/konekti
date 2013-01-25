@@ -1,0 +1,60 @@
+.v-buttongroup {
+	border: 0;
+}
+
+.v-buttongroup .v-button {
+	height: 25px;
+}
+
+.v-buttongroup .v-button-left .v-button-wrap {
+	padding: 4px 6px 0 3px;
+}
+
+.v-buttongroup .v-button-middle .v-button-wrap {
+	padding: 4px 6px 0 6px;
+}
+
+.v-buttongroup .v-button-right .v-button-wrap {
+	padding: 4px 9px 0 6px;
+}
+
+.v-buttongroup .v-button-left .v-button-wrap,
+.v-buttongroup .v-button-middle .v-button-wrap,
+.v-buttongroup .v-button-left.v-disabled .v-button-wrap,
+.v-buttongroup .v-button-middle.v-disabled .v-button-wrap,
+.v-buttongroup .v-button-left.v-disabled:active .v-button-wrap,
+.v-buttongroup .v-button-middle.v-disabled:active .v-button-wrap,
+.v-buttongroup .v-button-left.v-disabled:focus .v-button-wrap,
+.v-buttongroup .v-button-middle.v-disabled:focus .v-button-wrap {
+	background-position: left -130px;
+}
+
+.v-buttongroup .v-button-middle,
+.v-buttongroup .v-button-middle.v-disabled:active,
+.v-buttongroup .v-button-middle.v-disabled:focus {
+	border-left: 1px solid #ccc;
+	background-position: 5px -104px;
+	padding: 0;
+}
+
+.v-buttongroup .v-button-right {
+	border-left: 1px solid #ccc;
+	padding: 0;
+	background-image: none;
+}
+
+.v-buttongroup .v-button-left:focus .v-button-wrap {
+	background-position: left -26px;
+}
+
+.v-buttongroup .v-button-middle:focus,
+.v-buttongroup .v-button-middle:focus .v-button-wrap {
+	background-position: left -26px;
+}
+
+.v-buttongroup .v-button-left:active .v-button-wrap,
+.v-buttongroup .v-button-left.v-pressed .v-button-wrap,
+.v-buttongroup .v-button-middle:active .v-button-wrap,
+.v-buttongroup .v-button-middle.v-pressed .v-button-wrap {
+	background-position: left -78px;
+}

@@ -1,0 +1,15 @@
+@import "dock/dock.css";
+
+@import "slidingpanel/slidingpanel.css";
+
+@import "popuptextfield/popuptextfield.css";
+
+@import "btextfield/btextfield.css";
+
+@import "breadcrumb/ikarusbreadcrumbs.css";
+
+@import "slider/styles.css";
+
+.v-select-optiongroup-horizontal .v-select-option-horizontal {
+	display: inline-block;
+}

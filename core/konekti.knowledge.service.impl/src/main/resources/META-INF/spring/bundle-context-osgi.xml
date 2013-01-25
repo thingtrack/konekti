@@ -24,9 +24,7 @@
        <osgi:reference id="calendarDetailDao" interface="com.thingtrack.konekti.dao.api.CalendarDetailDao" />
        <osgi:reference id="calendarGroupDao" interface="com.thingtrack.konekti.dao.api.CalendarGroupDao" />
        <osgi:reference id="calendarTypeDao" interface="com.thingtrack.konekti.dao.api.CalendarTypeDao" />
-       <osgi:reference id="clientDao" interface="com.thingtrack.konekti.dao.api.ClientDao" />       
-       <osgi:reference id="clientAgentDao" interface="com.thingtrack.konekti.dao.api.ClientAgentDao" />
-       <osgi:reference id="clientAgentTypeDao" interface="com.thingtrack.konekti.dao.api.ClientAgentTypeDao" />
+       <osgi:reference id="clientDao" interface="com.thingtrack.konekti.dao.api.ClientDao" />
        <osgi:reference id="clientGroupDao" interface="com.thingtrack.konekti.dao.api.ClientGroupDao" />
        <osgi:reference id="clientTypeDao" interface="com.thingtrack.konekti.dao.api.ClientTypeDao" />
        <osgi:reference id="employeeAgentDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentDao" />
@@ -70,8 +68,6 @@
        <osgi:reference id="stockDao" interface="com.thingtrack.konekti.dao.api.StockDao" />
        <osgi:reference id="stockStatusDao" interface="com.thingtrack.konekti.dao.api.StockStatusDao" />    
 	   <osgi:reference id="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao" />          
-       <osgi:reference id="supplierAgentDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentDao" />
-       <osgi:reference id="supplierAgentTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierAgentTypeDao" />
        <osgi:reference id="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao" />       
        <osgi:reference id="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao" />
        <osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />
@@ -92,9 +88,7 @@
        <osgi:reference id="calendarDetailService" interface="com.thingtrack.konekti.service.api.CalendarDetailService" />
        <osgi:reference id="calendarGroupService" interface="com.thingtrack.konekti.service.api.CalendarGroupService" />
        <osgi:reference id="calendarTypeService" interface="com.thingtrack.konekti.service.api.CalendarTypeService" />
-       <osgi:reference id="clientService" interface="com.thingtrack.konekti.service.api.ClientService" />       
-       <osgi:reference id="clientAgentService" interface="com.thingtrack.konekti.service.api.ClientAgentService" />
-       <osgi:reference id="clientAgentTypeService" interface="com.thingtrack.konekti.service.api.ClientAgentTypeService" />
+       <osgi:reference id="clientService" interface="com.thingtrack.konekti.service.api.ClientService" />
        <osgi:reference id="clientGroupService" interface="com.thingtrack.konekti.service.api.ClientGroupService" />
        <osgi:reference id="clientTypeService" interface="com.thingtrack.konekti.service.api.ClientTypeService" />
        <osgi:reference id="employeeAgentService" interface="com.thingtrack.konekti.service.api.EmployeeAgentService" />       
@@ -138,9 +132,7 @@
        <osgi:reference id="serviceTypeService" interface="com.thingtrack.konekti.service.api.ServiceTypeService" />       
        <osgi:reference id="stockService" interface="com.thingtrack.konekti.service.api.StockService" />
        <osgi:reference id="stockStatusService" interface="com.thingtrack.konekti.service.api.StockStatusService" />
-       <osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />       
-       <osgi:reference id="supplierAgentService" interface="com.thingtrack.konekti.service.api.SupplierAgentService" />
-       <osgi:reference id="supplierAgentTypeService" interface="com.thingtrack.konekti.service.api.SupplierAgentTypeService" />
+       <osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
        <osgi:reference id="supplierGroupService" interface="com.thingtrack.konekti.service.api.SupplierGroupService" />
        <osgi:reference id="supplierTypeService" interface="com.thingtrack.konekti.service.api.SupplierTypeService" />
        <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />

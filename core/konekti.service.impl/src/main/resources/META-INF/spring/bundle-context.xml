@@ -48,9 +48,7 @@
 	<bean id="calendarDetailService" class="com.thingtrack.konekti.service.impl.internal.CalendarDetailServiceImpl"/>
 	<bean id="calendarGroupService" class="com.thingtrack.konekti.service.impl.internal.CalendarGroupServiceImpl"/>
 	<bean id="calendarTypeService" class="com.thingtrack.konekti.service.impl.internal.CalendarTypeServiceImpl"/>
-	<bean id="clientService" class="com.thingtrack.konekti.service.impl.internal.ClientServiceImpl"/>	
-	<bean id="clientAgentService" class="com.thingtrack.konekti.service.impl.internal.ClientAgentServiceImpl"/>
-	<bean id="clientAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.ClientAgentTypeServiceImpl"/>
+	<bean id="clientService" class="com.thingtrack.konekti.service.impl.internal.ClientServiceImpl"/>
 	<bean id="clientGroupService" class="com.thingtrack.konekti.service.impl.internal.ClientGroupServiceImpl"/>	 		 			
 	<bean id="clientTypeService" class="com.thingtrack.konekti.service.impl.internal.ClientTypeServiceImpl"/>
 	<bean id="employeeAgentService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentServiceImpl"/>
@@ -95,9 +93,7 @@
 	<bean id="serviceTypeService" class="com.thingtrack.konekti.service.impl.internal.ServiceTypeServiceImpl"/>	
 	<bean id="stockService" class="com.thingtrack.konekti.service.impl.internal.StockServiceImpl"/>
 	<bean id="stockStatusService" class="com.thingtrack.konekti.service.impl.internal.StockStatusServiceImpl"/>
-	<bean id="supplierService" class="com.thingtrack.konekti.service.impl.internal.SupplierServiceImpl"/>	
-	<bean id="supplierAgentService" class="com.thingtrack.konekti.service.impl.internal.SupplierAgentServiceImpl"/>
-	<bean id="supplierAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.SupplierAgentTypeServiceImpl"/>
+	<bean id="supplierService" class="com.thingtrack.konekti.service.impl.internal.SupplierServiceImpl"/>
 	<bean id="supplierGroupService" class="com.thingtrack.konekti.service.impl.internal.SupplierGroupServiceImpl"/>	
 	<bean id="supplierTypeService" class="com.thingtrack.konekti.service.impl.internal.SupplierTypeServiceImpl"/>
 	<bean id="userService" class="com.thingtrack.konekti.service.impl.internal.UserServiceImpl"/>						

@@ -1,7 +1,6 @@
 package com.thingtrack.konekti.filter.service.impl.internal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.metamodel.Attribute;
@@ -13,10 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thingtrack.konekti.dao.template.DaoFilter;
 import com.thingtrack.konekti.dao.api.AddressDao;
 import com.thingtrack.konekti.dao.api.ClientDao;
-import com.thingtrack.konekti.dao.api.ClientAgentDao;
 import com.thingtrack.konekti.dao.api.ClientGroupDao;
 import com.thingtrack.konekti.dao.api.ClientTypeDao;
-import com.thingtrack.konekti.domain.Address;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.filter.service.api.FilterClientService;
 
@@ -33,9 +30,6 @@ public class FilterClientServiceImpl implements FilterClientService {
 
 	@Autowired
 	private AddressDao addressDao;
-	
-	@Autowired
-	private ClientAgentDao clientAgentDao;
 	
 	private List<DaoFilter> filters = new ArrayList<DaoFilter>();
 	

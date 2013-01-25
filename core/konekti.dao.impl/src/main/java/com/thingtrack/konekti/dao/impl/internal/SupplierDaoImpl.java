@@ -13,11 +13,15 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.SupplierDao;
+import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Supplier;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -35,4 +39,17 @@ public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements Suppli
 		
 	}
 
+	@Override
+	public Supplier getByUser(User user) throws Exception {
+		
+		String queryString = "SELECT p";
+		queryString += " FROM " + getEntityName() + " p";
+		queryString += " WHERE p.user = :user";
+		
+		Query query = (Query) getEntityManager().createQuery(queryString)
+		.setParameter("user", user);
+		
+		return (Supplier) query.getSingleResult();
+
+	}
 }

@@ -48,7 +48,7 @@ build.properties
 
 #MANIFEST files
 ###############
-META-INF/MANIFEST.MF
+MANIFEST.MF
 src/main/resources/META-INF/MANIFEST.MF
 src/main/webapp/META-INF/MANIFEST.MF
 

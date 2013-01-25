@@ -17,6 +17,7 @@ import java.util.List;
 
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Supplier;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -29,4 +30,5 @@ public interface SupplierService {
 	public Supplier save(Supplier supplier) throws Exception;
 	public void delete(Supplier supplier) throws Exception;
 	public Supplier createNewSupplier(Organization organization) throws Exception;
+	public Supplier getByUser(User user) throws Exception;
 }

@@ -3,7 +3,7 @@ Export-Package: com.thingtrack.konekti.dao.api;version="0.0.1.SNAPSHOT
  ";uses:="com.thingtrack.konekti.dao.template,com.thingtrack.konekti.d
  omain",com.thingtrack.konekti.dao.api.internal;version="0.0.1.SNAPSHO
  T"
-Built-By: Thingtrack S.L.
+Built-By: Thingtrack s.l.
 Tool: Bundlor 1.1.1.RELEASE
 Bundle-Name: Konekti Dao Layer API
 Created-By: Maven Integration for Eclipse

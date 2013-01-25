@@ -2,19 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-		
+
 	<parent>
 		<artifactId>core</artifactId>
 		<groupId>com.thingtrack</groupId>
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
-	
+
 	<artifactId>konekti.domain</artifactId>
 	<packaging>jar</packaging>
-	
+
 	<name>Konekti Domain Layer</name>
 	<description>Konekti Domain Layer</description>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -60,39 +60,40 @@ Meta-Persistence: META-INF/persistence.xml
 			</plugin>
 		</plugins>
 		<pluginManagement>
-        	<plugins>
-        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-        		<plugin>
-        			<groupId>org.eclipse.m2e</groupId>
-        			<artifactId>lifecycle-mapping</artifactId>
-        			<version>1.0.0</version>
-        			<configuration>
-        				<lifecycleMappingMetadata>
-        					<pluginExecutions>
-        						<pluginExecution>
-        							<pluginExecutionFilter>
-        								<groupId>
-        									org.eclipse.virgo.bundlor
-        								</groupId>
-        								<artifactId>
-        									org.eclipse.virgo.bundlor.maven
-        								</artifactId>
-        								<versionRange>
-        									[1.1.1.RELEASE,)
-        								</versionRange>
-        								<goals>
-        									<goal>bundlor</goal>
-        								</goals>
-        							</pluginExecutionFilter>
-        							<action>
-        								<ignore></ignore>
-        							</action>
-        						</pluginExecution>
-        					</pluginExecutions>
-        				</lifecycleMappingMetadata>
-        			</configuration>
-        		</plugin>
-        	</plugins>
-        </pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.eclipse.virgo.bundlor
+										</groupId>
+										<artifactId>
+											org.eclipse.virgo.bundlor.maven
+										</artifactId>
+										<versionRange>
+											[1.1.1.RELEASE,)
+										</versionRange>
+										<goals>
+											<goal>bundlor</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>

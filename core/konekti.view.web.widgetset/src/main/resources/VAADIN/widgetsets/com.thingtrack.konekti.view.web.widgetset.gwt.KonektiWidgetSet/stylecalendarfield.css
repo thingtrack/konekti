@@ -1,0 +1,15 @@
+.v-stylecalendarfield-popup {
+	background: none;
+	padding: 0;
+}
+
+.v-stylecalendarfield-popup .v-stylecalendar {
+	-moz-border-radius-topleft: 0;
+	-moz-border-radius-topright: 0;
+	
+	-webkit-border-top-left-radius: 0;
+	-webkit-border-top-right-radius: 0;
+	
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}

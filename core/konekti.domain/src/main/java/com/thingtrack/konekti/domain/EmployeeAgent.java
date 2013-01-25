@@ -13,6 +13,7 @@
  */
 package com.thingtrack.konekti.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 import java.util.Date;
@@ -110,15 +111,41 @@ public class EmployeeAgent implements Serializable {
 	@JoinTable(name="EMPLOYEE_AGENT_ORGANIZATION",
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))		
-	private List<Organization> organizations;
+	private List<Organization> organizations = new ArrayList<Organization>();
+
+	@ManyToMany
+	@JoinTable(name="EMPLOYEE_AGENT_LOCATION",
+			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
+			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
+	private List<Location> locations = new ArrayList<Location>();
+
+	@ManyToMany
+	@JoinTable(name="EMPLOYEE_AGENT_WAREHOUSE",
+			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))		
+	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
 	
+	@ManyToMany
+	@JoinTable(name="EMPLOYEE_AGENT_WORKSHOP",
+			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))		
+	private List<Workshop> workshops = new ArrayList<Workshop>();
+		
 	@OneToOne
-	@JoinColumn(name="DEFAULT_ORGANIZATION_ID", nullable=false)	
+	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")	
 	private Organization defaultOrganization;
 	
 	@OneToOne
-	@JoinColumn(name="DEFAULT_WAREHOUSE_ID", nullable=false)	
+	@JoinColumn(name="DEFAULT_LOCATION_ID")	
+	private Location defaultLocation;
+	
+	@OneToOne
+	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")	
 	private Warehouse defaultWarehouse;
+	
+	@OneToOne
+	@JoinColumn(name="DEFAULT_WORKSHOP_ID")	
+	private Workshop defaultWorkshop;
 	
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;
@@ -129,11 +156,7 @@ public class EmployeeAgent implements Serializable {
 
 	@Column(name="COMMENT", length=512)
 	private String comment;
-	
-	@ManyToOne
-	@JoinColumn(name="LOCATION_ID")	
-	private Location location;
-	
+		
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
 	
@@ -459,20 +482,6 @@ public class EmployeeAgent implements Serializable {
 	}
 
 	/**
-	 * @param location the location to set
-	 */
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	/**
-	 * @return the location
-	 */
-	public Location getLocation() {
-		return location;
-	}
-
-	/**
 	 * @param worksheets the worksheets to set
 	 */
 	public void setWorksheets(List<Worksheet> worksheets) {
@@ -610,4 +619,75 @@ public class EmployeeAgent implements Serializable {
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
+
+	/**
+	 * @return the locations
+	 */
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	/**
+	 * @param locations the locations to set
+	 */
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
+
+	/**
+	 * @return the warehouses
+	 */
+	public List<Warehouse> getWarehouses() {
+		return warehouses;
+	}
+
+	/**
+	 * @param warehouses the warehouses to set
+	 */
+	public void setWarehouses(List<Warehouse> warehouses) {
+		this.warehouses = warehouses;
+	}
+
+	/**
+	 * @return the workshops
+	 */
+	public List<Workshop> getWorkshops() {
+		return workshops;
+	}
+
+	/**
+	 * @param workshops the workshops to set
+	 */
+	public void setWorkshops(List<Workshop> workshops) {
+		this.workshops = workshops;
+	}
+
+	/**
+	 * @return the defaultLocation
+	 */
+	public Location getDefaultLocation() {
+		return defaultLocation;
+	}
+
+	/**
+	 * @param defaultLocation the defaultLocation to set
+	 */
+	public void setDefaultLocation(Location defaultLocation) {
+		this.defaultLocation = defaultLocation;
+	}
+
+	/**
+	 * @return the defaultWorkshop
+	 */
+	public Workshop getDefaultWorkshop() {
+		return defaultWorkshop;
+	}
+
+	/**
+	 * @param defaultWorkshop the defaultWorkshop to set
+	 */
+	public void setDefaultWorkshop(Workshop defaultWorkshop) {
+		this.defaultWorkshop = defaultWorkshop;
+	}
+
 }

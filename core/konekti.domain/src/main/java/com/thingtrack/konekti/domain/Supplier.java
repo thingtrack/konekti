@@ -15,9 +15,9 @@ package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,7 +28,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -79,9 +79,6 @@ public class Supplier implements Serializable {
 	@JoinColumn(name="SUPPLIER_ADDRESS_ID")
 	private Address supplierAddress;
 	
-	@OneToMany(mappedBy="supplier", orphanRemoval=true)
-	private List<SupplierAgent> supplierAgents = new ArrayList<SupplierAgent>();
-	
 	@ManyToOne
 	@JoinColumn(name="SUPPLIER_TYPE_ID", nullable=false)	
 	private SupplierType supplierType;
@@ -96,8 +93,49 @@ public class Supplier implements Serializable {
 			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))	
 	private List<Organization> organizations = new ArrayList<Organization>();
 	
+	@ManyToMany
+	@JoinTable(name="SUPPLIER_LOCATION",
+			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
+	private List<Location> locations = new ArrayList<Location>();
+
+	@ManyToMany
+	@JoinTable(name="SUPPLIER_WAREHOUSE",
+			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))		
+	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
+	
+	@ManyToMany
+	@JoinTable(name="SUPPLIER_WORKSHOP",
+			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))		
+	private List<Workshop> workshops = new ArrayList<Workshop>();
+	
 	@Column(name="COMMNET", length=512)	
 	private String comment;
+	
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name="USER_ID")		
+	private User user;
+	
+	@Column(name="DEFAULT_LOCALE")
+	private String defaultLocale;
+	
+	@OneToOne
+	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")	
+	private Organization defaultOrganization;
+
+	@OneToOne
+	@JoinColumn(name="DEFAULT_LOCATION_ID")	
+	private Location defaultLocation;
+	
+	@OneToOne
+	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")	
+	private Warehouse defaultWarehouse;
+	
+	@OneToOne
+	@JoinColumn(name="DEFAULT_WORKSHOP_ID")	
+	private Workshop defaultWorkshop;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active=true;
@@ -184,42 +222,6 @@ public class Supplier implements Serializable {
 	 */
 	public Address getSupplierAddress() {
 		return supplierAddress;
-	}
-
-	/**
-	 * @param supplierAgents the supplierAgents to set
-	 */
-	public void addSupplierAgent(SupplierAgent supplierAgent) {
-		supplierAgents.add(supplierAgent);		
-		
-		if (supplierAgent.getSupplier() != this)
-			supplierAgent.setSupplier(this);
-		
-	}
-
-	public void removeSupplierAgent(SupplierAgent supplierAgent) {
-		supplierAgents.remove(supplierAgent);
-		
-	}
-
-	
-	/**
-	 * @param clientAgents the supplierAgents to set
-	 */
-	public void setSupplierAgents(List<SupplierAgent> supplierAgents) {
-		this.supplierAgents.clear();
-
-		for (SupplierAgent supplierAgent : supplierAgents)
-			addSupplierAgent(supplierAgent);
-
-	}
-	
-	/**
-	 * @return the supplierAgents
-	 */
-	public List<SupplierAgent> getSupplierAgents() {
-		return Collections.unmodifiableList(supplierAgents);
-		
 	}
 
 	/**
@@ -414,5 +416,131 @@ public class Supplier implements Serializable {
 	@Override
 	public String toString() {
 		return "Supplier [supplierId=" + supplierId + "]";
+	}
+
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	/**
+	 * @return the defaultOrganization
+	 */
+	public Organization getDefaultOrganization() {
+		return defaultOrganization;
+	}
+
+	/**
+	 * @param defaultOrganization the defaultOrganization to set
+	 */
+	public void setDefaultOrganization(Organization defaultOrganization) {
+		this.defaultOrganization = defaultOrganization;
+	}
+
+	/**
+	 * @return the defaultWarehouse
+	 */
+	public Warehouse getDefaultWarehouse() {
+		return defaultWarehouse;
+	}
+
+	/**
+	 * @param defaultWarehouse the defaultWarehouse to set
+	 */
+	public void setDefaultWarehouse(Warehouse defaultWarehouse) {
+		this.defaultWarehouse = defaultWarehouse;
+	}
+
+	/**
+	 * @return the defaultLocale
+	 */
+	public String getDefaultLocale() {
+		return defaultLocale;
+	}
+
+	/**
+	 * @param defaultLocale the defaultLocale to set
+	 */
+	public void setDefaultLocale(String defaultLocale) {
+		this.defaultLocale = defaultLocale;
+	}
+
+	/**
+	 * @return the locations
+	 */
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	/**
+	 * @param locations the locations to set
+	 */
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
+
+	/**
+	 * @return the warehouses
+	 */
+	public List<Warehouse> getWarehouses() {
+		return warehouses;
+	}
+
+	/**
+	 * @param warehouses the warehouses to set
+	 */
+	public void setWarehouses(List<Warehouse> warehouses) {
+		this.warehouses = warehouses;
+	}
+
+	/**
+	 * @return the workshops
+	 */
+	public List<Workshop> getWorkshops() {
+		return workshops;
+	}
+
+	/**
+	 * @param workshops the workshops to set
+	 */
+	public void setWorkshops(List<Workshop> workshops) {
+		this.workshops = workshops;
+	}
+
+	/**
+	 * @return the defaultLocation
+	 */
+	public Location getDefaultLocation() {
+		return defaultLocation;
+	}
+
+	/**
+	 * @param defaultLocation the defaultLocation to set
+	 */
+	public void setDefaultLocation(Location defaultLocation) {
+		this.defaultLocation = defaultLocation;
+	}
+
+	/**
+	 * @return the defaultWorkshop
+	 */
+	public Workshop getDefaultWorkshop() {
+		return defaultWorkshop;
+	}
+
+	/**
+	 * @param defaultWorkshop the defaultWorkshop to set
+	 */
+	public void setDefaultWorkshop(Workshop defaultWorkshop) {
+		this.defaultWorkshop = defaultWorkshop;
 	}
 }

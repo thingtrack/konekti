@@ -13,7 +13,10 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Warehouse;
 
 /**
@@ -22,5 +25,5 @@ import com.thingtrack.konekti.domain.Warehouse;
  */
 public interface WarehouseDao extends Dao<Warehouse, Integer> {
 	public Warehouse getByCode(String code) throws Exception;
-	
+	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception;
 }

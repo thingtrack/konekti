@@ -13,10 +13,15 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.WarehouseDao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Warehouse;
 
 /**
@@ -33,6 +38,15 @@ public class WarehouseDaoImpl extends JpaDao<Warehouse, Integer> implements Ware
 
 		return warehouse;
 		
+	}
+	
+	@Override
+	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception {
+		Query query = (Query)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
+				.setParameter("organization", organization);
+		
+		return query.getResultList();
 	}
 
 }

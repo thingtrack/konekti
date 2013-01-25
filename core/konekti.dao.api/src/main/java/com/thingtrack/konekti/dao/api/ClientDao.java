@@ -18,6 +18,7 @@ import java.util.List;
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -26,5 +27,5 @@ import com.thingtrack.konekti.domain.Organization;
 public interface ClientDao extends Dao<Client, Integer> {
 	public Client getByCode(String code) throws Exception;
 	public List<Client> getByCode(Organization organization, String code) throws Exception;
-	
+	public Client getByUser(User user) throws Exception;
 }

@@ -24,20 +24,17 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
  * @author Thingtrack S.L
  *
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="USER")
 public class User implements Serializable {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@Column(name="USER_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -57,6 +54,15 @@ public class User implements Serializable {
 	
 	@Column(name="COMMENT", length=256)
 	private String comment;
+	
+	@OneToOne(mappedBy="user")
+	private Client client;
+
+	@OneToOne(mappedBy="user")
+	private EmployeeAgent employeeAgent;
+	
+	@OneToOne(mappedBy="user")
+	private Supplier supplier;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
@@ -204,5 +210,47 @@ public class User implements Serializable {
 		return "User [userId=" + userId + ", username=" + username
 				+ ", password=" + password + ", comment="
 				+ comment + ", active=" + active + "]";
+	}
+
+	/**
+	 * @return the client
+	 */
+	public Client getClient() {
+		return client;
+	}
+
+	/**
+	 * @param client the client to set
+	 */
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	/**
+	 * @return the employeeAgent
+	 */
+	public EmployeeAgent getEmployeeAgent() {
+		return employeeAgent;
+	}
+
+	/**
+	 * @param employeeAgent the employeeAgent to set
+	 */
+	public void setEmployeeAgent(EmployeeAgent employeeAgent) {
+		this.employeeAgent = employeeAgent;
+	}
+
+	/**
+	 * @return the supplier
+	 */
+	public Supplier getSupplier() {
+		return supplier;
+	}
+
+	/**
+	 * @param supplier the supplier to set
+	 */
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 }

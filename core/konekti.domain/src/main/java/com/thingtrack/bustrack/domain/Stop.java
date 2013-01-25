@@ -46,6 +46,9 @@ public class Stop implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer stopId;
 	
+	@Column(name="STOP_NAME", nullable=true)
+	private String name;
+	
 	@ManyToMany(mappedBy="stops")
 	private List<Route> routes = new ArrayList<Route>();
 	
@@ -90,6 +93,20 @@ public class Stop implements Serializable {
 	 */
 	public void setStopId(Integer stopId) {
 		this.stopId = stopId;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**

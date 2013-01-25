@@ -50,9 +50,7 @@
 	<bean id="calendarDetailDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarDetailDaoImpl" />
 	<bean id="calendarGroupDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarGroupDaoImpl" />
 	<bean id="calendarTypeDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarTypeDaoImpl" />
-	<bean id="clientDao" class="com.thingtrack.konekti.dao.impl.internal.ClientDaoImpl" />			
-	<bean id="clientAgentDao" class="com.thingtrack.konekti.dao.impl.internal.ClientAgentDaoImpl" />
-	<bean id="clientAgentTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ClientAgentTypeDaoImpl" />	
+	<bean id="clientDao" class="com.thingtrack.konekti.dao.impl.internal.ClientDaoImpl" />				
 	<bean id="clientGroupDao" class="com.thingtrack.konekti.dao.impl.internal.ClientGroupDaoImpl" />
 	<bean id="clientTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ClientTypeDaoImpl" />
 	<bean id="employeeAgentDao" class="com.thingtrack.konekti.dao.impl.internal.EmployeeAgentDaoImpl" />
@@ -98,8 +96,6 @@
 	<bean id="stockDao" class="com.thingtrack.konekti.dao.impl.internal.StockDaoImpl" />
 	<bean id="stockStatusDao" class="com.thingtrack.konekti.dao.impl.internal.StockStatusDaoImpl" />
 	<bean id="supplierDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierDaoImpl" />	
-	<bean id="supplierAgentDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierAgentDaoImpl" />
-	<bean id="supplierAgentTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierAgentTypeDaoImpl" />
 	<bean id="supplierGroupDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierGroupDaoImpl" />					
 	<bean id="supplierTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierTypeDaoImpl" />
 	<bean id="userDao" class="com.thingtrack.konekti.dao.impl.internal.UserDaoImpl" />

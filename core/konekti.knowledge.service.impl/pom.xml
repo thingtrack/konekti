@@ -78,7 +78,7 @@
 					<![CDATA[
 Bundle-ManifestVersion: 2
 Bundle-Name: ${project.name}
-Bundle-Description: ${description}
+Bundle-Description: ${project.description}
 Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
@@ -161,4 +161,5 @@ Import-Library:
 		</pluginManagement>
 	</build>
 
+	<description>Knowledge Service Implementation</description>
 </project>

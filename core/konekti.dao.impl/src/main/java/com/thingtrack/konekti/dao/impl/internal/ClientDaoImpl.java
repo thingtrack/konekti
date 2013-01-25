@@ -15,12 +15,15 @@ package com.thingtrack.konekti.dao.impl.internal;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ClientDao;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -48,5 +51,19 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 
 		return clients;
 		
+	}
+	
+	@Override
+	public Client getByUser(User user) throws Exception {
+		
+		String queryString = "SELECT p";
+		queryString += " FROM " + getEntityName() + " p";
+		queryString += " WHERE p.user = :user";
+		
+		Query query = (Query) getEntityManager().createQuery(queryString)
+		.setParameter("user", user);
+		
+		return (Client) query.getSingleResult();
+
 	}
 }
