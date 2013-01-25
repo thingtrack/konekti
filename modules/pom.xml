@@ -31,9 +31,9 @@
 		<module>konekti.view.module.stock</module>
 		<module>konekti.view.module.bundle</module>
 		<module>konekti.view.module.alarm</module>
-		<module>konekti.view.web.client</module>
-		<module>konekti.view.web.supplier</module>
-		<module>konekti.view.web.employee</module>
+		<module>konekti.view.module.client</module>
+		<module>konekti.view.module.supplier</module>
+		<module>konekti.view.module.employee</module>
 		<module>konekti.view.module.sensor</module>
 		<module>konekti.view.module.dashboard</module>
 		<module>konekti.view.module.calendar</module>
