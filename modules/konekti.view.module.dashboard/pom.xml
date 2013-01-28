@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>konekti.view.module.dashboard</artifactId>
 	<name>konekti.view.module.dashboard</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -76,4 +75,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	<description>Konekti View Module Dashboard</description>
 </project>

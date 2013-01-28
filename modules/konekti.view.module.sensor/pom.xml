@@ -12,7 +12,6 @@
 	
 	<artifactId>konekti.view.module.sensor</artifactId>
 	<name>konekti.view.module.sensor</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -72,4 +71,5 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 		</dependency>
 	</dependencies>
 	
+	<description>Konekti View Module Sensor</description>
 </project>

@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>konekti.view.module.supplier</artifactId>
 	<name>konekti.view.web.supplier</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,4 +49,5 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 		</plugins>
 	</build>
 
+	<description>Konekti View Module Supplier</description>
 </project>

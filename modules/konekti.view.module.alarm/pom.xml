@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>konekti.view.module.alarm</artifactId>
 	<name>konekti.view.module.alarm</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -79,4 +78,5 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable, org.quartz
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	<description>Konekti View Module Alarm</description>
 </project>

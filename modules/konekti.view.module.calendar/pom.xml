@@ -10,7 +10,6 @@
 	</parent>
 	<artifactId>konekti.view.module.calendar</artifactId>
 	<name>konekti.view.module.calendar</name>
-	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -99,4 +98,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+	<description>Konekti View Module Calendar</description>
 </project>
