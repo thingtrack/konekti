@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:amq="http://activemq.apache.org/schema/core" 
+	   xmlns:osgi="http://www.springframework.org/schema/osgi"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:osgi-compendium="http://www.springframework.org/schema/osgi-compendium"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd 
+	                       http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+					       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+					       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+		
+<!-- 	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config"/> -->
+	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config">
+	    <prop key="transportconnector.uri">tcp://0.0.0.0:61616</prop>
+	    <prop key="transportconnector.mqtt.uri">mqtt://0.0.0.0:1883</prop>
+	    <prop key="connectionfactory.uri">vm://localhost</prop>
+	</osgi-compendium:cm-properties>
+	
+	<context:property-placeholder properties-ref="jmsConfigProperties"/>
+			
+	<amq:broker brokerName="brokerB1" shutdownOnMasterFailure="true">
+		<amq:destinationPolicy>
+			<amq:policyMap>
+				<amq:policyEntries>
+					<amq:policyEntry queue=">" producerFlowControl="true" memoryLimit="5mb">
+						<amq:deadLetterStrategy>
+							<amq:individualDeadLetterStrategy queuePrefix="DLQ." useQueueForQueueMessages="true" />
+						</amq:deadLetterStrategy>
+					</amq:policyEntry>
+				</amq:policyEntries>
+			</amq:policyMap>
+		</amq:destinationPolicy>
+		
+		<amq:managementContext>
+			<amq:managementContext createConnector="false" />
+		</amq:managementContext>
+		
+		<amq:persistenceAdapter>
+			<amq:kahaDB directory="activeMQ/kahadb" enableJournalDiskSyncs="false" indexWriteBatchSize="10000" indexCacheSize="1000" />
+		</amq:persistenceAdapter>
+		
+		<amq:plugins>
+			<amq:loggingBrokerPlugin />
+		</amq:plugins>
+		
+		<amq:systemUsage>
+			<amq:systemUsage>
+				<amq:memoryUsage>
+					<amq:memoryUsage limit="420 mb" />
+				</amq:memoryUsage>
+				<amq:storeUsage>
+					<amq:storeUsage limit="1 gb" />
+				</amq:storeUsage>
+				<amq:tempUsage>
+					<amq:tempUsage limit="250 mb" />
+				</amq:tempUsage>
+			</amq:systemUsage>
+		</amq:systemUsage>
+		
+		<amq:transportConnectors>
+			<amq:transportConnector name="tcp" uri="${transportconnector.uri}" />
+			<amq:transportConnector name="mqtt" uri="${transportconnector.mqtt.uri}" />
+		</amq:transportConnectors>
+	</amq:broker>
+	
+	<!-- JMS ConnectionFactory to use, configuring the embedded broker using XML -->
+	<amq:connectionFactory id="jmsFactory" brokerURL="${connectionfactory.uri}" />
+
+	<bean id="cachedConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+               <property name="targetConnectionFactory" ref="jmsFactory" />
+               <property name="sessionCacheSize" value="3" />
+    </bean>	
+</beans>

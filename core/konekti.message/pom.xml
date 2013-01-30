@@ -5,11 +5,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.thingtrack</groupId>
-		<artifactId>modules</artifactId>
+		<artifactId>core</artifactId>
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
-	<artifactId>konekti.view.module.supplier</artifactId>
-	<name>konekti.view.web.supplier</name>
+  <artifactId>konekti.message</artifactId>
+	<name>konekti.message</name>
+	<description>Konekti Message</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,7 +33,15 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.vaadin.ui, org.tepi.filtertable
+Import-Package: org.apache.activemq.xbean,
+ org.apache.activemq.broker.region.policy,
+ org.apache.activemq.util,
+ org.apache.activemq.broker,
+ org.apache.activemq.broker.jmx,
+ org.apache.activemq.store.kahadb,
+ org.apache.activemq.broker.util,
+ org.apache.activemq.usage,
+ org.apache.activemq.spring
 ]]>
 					</manifestTemplate>
 				</configuration>
@@ -58,9 +67,15 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 					</archive>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
-	<description>Konekti View Module Supplier</description>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

@@ -8,8 +8,9 @@
 		<artifactId>modules</artifactId>
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
-	<artifactId>konekti.view.module.supplier</artifactId>
-	<name>konekti.view.web.supplier</name>
+	<artifactId>konekti.view.module.modulemanager</artifactId>
+	<name>konekti.view.module.mananger</name>
+	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,7 +33,8 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.vaadin.ui, org.tepi.filtertable
+Import-Package: org.aspectj.lang
+Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
 ]]>
 					</manifestTemplate>
 				</configuration>
@@ -58,9 +60,22 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 					</archive>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
-	<description>Konekti View Module Supplier</description>
+	<dependencies>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>switch</artifactId>
+			<version>0.94</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>buttongroup</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+	<description>Konekti View Module Module manager</description>
 </project>
