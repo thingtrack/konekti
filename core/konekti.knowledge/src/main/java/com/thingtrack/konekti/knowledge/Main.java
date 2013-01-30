@@ -16,22 +16,24 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import com.thingtrack.konekti.service.api.OfferService;
+//import com.thingtrack.konekti.service.api.OfferService;
 
 public class Main implements BundleActivator {
 
-	public static OfferService offerService;
-    
-	public void setOfferService(OfferService offerService) {
-		Main.offerService = offerService;
-		
-	}
+//	public static OfferService offerService;
+//    
+//	public void setOfferService(OfferService offerService) {
+//		Main.offerService = offerService;
+//		
+//	}
 	
+	@SuppressWarnings("rawtypes")
 	public void start(BundleContext arg0) throws Exception {
 		try 
 		{
 			// get the service registry from bundlecontext
 			ServiceReference serviceRef = arg0.getServiceReference( ServiceRegistry.class.getName() );
+			@SuppressWarnings("unchecked")
 			ServiceRegistry registry = (ServiceRegistry) arg0.getService( serviceRef );
 	
 			// get knowledge necesary services from service registry
@@ -44,10 +46,10 @@ public class Main implements BundleActivator {
 			KnowledgeBuilderConfiguration kbConf = knowledgeBuilderFactoryService.newKnowledgeBuilderConfiguration( null, getClass().getClassLoader() );
 			
 			KnowledgeBuilder kbuilder = knowledgeBuilderFactoryService.newKnowledgeBuilder( kbConf );			
-			kbuilder.add(resourceFactoryService.newClassPathResource("TEST01.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("TEST02.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("TEST03.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("TEST04.rf"), ResourceType.BPMN2);
+			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST01.bpmn"), ResourceType.BPMN2);
+			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST02.bpmn"), ResourceType.BPMN2);
+			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST03.bpmn"), ResourceType.BPMN2);
+			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST04.rf"), ResourceType.BPMN2);
 			//kbuilder.add(resourceFactoryService.newClassPathResource("PendingOfferRequestHead.rf"), ResourceType.BPMN2);
 			//kbuilder.add(resourceFactoryService.newClassPathResource("ReOpenOfferRequestHead.rf"), ResourceType.BPMN2);
 			//kbuilder.add(resourceFactoryService.newClassPathResource("TransferOfferRequestHead.rf"), ResourceType.BPMN2);
@@ -57,6 +59,10 @@ public class Main implements BundleActivator {
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPReOpenOfferRequest.bpmn"), ResourceType.BPMN2);
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPRejectOfferRequest.bpmn"), ResourceType.BPMN2);
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPTransferOfferRequest.bpmn"), ResourceType.BPMN2);
+			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportClient.bpmn"), ResourceType.BPMN2);
+			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportSupplier.bpmn"), ResourceType.BPMN2);
+			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportEmployeeAgent.bpmn"), ResourceType.BPMN2);
+			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportProduct.bpmn"), ResourceType.BPMN2);
 			
 			kbaseConf = knowledgeBaseFactoryService.newKnowledgeBaseConfiguration( null, getClass().getClassLoader() );
 			KnowledgeBase kbase = knowledgeBaseFactoryService.newKnowledgeBase( kbaseConf );
@@ -77,17 +83,14 @@ public class Main implements BundleActivator {
 			arg0.registerService(StatefulKnowledgeSession.class.getName(), ksession, null);
 			
 		}
-		catch(Exception ex)
-		{
-			@SuppressWarnings("unused")
-			String xxx = ex.getMessage();
+		catch(Exception ex) {
+			ex.getMessage();
 		}
 		
 	}
 
 	public void stop(BundleContext arg0) throws Exception {
-		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub		
 	}
 
 }

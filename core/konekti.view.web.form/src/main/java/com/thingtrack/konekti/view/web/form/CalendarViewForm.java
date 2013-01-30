@@ -153,7 +153,6 @@ public class CalendarViewForm extends CustomComponent {
 		descriptionField.setWidth("400px");
 		descriptionField.setHeight("24px");
 		descriptionField.setTabIndex(2);
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:60.0px;left:20.0px;");
 		
 		// nameField
@@ -164,7 +163,6 @@ public class CalendarViewForm extends CustomComponent {
 		nameField.setHeight("-1px");
 		nameField.setTabIndex(1);
 		nameField.setRequired(true);
-		nameField.setSecret(false);
 		mainLayout.addComponent(nameField, "top:20.0px;left:20.0px;");
 		
 		// observationField
@@ -174,7 +172,6 @@ public class CalendarViewForm extends CustomComponent {
 		observationField.setWidth("480px");
 		observationField.setHeight("120px");
 		observationField.setTabIndex(6);
-		observationField.setSecret(false);
 		mainLayout.addComponent(observationField, "top:180.0px;left:20.0px;");
 		
 		// calendarTypeField

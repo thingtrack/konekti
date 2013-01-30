@@ -112,10 +112,12 @@ public class EmployeeAgentViewForm extends CustomComponent {
 
 		// TODO add user code here
 		initComponents();
-				
+		
+		employeeAgentTypeField.setNullSelectionAllowed(false);
 		employeeAgentTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		employeeAgentTypeField.setItemCaptionPropertyId("description");
 		
+		employeeAgentStatusField.setNullSelectionAllowed(false);
 		employeeAgentStatusField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		employeeAgentStatusField.setItemCaptionPropertyId("description");
 
@@ -155,6 +157,10 @@ public class EmployeeAgentViewForm extends CustomComponent {
 		employeeAgentStatusField.setRequiredError(employeeAgentStatusField.getCaption() + " es un campo requerido");
 		defaultOrganizationField.setRequiredError(defaultOrganizationField.getCaption() + " es un campo requerido");
 		emailField.addValidator(new EmailValidator(emailField.getCaption() + " no es un correo eléctronico válido"));
+		
+		defaultOrganizationField.setNullSelectionAllowed(false);
+		
+		workNumberField.focus();
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

@@ -151,6 +151,11 @@ public class AlarmJobViewForm extends CustomComponent {
 		alarmIntervalField.setNullRepresentation("");
 		alarmGroupField.setNullRepresentation("");
 		future_timeField.setNullRepresentation("");
+		
+		locationField.setNullSelectionAllowed(false);
+		alarmTriggerTypeField.setNullSelectionAllowed(false);
+		
+		alarmNameField.focus();
 	}
 	
 	
@@ -202,7 +207,7 @@ public class AlarmJobViewForm extends CustomComponent {
 		
 		// alarmGroupField
 		alarmGroupField = new TextField();
-		alarmGroupField.setCaption("Alarm Group");
+		alarmGroupField.setCaption("Grupo");
 		alarmGroupField.setImmediate(false);
 		alarmGroupField.setWidth("140px");
 		alarmGroupField.setHeight("-1px");
@@ -210,19 +215,19 @@ public class AlarmJobViewForm extends CustomComponent {
 		
 		// alarmIntervalField
 		alarmIntervalField = new TextField();
-		alarmIntervalField.setCaption("Alarm Interval");
+		alarmIntervalField.setCaption("Intervalo");
 		alarmIntervalField.setImmediate(false);
 		alarmIntervalField.setWidth("-1px");
 		alarmIntervalField.setHeight("-1px");
-		alarmIntervalField.setSecret(false);
 		mainLayout.addComponent(alarmIntervalField, "top:180.0px;left:20.0px;");
 		
 		// alarmNameField
 		alarmNameField = new TextField();
-		alarmNameField.setCaption("Alarm Name");
+		alarmNameField.setCaption("Nombre");
 		alarmNameField.setImmediate(false);
 		alarmNameField.setWidth("140px");
 		alarmNameField.setHeight("-1px");
+		alarmNameField.setRequired(true);
 		mainLayout.addComponent(alarmNameField, "top:20.0px;left:20.0px;");
 		
 		// alarmTriggerPriorityField
@@ -236,7 +241,7 @@ public class AlarmJobViewForm extends CustomComponent {
 		
 		// alarmTriggerTypeField
 		alarmTriggerTypeField = new ComboBox();
-		alarmTriggerTypeField.setCaption("Alarm Trigger Type");
+		alarmTriggerTypeField.setCaption("Tipo Disparador");
 		alarmTriggerTypeField.setImmediate(true);
 		alarmTriggerTypeField.setWidth("160px");
 		alarmTriggerTypeField.setHeight("-1px");
@@ -245,26 +250,24 @@ public class AlarmJobViewForm extends CustomComponent {
 		
 		// cronExpressionField
 		cronExpressionField = new TextField();
-		cronExpressionField.setCaption("Cron Expression");
+		cronExpressionField.setCaption("Expresión Cron ");
 		cronExpressionField.setImmediate(false);
 		cronExpressionField.setWidth("340px");
 		cronExpressionField.setHeight("-1px");
-		cronExpressionField.setSecret(false);
 		mainLayout
 				.addComponent(cronExpressionField, "top:180.0px;left:20.0px;");
 		
 		// descriptionField
 		descriptionField = new TextField();
-		descriptionField.setCaption("Description");
+		descriptionField.setCaption("Descripción");
 		descriptionField.setImmediate(false);
 		descriptionField.setWidth("620px");
 		descriptionField.setHeight("-1px");
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:100.0px;left:20.0px;");
 		
 		// endTimeField
 		endTimeField = new DateField();
-		endTimeField.setCaption("End Time");
+		endTimeField.setCaption("Fecha Finalización");
 		endTimeField.setImmediate(false);
 		endTimeField.setWidth("-1px");
 		endTimeField.setHeight("-1px");
@@ -273,7 +276,7 @@ public class AlarmJobViewForm extends CustomComponent {
 		
 		// futureField
 		futureField = new CheckBox();
-		futureField.setCaption("Future");
+		futureField.setCaption("Futuro");
 		futureField.setImmediate(false);
 		futureField.setWidth("-1px");
 		futureField.setHeight("-1px");
@@ -285,21 +288,19 @@ public class AlarmJobViewForm extends CustomComponent {
 		future_timeField.setImmediate(false);
 		future_timeField.setWidth("160px");
 		future_timeField.setHeight("-1px");
-		future_timeField.setSecret(false);
 		mainLayout.addComponent(future_timeField, "top:140.0px;left:400.0px;");
 		
 		// repeatCountField
 		repeatCountField = new TextField();
-		repeatCountField.setCaption("Repeat Count");
+		repeatCountField.setCaption("Repeticiones");
 		repeatCountField.setImmediate(false);
 		repeatCountField.setWidth("-1px");
 		repeatCountField.setHeight("24px");
-		repeatCountField.setSecret(false);
 		mainLayout.addComponent(repeatCountField, "top:180.0px;left:206.0px;");
 		
 		// startTimeField
 		startTimeField = new DateField();
-		startTimeField.setCaption("Start Time");
+		startTimeField.setCaption("Fecha Comienzo");
 		startTimeField.setImmediate(false);
 		startTimeField.setWidth("-1px");
 		startTimeField.setHeight("-1px");
@@ -312,6 +313,7 @@ public class AlarmJobViewForm extends CustomComponent {
 		locationField.setImmediate(false);
 		locationField.setWidth("-1px");
 		locationField.setHeight("-1px");
+		locationField.setRequired(true);
 		mainLayout.addComponent(locationField, "top:60.0px;left:420.0px;");
 		
 		// alarmCalendarField

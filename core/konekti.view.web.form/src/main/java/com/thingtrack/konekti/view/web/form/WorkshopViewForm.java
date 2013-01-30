@@ -67,6 +67,7 @@ public class WorkshopViewForm extends CustomComponent {
 		locationField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		locationField.setItemCaptionPropertyId("name");
 		
+		workshopTypeField.setNullSelectionAllowed(false);
 		workshopTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		workshopTypeField.setItemCaptionPropertyId("description");
 		
@@ -87,6 +88,10 @@ public class WorkshopViewForm extends CustomComponent {
 		locationField.setRequiredError(locationField.getCaption() + " es un campo requerido");
 		workshopTypeField.setRequiredError(locationField.getCaption() + " es un campo requerido");
 		activeField.setRequiredError(activeField.getCaption() + " es un campo requerido");
+		
+		locationField.setNullSelectionAllowed(false);
+		
+		codeField.focus();
 	}
 	
 	

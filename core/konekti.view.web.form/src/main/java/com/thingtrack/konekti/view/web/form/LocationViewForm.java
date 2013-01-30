@@ -70,6 +70,7 @@ public class LocationViewForm extends CustomComponent {
 		initComponents();
 		
 		// configure Location Type data
+		locationTypeField.setNullSelectionAllowed(false);
 		locationTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		locationTypeField.setItemCaptionPropertyId("code");
 		

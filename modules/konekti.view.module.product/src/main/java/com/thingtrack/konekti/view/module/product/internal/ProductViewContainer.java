@@ -5,7 +5,10 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService;
 import com.thingtrack.konekti.service.api.ProductService;
+import com.thingtrack.konekti.service.api.ProductTypeService;
+import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
@@ -29,11 +32,20 @@ public class ProductViewContainer extends AbstractViewContainer {
 	/** Business services **/
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductTypeService productTypeService;
+	@Autowired
+	private SupplierService supplierService;
+	@Autowired
+	private ProductKnowledgeService productKnowledgeService;
 	
 	private IWorkbenchContext context; 
 	
 	// Thread Local Bundle Business Services
 	private static ThreadLocal<ProductService> threadProductService= new ThreadLocal<ProductService>();
+	private static ThreadLocal<ProductTypeService> threadProductTypeService = new ThreadLocal<ProductTypeService>();
+	private static ThreadLocal<SupplierService> threadSupplierService = new ThreadLocal<SupplierService>();
+	private static ThreadLocal<ProductKnowledgeService> threadProductKnowledgeService = new ThreadLocal<ProductKnowledgeService>();
 	
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
@@ -57,9 +69,12 @@ public class ProductViewContainer extends AbstractViewContainer {
 	private void createViews() {
 		// initialize thread local bundle services
 		threadProductService.set(productService);
+		threadProductTypeService.set(productTypeService);
+		threadSupplierService.set(supplierService);
+		threadProductKnowledgeService.set(productKnowledgeService);
 		
 		// add all views controlled by SliderView Component
-		productView = new ProductView(this);
+		productView = new ProductView(context, this);
 		sliderView.addView(productView);
 		views.put(0, productView);
 	}
@@ -69,11 +84,28 @@ public class ProductViewContainer extends AbstractViewContainer {
 	private void destroyViews() {
 		// destroy thread local bundle services
 		threadProductService.set(null);
-		
+		threadProductTypeService.set(null);
+		threadSupplierService.set(null);
+		threadProductKnowledgeService.set(null);
 	}
 	
     public static ProductService getProductService() {
         return threadProductService.get();
+        
+    }
+    
+    public static ProductTypeService getProductTypeService() {
+        return threadProductTypeService.get();
+        
+    }
+    
+    public static SupplierService getSupplierService() {
+        return threadSupplierService.get();
+        
+    }
+    
+    public static ProductKnowledgeService getProductKnowledgeService() {
+        return threadProductKnowledgeService.get();
         
     }
     

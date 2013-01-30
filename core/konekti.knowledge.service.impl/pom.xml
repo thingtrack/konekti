@@ -87,6 +87,7 @@ Import-Package: org.aspectj.runtime.reflect,
  org.aspectj.lang,
  com.thingtrack.konekti.dao.template,
  javax.persistence.metamodel,
+ javax.persistence,
  com.mysql.jdbc.exceptions.jdbc4,
  org.drools.runtime
 Excluded-Exports: 

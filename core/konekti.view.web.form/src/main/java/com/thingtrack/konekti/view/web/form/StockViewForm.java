@@ -81,15 +81,19 @@ public class StockViewForm extends CustomComponent {
 		initComponents();
 		
 		// configure Organization Type data
+		stockStatusField.setNullSelectionAllowed(false);
 		stockStatusField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		stockStatusField.setItemCaptionPropertyId("description");
 		
+		productUnitField.setNullSelectionAllowed(false);
 		productUnitField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		productUnitField.setItemCaptionPropertyId("description");
 		
+		warehouseField.setNullSelectionAllowed(false);
 		warehouseField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		warehouseField.setItemCaptionPropertyId("description");
 
+		productField.setNullSelectionAllowed(false);
 		productField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		productField.setItemCaptionPropertyId("description");
 		
@@ -134,8 +138,8 @@ public class StockViewForm extends CustomComponent {
 		productUnitField.setRequiredError(productUnitField.getCaption() + " es un campo requerido");
 		stockStatusField.setRequiredError(stockStatusField.getCaption() + " es un campo requerido");
 		stockDateField.setRequiredError(stockDateField.getCaption() + " es un campo requerido");
-		
-		
+				
+		warehouseField.focus();
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -219,6 +223,7 @@ public class StockViewForm extends CustomComponent {
 		
 		// productField
 		productField = new ComboBox();
+		productField.setRequired(true);
 		productField.setCaption("Producto");
 		productField.setImmediate(false);
 		productField.setWidth("300px");

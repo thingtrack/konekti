@@ -222,10 +222,10 @@ public class BindingSource<BEANTYPE> extends BeanItemContainer<BEANTYPE>
 	public void addListenerToolBar(IndexChangeListener listener) {		
 		indexChangeToolBarListeners.add(listener);
 		
-		index = -1;
-		BEANTYPE result = Initialize();
+		//index = -1;
+		//BEANTYPE result = Initialize();
 		
-		//BEANTYPE result = index == -1 ? Initialize() : getItemId();
+		BEANTYPE result = index == -1 ? Initialize() : getItemId();
 		
 		listener.bindingSourceIndexChange(new IndexChangeEvent(result, index));
 

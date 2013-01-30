@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_employeeAgentsItem" structureRef="List&lt;com.thingtrack.konekti.domain.EmployeeAgent&gt;" />
+  <itemDefinition id="_employeeAgentServiceItem" structureRef="com.thingtrack.konekti.service.api.EmployeeAgentService" />
+  <itemDefinition id="_organizationItem" structureRef="com.thingtrack.konekti.domain.Organization" />
+
+  <itemDefinition id="_11_multiInstanceItemType" />
+
+  <process processType="Private" isExecutable="true" id="com.konekti.knowledge.bpmn2.bpimportemployeeagent" name="Import Employee Agent" tns:packageName="com.konekti.knowledge.bpmn2" tns:version="1.0.0" >
+
+    <extensionElements>
+     <tns:import name="com.thingtrack.konekti.domain.EmployeeAgent" />
+     <tns:import name="com.thingtrack.konekti.service.api.EmployeeAgentService" />
+    </extensionElements>
+    <!-- process variables -->
+    <property id="employeeAgents" itemSubjectRef="_employeeAgentsItem"/>
+    <property id="employeeAgentService" itemSubjectRef="_employeeAgentServiceItem"/>
+    <property id="organization" itemSubjectRef="_organizationItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="StartProcess" />
+    <endEvent id="_3" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <subProcess id="_11" name="Import Employee Agent"  >
+      <ioSpecification>
+        <dataInput id="_11_input" name="MultiInstanceInput" />
+        <inputSet/>
+        <outputSet/>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>employeeAgents</sourceRef>
+        <targetRef>_11_input</targetRef>
+      </dataInputAssociation>
+      <multiInstanceLoopCharacteristics>
+        <loopDataInputRef>_11_input</loopDataInputRef>
+        <inputDataItem id="employeeAgentItem" itemSubjectRef="_11_multiInstanceItemType"/>
+      </multiInstanceLoopCharacteristics>
+    <!-- nodes -->
+    <startEvent id="_11-2-1" name="Start" />
+    <scriptTask id="_11-2-2" name="get Employee Agent" scriptFormat="http://www.java.com/java" >
+      <script>// recover the Employee Agent
+EmployeeAgent item = (EmployeeAgent)employeeAgentItem;
+EmployeeAgent employeeAgent = null;
+System.out.println("SUBTASK: Get Employee Agent Work Number:" + item.getWorkNumber());
+
+try {
+	employeeAgent = employeeAgentService.getByWorkNumber(organization, item.getWorkNumber());
+}
+catch(Exception  ex) {
+    System.out.println("SUBTASK: not exist Agent Work Number: " + item.getWorkNumber());
+}
+
+kcontext.setVariable("employeeAgent", employeeAgent);</script>
+    </scriptTask>
+    <scriptTask id="_11-2-4" name="Insert Employee Agent" scriptFormat="http://www.java.com/java" >
+      <script>// recover the Employee Agent from list
+EmployeeAgent item = (EmployeeAgent)employeeAgentItem;
+System.out.println("SUBTASK: Insert Employee Agent number: " + item.getWorkNumber());
+
+// save new Employee Agent
+employeeAgentService.save(item);</script>
+    </scriptTask>
+    <scriptTask id="_11-2-5" name="Update Employee Agent" scriptFormat="http://www.java.com/java" >
+      <script>// recover the supplier from list
+EmployeeAgent item = (EmployeeAgent)employeeAgentItem;
+System.out.println("SUBTASK: Update Employee Agent Number: " + item.getWorkNumber());
+
+// recover the Employee Agent from db
+EmployeeAgent employeeAgent = (EmployeeAgent)kcontext.getVariable("employeeAgent");
+
+employeeAgent.setName(item.getName());
+employeeAgent.setPhone(item.getPhone());
+employeeAgent.setFax(item.getFax());
+employeeAgent.setMobile(item.getMobile());
+employeeAgent.setEmail(item.getEmail());
+employeeAgent.setEmployeeAddress(item.getEmployeeAddress());
+employeeAgent.setNif(item.getNif());
+employeeAgent.setEmployeeAgentType(item.getEmployeeAgentType());
+employeeAgent.setComment(item.getComment());
+employeeAgent.setEmployeeAgentStatus(item.getEmployeeAgentStatus());
+
+// update Employee Agent
+employeeAgentService.save(employeeAgent);</script>
+    </scriptTask>
+    <endEvent id="_11-2-6" name="End" />
+    <exclusiveGateway id="_11-2-7" name="Gateway" gatewayDirection="Diverging" />
+    <exclusiveGateway id="_11-2-8" name="Gateway" gatewayDirection="Converging" />
+    <!-- connections -->
+    <sequenceFlow id="_11-2-1-_11-2-2" sourceRef="_11-2-1" targetRef="_11-2-2" />
+    <sequenceFlow id="_11-2-7-_11-2-4" sourceRef="_11-2-7" targetRef="_11-2-4" name="Insert" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" language="http://www.java.com/java" >return kcontext.getVariable("employeeAgent") == null;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_11-2-7-_11-2-5" sourceRef="_11-2-7" targetRef="_11-2-5" name="update" tns:priority="1" >
+      <conditionExpression xsi:type="tFormalExpression" >return true;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_11-2-8-_11-2-6" sourceRef="_11-2-8" targetRef="_11-2-6" />
+    <sequenceFlow id="_11-2-2-_11-2-7" sourceRef="_11-2-2" targetRef="_11-2-7" />
+    <sequenceFlow id="_11-2-4-_11-2-8" sourceRef="_11-2-4" targetRef="_11-2-8" />
+    <sequenceFlow id="_11-2-5-_11-2-8" sourceRef="_11-2-5" targetRef="_11-2-8" />
+    </subProcess>
+
+    <!-- connections -->
+    <sequenceFlow id="_11-_3" sourceRef="_11" targetRef="_3" />
+    <sequenceFlow id="_1-_11" sourceRef="_1" targetRef="_11" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="com.konekti.knowledge.bpmn2.bpimportemployeeagent" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="360" y="12" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="360" y="552" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" >
+        <dc:Bounds x="204" y="96" width="337" height="409" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-1" >
+        <dc:Bounds x="361" y="116" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-2" >
+        <dc:Bounds x="318" y="181" width="130" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-4" >
+        <dc:Bounds x="211" y="315" width="145" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-5" >
+        <dc:Bounds x="387" y="317" width="147" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-6" >
+        <dc:Bounds x="354" y="449" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-7" >
+        <dc:Bounds x="356" y="252" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11-2-8" >
+        <dc:Bounds x="357" y="379" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-1-_11-2-2" >
+        <di:waypoint x="181" y="44" />
+        <di:waypoint x="179" y="109" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-7-_11-2-4" >
+        <di:waypoint x="176" y="180" />
+        <di:waypoint x="79" y="243" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-7-_11-2-5" >
+        <di:waypoint x="176" y="180" />
+        <di:waypoint x="256" y="245" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-8-_11-2-6" >
+        <di:waypoint x="177" y="307" />
+        <di:waypoint x="174" y="377" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-2-_11-2-7" >
+        <di:waypoint x="179" y="109" />
+        <di:waypoint x="176" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-4-_11-2-8" >
+        <di:waypoint x="79" y="243" />
+        <di:waypoint x="177" y="307" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-2-5-_11-2-8" >
+        <di:waypoint x="256" y="245" />
+        <di:waypoint x="177" y="307" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_3" >
+        <di:waypoint x="372" y="300" />
+        <di:waypoint x="384" y="576" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_11" >
+        <di:waypoint x="384" y="36" />
+        <di:waypoint x="372" y="300" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

@@ -10,7 +10,11 @@
 		is to facilitate integration testing of the bundle outside of an OSGi container -->
 
 	<osgi:reference id="productService" interface="com.thingtrack.konekti.service.api.ProductService" />
-
+	<osgi:reference id="productTypeService" interface="com.thingtrack.konekti.service.api.ProductTypeService" />
+	<osgi:reference id="SupplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
+	
+	<osgi:reference id="productKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService" />
+	
 	<osgi:service ref="productModule" interface="com.thingtrack.konekti.view.kernel.IModule"/>
 		
 </beans>

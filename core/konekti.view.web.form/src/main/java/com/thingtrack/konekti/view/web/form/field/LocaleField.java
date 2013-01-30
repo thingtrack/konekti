@@ -1,0 +1,100 @@
+package com.thingtrack.konekti.view.web.form.field;
+
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
+import org.vaadin.addon.customfield.CustomField;
+
+import com.vaadin.data.Property;
+import com.vaadin.ui.ComboBox;
+import com.vaadin.ui.Select;
+import com.vaadin.ui.VerticalLayout;
+
+@SuppressWarnings("serial")
+public class LocaleField  extends CustomField {
+	private VerticalLayout mainLayout;
+	private ComboBox defaultLocaleField;
+	
+	public static final String LOCALE_SEPARATOR = "_";
+	
+	private String localeCode;
+	private Locale[] locales;
+	
+	public LocaleField() {
+		buildMainLayout();
+		setCompositionRoot(mainLayout);
+		
+		// get all available locales
+		locales = SimpleDateFormat.getAvailableLocales();
+	    
+		// construct custom datasource for combobox
+		// id: country + LOCALE_SEPARATOR + language: ES_es
+		// display: fraindly locale string
+		for (int i = 0; i< locales.length; i++) {
+			if (locales[i].getCountry() != "" && locales[i].getLanguage() != "") {
+				String localeCode = locales[i].getCountry() + LOCALE_SEPARATOR + locales[i].getLanguage();
+				
+				// Use the item ID also as the caption of this item
+				defaultLocaleField.addItem(localeCode);
+				defaultLocaleField.setItemCaption(localeCode, locales[i].getDisplayName());
+			}
+		}
+		
+		defaultLocaleField.addListener(new Property.ValueChangeListener() {
+			public void valueChange(Property.ValueChangeEvent event) {
+	            // Get the selected item
+	            Object itemId = event.getProperty().getValue();
+	            
+	            if (itemId != null)
+	            	localeCode = itemId.toString();
+				
+			}
+	    });
+		defaultLocaleField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_EXPLICIT_DEFAULTS_ID);
+		defaultLocaleField.setImmediate(true);
+	    defaultLocaleField.setNullSelectionAllowed(false);
+	    
+	}
+	
+	@Override
+	public Class<?> getType() {
+		return String.class;
+	}
+	
+	@Override
+	public void setPropertyDataSource(Property newDataSource) {
+		localeCode = (String)newDataSource.getValue();
+		
+		defaultLocaleField.setValue(localeCode);
+		
+		super.setPropertyDataSource(newDataSource);
+	}
+	
+	@Override
+	public Object getValue() {	
+		return localeCode;
+		
+	}
+
+	private VerticalLayout buildMainLayout() {
+		// common part: create layout
+		mainLayout = new VerticalLayout();
+		mainLayout.setImmediate(false);
+		mainLayout.setWidth("100%");
+		mainLayout.setHeight("100%");
+		mainLayout.setMargin(false);
+		
+		// top-level component properties
+		setWidth("100.0%");
+		setHeight("100.0%");
+		
+		// comboBox_1
+		defaultLocaleField = new ComboBox();
+		defaultLocaleField.setImmediate(false);
+		defaultLocaleField.setWidth("100.0%");
+		defaultLocaleField.setHeight("-1px");
+		mainLayout.addComponent(defaultLocaleField);
+		
+		return mainLayout;
+	}
+}

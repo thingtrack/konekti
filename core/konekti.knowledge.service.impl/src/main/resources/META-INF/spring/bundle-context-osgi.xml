@@ -147,5 +147,8 @@
        
        <!-- Konekti Knowledge Engine service -->
        <osgi:service ref="calendarKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.CalendarKnowledgeService" />
-       
+       <osgi:service ref="clientKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.ClientKnowledgeService" />
+       <osgi:service ref="supplierKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.SupplierKnowledgeService" />
+       <osgi:service ref="employeeAgentKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.EmployeeAgentKnowledgeService" />
+       <osgi:service ref="productKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService" />
 </beans>

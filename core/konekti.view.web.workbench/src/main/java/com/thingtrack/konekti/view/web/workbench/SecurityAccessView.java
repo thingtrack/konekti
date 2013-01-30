@@ -12,6 +12,7 @@ import com.thingtrack.konekti.view.kernel.ui.layout.IPanelView;
 import com.thingtrack.konekti.view.kernel.ui.layout.IToolbar;
 import com.thingtrack.konekti.view.security.LoginViewForm;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.terminal.UserError;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -19,6 +20,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
+@SuppressWarnings("serial")
 public class SecurityAccessView extends AbstractView {
 
 	private SecurityService securityService;
@@ -118,6 +120,8 @@ public class SecurityAccessView extends AbstractView {
 		loginBtn.setImmediate(true);
 		loginBtn.setWidth("-1px");
 		loginBtn.setHeight("-1px");
+		loginBtn.setClickShortcut(KeyCode.ENTER);
+		loginBtn.addStyleName("primary");
 		footerWindow.addComponent(loginBtn);
 		footerWindow.setComponentAlignment(loginBtn, new Alignment(34));
 

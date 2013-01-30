@@ -68,4 +68,17 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 		return query.getResultList();
 	}
 
+	@Override
+	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception {
+		String queryString = "SELECT em";
+		queryString += " FROM " + getEntityName() + " em";
+		queryString += " JOIN  em.organizations org";
+		queryString += " WHERE em.workNumber = :workNumber";
+		
+		Query query = (Query) getEntityManager().createQuery(queryString)
+		.setParameter("workNumber", workNumber);
+		
+		return (EmployeeAgent) query.getSingleResult();
+	}
+
 }

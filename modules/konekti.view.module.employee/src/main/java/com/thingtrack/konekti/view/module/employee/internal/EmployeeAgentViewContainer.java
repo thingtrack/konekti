@@ -5,7 +5,11 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.knowledge.service.api.EmployeeAgentKnowledgeService;
+import com.thingtrack.konekti.service.api.AddressService;
 import com.thingtrack.konekti.service.api.EmployeeAgentService;
+import com.thingtrack.konekti.service.api.EmployeeAgentStatusService;
+import com.thingtrack.konekti.service.api.EmployeeAgentTypeService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
@@ -28,13 +32,25 @@ public class EmployeeAgentViewContainer extends AbstractViewContainer {
 		
 	/** Business services **/
 	@Autowired
+	private AddressService addressService;
+	@Autowired
 	private EmployeeAgentService employeeAgentService;
+	@Autowired
+	private EmployeeAgentTypeService employeeAgentTypeService;
+	@Autowired
+	private EmployeeAgentStatusService employeeAgentStatusService;
+	@Autowired
+	private EmployeeAgentKnowledgeService employeeAgentKnowledgeService;
 	
 	private IWorkbenchContext context; 
 	
 	// Thread Local Bundle Business Services
+	private static ThreadLocal<AddressService> threadAddressService = new ThreadLocal<AddressService>();
 	private static ThreadLocal<EmployeeAgentService> threadEmployeeAgentService = new ThreadLocal<EmployeeAgentService>();
-	
+	private static ThreadLocal<EmployeeAgentTypeService> threadEmployeeAgentTypeService = new ThreadLocal<EmployeeAgentTypeService>();
+	private static ThreadLocal<EmployeeAgentStatusService> threadEmployeeAgentStatusService = new ThreadLocal<EmployeeAgentStatusService>();
+	private static ThreadLocal<EmployeeAgentKnowledgeService> threadEmployeeAgentKnowledgeService = new ThreadLocal<EmployeeAgentKnowledgeService>();
+		
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
 	/**
@@ -56,7 +72,11 @@ public class EmployeeAgentViewContainer extends AbstractViewContainer {
 	@PostConstruct
 	private void createViews() {
 		// initialize thread local bundle services
+		threadAddressService.set(addressService);
 		threadEmployeeAgentService.set(employeeAgentService);
+		threadEmployeeAgentTypeService.set(employeeAgentTypeService);
+		threadEmployeeAgentStatusService.set(employeeAgentStatusService);
+		threadEmployeeAgentKnowledgeService.set(employeeAgentKnowledgeService);
 		
 		// add all views controlled by SliderView Component
 		employeeAgentView = new EmployeeAgentView(context, this);
@@ -68,12 +88,36 @@ public class EmployeeAgentViewContainer extends AbstractViewContainer {
 	@PreDestroy
 	private void destroyViews() {
 		// destroy thread local bundle services
+		threadAddressService.set(null);
 		threadEmployeeAgentService.set(null);
+		threadEmployeeAgentTypeService.set(null);
+		threadEmployeeAgentStatusService.set(null);
+		threadEmployeeAgentKnowledgeService.set(null);
 		
 	}
-	
+    
+    public static AddressService getAddressService() {
+        return threadAddressService.get();
+        
+    }
+    
     public static EmployeeAgentService getEmployeeAgentService() {
         return threadEmployeeAgentService.get();
+        
+    }
+    
+    public static EmployeeAgentTypeService getEmployeeAgentTypeService() {
+        return threadEmployeeAgentTypeService.get();
+        
+    }
+    
+    public static EmployeeAgentStatusService getEmployeeAgentStatusService() {
+        return threadEmployeeAgentStatusService.get();
+        
+    }
+    
+    public static EmployeeAgentKnowledgeService getEmployeeAgentKnowledgeService() {
+        return threadEmployeeAgentKnowledgeService.get();
         
     }
     

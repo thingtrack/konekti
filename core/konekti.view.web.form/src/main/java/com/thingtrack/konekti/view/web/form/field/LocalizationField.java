@@ -97,9 +97,6 @@ public class LocalizationField extends CustomField implements ValueChangeListene
 		 
 		 geocodedLocation = (GeocodedLocation) property.getValue();
 		 
-		 if(geocodedLocation == null)
-			 throw new RuntimeException("This component is registered like listener to a no supported component");
-		 
 		 if(property instanceof AddressInputComponent && latLonInputComponent.getValue() != geocodedLocation){
 			 latLonInputComponent.setValue(geocodedLocation);
 		 }
@@ -130,7 +127,7 @@ public class LocalizationField extends CustomField implements ValueChangeListene
 	public void setValue(Object newValue) throws ReadOnlyException,
 			ConversionException {
 		
-		if(!(newValue instanceof GeocodedLocation))
+		if(newValue != null && !(newValue instanceof GeocodedLocation))
 			throw new ConversionException("There is an " + GeocodedLocation.class.getSimpleName()); 
 		
 		geocodedLocation = (GeocodedLocation) newValue;

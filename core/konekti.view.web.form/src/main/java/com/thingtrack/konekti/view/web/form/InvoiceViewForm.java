@@ -138,6 +138,13 @@ public class InvoiceViewForm extends CustomComponent {
 		
 		codeField.setRequiredError(codeField.getCaption() + " es un campo requerido");
 		
+		invoiceClientField.setNullSelectionAllowed(false);
+		invoiceStatusField.setNullSelectionAllowed(false);
+		invoiceTypeField.setNullSelectionAllowed(false);
+		organizationField.setNullSelectionAllowed(false);
+		
+		codeField.focus();
+		
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

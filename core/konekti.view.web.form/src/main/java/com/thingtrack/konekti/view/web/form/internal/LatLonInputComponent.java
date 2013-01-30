@@ -53,6 +53,9 @@ public class LatLonInputComponent extends CustomField implements
 		// TODO add user code here
 		listeners = new ArrayList<ValueChangeListener>();
 		
+		latTextField.setNullRepresentation("");
+		lonTextField.setNullRepresentation("");
+		
 		latLonFetchButton.addListener(new Button.ClickListener() {
 			
 			@Override
@@ -172,32 +175,39 @@ public class LatLonInputComponent extends CustomField implements
 	public void setValue(Object newValue) throws ReadOnlyException,
 			ConversionException {
 
-		if (!(newValue instanceof GeocodedLocation))
+		if (newValue != null && !(newValue instanceof GeocodedLocation))
 			throw new ConversionException("There is an "
 					+ GeocodedLocation.class.getSimpleName());
 
 		geocodedLocation = (GeocodedLocation) newValue;
 		
+		//Nullable location
+		if(geocodedLocation == null)
+		{
+			latTextField.setValue(null);
+			lonTextField.setValue(null);
+		}
+		
 		// It is not geocoded
-		if(geocodedLocation.getGeocodedAddress() == null){
+		else if(geocodedLocation.getGeocodedAddress() == null){
 			try {
 				List<GeocodedLocation> geocodedLocations = new ArrayList<GeocodedLocation>((Set<GeocodedLocation>) locationProvider.reverseGeocode(geocodedLocation.getLat(), geocodedLocation.getLon()));
 				
 				if(geocodedLocations.size() > 0 )
 					this.geocodedLocation = geocodedLocations.get(0);
 				
-				// Notify listeners a new geological location
-				for(ValueChangeListener listener : listeners)
-					listener.valueChange(new Field.ValueChangeEvent(LatLonInputComponent.this));
+				// Set the text values
+				latTextField.setValue(decimalFormat.format(geocodedLocation.getLat()));
+				lonTextField.setValue(decimalFormat.format(geocodedLocation.getLon()));
 				
 			} catch (GeocodingException e) {
 				throw new RuntimeException(e);
 			}
 		}
-
-		// Set the text values
-		latTextField.setValue(decimalFormat.format(geocodedLocation.getLat()));
-		lonTextField.setValue(decimalFormat.format(geocodedLocation.getLon()));
+		
+		// Notify listeners a new geological location
+		for(ValueChangeListener listener : listeners)
+			listener.valueChange(new Field.ValueChangeEvent(LatLonInputComponent.this));
 
 	}
 

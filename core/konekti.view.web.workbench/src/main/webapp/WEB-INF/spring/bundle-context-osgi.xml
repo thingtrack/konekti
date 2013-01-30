@@ -12,14 +12,13 @@
        testing of the bundle outside of an OSGi container -->
        
        <!-- Bussines services-->
-       <osgi:reference id="moduleService" interface="com.thingtrack.konekti.view.kernel.IModuleService"/>
-       
+       <osgi:reference id="securityService" interface="com.thingtrack.konekti.service.security.SecurityService" />
+       <osgi:reference id="moduleService" interface="com.thingtrack.konekti.view.kernel.IModuleService"/>       
        <osgi:reference id="menuWorkbench" interface="com.thingtrack.konekti.service.api.MenuWorkbenchService"/>
        
-       <osgi:reference id="employeeAgentService" interface="com.thingtrack.konekti.service.api.EmployeeAgentService"/>
-       
-       <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />
-       
-       <osgi:reference id="securityService" interface="com.thingtrack.konekti.service.security.SecurityService" />
+       <osgi:reference id="employeeAgentService" interface="com.thingtrack.konekti.service.api.EmployeeAgentService"/>      
+       <osgi:reference id="clientService" interface="com.thingtrack.konekti.service.api.ClientService"/>
+       <osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService"/>       
+       <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />       
        
 </beans>

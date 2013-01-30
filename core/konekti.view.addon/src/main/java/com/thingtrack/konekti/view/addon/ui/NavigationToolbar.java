@@ -250,7 +250,7 @@ public class NavigationToolbar extends AbstractToolbar {
 			bindingSource.addListenerToolBar((IndexChangeListener)this);
 			
 			// initialize binding source
-			bindingSource.Initialize();
+			//bindingSource.Initialize();
 		}
 		
 	}

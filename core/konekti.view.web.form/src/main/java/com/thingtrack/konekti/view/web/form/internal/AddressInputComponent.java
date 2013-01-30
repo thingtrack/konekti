@@ -98,7 +98,7 @@ public class AddressInputComponent extends CustomField implements ValueChangeNot
 	public void setValue(Object newValue) throws ReadOnlyException,
 			ConversionException {
 
-		if(!(newValue instanceof GeocodedLocation))
+		if(newValue != null && !(newValue instanceof GeocodedLocation))
 			throw new ConversionException("There is an " + GeocodedLocation.class.getSimpleName()); 
 		
 		geocodedLocation = (GeocodedLocation) newValue;

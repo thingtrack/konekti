@@ -7,6 +7,7 @@ import org.vaadin.addon.formbinder.ViewBoundForm;
 import com.vaadin.data.Validator.EmptyValueException;
 import com.vaadin.data.Validator.InvalidValueException;
 import com.vaadin.data.util.BeanItem;
+import com.vaadin.event.ShortcutAction.KeyCode;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
@@ -80,7 +81,7 @@ public class WindowDialog<BEANTYPE> extends Window {
 		  setModal(true);
 		  setResizable(false);
 		  setReadOnly(true);
-		  
+		  		  
 		  // create view bound form		
 		  VerticalLayout content = buildMainLayout();
 		  content.setMargin(false);
@@ -171,7 +172,7 @@ public class WindowDialog<BEANTYPE> extends Window {
 		formWindow = buildFormWindow();
 		formWindow.getFooter().addComponent(buildFooterWindow());
 		formWindow.getFooter().addStyleName("windowdialog-footer");
-		
+					
 		mainLayout.addComponent(formWindow);
 		mainLayout.setExpandRatio(formWindow, 1.0f);
 		
@@ -204,6 +205,10 @@ public class WindowDialog<BEANTYPE> extends Window {
 		btnLeft.setImmediate(true);
 		btnLeft.setWidth("-1px");
 		btnLeft.setHeight("-1px");
+		
+		btnLeft.setClickShortcut(KeyCode.ENTER);
+	    btnLeft.addStyleName("primary");
+	    
 		footerWindow.addComponent(btnLeft);
 		footerWindow.setExpandRatio(btnLeft, 1.0f);
 		footerWindow.setComponentAlignment(btnLeft, new Alignment(34));
@@ -213,6 +218,9 @@ public class WindowDialog<BEANTYPE> extends Window {
 		btnRight.setImmediate(true);
 		btnRight.setWidth("-1px");
 		btnRight.setHeight("-1px");
+		
+	    btnRight.setClickShortcut(KeyCode.ESCAPE);
+	    
 		footerWindow.addComponent(btnRight);
 		footerWindow.setComponentAlignment(btnRight, new Alignment(34));
 		

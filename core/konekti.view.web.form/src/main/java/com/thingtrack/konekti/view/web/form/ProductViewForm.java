@@ -52,10 +52,6 @@ public class ProductViewForm extends CustomComponent {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
 	private SupplierService supplierService;
 	private ProductTypeService productTypeService;	
 	
@@ -82,6 +78,7 @@ public class ProductViewForm extends CustomComponent {
 		productSupplierField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		productSupplierField.setItemCaptionPropertyId("description");
 		
+		productTypeField.setNullSelectionAllowed(false);
 		productTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		productTypeField.setItemCaptionPropertyId("description");
 		
@@ -104,6 +101,9 @@ public class ProductViewForm extends CustomComponent {
 		codeField.setRequiredError(codeField.getCaption() + " es un campo requerido");
 		nameField.setRequiredError(codeField.getCaption() + " es un campo requerido");
 		productTypeField.setRequiredError(productTypeField.getCaption() + " es un campo requerido");
+		
+		
+		codeField.focus();
 	}
 		
 	@SuppressWarnings({ "unchecked", "rawtypes" })

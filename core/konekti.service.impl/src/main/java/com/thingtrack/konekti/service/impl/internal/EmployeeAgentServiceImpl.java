@@ -67,4 +67,10 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 
 	}
 
+	@Override
+	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception {
+		return this.employeeAgentDao.getByWorkNumber(organization, workNumber);
+		
+	}
+
 }

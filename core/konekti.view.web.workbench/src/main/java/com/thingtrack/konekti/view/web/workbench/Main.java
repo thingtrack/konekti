@@ -25,21 +25,28 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.imageio.ImageIO;
 
 import org.dellroad.stuff.vaadin.SpringContextApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
+import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.EmployeeAgent;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.MenuCommandResource;
 import com.thingtrack.konekti.domain.MenuFolderResource;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.MenuWorkbench;
+import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
+import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Workshop;
+import com.thingtrack.konekti.service.api.ClientService;
 import com.thingtrack.konekti.service.api.EmployeeAgentService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
+import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.service.api.UserService;
 import com.thingtrack.konekti.service.security.SecurityService;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -56,6 +63,9 @@ import com.thingtrack.konekti.view.web.workbench.ui.ResourceManager;
 import com.thingtrack.konekti.view.web.workbench.ui.ResourceManager.Resource;
 import com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager;
 import com.thingtrack.konekti.view.web.workbench.ui.WorkbenchContext;
+import com.thingtrack.konekti.view.web.form.field.LocaleField;
+import com.thingtrack.konekti.view.addon.ui.ErrorViewForm;
+
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.terminal.Terminal;
@@ -63,18 +73,13 @@ import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
-import com.vaadin.ui.Window.Notification;
-
-import com.thingtrack.konekti.view.addon.ui.ErrorViewForm;
 
 /**
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
 
-public class Main extends SpringContextApplication implements
-		IMetadataModuleServiceListener, IViewChangeListener {
-
+public class Main extends SpringContextApplication implements IMetadataModuleServiceListener, IViewChangeListener {
 	private static final String VERSION = "1.0.0.SR1";
 
     private final static Logger logger = Logger.getLogger(SpringContextApplication.class.getName());
@@ -88,6 +93,12 @@ public class Main extends SpringContextApplication implements
 	@Autowired
 	private EmployeeAgentService employeeAgentService;
 
+	@Autowired
+	private ClientService clientService;
+
+	@Autowired
+	private SupplierService supplierService;
+	
 	@Autowired
 	private SecurityService securityService;
 	
@@ -117,7 +128,7 @@ public class Main extends SpringContextApplication implements
 		setTheme("konekti");
 
 		// set the main application window
-		window = new Window("Konekti-Bustrack");
+		window = new Window("Konekti-Fleet");
 		window.setStyleName("background");
 		setMainWindow(window);
 
@@ -447,25 +458,91 @@ public class Main extends SpringContextApplication implements
 		}
 	}
 
-	private void loadWorkbenchContext(User user) throws Exception {		
-		EmployeeAgent employeeAgent = employeeAgentService.getByUser(user);
+	private void loadWorkbenchContext(User user) throws Exception {
+		EmployeeAgent employeeAgent = null;
+		Client client = null;
+		Supplier supplier = null;
 		
-		// create locale for employee agent
-		Locale employeeAgentLocale = null;
-		if (employeeAgent.getDefaultLocale() != null ) {
-			String[] localeParams = employeeAgent.getDefaultLocale().split(";");
+		Locale defaultLocale = null;
+		Organization defaultOrganization = null;
+		Location defaultLocation = null;
+		Warehouse defaultWarehouse = null;
+		Workshop defaultWorkshop = null;
+		
+		try {
+			if (user.getClient() != null) {
+				client = clientService.getByUser(user);
+				
+				// get default organization&warehouse
+				defaultOrganization = client.getDefaultOrganization(); 
+				defaultLocation = client.getDefaultLocation();
+				defaultWarehouse = client.getDefaultWarehouse();
+				defaultWorkshop = client.getDefaultWorkshop();
+				
+				// create locale for employee agent
+				if (client.getDefaultLocale() != null ) {
+					String[] localeParams = client.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
+					
+					String language = localeParams[0];
+					String country = localeParams[1];
+					
+					defaultLocale = new Locale(language, country);
+				}
+				
+			} else if (user.getEmployeeAgent() != null) {				
+				employeeAgent = employeeAgentService.getByUser(user);
+				
+				// get default organization&warehouse
+				defaultOrganization = employeeAgent.getDefaultOrganization();
+				defaultLocation = employeeAgent.getDefaultLocation();
+				defaultWarehouse = employeeAgent.getDefaultWarehouse();
+				defaultWorkshop = employeeAgent.getDefaultWorkshop();
+				
+				// create locale for employee agent
+				if (employeeAgent.getDefaultLocale() != null ) {
+					String[] localeParams = employeeAgent.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
+					
+					String language = localeParams[0];
+					String country = localeParams[1];
+					
+					defaultLocale = new Locale(language, country);
+				}
+				
+			} else if (user.getSupplier() != null) {
+				supplier = supplierService.getByUser(user);
+				
+				// get default organization&warehouse
+				defaultOrganization = supplier.getDefaultOrganization();
+				defaultLocation = supplier.getDefaultLocation();
+				defaultWarehouse = supplier.getDefaultWarehouse();
+				defaultWorkshop = supplier.getDefaultWorkshop();
+				
+				// create locale for employee agent
+				if (supplier.getDefaultLocale() != null ) {
+					String[] localeParams = supplier.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
+					
+					String language = localeParams[0];
+					String country = localeParams[1];
+					
+					defaultLocale = new Locale(language, country);
+				}
+				
+			}
 			
-			String language = localeParams[0];
-			String country = localeParams[1];
 			
-			employeeAgentLocale = new Locale(language, country);
 		}
+		catch(Exception ex) {
 			
+		}
+	
+		// konekti context
 		workbenchContext = new WorkbenchContext(
-				employeeAgent.getDefaultOrganization(),
-				employeeAgent.getDefaultWarehouse(),
-				employeeAgent.getUser(),
-				employeeAgentLocale,				
+				defaultOrganization,
+				defaultLocation,
+				defaultWarehouse,
+				defaultWorkshop,
+				user,
+				defaultLocale,				
 				toolbarManager,
 				resourceManager);
 

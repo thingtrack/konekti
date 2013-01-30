@@ -5,7 +5,12 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.knowledge.service.api.ClientKnowledgeService;
+import com.thingtrack.konekti.service.api.AddressService;
+import com.thingtrack.konekti.service.api.ClientGroupService;
 import com.thingtrack.konekti.service.api.ClientService;
+import com.thingtrack.konekti.service.api.ClientTypeService;
+import com.thingtrack.konekti.service.api.SequenceService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
@@ -28,12 +33,27 @@ public class ClientViewContainer extends AbstractViewContainer {
 		
 	/** Business services **/
 	@Autowired
+	private SequenceService sequenceService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
 	private ClientService clientService;
+	@Autowired
+	private ClientTypeService clientTypeService;
+	@Autowired
+	private ClientGroupService clientGroupService;
+	@Autowired
+	private ClientKnowledgeService clientKnowledgeService;
 	
 	private IWorkbenchContext context; 
 	
 	// Thread Local Bundle Business Services
+	private static ThreadLocal<SequenceService> threadSequenceService = new ThreadLocal<SequenceService>();
+	private static ThreadLocal<AddressService> threadAddressService = new ThreadLocal<AddressService>();
 	private static ThreadLocal<ClientService> threadClientService = new ThreadLocal<ClientService>();
+	private static ThreadLocal<ClientTypeService> threadClientTypeService = new ThreadLocal<ClientTypeService>();
+	private static ThreadLocal<ClientGroupService> threadClientGroupService = new ThreadLocal<ClientGroupService>();
+	private static ThreadLocal<ClientKnowledgeService> threadClientKnowledgeService = new ThreadLocal<ClientKnowledgeService>();
 	
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
@@ -56,7 +76,12 @@ public class ClientViewContainer extends AbstractViewContainer {
 	@PostConstruct
 	private void createViews() {
 		// initialize thread local bundle services
+		threadSequenceService.set(sequenceService);
+		threadAddressService.set(addressService);
 		threadClientService.set(clientService);
+		threadClientTypeService.set(clientTypeService);
+		threadClientGroupService.set(clientGroupService);
+		threadClientKnowledgeService.set(clientKnowledgeService);
 		
 		// add all views controlled by SliderView Component
 		clientView = new ClientView(context, this);
@@ -69,12 +94,41 @@ public class ClientViewContainer extends AbstractViewContainer {
 	@PreDestroy
 	private void destroyViews() {
 		// destroy thread local bundle services
+		threadSequenceService.set(null);
+		threadAddressService.set(null);
 		threadClientService.set(null);
-		
+		threadClientTypeService.set(null);
+		threadClientGroupService.set(null);
+		threadClientKnowledgeService.set(null);
 	}
-		
+
+    public static SequenceService getSequenceService() {
+        return threadSequenceService.get();
+        
+    }
+    
+    public static AddressService getAddressService() {
+        return threadAddressService.get();
+        
+    }
+    
     public static ClientService getClientService() {
         return threadClientService.get();
+        
+    }
+    
+    public static ClientTypeService getClientTypeService() {
+        return threadClientTypeService.get();
+        
+    }
+    
+    public static ClientGroupService getClientGroupService() {
+        return threadClientGroupService.get();
+        
+    }
+    
+    public static ClientKnowledgeService getClientKnowledgeService() {
+        return threadClientKnowledgeService.get();
         
     }
     

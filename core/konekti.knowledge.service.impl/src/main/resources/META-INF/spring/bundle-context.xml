@@ -29,12 +29,16 @@
         <tx:attributes>
             <tx:method name="save*" rollback-for="java.lang.Exception"/>
             <tx:method name="add*" rollback-for="java.lang.Exception" />
-            <tx:method name="set*" rollback-for="java.lang.Exception" />
+            <tx:method name="set*" propagation="REQUIRED"/>
             <tx:method name="delete*" rollback-for="java.lang.Exception"/>
             <tx:method name="*" read-only="true" propagation="SUPPORTS"/>
         </tx:attributes>
     </tx:advice> 			
     
     <!-- Konekti Knowledge Engine service implementation -->
-    <bean id="calendarKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.CalendarKnowledgeServiceImpl"/>												
+    <bean id="calendarKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.CalendarKnowledgeServiceImpl"/>
+    <bean id="clientKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.ClientKnowledgeServiceImpl"/>
+    <bean id="supplierKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.SupplierKnowledgeServiceImpl"/>
+    <bean id="employeeAgentKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.EmployeeAgentKnowledgeServiceImpl"/>
+    <bean id="productKnowledgeService" class="com.thingtrack.konekti.knowledge.service.impl.internal.ProductKnowledgeServiceImpl"/>																								
 </beans>

@@ -6,7 +6,7 @@
     
     <parent>
     	<groupId>com.thingtrack</groupId>
-    	<artifactId>core</artifactId>
+    	<artifactId>konekti.maven.parent</artifactId>
     	<version>0.0.1.SNAPSHOT</version>
     </parent>
     
@@ -101,12 +101,20 @@
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.report</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>cssinject</artifactId>
+		   <version>1.0</version>
+		   <scope>provided</scope>
+		</dependency>		
     </dependencies>
 
 	<repositories>

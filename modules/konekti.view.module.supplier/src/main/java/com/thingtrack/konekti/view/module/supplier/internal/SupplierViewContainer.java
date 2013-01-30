@@ -5,7 +5,12 @@ import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.knowledge.service.api.SupplierKnowledgeService;
+import com.thingtrack.konekti.service.api.AddressService;
+import com.thingtrack.konekti.service.api.SequenceService;
+import com.thingtrack.konekti.service.api.SupplierGroupService;
 import com.thingtrack.konekti.service.api.SupplierService;
+import com.thingtrack.konekti.service.api.SupplierTypeService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
@@ -28,12 +33,27 @@ public class SupplierViewContainer extends AbstractViewContainer {
 		
 	/** Business services **/
 	@Autowired
+	private SequenceService sequenceService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
 	private SupplierService supplierService;
-	
+	@Autowired
+	private SupplierTypeService supplierTypeService;
+	@Autowired
+	private SupplierGroupService supplierGroupService;
+	@Autowired
+	private SupplierKnowledgeService supplierKnowledgeService;
+		
 	private IWorkbenchContext context; 
 	
 	// Thread Local Bundle Business Services
+	private static ThreadLocal<SequenceService> threadSequenceService = new ThreadLocal<SequenceService>();
+	private static ThreadLocal<AddressService> threadAddressService = new ThreadLocal<AddressService>();
 	private static ThreadLocal<SupplierService> threadSupplierService = new ThreadLocal<SupplierService>();
+	private static ThreadLocal<SupplierTypeService> threadSupplierTypeService = new ThreadLocal<SupplierTypeService>();
+	private static ThreadLocal<SupplierGroupService> threadSupplierGroupService = new ThreadLocal<SupplierGroupService>();
+	private static ThreadLocal<SupplierKnowledgeService> threadSupplierKnowledgeService = new ThreadLocal<SupplierKnowledgeService>();	
 	
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
@@ -56,7 +76,12 @@ public class SupplierViewContainer extends AbstractViewContainer {
 	@PostConstruct
 	private void createViews() {
 		// initialize thread local bundle services
+		threadSequenceService.set(sequenceService);
+		threadAddressService.set(addressService);
 		threadSupplierService.set(supplierService);
+		threadSupplierTypeService.set(supplierTypeService);
+		threadSupplierGroupService.set(supplierGroupService);
+		threadSupplierKnowledgeService.set(supplierKnowledgeService);		
 		
 		// add all views controlled by SliderView Component
 		supplierView = new SupplierView(context, this);
@@ -69,21 +94,51 @@ public class SupplierViewContainer extends AbstractViewContainer {
 	@PreDestroy
 	private void destroyViews() {
 		// destroy thread local bundle services
+		threadSequenceService.set(null);
+		threadAddressService.set(null);
 		threadSupplierService.set(null);
+		threadSupplierTypeService.set(null);
+		threadSupplierGroupService.set(null);
+		threadSupplierKnowledgeService.set(null);	
 		
 	}
 	
+    public static SequenceService getSequenceService() {
+        return threadSequenceService.get();
+        
+    }
+    
+    public static AddressService getAddressService() {
+        return threadAddressService.get();
+        
+    }
+    
     public static SupplierService getSupplierService() {
         return threadSupplierService.get();
         
     }
     
+    public static SupplierTypeService getSupplierTypeService() {
+        return threadSupplierTypeService.get();
+        
+    }
+    
+    public static SupplierGroupService getSupplierGroupService() {
+        return threadSupplierGroupService.get();
+        
+    }
+    
+    public static SupplierKnowledgeService getSupplierKnowledgeService() {
+        return threadSupplierKnowledgeService.get();
+        
+    }
+        
 	@Override
 	public ISliderView getSliderView() {
 		return sliderView;
 		
 	}
-	
+		
 	@Override
 	public IView getSelectedView() {
 		return sliderView.getSelectedView();

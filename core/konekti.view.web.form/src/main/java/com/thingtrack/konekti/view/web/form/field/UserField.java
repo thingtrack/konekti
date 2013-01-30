@@ -60,8 +60,8 @@ public class UserField extends CustomField {
 					return;
 				}
 				
-//				if (user == null)
-//					user = new User();
+				if (user == null)
+					user = new User();
 				
 				user.setUsername(usernameField.getValue().toString());
 				user.setPassword(passwordField.getValue().toString());
@@ -82,8 +82,11 @@ public class UserField extends CustomField {
 					usernameField.setValue(undoUser.getUsername());
 					passwordField.setValue(undoUser.getUsername());
 				}
+				else
+					usernameField.setValue("");								
 				
 				passwordConfirmField.setValue("");				
+				passwordConfirmField.setValue("");
 				
 				btnApplyUser.setEnabled(false);
 				btnCancelUser.setEnabled(false);
@@ -115,8 +118,8 @@ public class UserField extends CustomField {
 			usernameField.setValue(user.getUsername());
 			passwordField.setValue(user.getPassword());
 		}
-		else
-			user = new User();
+//		else
+//			user = new User();
 		
 		super.setPropertyDataSource(newDataSource);
 

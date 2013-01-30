@@ -84,6 +84,7 @@ public class OrganizationViewForm extends CustomComponent {
 		parentOrganizationField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		parentOrganizationField.setItemCaptionPropertyId("name");
 		
+		organizationTypeField.setNullSelectionAllowed(false);
 		organizationTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		organizationTypeField.setItemCaptionPropertyId("description");
 		

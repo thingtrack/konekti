@@ -66,6 +66,7 @@ public class WarehouseViewForm extends CustomComponent {
 		locationField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		locationField.setItemCaptionPropertyId("name");
 		
+		warehouseTypeField.setNullSelectionAllowed(false);
 		warehouseTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		warehouseTypeField.setItemCaptionPropertyId("description");
 		
@@ -86,6 +87,10 @@ public class WarehouseViewForm extends CustomComponent {
 		locationField.setRequiredError(locationField.getCaption() + " es un campo requerido");
 		warehouseTypeField.setRequiredError(warehouseTypeField.getCaption() + " es un campo requerido");
 		activeField.setRequiredError(activeField.getCaption() + " es un campo requerido");
+		
+		locationField.setNullSelectionAllowed(false);
+		
+		codeField.focus();
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
