@@ -40,6 +40,7 @@ Directory Structure
 	  | |-konekti.knowledge/
 	  | |-konekti.knowlegde.service.api/
 	  | |-konekti.knowlege.service.impl/
+	  | |-konekti.message/
 	  | |-konekti.report/
 	  | |-konekti.schedule/
 	  | |-konekti.schedule.job/
