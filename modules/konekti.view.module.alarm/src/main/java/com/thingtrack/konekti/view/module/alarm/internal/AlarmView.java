@@ -112,7 +112,7 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 
 //			// TEST: open Vehicle module version 0.0.1.SNAPSHOT
 //			try {
-//				context.openBundle("com.thingtrack.bustrack.view.module.vehicl", "0.0.1.SNAPSHOT");
+//				context.openBundle("com.thingtrack.bustrack.view.module.vehicle", "0.0.1.SNAPSHOT");
 //			}
 //			catch (Exception ex) {
 //				throw new  RuntimeException(ex.getMessage());

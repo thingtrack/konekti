@@ -19,7 +19,6 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.SupplierDao;
-import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
 

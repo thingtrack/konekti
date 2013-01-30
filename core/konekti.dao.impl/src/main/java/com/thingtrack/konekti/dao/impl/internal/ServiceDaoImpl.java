@@ -107,6 +107,7 @@ public class ServiceDaoImpl extends JpaDao<Service, Integer> implements
 
 	}
 
+	@SuppressWarnings("unused")
 	private Date getNowDate() {
 		Date date = new Date();
 
@@ -158,6 +159,7 @@ public class ServiceDaoImpl extends JpaDao<Service, Integer> implements
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Service> getAllPlanned(Organization organization,
 			EmployeeAgent employeeAgent, Date routeStartDate) throws Exception {

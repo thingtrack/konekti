@@ -40,6 +40,7 @@ public class WarehouseDaoImpl extends JpaDao<Warehouse, Integer> implements Ware
 		
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception {
 		Query query = (Query)getEntityManager()

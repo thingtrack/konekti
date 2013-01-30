@@ -13,15 +13,11 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
-import java.util.List;
-
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.OrganizationDao;
-import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
