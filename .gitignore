@@ -44,13 +44,11 @@ build.properties
 
 #VAADIN files
 #############
-*/main/*/VAADIN/widgetsets/**/*
+core/**/src/main/resources/VAADIN/widgetsets/*
 
 #MANIFEST files
 ###############
 MANIFEST.MF
-src/main/resources/META-INF/MANIFEST.MF
-src/main/webapp/META-INF/MANIFEST.MF
 
 #Maven binaries
 ###############
