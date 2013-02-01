@@ -6,8 +6,8 @@
     
     <parent>
     	<groupId>com.thingtrack</groupId>
-    	<artifactId>konekti.maven.parent</artifactId>
     	<version>0.0.1.SNAPSHOT</version>
+    	<artifactId>core</artifactId>
     </parent>
     
     <artifactId>konekti.view.addon</artifactId>
