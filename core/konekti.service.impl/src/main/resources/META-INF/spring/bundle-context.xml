@@ -51,6 +51,7 @@
 	<bean id="clientService" class="com.thingtrack.konekti.service.impl.internal.ClientServiceImpl"/>
 	<bean id="clientGroupService" class="com.thingtrack.konekti.service.impl.internal.ClientGroupServiceImpl"/>	 		 			
 	<bean id="clientTypeService" class="com.thingtrack.konekti.service.impl.internal.ClientTypeServiceImpl"/>
+	<bean id="configurationService" class="com.thingtrack.konekti.service.impl.internal.ConfigurationServiceImpl"/>
 	<bean id="employeeAgentService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentServiceImpl"/>
 	<bean id="employeeAgentStatusService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentStatusServiceImpl"/>	
 	<bean id="employeeAgentTypeService" class="com.thingtrack.konekti.service.impl.internal.EmployeeAgentTypeServiceImpl"/>

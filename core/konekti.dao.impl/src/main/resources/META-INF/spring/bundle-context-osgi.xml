@@ -31,6 +31,7 @@
 		<osgi:service ref="clientDao" interface="com.thingtrack.konekti.dao.api.ClientDao"/>		
 		<osgi:service ref="clientGroupDao" interface="com.thingtrack.konekti.dao.api.ClientGroupDao"/>
 		<osgi:service ref="clientTypeDao" interface="com.thingtrack.konekti.dao.api.ClientTypeDao"/>
+		<osgi:service ref="configurationDao" interface="com.thingtrack.konekti.dao.api.ConfigurationDao"/>
 		<osgi:service ref="employeeAgentDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentDao"/>
 		<osgi:service ref="employeeAgentStatusDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentStatusDao"/>
 		<osgi:service ref="employeeAgentTypeDao" interface="com.thingtrack.konekti.dao.api.EmployeeAgentTypeDao"/>

@@ -20,10 +20,11 @@
 	    <class>com.thingtrack.konekti.domain.CalendarCard</class>
 	    <class>com.thingtrack.konekti.domain.CalendarDetail</class>
 	    <class>com.thingtrack.konekti.domain.CalendarGroup</class>
-	    <class>com.thingtrack.konekti.domain.CalendarType</class>
+	    <class>com.thingtrack.konekti.domain.CalendarType</class>	    
 		<class>com.thingtrack.konekti.domain.Client</class>
 		<class>com.thingtrack.konekti.domain.ClientGroup</class>		
 		<class>com.thingtrack.konekti.domain.ClientType</class>
+		<class>com.thingtrack.konekti.domain.Configuration</class>		
 		<class>com.thingtrack.konekti.domain.EmployeeAgent</class>
 		<class>com.thingtrack.konekti.domain.EmployeeAgentStatus</class>
 		<class>com.thingtrack.konekti.domain.EmployeeAgentType</class>

@@ -50,6 +50,7 @@
 	<bean id="calendarDetailDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarDetailDaoImpl" />
 	<bean id="calendarGroupDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarGroupDaoImpl" />
 	<bean id="calendarTypeDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarTypeDaoImpl" />
+	<bean id="configurationDao" class="com.thingtrack.konekti.dao.impl.internal.ConfigurationDaoImpl" />
 	<bean id="clientDao" class="com.thingtrack.konekti.dao.impl.internal.ClientDaoImpl" />				
 	<bean id="clientGroupDao" class="com.thingtrack.konekti.dao.impl.internal.ClientGroupDaoImpl" />
 	<bean id="clientTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ClientTypeDaoImpl" />

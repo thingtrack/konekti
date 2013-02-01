@@ -32,6 +32,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
 import com.thingtrack.konekti.domain.Client;
+import com.thingtrack.konekti.domain.Configuration;
 import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.MenuCommandResource;
@@ -44,6 +45,7 @@ import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.domain.Warehouse;
 import com.thingtrack.konekti.domain.Workshop;
 import com.thingtrack.konekti.service.api.ClientService;
+import com.thingtrack.konekti.service.api.ConfigurationService;
 import com.thingtrack.konekti.service.api.EmployeeAgentService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
 import com.thingtrack.konekti.service.api.SupplierService;
@@ -80,9 +82,7 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 
 public class Main extends SpringContextApplication implements IMetadataModuleServiceListener, IViewChangeListener {
-	private static final String VERSION = "1.0.0.SR1";
-
-    private final static Logger logger = Logger.getLogger(SpringContextApplication.class.getName());
+	private final static Logger logger = Logger.getLogger(SpringContextApplication.class.getName());
     
 	@Autowired
 	private IModuleService moduleService;
@@ -106,29 +106,43 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private UserService userService;
 
 	@Autowired
+	private ConfigurationService configurationService;
+	
+	@Autowired
 	private ResourceManager resourceManager;
 
 	@Autowired
 	private ToolbarManager toolbarManager;
 
-	private Window window;
-
 	@Autowired
 	private KonektiLayout konektiLayout;
 
-	private MenuItem aboutSubHelpMenuItem;
+	private Window window;
+	
+	//private MenuItem aboutSubHelpMenuItem;
 
 	private SliderView sliderView;
 
 	private IWorkbenchContext workbenchContext;
 
+	private final static String CONFIGURATION_CODE = "KONEKTI";
+	
+	private Configuration configuration;
+		
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext arg0) {
 		// set konekti theme
 		setTheme("konekti");
 
+		// get konekti configuration
+		getConfiguration();
+		
 		// set the main application window
-		window = new Window("Konekti-Fleet");
+		if (configuration != null)
+			window = new Window(configuration.getName());
+		else
+			window = new Window("Konekti");
+		
 		window.setStyleName("background");
 		setMainWindow(window);
 
@@ -136,7 +150,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		VerticalLayout mainLayout = (VerticalLayout) window.getContent();
 		mainLayout.setSizeFull();
 		mainLayout.setMargin(false);
-
+		
 		// Create the views
 		createViews();
 
@@ -148,16 +162,27 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	}
 
+	private void getConfiguration() {
+		try {
+			configuration = configurationService.getByCode(CONFIGURATION_CODE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	
 	private void createViews() {
 
 		sliderView = new SliderView();
 
 		sliderView.addListener(this);
 
-		sliderView.addView(new SecurityAccessView(securityService, sliderView));
+		if (configuration != null)
+			sliderView.addView(new SecurityAccessView(securityService, sliderView, configuration.getVersion(), configuration.getLogoInit()));
+		else
+			sliderView.addView(new SecurityAccessView(securityService, sliderView, null, null));
 		
-		
-		sliderView.addView(new WorkbenchView(konektiLayout,sliderView));
+		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}
 
 	protected void initMenuManager() {

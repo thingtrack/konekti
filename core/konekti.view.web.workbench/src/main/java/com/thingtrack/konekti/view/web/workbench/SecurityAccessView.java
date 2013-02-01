@@ -34,16 +34,21 @@ public class SecurityAccessView extends AbstractView {
 	
 	private User grantedUser; 
 
+	private String version;
+	private byte[] logo;
+	
 	public User getGrantedUser() {
 		return grantedUser;
 	}
 
 	public SecurityAccessView(SecurityService securityService,
-			SliderView sliderView) {
-
+			SliderView sliderView, String version, byte[] logo) {
+		
 		this.securityService = securityService;
 		this.sliderView = sliderView;
-
+		this.version = version;
+		this.logo = logo;
+		
 		mainLayout = new VerticalLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -98,7 +103,7 @@ public class SecurityAccessView extends AbstractView {
 		viewBoundForm.setWriteThrough(false);
 		viewBoundForm.setInvalidCommitted(false);
 
-		loginViewForm = new LoginViewForm();
+		loginViewForm = new LoginViewForm(version, logo);
 		viewBoundForm.setContent(loginViewForm);
 
 		viewBoundForm.getFooter().addComponent(buildFooterWindow());
