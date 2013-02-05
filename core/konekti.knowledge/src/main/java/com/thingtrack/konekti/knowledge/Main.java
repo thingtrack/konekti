@@ -16,16 +16,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-//import com.thingtrack.konekti.service.api.OfferService;
-
 public class Main implements BundleActivator {
-
-//	public static OfferService offerService;
-//    
-//	public void setOfferService(OfferService offerService) {
-//		Main.offerService = offerService;
-//		
-//	}
 	
 	@SuppressWarnings("rawtypes")
 	public void start(BundleContext arg0) throws Exception {
@@ -66,7 +57,7 @@ public class Main implements BundleActivator {
 			
 			kbaseConf = knowledgeBaseFactoryService.newKnowledgeBaseConfiguration( null, getClass().getClassLoader() );
 			KnowledgeBase kbase = knowledgeBaseFactoryService.newKnowledgeBase( kbaseConf );
-			kbase.addKnowledgePackages( kbuilder.getKnowledgePackages() );
+			kbase.addKnowledgePackages( kbuilder.getKnowledgePackages());
 	
 			// create a state full knowledge session fron knowledge base
 			StatefulKnowledgeSession ksession = kbase.newStatefulKnowledgeSession();

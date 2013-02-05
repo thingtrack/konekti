@@ -1,7 +1,6 @@
 package com.thingtrack.konekti.view.module.employee.internal;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,6 @@ public class Excel2Entity {
 	private static final int TYPE = 12;
 	private static final int COMMENT = 13;
 	private static final int STATUS = 14;
-	private static final int ORGANIZATION_CODE = 15;
 	
 	private IWorkbenchContext context;
 	private AddressService addressService;
@@ -163,8 +161,6 @@ public class Excel2Entity {
 			employeeAgentStatus = defaultEmployeeAgentStatus;
 		
 		employeeAgent.setEmployeeAgentStatus(employeeAgentStatus);
-		
-		employeeAgent.setDefaultOrganization(context.getOrganization());
 		
 		return employeeAgent;
 	}

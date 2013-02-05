@@ -180,7 +180,6 @@ public class OrganizationViewForm extends CustomComponent {
 		cifField.setWidth("172px");
 		cifField.setHeight("-1px");
 		cifField.setTabIndex(5);
-		cifField.setSecret(false);
 		mainLayout.addComponent(cifField, "top:136.0px;left:368.0px;");
 		
 		// codeField
@@ -191,7 +190,6 @@ public class OrganizationViewForm extends CustomComponent {
 		codeField.setHeight("-1px");
 		codeField.setTabIndex(1);
 		codeField.setRequired(true);
-		codeField.setSecret(false);
 		mainLayout.addComponent(codeField, "top:20.0px;left:20.0px;");
 		
 		// commentField
@@ -201,7 +199,6 @@ public class OrganizationViewForm extends CustomComponent {
 		commentField.setWidth("520px");
 		commentField.setHeight("40px");
 		commentField.setTabIndex(8);
-		commentField.setSecret(false);
 		mainLayout.addComponent(commentField, "top:280.0px;left:20.0px;");
 		
 		// descriptionField
@@ -211,7 +208,6 @@ public class OrganizationViewForm extends CustomComponent {
 		descriptionField.setWidth("520px");
 		descriptionField.setHeight("-1px");
 		descriptionField.setTabIndex(4);
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:56.0px;left:20.0px;");
 		
 		// nameField
@@ -222,7 +218,6 @@ public class OrganizationViewForm extends CustomComponent {
 		nameField.setHeight("-1px");
 		nameField.setTabIndex(2);
 		nameField.setRequired(true);
-		nameField.setSecret(false);
 		mainLayout.addComponent(nameField, "top:20.0px;left:160.0px;");
 		
 		// parentOrganizationField

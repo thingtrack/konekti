@@ -14,8 +14,10 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -51,18 +53,52 @@ public class User implements Serializable {
 			   joinColumns=@JoinColumn(name="USER_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ROLE_ID"))
 	private List<Role> roles;
+			
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+	@JoinTable(name="USER_ORGANIZATION",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))	
+	private List<Organization> organizations = new ArrayList<Organization>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+	@JoinTable(name="USER_LOCATION",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))	
+	private List<Location> locations = new ArrayList<Location>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+	@JoinTable(name="USER_WAREHOUSE",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))	
+	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
+	
+	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
+	@JoinTable(name="USER_WORKSHOP",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))	
+	private List<Workshop> workshops = new ArrayList<Workshop>();
+	
+	@Column(name="DEFAULT_LOCALE")
+	private String defaultLocale;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")
+	private Organization defaultOrganization;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_LOCATION_ID")
+	private Location defaultLocation;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")
+	private Warehouse defaultWarehouse;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_WORKSHOP_ID")
+	private Workshop defaultWorkshop;
 	
 	@Column(name="COMMENT", length=256)
 	private String comment;
-	
-	@OneToOne(mappedBy="user")
-	private Client client;
-
-	@OneToOne(mappedBy="user")
-	private EmployeeAgent employeeAgent;
-	
-	@OneToOne(mappedBy="user")
-	private Supplier supplier;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
@@ -213,44 +249,129 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the client
+	 * @return the defaultLocale
 	 */
-	public Client getClient() {
-		return client;
+	public String getDefaultLocale() {
+		return defaultLocale;
 	}
 
 	/**
-	 * @param client the client to set
+	 * @param defaultLocale the defaultLocale to set
 	 */
-	public void setClient(Client client) {
-		this.client = client;
+	public void setDefaultLocale(String defaultLocale) {
+		this.defaultLocale = defaultLocale;
 	}
 
 	/**
-	 * @return the employeeAgent
+	 * @return the defaultOrganization
 	 */
-	public EmployeeAgent getEmployeeAgent() {
-		return employeeAgent;
+	public Organization getDefaultOrganization() {
+		return defaultOrganization;
 	}
 
 	/**
-	 * @param employeeAgent the employeeAgent to set
+	 * @param defaultOrganization the defaultOrganization to set
 	 */
-	public void setEmployeeAgent(EmployeeAgent employeeAgent) {
-		this.employeeAgent = employeeAgent;
+	public void setDefaultOrganization(Organization defaultOrganization) {
+		this.defaultOrganization = defaultOrganization;
 	}
 
 	/**
-	 * @return the supplier
+	 * @return the defaultLocation
 	 */
-	public Supplier getSupplier() {
-		return supplier;
+	public Location getDefaultLocation() {
+		return defaultLocation;
 	}
 
 	/**
-	 * @param supplier the supplier to set
+	 * @param defaultLocation the defaultLocation to set
 	 */
-	public void setSupplier(Supplier supplier) {
-		this.supplier = supplier;
+	public void setDefaultLocation(Location defaultLocation) {
+		this.defaultLocation = defaultLocation;
 	}
+
+	/**
+	 * @return the defaultWarehouse
+	 */
+	public Warehouse getDefaultWarehouse() {
+		return defaultWarehouse;
+	}
+
+	/**
+	 * @param defaultWarehouse the defaultWarehouse to set
+	 */
+	public void setDefaultWarehouse(Warehouse defaultWarehouse) {
+		this.defaultWarehouse = defaultWarehouse;
+	}
+
+	/**
+	 * @return the defaultWorkshop
+	 */
+	public Workshop getDefaultWorkshop() {
+		return defaultWorkshop;
+	}
+
+	/**
+	 * @param defaultWorkshop the defaultWorkshop to set
+	 */
+	public void setDefaultWorkshop(Workshop defaultWorkshop) {
+		this.defaultWorkshop = defaultWorkshop;
+	}
+
+	/**
+	 * @return the organizations
+	 */
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	/**
+	 * @param organizations the organizations to set
+	 */
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
+
+	/**
+	 * @return the locations
+	 */
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	/**
+	 * @param locations the locations to set
+	 */
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
+
+	/**
+	 * @return the warehouses
+	 */
+	public List<Warehouse> getWarehouses() {
+		return warehouses;
+	}
+
+	/**
+	 * @param warehouses the warehouses to set
+	 */
+	public void setWarehouses(List<Warehouse> warehouses) {
+		this.warehouses = warehouses;
+	}
+
+	/**
+	 * @return the workshops
+	 */
+	public List<Workshop> getWorkshops() {
+		return workshops;
+	}
+
+	/**
+	 * @param workshops the workshops to set
+	 */
+	public void setWorkshops(List<Workshop> workshops) {
+		this.workshops = workshops;
+	}
+
 }

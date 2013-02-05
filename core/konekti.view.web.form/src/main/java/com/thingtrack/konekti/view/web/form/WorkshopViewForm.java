@@ -155,7 +155,6 @@ public class WorkshopViewForm extends CustomComponent {
 		codeField.setWidth("120px");
 		codeField.setHeight("-1px");
 		codeField.setRequired(true);
-		codeField.setSecret(false);
 		mainLayout.addComponent(codeField, "top:19.0px;left:20.0px;");
 		
 		// commentField
@@ -165,7 +164,6 @@ public class WorkshopViewForm extends CustomComponent {
 		commentField.setWidth("520px");
 		commentField.setHeight("120px");
 		commentField.setTabIndex(6);
-		commentField.setSecret(false);
 		mainLayout.addComponent(commentField, "top:140.0px;left:20.0px;");
 		
 		// descriptionField
@@ -175,7 +173,6 @@ public class WorkshopViewForm extends CustomComponent {
 		descriptionField.setWidth("520px");
 		descriptionField.setHeight("-1px");
 		descriptionField.setTabIndex(3);
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:60.0px;left:20.0px;");
 		
 		// locationField
@@ -195,7 +192,6 @@ public class WorkshopViewForm extends CustomComponent {
 		nameField.setWidth("320px");
 		nameField.setHeight("-1px");
 		nameField.setTabIndex(1);
-		nameField.setSecret(false);
 		mainLayout.addComponent(nameField, "top:19.0px;left:160.0px;");
 		
 		// workshopTypeField

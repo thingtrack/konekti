@@ -26,7 +26,7 @@ public class EmployeeAgentKnowledgeServiceImpl implements EmployeeAgentKnowledge
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("employeeAgents", employeeAgents);		
 		params.put("employeeAgentService", employeeAgentService);
-		params.put("organization", organization);
+		params.put("organization", organization);	
 		
 		// execute BP
 		statefulKnowledgeSession.startProcess("com.konekti.knowledge.bpmn2.bpimportemployeeagent", params);
