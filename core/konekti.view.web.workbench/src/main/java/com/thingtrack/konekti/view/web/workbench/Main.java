@@ -31,24 +31,14 @@ import org.dellroad.stuff.vaadin.SpringContextApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
-import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Configuration;
-import com.thingtrack.konekti.domain.EmployeeAgent;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.MenuCommandResource;
 import com.thingtrack.konekti.domain.MenuFolderResource;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.MenuWorkbench;
-import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
-import com.thingtrack.konekti.domain.Warehouse;
-import com.thingtrack.konekti.domain.Workshop;
-import com.thingtrack.konekti.service.api.ClientService;
 import com.thingtrack.konekti.service.api.ConfigurationService;
-import com.thingtrack.konekti.service.api.EmployeeAgentService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
-import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.service.api.UserService;
 import com.thingtrack.konekti.service.security.SecurityService;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -89,15 +79,6 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	@Autowired
 	private MenuWorkbenchService menuWorkbenchService;
-
-	@Autowired
-	private EmployeeAgentService employeeAgentService;
-
-	@Autowired
-	private ClientService clientService;
-
-	@Autowired
-	private SupplierService supplierService;
 	
 	@Autowired
 	private SecurityService securityService;
@@ -484,88 +465,24 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 
 	private void loadWorkbenchContext(User user) throws Exception {
-		EmployeeAgent employeeAgent = null;
-		Client client = null;
-		Supplier supplier = null;
-		
 		Locale defaultLocale = null;
-		Organization defaultOrganization = null;
-		Location defaultLocation = null;
-		Warehouse defaultWarehouse = null;
-		Workshop defaultWorkshop = null;
-		
-		try {
-			if (user.getClient() != null) {
-				client = clientService.getByUser(user);
-				
-				// get default organization&warehouse
-				defaultOrganization = client.getDefaultOrganization(); 
-				defaultLocation = client.getDefaultLocation();
-				defaultWarehouse = client.getDefaultWarehouse();
-				defaultWorkshop = client.getDefaultWorkshop();
-				
-				// create locale for employee agent
-				if (client.getDefaultLocale() != null ) {
-					String[] localeParams = client.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
-					
-					String language = localeParams[0];
-					String country = localeParams[1];
-					
-					defaultLocale = new Locale(language, country);
-				}
-				
-			} else if (user.getEmployeeAgent() != null) {				
-				employeeAgent = employeeAgentService.getByUser(user);
-				
-				// get default organization&warehouse
-				defaultOrganization = employeeAgent.getDefaultOrganization();
-				defaultLocation = employeeAgent.getDefaultLocation();
-				defaultWarehouse = employeeAgent.getDefaultWarehouse();
-				defaultWorkshop = employeeAgent.getDefaultWorkshop();
-				
-				// create locale for employee agent
-				if (employeeAgent.getDefaultLocale() != null ) {
-					String[] localeParams = employeeAgent.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
-					
-					String language = localeParams[0];
-					String country = localeParams[1];
-					
-					defaultLocale = new Locale(language, country);
-				}
-				
-			} else if (user.getSupplier() != null) {
-				supplier = supplierService.getByUser(user);
-				
-				// get default organization&warehouse
-				defaultOrganization = supplier.getDefaultOrganization();
-				defaultLocation = supplier.getDefaultLocation();
-				defaultWarehouse = supplier.getDefaultWarehouse();
-				defaultWorkshop = supplier.getDefaultWorkshop();
-				
-				// create locale for employee agent
-				if (supplier.getDefaultLocale() != null ) {
-					String[] localeParams = supplier.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
-					
-					String language = localeParams[0];
-					String country = localeParams[1];
-					
-					defaultLocale = new Locale(language, country);
-				}
-				
-			}
-			
-			
-		}
-		catch(Exception ex) {
-			
-		}
 	
+	
+		// create locale for employee agent
+		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
+			
+		String language = localeParams[0];
+		String country = localeParams[1];
+		
+		defaultLocale = new Locale(language, country);
+		
+		
 		// konekti context
 		workbenchContext = new WorkbenchContext(
-				defaultOrganization,
-				defaultLocation,
-				defaultWarehouse,
-				defaultWorkshop,
+				user.getDefaultOrganization(),
+				user.getDefaultLocation(),
+				user.getDefaultWarehouse(),
+				user.getDefaultWorkshop(),
 				user,
 				defaultLocale,				
 				toolbarManager,

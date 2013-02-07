@@ -98,45 +98,14 @@ public class Client implements Serializable {
 			   joinColumns=@JoinColumn(name="CLIENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
-
-	@ManyToMany
-	@JoinTable(name="CLIENT_WAREHOUSE",
-			   joinColumns=@JoinColumn(name="CLIENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))		
-	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
-	
-	@ManyToMany
-	@JoinTable(name="CLIENT_WORKSHOP",
-			   joinColumns=@JoinColumn(name="CLIENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))		
-	private List<Workshop> workshops = new ArrayList<Workshop>();
-	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="USER_ID")		
-	private User user;
-	
-	@Column(name="DEFAULT_LOCALE")
-	private String defaultLocale;
-	
-	@OneToOne
-	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")	
-	private Organization defaultOrganization;
-
-	@OneToOne
-	@JoinColumn(name="DEFAULT_LOCATION_ID")	
-	private Location defaultLocation;
-		
-	@OneToOne
-	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")	
-	private Warehouse defaultWarehouse;
-	
-	@OneToOne
-	@JoinColumn(name="DEFAULT_WORKSHOP_ID")	
-	private Workshop defaultWorkshop;
 	
 	@Column(name = "COMMENT", length = 512)
 	private String comment;
 
+	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
+	@JoinColumn(name="USER_ID")		
+	private User user;
+	
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
 
@@ -453,48 +422,6 @@ public class Client implements Serializable {
 	}
 
 	/**
-	 * @return the defaultOrganization
-	 */
-	public Organization getDefaultOrganization() {
-		return defaultOrganization;
-	}
-
-	/**
-	 * @param defaultOrganization the defaultOrganization to set
-	 */
-	public void setDefaultOrganization(Organization defaultOrganization) {
-		this.defaultOrganization = defaultOrganization;
-	}
-
-	/**
-	 * @return the defaultWarehouse
-	 */
-	public Warehouse getDefaultWarehouse() {
-		return defaultWarehouse;
-	}
-
-	/**
-	 * @param defaultWarehouse the defaultWarehouse to set
-	 */
-	public void setDefaultWarehouse(Warehouse defaultWarehouse) {
-		this.defaultWarehouse = defaultWarehouse;
-	}
-
-	/**
-	 * @return the defaultLocale
-	 */
-	public String getDefaultLocale() {
-		return defaultLocale;
-	}
-
-	/**
-	 * @param defaultLocale the defaultLocale to set
-	 */
-	public void setDefaultLocale(String defaultLocale) {
-		this.defaultLocale = defaultLocale;
-	}
-
-	/**
 	 * @return the locations
 	 */
 	public List<Location> getLocations() {
@@ -507,61 +434,4 @@ public class Client implements Serializable {
 	public void setLocations(List<Location> locations) {
 		this.locations = locations;
 	}
-
-	/**
-	 * @return the warehouses
-	 */
-	public List<Warehouse> getWarehouses() {
-		return warehouses;
-	}
-
-	/**
-	 * @param warehouses the warehouses to set
-	 */
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
-	/**
-	 * @return the workshops
-	 */
-	public List<Workshop> getWorkshops() {
-		return workshops;
-	}
-
-	/**
-	 * @param workshops the workshops to set
-	 */
-	public void setWorkshops(List<Workshop> workshops) {
-		this.workshops = workshops;
-	}
-
-	/**
-	 * @return the defaultLocation
-	 */
-	public Location getDefaultLocation() {
-		return defaultLocation;
-	}
-
-	/**
-	 * @param defaultLocation the defaultLocation to set
-	 */
-	public void setDefaultLocation(Location defaultLocation) {
-		this.defaultLocation = defaultLocation;
-	}
-
-	/**
-	 * @return the defaultWorkshop
-	 */
-	public Workshop getDefaultWorkshop() {
-		return defaultWorkshop;
-	}
-
-	/**
-	 * @param defaultWorkshop the defaultWorkshop to set
-	 */
-	public void setDefaultWorkshop(Workshop defaultWorkshop) {
-		this.defaultWorkshop = defaultWorkshop;
-	}
-
 }

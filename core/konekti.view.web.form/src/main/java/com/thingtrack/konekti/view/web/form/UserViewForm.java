@@ -84,7 +84,6 @@ public class UserViewForm extends CustomComponent {
 		commentField.setWidth("540px");
 		commentField.setHeight("160px");
 		commentField.setTabIndex(3);
-		commentField.setSecret(false);
 		mainLayout.addComponent(commentField, "top:100.0px;left:20.0px;");
 		
 		// passwordField
@@ -104,7 +103,6 @@ public class UserViewForm extends CustomComponent {
 		usernameField.setWidth("160px");
 		usernameField.setHeight("-1px");
 		usernameField.setRequired(true);
-		usernameField.setSecret(false);
 		mainLayout.addComponent(usernameField, "top:17.0px;left:20.0px;");
 		
 		// rolesField

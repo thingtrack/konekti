@@ -157,7 +157,6 @@ public class ProductViewForm extends CustomComponent {
 		averagePriceField.setWidth("80px");
 		averagePriceField.setHeight("-1px");
 		averagePriceField.setTabIndex(5);
-		averagePriceField.setSecret(false);
 		mainLayout.addComponent(averagePriceField, "top:57.0px;left:365.0px;");
 		
 		// codeField
@@ -168,7 +167,6 @@ public class ProductViewForm extends CustomComponent {
 		codeField.setHeight("-1px");
 		codeField.setTabIndex(1);
 		codeField.setRequired(true);
-		codeField.setSecret(false);
 		mainLayout.addComponent(codeField, "top:16.0px;left:20.0px;");
 		
 		// descriptionField
@@ -178,7 +176,6 @@ public class ProductViewForm extends CustomComponent {
 		descriptionField.setWidth("665px");
 		descriptionField.setHeight("-1px");
 		descriptionField.setTabIndex(7);
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:216.0px;left:20.0px;");
 		
 		// hasExpeditionDateField
@@ -221,7 +218,6 @@ public class ProductViewForm extends CustomComponent {
 		nameField.setHeight("-1px");
 		nameField.setTabIndex(3);
 		nameField.setRequired(true);
-		nameField.setSecret(false);
 		mainLayout.addComponent(nameField, "top:16.0px;left:160.0px;");
 		
 		// productActiveField

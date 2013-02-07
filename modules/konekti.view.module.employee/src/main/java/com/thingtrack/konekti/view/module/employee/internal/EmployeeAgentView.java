@@ -115,10 +115,9 @@ public class EmployeeAgentView extends AbstractView
 			dgEmployeeAgent.addGeneratedColumn(UserNameColumn.USER_NAME_COLUMN_ID, new UserNameColumn());
 			dgEmployeeAgent.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
 			
-			dgEmployeeAgent.setVisibleColumns(new String[] { "defaultOrganization.name", "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
-			dgEmployeeAgent.setColumnHeaders(new String[] { "Organización Defecto", "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
+			dgEmployeeAgent.setVisibleColumns(new String[] { "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
+			dgEmployeeAgent.setColumnHeaders(new String[] { "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
 						
-			dgEmployeeAgent.setColumnCollapsed("defaultOrganization.name", true);
 			dgEmployeeAgent.setColumnCollapsed("tittle", true);
 			dgEmployeeAgent.setColumnCollapsed("shortname", true);
 			dgEmployeeAgent.setColumnCollapsed("fax", true);
@@ -173,7 +172,6 @@ public class EmployeeAgentView extends AbstractView
 			
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentType.description");
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentStatus.description");
-			bsEmployeeAgent.addNestedContainerProperty("defaultOrganization.name");
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

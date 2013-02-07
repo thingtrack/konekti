@@ -35,9 +35,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.thingtrack.bustrack.domain.Route;
-import com.thingtrack.bustrack.domain.Worksheet;
-
 /**
  * @author Thingtrack S.L.
  *
@@ -45,7 +42,7 @@ import com.thingtrack.bustrack.domain.Worksheet;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="EMPLOYEE_AGENT")
-public class EmployeeAgent implements Serializable {	
+public class EmployeeAgent implements Serializable {
 	@Id
 	@Column(name="EMPLOYEE_AGENT_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -102,7 +99,7 @@ public class EmployeeAgent implements Serializable {
 	@Column(name="SENIORITY")
 	@Temporal(TemporalType.DATE)
 	private Date seniority;
-
+	
 	@Column(name="BIRTHDAY", nullable=false)
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
@@ -111,60 +108,23 @@ public class EmployeeAgent implements Serializable {
 	@JoinTable(name="EMPLOYEE_AGENT_ORGANIZATION",
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))		
-	private List<Organization> organizations = new ArrayList<Organization>();
-
+	private List<Organization> organizations;
+	
 	@ManyToMany
 	@JoinTable(name="EMPLOYEE_AGENT_LOCATION",
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
-
-	@ManyToMany
-	@JoinTable(name="EMPLOYEE_AGENT_WAREHOUSE",
-			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))		
-	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
-	
-	@ManyToMany
-	@JoinTable(name="EMPLOYEE_AGENT_WORKSHOP",
-			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))		
-	private List<Workshop> workshops = new ArrayList<Workshop>();
-		
-	@OneToOne
-	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")	
-	private Organization defaultOrganization;
-	
-	@OneToOne
-	@JoinColumn(name="DEFAULT_LOCATION_ID")	
-	private Location defaultLocation;
-	
-	@OneToOne
-	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")	
-	private Warehouse defaultWarehouse;
-	
-	@OneToOne
-	@JoinColumn(name="DEFAULT_WORKSHOP_ID")	
-	private Workshop defaultWorkshop;
-	
-	@Column(name="DEFAULT_LOCALE")
-	private String defaultLocale;
 	
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="USER_ID")		
 	private User user;
-
+	
 	@Column(name="COMMENT", length=512)
 	private String comment;
 		
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
-	
-	@OneToMany(mappedBy="driver")
-	private List<Worksheet> worksheets;
-	
-	@OneToMany(mappedBy="driver")
-	private List<Route> routes;
 	
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_STATUS_ID", nullable=false)
@@ -193,15 +153,7 @@ public class EmployeeAgent implements Serializable {
 		return employeeAgentId;
 	}
 
-	/**	public enum EMPLOYEE_AGENT_TYPE{
-		
-		OFFICER_TYPE_1,
-		OFFICER_TYPE_2,
-		OPERATOR_TYPE_1,
-		OPERATOR_TYPE_2,
-		MANAGER_TYPE_1,
-		MANAGER_TYPE_2
-	} 
+	/**
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -482,34 +434,6 @@ public class EmployeeAgent implements Serializable {
 	}
 
 	/**
-	 * @param worksheets the worksheets to set
-	 */
-	public void setWorksheets(List<Worksheet> worksheets) {
-		this.worksheets = worksheets;
-	}
-
-	/**
-	 * @return the worksheets
-	 */
-	public List<Worksheet> getWorksheets() {
-		return worksheets;
-	}
-
-	/**
-	 * @param routes the routes to set
-	 */
-	public void setRoutes(List<Route> routes) {
-		this.routes = routes;
-	}
-
-	/**
-	 * @return the routes
-	 */
-	public List<Route> getRoutes() {
-		return routes;
-	}
-
-	/**
 	 * @param offerRequestLines the offerRequestLines to set
 	 */
 	public void setOfferRequestLines(List<OfferRequestLine> offerRequestLines) {
@@ -521,20 +445,6 @@ public class EmployeeAgent implements Serializable {
 	 */
 	public List<OfferRequestLine> getOfferRequestLines() {
 		return offerRequestLines;
-	}
-
-	/**
-	 * @param defaultOrganization the defaultOrganization to set
-	 */
-	public void setDefaultOrganization(Organization defaultOrganization) {
-		this.defaultOrganization = defaultOrganization;
-	}
-
-	/**
-	 * @return the defaultOrganization
-	 */
-	public Organization getDefaultOrganization() {
-		return defaultOrganization;
 	}
 
 	/* (non-Javadoc)
@@ -576,35 +486,6 @@ public class EmployeeAgent implements Serializable {
 	public String toString() {
 		return "EmployeeAgent [employeeAgentId=" + employeeAgentId + "]";
 	}
-
-	/**
-	 * @return the defaultWarehouse
-	 */
-	public Warehouse getDefaultWarehouse() {
-		return defaultWarehouse;
-	}
-
-	/**
-	 * @param defaultWarehouse the defaultWarehouse to set
-	 */
-	public void setDefaultWarehouse(Warehouse defaultWarehouse) {
-		this.defaultWarehouse = defaultWarehouse;
-	}
-
-	/**
-	 * @return the defaultLocale
-	 */
-	public String getDefaultLocale() {
-		return defaultLocale;
-	}
-
-	/**
-	 * @param defaultLocale the defaultLocale to set
-	 */
-	public void setDefaultLocale(String defaultLocale) {
-		this.defaultLocale = defaultLocale;
-	}
-
 	
 	/**
 	 * @return the birthday
@@ -632,62 +513,6 @@ public class EmployeeAgent implements Serializable {
 	 */
 	public void setLocations(List<Location> locations) {
 		this.locations = locations;
-	}
-
-	/**
-	 * @return the warehouses
-	 */
-	public List<Warehouse> getWarehouses() {
-		return warehouses;
-	}
-
-	/**
-	 * @param warehouses the warehouses to set
-	 */
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
-	/**
-	 * @return the workshops
-	 */
-	public List<Workshop> getWorkshops() {
-		return workshops;
-	}
-
-	/**
-	 * @param workshops the workshops to set
-	 */
-	public void setWorkshops(List<Workshop> workshops) {
-		this.workshops = workshops;
-	}
-
-	/**
-	 * @return the defaultLocation
-	 */
-	public Location getDefaultLocation() {
-		return defaultLocation;
-	}
-
-	/**
-	 * @param defaultLocation the defaultLocation to set
-	 */
-	public void setDefaultLocation(Location defaultLocation) {
-		this.defaultLocation = defaultLocation;
-	}
-
-	/**
-	 * @return the defaultWorkshop
-	 */
-	public Workshop getDefaultWorkshop() {
-		return defaultWorkshop;
-	}
-
-	/**
-	 * @param defaultWorkshop the defaultWorkshop to set
-	 */
-	public void setDefaultWorkshop(Workshop defaultWorkshop) {
-		this.defaultWorkshop = defaultWorkshop;
 	}
 
 }

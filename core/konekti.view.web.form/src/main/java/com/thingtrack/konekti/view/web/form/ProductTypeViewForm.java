@@ -61,7 +61,6 @@ public class ProductTypeViewForm extends CustomComponent {
 		codeField.setHeight("-1px");
 		codeField.setTabIndex(1);
 		codeField.setRequired(true);
-		codeField.setSecret(false);
 		mainLayout.addComponent(codeField, "top:16.0px;left:20.0px;");
 		
 		// descriptionField
@@ -70,7 +69,6 @@ public class ProductTypeViewForm extends CustomComponent {
 		descriptionField.setImmediate(false);
 		descriptionField.setWidth("520px");
 		descriptionField.setHeight("-1px");
-		descriptionField.setSecret(false);
 		mainLayout.addComponent(descriptionField, "top:56.0px;left:20.0px;");
 		
 		return mainLayout;

@@ -134,15 +134,11 @@ public class ClientOrganizationCollectionField extends CustomField {
 		BundleContext bundleContext = FrameworkUtil.getBundle(this.getClass())
 				.getBundleContext();
 
-		ServiceReference clientServiceReference = bundleContext
-				.getServiceReference(ClientService.class.getName());
-		clientService = ClientService.class.cast(bundleContext
-				.getService(clientServiceReference));
+		ServiceReference clientServiceReference = bundleContext.getServiceReference(ClientService.class.getName());
+		clientService = ClientService.class.cast(bundleContext.getService(clientServiceReference));
 
-		ServiceReference organizationServiceReference = bundleContext
-				.getServiceReference(OrganizationService.class.getName());
-		organizationService = OrganizationService.class.cast(bundleContext
-				.getService(organizationServiceReference));
+		ServiceReference organizationServiceReference = bundleContext.getServiceReference(OrganizationService.class.getName());
+		organizationService = OrganizationService.class.cast(bundleContext.getService(organizationServiceReference));
 	}
 
 	private class ClientAssignmentColumn implements Table.ColumnGenerator {
