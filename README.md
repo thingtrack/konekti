@@ -37,6 +37,7 @@ Directory Structure
 	  | |-konekti.dao.sensor.impl/
 	  | |-konekti.dao.template/
 	  | |-konekti.domain/
+	  | |-konekti.domain.mobile/
 	  | |-konekti.knowledge/
 	  | |-konekti.knowlegde.service.api/
 	  | |-konekti.knowlege.service.impl/
@@ -65,12 +66,15 @@ Directory Structure
 	  |-modules/ ........... modules code
 	  |	|-konekti.view.module.address/
 	  |	|-konekti.view.module.alarm/
+	  |	|-konekti.view.module.bundle/
 	  |	|-konekti.view.module.calendar/
 	  |	|-konekti.view.module.client/
+	  |	|-konekti.view.module.dashboard/
 	  |	|-konekti.view.module.employee/
 	  |	|-konekti.view.module.feedback/
-	  |	|-konekti.view.module.productomanager/
+	  |	|-konekti.view.module.modulemanager/
 	  |	|-konekti.view.module.product/
+	  |	|-konekti.view.module.sensor/
 	  |	|-konekti.view.module.stock/
 	  |	|-konekti.view.module.supplier/
 	  | |-pom.xml ....... project object model
