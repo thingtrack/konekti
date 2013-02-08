@@ -14,7 +14,6 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -29,9 +28,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.thingtrack.bustrack.domain.OfferRequestLineFixService;
-import com.thingtrack.bustrack.domain.OfferRequestLineRegularService;
 
 /**
  * @author Thingtrack S.L.
@@ -60,12 +56,9 @@ public class OfferRequest implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CLIENT_ID", nullable=false)
 	private Client client;
-	
+
 	@OneToMany(mappedBy="offerRequest")
-	private List<OfferRequestLineFixService> offerRequestLineFixServices;
-	
-	@OneToMany(mappedBy="offerRequest")
-	private List<OfferRequestLineRegularService> offerRequestLineRegularServices;
+	private List<OfferRequestLine> offerRequestLines;
 	
 	@OneToMany(mappedBy="offerRequest")
 	private List<Offer> offers;
@@ -243,42 +236,6 @@ public class OfferRequest implements Serializable {
 		return observation;
 	}
 
-	/**
-	 * @param offerRequestLineFixServices the offerRequestLineFixServices to set
-	 */
-	public void addOfferRequestLineFixService(OfferRequestLineFixService offerRequestLineFixService) {
-		offerRequestLineFixServices.add(offerRequestLineFixService);
-		
-		if (offerRequestLineFixService.getOfferRequest() != this)
-			offerRequestLineFixService.setOfferRequest(this);
-	}
-	
-	/**
-	 * @return the offerRequestLineFixServices
-	 */
-	public List<OfferRequestLineFixService> getOfferRequestLineFixServices() {
-		return Collections.unmodifiableList(offerRequestLineFixServices);
-
-	}
-
-	/**
-	 * @param offerRequestLineRegularServices the offerRequestLineRegularServices to set
-	 */
-	public void addOfferRequestLineRegularService(OfferRequestLineRegularService offerRequestLineRegularService) {
-		offerRequestLineRegularServices.add(offerRequestLineRegularService);
-		
-		if (offerRequestLineRegularService.getOfferRequest() != this)
-			offerRequestLineRegularService.setOfferRequest(this);
-	}
-	
-	/**
-	 * @return the offerRequestLineRegularServices
-	 */
-	public List<OfferRequestLineRegularService> getOfferRequestLineRegularServices() {
-		return  Collections.unmodifiableList(offerRequestLineRegularServices);
-		
-	}
-
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
@@ -287,10 +244,7 @@ public class OfferRequest implements Serializable {
 		return "OfferRequest [offerRequestId=" + offerRequestId + ", code="
 				+ code + ", organization=" + organization
 				+ ", offerRequestType=" + offerRequestType
-				+ ", offerRequestLineFixServices="
-				+ offerRequestLineFixServices
-				+ ", offerRequestLineRegularServices="
-				+ offerRequestLineRegularServices + ", offers=" + offers
+				+ ", offers=" + offers
 				+ ", observation=" + observation + ", offerRequestStatus="
 				+ offerRequestStatus + ", offerRequestDate=" + offerRequestDate
 				+ "]";
@@ -308,6 +262,20 @@ public class OfferRequest implements Serializable {
 	 */
 	public void setClient(Client client) {
 		this.client = client;
+	}
+
+	/**
+	 * @return the offerRequestLines
+	 */
+	public List<OfferRequestLine> getOfferRequestLines() {
+		return offerRequestLines;
+	}
+
+	/**
+	 * @param offerRequestLines the offerRequestLines to set
+	 */
+	public void setOfferRequestLines(List<OfferRequestLine> offerRequestLines) {
+		this.offerRequestLines = offerRequestLines;
 	}
 	
 }

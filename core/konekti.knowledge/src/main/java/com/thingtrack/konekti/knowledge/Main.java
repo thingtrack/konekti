@@ -41,15 +41,7 @@ public class Main implements BundleActivator {
 			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST02.bpmn"), ResourceType.BPMN2);
 			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST03.bpmn"), ResourceType.BPMN2);
 			//kbuilder.add(resourceFactoryService.newClassPathResource("TEST04.rf"), ResourceType.BPMN2);
-			//kbuilder.add(resourceFactoryService.newClassPathResource("PendingOfferRequestHead.rf"), ResourceType.BPMN2);
-			//kbuilder.add(resourceFactoryService.newClassPathResource("ReOpenOfferRequestHead.rf"), ResourceType.BPMN2);
-			//kbuilder.add(resourceFactoryService.newClassPathResource("TransferOfferRequestHead.rf"), ResourceType.BPMN2);
-			//kbuilder.add(resourceFactoryService.newClassPathResource("RejectOfferRequestHead.rf"), ResourceType.BPMN2);
-			
-			kbuilder.add(resourceFactoryService.newClassPathResource("BPPendingOfferRequest.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("BPReOpenOfferRequest.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("BPRejectOfferRequest.bpmn"), ResourceType.BPMN2);
-			kbuilder.add(resourceFactoryService.newClassPathResource("BPTransferOfferRequest.bpmn"), ResourceType.BPMN2);
+
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportClient.bpmn"), ResourceType.BPMN2);
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportSupplier.bpmn"), ResourceType.BPMN2);
 			kbuilder.add(resourceFactoryService.newClassPathResource("BPImportEmployeeAgent.bpmn"), ResourceType.BPMN2);

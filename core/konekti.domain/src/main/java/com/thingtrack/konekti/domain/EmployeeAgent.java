@@ -108,7 +108,7 @@ public class EmployeeAgent implements Serializable {
 	@JoinTable(name="EMPLOYEE_AGENT_ORGANIZATION",
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))		
-	private List<Organization> organizations;
+	private List<Organization> organizations = new ArrayList<Organization>();
 	
 	@ManyToMany
 	@JoinTable(name="EMPLOYEE_AGENT_LOCATION",

@@ -1,8 +1,6 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.thingtrack.bustrack.domain.GasStation;
 
 /**
  * @author Thingtrack S.L.
@@ -45,9 +40,6 @@ public class Workshop implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="LOCATION_ID", nullable=false)	
 	private Location location;
-
-	@OneToMany(mappedBy="workshop")	
-	private List<GasStation> gasStations = new ArrayList<GasStation>();
 
 	@Column(name="COMMENT", length=512)
 	private String Comment;
@@ -167,20 +159,6 @@ public class Workshop implements Serializable {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
-	}
-
-	/**
-	 * @param gasStations the gasStations to set
-	 */
-	public void setGasStations(List<GasStation> gasStations) {
-		this.gasStations = gasStations;
-	}
-
-	/**
-	 * @return the gasStations
-	 */
-	public List<GasStation> getGasStations() {
-		return gasStations;
 	}
 
 	/**
