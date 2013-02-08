@@ -293,6 +293,11 @@ Export-Package: VAADIN.themes.konekti,
 			<version>1.3.1</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>event-timeline</artifactId>
+			<version>0.5.1</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
