@@ -8,18 +8,15 @@
 	<!-- OSGi configuration for the Load Time Weaver -->
 	<context:load-time-weaver aspectj-weaving="on" />
 
-	<bean id="workbench" class="com.thingtrack.konekti.view.web.workbench.Main"
-		factory-method="get" />
+	<bean id="workbench" class="com.thingtrack.konekti.view.web.workbench.Main" factory-method="get" />
 
-	<bean id="konektiLayout" class="com.thingtrack.konekti.view.layout.KonektiLayout"
-		depends-on="workbench" />
+	<!-- <bean id="konektiLayout" class="com.thingtrack.konekti.view.layout.KonektiLayout" depends-on="workbench" /> -->
+	<bean id="konektiLayout" class="com.thingtrack.konekti.view.layout.KonektiLayout" depends-on="workbench" >
+	    <constructor-arg ref="configurationService"/>
+	</bean>
+	    
+	<bean id="resourceManager" class="com.thingtrack.konekti.view.web.workbench.ui.ResourceManager" depends-on="workbench" />
 
-	<bean id="resourceManager"
-		class="com.thingtrack.konekti.view.web.workbench.ui.ResourceManager"
-		depends-on="workbench" />
-
-	<bean id="toolbarManager"
-		class="com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager"
-		depends-on="konektiLayout" />
+	<bean id="toolbarManager" class="com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager" depends-on="konektiLayout" />
 
 </beans>

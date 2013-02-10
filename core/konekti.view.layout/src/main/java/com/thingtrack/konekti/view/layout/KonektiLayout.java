@@ -15,11 +15,14 @@
  ******************************************************************************/
 package com.thingtrack.konekti.view.layout;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.vaadin.notifique.Notifique;
 import org.vaadin.notifique.Notifique.ClickListener;
 import org.vaadin.notifique.Notifique.Message;
 import org.vaadin.overlay.CustomOverlay;
 
+import com.thingtrack.konekti.domain.Configuration;
+import com.thingtrack.konekti.service.api.ConfigurationService;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.thingtrack.konekti.view.kernel.ui.layout.IFooterLayout;
 import com.thingtrack.konekti.view.kernel.ui.layout.IHeaderLayout;
@@ -60,6 +63,11 @@ public class KonektiLayout extends CustomComponent {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
+	@Autowired
+	private ConfigurationService configurationService;
+	
+	private String logo_workbench;
+	
 	//Vaadin Notifique addon to show Konekti System Events in a notification way  
 	private Notifique notifications;
 	
@@ -80,6 +88,41 @@ public class KonektiLayout extends CustomComponent {
 	 * visual editor.
 	 */
 	public KonektiLayout() {
+		this(null);
+		
+		/*buildMainLayout();
+		setCompositionRoot(mainLayout);
+
+		// TODO add user code here
+		headerLayout.setStyleName("headerLayout");
+		toolbarLayout.setStyleName(ToolbarLayout.TOOLBAR_LAYOUT_STYLE);
+		menuLayout.setStyleName("menuLayout");
+		workbenchLayout.setStyleName("workbenchLayout");
+		footerLayout.setStyleName("footerLayout");
+		
+		//Notifications initialization
+		notifications = new Notifique(true);
+		notifications.setWidth("100%");
+		
+		notifications.setClickListener(new ClickListener() {
+			
+			@Override
+			public void messageClicked(Message message) {
+				message.hide();
+			}
+		});
+		
+		this.setImmediate(true);
+		menuLayout.setImmediate(true);
+		
+		headerLayout.setVisible(false);*/
+	}
+		
+	public KonektiLayout(ConfigurationService configurationService) {
+		this.configurationService  = configurationService;
+		
+		getConfiguration();
+		
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
@@ -106,8 +149,19 @@ public class KonektiLayout extends CustomComponent {
 		menuLayout.setImmediate(true);
 		
 		headerLayout.setVisible(false);
-	}
 		
+	}
+	
+	private void getConfiguration() {
+		Configuration configuration = null;
+		try {
+			configuration = configurationService.getByTag(Configuration.TAG.LOGO_WORKBENCH.name());
+			logo_workbench = configuration.getValue();
+		} catch (Exception e) {
+			logo_workbench = "logo_konekti_workbench.png";
+		}	
+	}
+	
 	public IHeaderLayout getHeaderLayout() {
 		return this.headerLayout;
 	}
@@ -193,7 +247,7 @@ public class KonektiLayout extends CustomComponent {
 		mainLayout.addComponent(headerLayout);
 		
 		// menuLayout
-		menuLayout = new MenuLayout();
+		menuLayout = new MenuLayout(logo_workbench);
 		menuLayout.setImmediate(false);
 		menuLayout.setWidth("100.0%");
 		menuLayout.setHeight("-1px");

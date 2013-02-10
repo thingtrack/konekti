@@ -7,7 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -23,27 +24,43 @@ public class Configuration implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer configurationId;
 	
-	@Column(name = "CODE", nullable = false, unique = true, length = 45)
-	private String code;
+	@Column(name = "TAG", nullable = false, length = 45)
+	private String tag;
 	
-	@Column(name = "NAME", nullable = false, length = 64)
-	private String name;
+	@Column(name = "TYPE", nullable = false, length = 512)
+	private String type;
 	
-	@Column(name = "VERSION", nullable = false, length = 64)
-	private String version;
-
-	@Column(name = "FAVICON")
-	@Lob
-	private byte[] favicon;
+	@Column(name = "VALUE", nullable = false, length = 64)
+	private String value;
 	
-	@Column(name = "LOGO_INIT")
-	@Lob
-	private byte[] logoInit;
+	@Column(name = "DESCRIPTION", nullable = false, length = 64)
+	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="ORGANIZATION_ID", nullable=true)	
+	private Organization organization;
 
-	@Column(name = "LOGO_WORKBENCH")
-	@Lob
-	private byte[] logoWorkbench;
+	@ManyToOne
+	@JoinColumn(name="MENU_RESOURCE_ID", nullable=true)
+	private MenuResource menuResouce;
 
+	public enum TAG {        
+        NAME,
+        VERSION,
+        FAVICON,
+        LOGO_INIT,
+        LOGO_WORKBENCH,
+        DEMO
+    }
+	
+	public enum TYPE {        
+        STRING,
+        BOOLEAN,
+        INTEGER,
+        DOUBLE,
+        DATE
+    }
+	
 	/**
 	 * @return the configurationId
 	 */
@@ -59,86 +76,87 @@ public class Configuration implements Serializable {
 	}
 
 	/**
-	 * @return the name
+	 * @return the tag
 	 */
-	public String getName() {
-		return name;
+	public String getTag() {
+		return tag;
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param tag the tag to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	/**
-	 * @return the version
+	 * @return the type
 	 */
-	public String getVersion() {
-		return version;
+	public String getType() {
+		return type;
 	}
 
 	/**
-	 * @param version the version to set
+	 * @param type the type to set
 	 */
-	public void setVersion(String version) {
-		this.version = version;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	/**
-	 * @return the logoInit
+	 * @return the value
 	 */
-	public byte[] getLogoInit() {
-		return logoInit;
+	public String getValue() {
+		return value;
 	}
 
 	/**
-	 * @param logoInit the logoInit to set
+	 * @param value the value to set
 	 */
-	public void setLogoInit(byte[] logoInit) {
-		this.logoInit = logoInit;
+	public void setValue(String value) {
+		this.value = value;
+	}
+	
+	/**
+	 * @return the description
+	 */
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * @return the logoWorkbench
+	 * @param description the description to set
 	 */
-	public byte[] getLogoWorkbench() {
-		return logoWorkbench;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	/**
-	 * @param logoWorkbench the logoWorkbench to set
+	 * @return the organization
 	 */
-	public void setLogoWorkbench(byte[] logoWorkbench) {
-		this.logoWorkbench = logoWorkbench;
+	public Organization getOrganization() {
+		return organization;
 	}
 
 	/**
-	 * @return the favicon
+	 * @param organization the organization to set
 	 */
-	public byte[] getFavicon() {
-		return favicon;
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 
 	/**
-	 * @param favicon the favicon to set
+	 * @return the menuResouce
 	 */
-	public void setFavicon(byte[] favicon) {
-		this.favicon = favicon;
+	public MenuResource getMenuResouce() {
+		return menuResouce;
 	}
 
 	/**
-	 * @return the code
+	 * @param menuResouce the menuResouce to set
 	 */
-	public String getCode() {
-		return code;
+	public void setMenuResouce(MenuResource menuResouce) {
+		this.menuResouce = menuResouce;
 	}
 
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
 }
