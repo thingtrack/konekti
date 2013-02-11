@@ -17,8 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.thingtrack.bustrack.domain.VehicleType;
-
 /**
  * @author Thingtrack S.L.
  *
@@ -48,10 +46,6 @@ public class OfferRequestLine implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="DRIVER_ID")
 	private EmployeeAgent driver;
-
-	@ManyToOne
-	@JoinColumn(name="VEHICLE_TYPE_ID")
-	private VehicleType vehicleType;
 	
 	@Column(name="PAYMENT")
 	private String payment;
@@ -186,20 +180,6 @@ public class OfferRequestLine implements Serializable {
 	 */
 	public void setDriver(EmployeeAgent driver) {
 		this.driver = driver;
-	}
-
-	/**
-	 * @return the vehicleType
-	 */
-	public VehicleType getVehicleType() {
-		return vehicleType;
-	}
-
-	/**
-	 * @param vehicleType the vehicleType to set
-	 */
-	public void setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
 	}
 
 	/**

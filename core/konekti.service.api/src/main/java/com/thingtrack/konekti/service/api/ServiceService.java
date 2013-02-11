@@ -24,6 +24,5 @@ public interface ServiceService {
 	public List<Service> getAllNonPlanned(Organization organization) throws Exception;
 	public List<Service> getAllNonPlanned(Organization organization, EmployeeAgent employeeAgent) throws Exception;
 	public List<Service> getAllNonPlanned(Organization organization, Date routeStartDate) throws Exception;
-	
-	public List<Service> getCandidatesForAssignment(Organization organization, EmployeeAgent employeeAgent, Date routeStartDate) throws Exception;
+
 }

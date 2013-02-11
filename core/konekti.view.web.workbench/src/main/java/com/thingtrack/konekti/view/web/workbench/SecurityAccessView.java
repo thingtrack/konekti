@@ -35,19 +35,24 @@ public class SecurityAccessView extends AbstractView {
 	private User grantedUser; 
 
 	private String version;
-	private byte[] logo;
+	private String logo;
+	private boolean demo;
+	
+	private static final String DEMO_USERNAME = "demo";
+	private static final String DEMO_PASSWORD = "demo";
 	
 	public User getGrantedUser() {
 		return grantedUser;
 	}
 
 	public SecurityAccessView(SecurityService securityService,
-			SliderView sliderView, String version, byte[] logo) {
+			SliderView sliderView, String version, String logo, boolean demo) {
 		
 		this.securityService = securityService;
 		this.sliderView = sliderView;
 		this.version = version;
 		this.logo = logo;
+		this.demo = demo;
 		
 		mainLayout = new VerticalLayout();
 		setCompositionRoot(mainLayout);
@@ -103,7 +108,7 @@ public class SecurityAccessView extends AbstractView {
 		viewBoundForm.setWriteThrough(false);
 		viewBoundForm.setInvalidCommitted(false);
 
-		loginViewForm = new LoginViewForm(version, logo);
+		loginViewForm = new LoginViewForm(version, logo, demo);
 		viewBoundForm.setContent(loginViewForm);
 
 		viewBoundForm.getFooter().addComponent(buildFooterWindow());
@@ -137,13 +142,23 @@ public class SecurityAccessView extends AbstractView {
 	 * Login result button
 	 */
 	public void loginBtn_Click(Button.ClickEvent event) {
-
+		String userName ;
+		String password;
+		
 		try{
-
 			viewBoundForm.commit();
 			BeanItem<User> userBean = (BeanItem<User>) viewBoundForm.getItemDataSource();
 			
-			grantedUser = securityService.authenticate(userBean.getBean().getUsername(), userBean.getBean().getPassword());
+			if (demo) {
+				userName = DEMO_USERNAME;
+				password = DEMO_PASSWORD;
+			}
+			else {
+				userName = userBean.getBean().getUsername();
+				password = userBean.getBean().getPassword();
+			}
+			
+			grantedUser = securityService.authenticate(userName, password);
 			getWindow().removeWindow(loginWindow);
 			
 			sliderView.rollNext();

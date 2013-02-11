@@ -109,30 +109,5 @@ public class ServiceServiceImpl implements ServiceService {
 			EmployeeAgent employeeAgent, Date routeStartDate) throws Exception {
 		return this.serviceDao.getAllPlanned(organization, employeeAgent, routeStartDate);
 	}
-
-	@Override
-	public List<Service> getCandidatesForAssignment(Organization organization,
-			EmployeeAgent employeeAgent, Date routeStartDate) throws Exception {
-
-		List<Service> candidates = new ArrayList<Service>();
-		
-		candidates.addAll(this.serviceDao.getAllNonPlanned(organization, routeStartDate));
-		candidates.addAll(this.serviceDao.getAllPlanned(organization, employeeAgent, routeStartDate));
-		
-		Collections.sort(candidates, new ServiceCandidateComparator());
-		
-		return candidates;
-	}
-	
-	private class ServiceCandidateComparator implements Comparator<Service>{
-
-		@Override
-		public int compare(Service o1, Service o2) {
-			
-			return o1.getRoutes().get(0).getStops().get(0).getStopCheckoutDate().compareTo(o2.getRoutes().get(0).getStops().get(0).getStopCheckoutDate());
-		}
-		
-	}
-	
 	
 }

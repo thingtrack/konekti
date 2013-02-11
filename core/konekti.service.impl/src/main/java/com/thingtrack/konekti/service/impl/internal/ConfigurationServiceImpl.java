@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.ConfigurationDao;
 import com.thingtrack.konekti.domain.Configuration;
+import com.thingtrack.konekti.domain.MenuResource;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.service.api.ConfigurationService;
 
 public class ConfigurationServiceImpl implements ConfigurationService {
@@ -23,8 +25,14 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 
 	@Override
-	public Configuration getByCode(String code) throws Exception {
-		return this.configurationDao.getByCode(code);
+	public Configuration getByTag(String tag) throws Exception {
+		return this.configurationDao.getByTag(tag);
+	}
+	
+
+	@Override
+	public Configuration getByTag(String tag, Organization organization, MenuResource menuResource) throws Exception {
+		return this.configurationDao.getByTag(tag, organization, menuResource);
 	}
 	
 	@Override

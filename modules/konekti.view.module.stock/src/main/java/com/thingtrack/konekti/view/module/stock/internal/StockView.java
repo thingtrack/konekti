@@ -38,7 +38,7 @@ public class StockView extends AbstractView
 
 	private StockService stockService;
 	
-	private BindingSource<Stock> bsStock =  new BindingSource<Stock>(Stock.class, 1);
+	private BindingSource<Stock> bsStock =  new BindingSource<Stock>(Stock.class, 0);
 	
 	private NavigationToolbar navigationToolbar;
 	private EditionToolbar editionToolbar;

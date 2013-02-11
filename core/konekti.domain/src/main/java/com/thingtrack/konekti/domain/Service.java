@@ -14,13 +14,8 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -28,19 +23,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import com.thingtrack.bustrack.domain.Route;
-import com.thingtrack.bustrack.domain.ServiceTemplate;
-import com.thingtrack.bustrack.domain.Turn;
-import com.thingtrack.bustrack.domain.VehicleType;
-import com.thingtrack.bustrack.domain.WorksheetLine;
 
 /**
  * @author Thingtrack S.L.
@@ -72,9 +58,6 @@ public class Service implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CLIENT_ID")
 	private Client client;
-	
-	@ManyToMany(mappedBy="services")	
-	private List<Turn> turns;
 
 	@ManyToOne
 	@JoinColumn(name="OFFER_LINE_ID")
@@ -83,15 +66,6 @@ public class Service implements Serializable {
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="INVOICE_LINE_ID")
 	private InvoiceLine invoiceLine;
-	
-	@OneToMany(fetch=FetchType.LAZY, mappedBy="service")
-	private List<WorksheetLine> worksheetLines = new ArrayList<WorksheetLine>();
-	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH })
-	@JoinTable(name="SERVICE_ROUTE",
-			   joinColumns=@JoinColumn(name="SERVICE_ID"),
-			   inverseJoinColumns=@JoinColumn(name="ROUTE_ID"))	
-	private List<Route> routes = new ArrayList<Route>();
 	
 	@Column(name="INTERMEDIATE_STOPS")
 	private String intermediateStops;
@@ -125,10 +99,6 @@ public class Service implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date stopService;
 	
-	@ManyToOne
-	@JoinColumn(name="VEHICLE_TYPE_ID")
-	private VehicleType vehicleType;
-	
 	@Column(name="LUNCH", nullable=false)
 	private boolean lunch=false;
 	
@@ -161,10 +131,6 @@ public class Service implements Serializable {
 
 	@Column(name="ROUTE_AVOIDS")
 	private String routeAvoids;
-	
-	@ManyToOne(optional=false)
-	@JoinColumn(name="SERVICE_TEMPLATE_ID", nullable=false)
-	private ServiceTemplate serviceTemplate;
 	
 	@Column(name="TEMPLATE")
 	private boolean Template;
@@ -378,42 +344,6 @@ public class Service implements Serializable {
 	}
 
 	/**
-	 * @return the worksheetLine
-	 */
-	public List<WorksheetLine> getWorksheetLines() {
-		return Collections.unmodifiableList(worksheetLines);
-	}
-
-	/**
-	 * @param worksheetLine the worksheetLine to set
-	 */
-	public void setWorksheetLines(List<WorksheetLine> worksheetLines) {
-		
-		//Clean all worksheet lines
-		for(WorksheetLine worksheetLine: this.worksheetLines)
-			removeWorksheetLine(worksheetLine);
-		
-		//Insert the new ones
-		for(WorksheetLine worksheetLine : worksheetLines)
-			addWorksheetLine(worksheetLine);
-	}
-	
-	public void addWorksheetLine(WorksheetLine worksheetLine){
-		
-		if(worksheetLines.contains(worksheetLine))
-			return;
-		
-		worksheetLine.setService(this);
-		worksheetLines.add(worksheetLine);
-	}
-	
-	public void removeWorksheetLine(WorksheetLine worksheetLine){
-		
-		if(worksheetLines.remove(worksheetLine))
-			worksheetLine.setService(null);
-	}
-
-	/**
 	 * @return the observation
 	 */
 	public String getObservation() {
@@ -425,21 +355,6 @@ public class Service implements Serializable {
 	 */
 	public void setObservation(String observation) {
 		this.observation = observation;
-	}
-
-	/**
-	 * @return the routes
-	 */
-	public List<Route> getRoutes() {
-		
-		Collections.sort(routes, new RouteComparator()); 
-		return Collections.unmodifiableList(routes);
-		
-	}
-	
-	
-	public void removeAllRoutes(){
-		routes.clear();
 	}
 
 	/**
@@ -555,20 +470,6 @@ public class Service implements Serializable {
 	}
 
 	/**
-	 * @param turns the turns to set
-	 */
-	public void setTurns(List<Turn> turns) {
-		this.turns = turns;
-	}
-
-	/**
-	 * @return the turns
-	 */
-	public List<Turn> getTurns() {
-		return turns;
-	}
-
-	/**
 	 * @param invoiceLine the invoiceLine to set
 	 */
 	public void setInvoiceLine(InvoiceLine invoiceLine) {
@@ -595,35 +496,6 @@ public class Service implements Serializable {
 	public Date getStopService() {
 		return stopService;
 	}
-
-	public void addRoute(Route route) {
-
-		routes.add(route);
-		
-		if (!route.getServices().contains(this))	
-			route.addService(this);
-		
-	}
-	
-	public void removeRoute(Route route){
-		
-		routes.remove(route);
-		
-		if (route.getServices().contains(this))	
-			route.removeService(this);
-	}
-	
-	public void addTurn(Turn turn) {
-		
-		if(turns.contains(turn))
-			return;
-		
-		turns.add(turn);
-		
-		if (!turn.getServices().contains(this))
-			turn.addService(this);
-			
-	}
 	
 	/* (non-Javadoc)
 	 * @see java.lang.Object#hashCode()
@@ -648,14 +520,7 @@ public class Service implements Serializable {
 		if (!(obj instanceof Service))
 			return false;
 		Service other = (Service) obj;
-		
-		//Routes check
-		if(this.routes != other.routes)
-			return false;
-		
-		if(!this.routes.containsAll(other.routes))
-			return false;
-		
+				
 		//Code check
 		if (code == null && other.code != null)
 			return false;
@@ -748,54 +613,7 @@ public class Service implements Serializable {
 	public void setBreackfast(boolean breackfast) {
 		this.breackfast = breackfast;
 	}
-
-	/**
-	 * @return the vehicleType
-	 */
-	public VehicleType getVehicleType() {
-		return vehicleType;
-	}
-
-	/**
-	 * @param vehicleType the vehicleType to set
-	 */
-	public void setVehicleType(VehicleType vehicleType) {
-		this.vehicleType = vehicleType;
-	}
 	
-	
-	private class RouteComparator implements Comparator<Route>{
-
-		@Override
-		public int compare(Route route0, Route route1) {
-
-			if(route0.getStops().get(0).getStopCheckoutDate() == null)
-				return 1;
-			
-			if(route1.getStops().get(0).getStopCheckoutDate() == null)
-				return -1;
-			
-			return route0.getStops().get(0).getStopCheckoutDate().compareTo(route1.getStops().get(0).getStopCheckoutDate());
-		}
-		
-		
-	}
-
-
-	/**
-	 * @return the serviceTemplate
-	 */
-	public ServiceTemplate getServiceTemplate() {
-		return serviceTemplate;
-	}
-
-	/**
-	 * @param serviceTemplate the serviceTemplate to set
-	 */
-	public void setServiceTemplate(ServiceTemplate serviceTemplate) {
-		this.serviceTemplate = serviceTemplate;
-	}
-
 	/**
 	 * @return the template
 	 */

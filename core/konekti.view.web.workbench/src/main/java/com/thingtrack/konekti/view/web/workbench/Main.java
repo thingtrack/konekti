@@ -105,24 +105,21 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private SliderView sliderView;
 
 	private IWorkbenchContext workbenchContext;
-
-	private final static String CONFIGURATION_CODE = "KONEKTI";
 	
-	private Configuration configuration;
-		
+	private String name;
+	private String version;
+	private String logo_init;
+	private boolean demo;
+	
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext arg0) {
 		// set konekti theme
 		setTheme("konekti");
 
-		// get konekti configuration
+		// get global konekti configuration
 		getConfiguration();
 		
-		// set the main application window
-		if (configuration != null)
-			window = new Window(configuration.getName());
-		else
-			window = new Window("Konekti");
+		window = new Window(name);
 		
 		window.setStyleName("background");
 		setMainWindow(window);
@@ -144,12 +141,35 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 
 	private void getConfiguration() {
+		Configuration configuration = null;
 		try {
-			configuration = configurationService.getByCode(CONFIGURATION_CODE);
+			configuration = configurationService.getByTag(Configuration.TAG.NAME.name());
+			name = configuration.getValue();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			name = "KONEKTI";
 		}	
+		
+		try {
+			configuration = configurationService.getByTag(Configuration.TAG.VERSION.name());
+			version = configuration.getValue();
+		} catch (Exception e) {
+			version = "0.0.1.SNAPSHOT";
+		}	
+		
+		try {
+			configuration = configurationService.getByTag(Configuration.TAG.LOGO_INIT.name());
+			logo_init = configuration.getValue();
+		} catch (Exception e) {
+			logo_init = "logo_konekti_init.png";
+		}	
+		
+		try {
+			configuration = configurationService.getByTag(Configuration.TAG.DEMO.name());
+			demo = Boolean.parseBoolean(configuration.getValue());
+		} catch (Exception e) {
+			demo = false;
+		}
+			
 	}
 	
 	private void createViews() {
@@ -158,10 +178,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		sliderView.addListener(this);
 
-		if (configuration != null)
-			sliderView.addView(new SecurityAccessView(securityService, sliderView, configuration.getVersion(), configuration.getLogoInit()));
-		else
-			sliderView.addView(new SecurityAccessView(securityService, sliderView, null, null));
+		sliderView.addView(new SecurityAccessView(securityService, sliderView, version, logo_init, demo));
 		
 		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}

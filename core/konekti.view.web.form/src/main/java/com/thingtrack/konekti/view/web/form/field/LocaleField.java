@@ -15,7 +15,7 @@ public class LocaleField  extends CustomField {
 	private VerticalLayout mainLayout;
 	private ComboBox defaultLocaleField;
 	
-	public static final String LOCALE_SEPARATOR = "_";
+	public static final String LOCALE_SEPARATOR = "-";
 	
 	private String localeCode;
 	private Locale[] locales;
@@ -28,11 +28,11 @@ public class LocaleField  extends CustomField {
 		locales = SimpleDateFormat.getAvailableLocales();
 	    
 		// construct custom datasource for combobox
-		// id: country + LOCALE_SEPARATOR + language: ES_es
+		// id: language + LOCALE_SEPARATOR + country: es_ES
 		// display: fraindly locale string
 		for (int i = 0; i< locales.length; i++) {
 			if (locales[i].getCountry() != "" && locales[i].getLanguage() != "") {
-				String localeCode = locales[i].getCountry() + LOCALE_SEPARATOR + locales[i].getLanguage();
+				String localeCode =  locales[i].getLanguage() + LOCALE_SEPARATOR + locales[i].getCountry();
 				
 				// Use the item ID also as the caption of this item
 				defaultLocaleField.addItem(localeCode);
