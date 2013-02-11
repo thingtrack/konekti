@@ -78,4 +78,6 @@
     
 
     <inherits name="com.thingtrack.com.vaadin.addons.sliderlayout.gwt.SliderLayoutWidgetSet" />
+
+    <inherits name="com.spaceapplications.vaadin.addon.eventtimeline.gwt.EventTimelineWidgetSet" />
 </module>
