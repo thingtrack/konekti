@@ -138,25 +138,29 @@ public class ServiceDaoImpl extends JpaDao<Service, Integer> implements
 		queryString += " WHERE sv.organization = :organization";
 		queryString += " AND (rt.driver IS NULL OR rt.vehicle IS NULL)";
 		queryString += " AND stp.stopCheckoutDate >= :routeStartDate and stp.stopCheckoutDate < :routeStartNextDate";
-//		queryString += " AND NOT EXISTS (SELECT wl FROM WorksheetLine wl WHERE wl = wrkl)";
+		// queryString +=
+		// " AND NOT EXISTS (SELECT wl FROM WorksheetLine wl WHERE wl = wrkl)";
 
-		Query query = (Query) getEntityManager().createQuery(queryString)
+		Query query = (Query) getEntityManager()
+				.createQuery(queryString)
 				.setParameter("organization", organization)
-				.setParameter("routeStartDate", routeStartDate, TemporalType.DATE)
-				.setParameter("routeStartNextDate", getNext(routeStartDate), TemporalType.DATE);
+				.setParameter("routeStartDate", routeStartDate,
+						TemporalType.DATE)
+				.setParameter("routeStartNextDate", getNext(routeStartDate),
+						TemporalType.DATE);
 
 		return query.getResultList();
 	}
-	
-	
-	private Date getNext(Date routeStartDate){
-	
-		GregorianCalendar calendar = (GregorianCalendar) GregorianCalendar.getInstance();
+
+	private Date getNext(Date routeStartDate) {
+
+		GregorianCalendar calendar = (GregorianCalendar) GregorianCalendar
+				.getInstance();
 		calendar.setTime(routeStartDate);
-		
+
 		calendar.add(Calendar.DATE, 1);
 		return calendar.getTime();
-		
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -173,15 +177,35 @@ public class ServiceDaoImpl extends JpaDao<Service, Integer> implements
 		queryString += " AND stp.stopCheckoutDate >= :routeStartDate and stp.stopCheckoutDate < :routeStartNextDate";
 		queryString += " AND EXISTS (SELECT wl FROM WorksheetLine wl WHERE wl.service = sv)";
 
-		Query query = (Query) getEntityManager().createQuery(queryString)
+		Query query = (Query) getEntityManager()
+				.createQuery(queryString)
 				.setParameter("organization", organization)
 				.setParameter("driver", employeeAgent)
-				.setParameter("routeStartDate", routeStartDate, TemporalType.DATE)
-				.setParameter("routeStartNextDate", getNext(routeStartDate), TemporalType.DATE);
+				.setParameter("routeStartDate", routeStartDate,
+						TemporalType.DATE)
+				.setParameter("routeStartNextDate", getNext(routeStartDate),
+						TemporalType.DATE);
 
 		return query.getResultList();
 
 	}
-	
-	
+
+	@Override
+	public List<Service> getAllNoTurnAssigned(Organization organization)
+			throws Exception {
+
+		String queryString = "SELECT DISTINCT sv";
+		queryString += " FROM Service sv";
+		queryString += " JOIN sv.routes rt";
+		queryString += " JOIN rt.stops stp";
+		queryString += " WHERE sv.organization = :organization";
+		queryString += " AND NOT EXISTS (SELECT tr FROM Turn tr WHERE tr.organization = :organization AND sv MEMBER OF tr.services)";
+
+		Query query = (Query) getEntityManager().createQuery(queryString)
+				.setParameter("organization", organization);
+
+		return query.getResultList();
+
+	}
+
 }

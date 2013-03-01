@@ -20,4 +20,5 @@ public interface ServiceDao extends Dao<Service, Integer> {
 	public List<Service> getAllNonPlanned(Organization organization) throws Exception;
 	public List<Service> getAllNonPlanned(Organization organization, EmployeeAgent employeeAgent) throws Exception;
 	public List<Service> getAllNonPlanned(Organization organization, Date routeStartDate) throws Exception;
+	public List<Service> getAllNoTurnAssigned(Organization organization) throws Exception;
 }

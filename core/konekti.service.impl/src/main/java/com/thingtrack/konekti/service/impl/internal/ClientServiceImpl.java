@@ -86,4 +86,10 @@ public class ClientServiceImpl implements ClientService {
 		return this.clientDao.getByUser(user);
 		
 	}
+
+	@Override
+	public List<Client> getAll(Organization currentOrganization)
+			throws Exception {
+		return this.clientDao.getAll(currentOrganization);
+	}
 }

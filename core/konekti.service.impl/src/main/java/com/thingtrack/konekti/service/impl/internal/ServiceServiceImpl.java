@@ -109,5 +109,11 @@ public class ServiceServiceImpl implements ServiceService {
 			EmployeeAgent employeeAgent, Date routeStartDate) throws Exception {
 		return this.serviceDao.getAllPlanned(organization, employeeAgent, routeStartDate);
 	}
+
+	@Override
+	public List<Service> getAllNoTurnAssigned(Organization organization)
+			throws Exception {
+		return this.serviceDao.getAllNoTurnAssigned(organization);
+	}
 	
 }

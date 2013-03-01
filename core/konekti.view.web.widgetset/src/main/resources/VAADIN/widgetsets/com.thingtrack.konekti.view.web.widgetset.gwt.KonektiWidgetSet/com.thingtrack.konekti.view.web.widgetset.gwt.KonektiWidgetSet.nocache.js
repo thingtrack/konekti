@@ -244,7 +244,7 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
   $stats && $stats({moduleName:'com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      strongName = '31A3F78F15DED08E534FAE5ACB482FEB';
+      strongName = '896806AAD0DF69FDB531425131021476';
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = Number(strongName.substring(idx + 1));
@@ -363,6 +363,13 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
         __gwt_stylesLoaded['PortalLayout/portallayout.css'] = l;
         l.setAttribute('rel', 'stylesheet');
         l.setAttribute('href', base + 'PortalLayout/portallayout.css');
+        $doc_0.getElementsByTagName('head')[0].appendChild(l);
+      }
+      if (!__gwt_stylesLoaded['eventtimeline-widget/styles.css']) {
+        var l = $doc_0.createElement('link');
+        __gwt_stylesLoaded['eventtimeline-widget/styles.css'] = l;
+        l.setAttribute('rel', 'stylesheet');
+        l.setAttribute('href', base + 'eventtimeline-widget/styles.css');
         $doc_0.getElementsByTagName('head')[0].appendChild(l);
       }
       maybeStartModule();
