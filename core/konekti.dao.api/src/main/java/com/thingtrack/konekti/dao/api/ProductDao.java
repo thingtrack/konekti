@@ -25,5 +25,6 @@ import com.thingtrack.konekti.domain.Warehouse;
  */
 public interface ProductDao extends Dao<Product, Integer> {
 	public Product getByCode(String code) throws Exception;
+	public Product getByCode(String code, String version) throws Exception;
 	public List<Product> getAllProductByWarehouse(Warehouse warehouse) throws Exception;
 }

@@ -248,28 +248,20 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 					// create the new menu item
 					// recover commanda data
-					String symbolicName = ((MenuCommandResource) menuResource)
-							.getModuleId();
-					String version = ((MenuCommandResource) menuResource)
-							.getModuleVersion();
+					String symbolicName = ((MenuCommandResource) menuResource).getModuleId();
+					String version = ((MenuCommandResource) menuResource).getModuleVersion();
 
 					String id = symbolicName + "#" + version;
-					String caption = ((MenuCommandResource) menuResource)
-							.getCaption();
-					String hint = ((MenuCommandResource) menuResource)
-							.getHint();
-					boolean autoStart = ((MenuCommandResource) menuResource)
-							.isAutostart();
+					String caption = ((MenuCommandResource) menuResource).getCaption();
+					String hint = ((MenuCommandResource) menuResource).getHint();
+					
+					boolean autoStart = ((MenuCommandResource) menuResource).isAutostart();
 					com.vaadin.terminal.Resource resource = null;
 					if (((MenuCommandResource) menuResource) != null)
-						resource = getIcon(
-								((MenuCommandResource) menuResource).getIcon(),
-								caption);
+						resource = getIcon(((MenuCommandResource) menuResource).getIcon(), caption);
 
 					// create the new menu item
-					MenuItem headMenuItem = konektiLayout.getMenuLayout()
-							.addMenuItem(caption, hint, resource, itemParentId,
-									defaultCommand);
+					MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(caption, hint, resource, itemParentId, defaultCommand);
 
 					// add command to the menu manager list
 					if (((MenuCommandResource) menuResource).getLocation()

@@ -122,8 +122,8 @@ public class ProductSelectorWindow extends Window {
 			
 			dgProduct.setBindingSource(bsProduct);			
 			
-			dgProduct.setVisibleColumns(new String[] { "productSupplier.description", "code", "name", "productType.description" } );       
-			dgProduct.setColumnHeaders(new String[] { "Proveedor", "Codigo", "Nombre", "Tipo" } );
+			dgProduct.setVisibleColumns(new String[] { "productSupplier.description", "productType.description", "code", "name", "version" } );       
+			dgProduct.setColumnHeaders(new String[] { "Proveedor", "Tipo", "Codigo", "Nombre", "Version" } );
 		}
 		catch(Exception e) {
 			throw new RuntimeException("¡Error al crear el grid de Productos!", e);

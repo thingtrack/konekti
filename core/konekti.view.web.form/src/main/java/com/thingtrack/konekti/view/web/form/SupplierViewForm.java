@@ -240,7 +240,7 @@ public class SupplierViewForm extends CustomComponent {
 		codeField = new TextField();
 		codeField.setCaption("Código");
 		codeField.setImmediate(false);
-		codeField.setWidth("65px");
+		codeField.setWidth("100px");
 		codeField.setHeight("-1px");
 		codeField.setRequired(true);
 		horizontalLayoutHeader.addComponent(codeField);

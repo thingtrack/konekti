@@ -39,6 +39,7 @@ public class MasterDetailLayout extends CustomComponent {
 	public static final String BOTTON_CARD = "BOTTON";
 	
 	private static final String DEFAULT_CARD_SELECTOR_COLOR = "orange";
+	private static final String MODULE_SELECTED_STYLE = "module-selected";
 	
 	private CSSInject cssInjectSelecorColor = new CSSInject();
 	
@@ -74,7 +75,7 @@ public class MasterDetailLayout extends CustomComponent {
 		// listen for layout click on layout
 		topCard.addListener(new LayoutClickListener() {			
 			public void layoutClick(LayoutClickEvent event) {
-				cssInjectSelecorColor.setValue(".top_card_selected_label { background-color:" + color + "; }");
+				cssInjectSelecorColor.setValue("." + MODULE_SELECTED_STYLE + " .top_card_selected_label { background-color:" + color + "; }");
 								
 				if (listenerClickCard != null)
 					listenerClickCard.cardClick(new ClickCardEvent(TOP_CARD, event.getComponent()));
@@ -85,7 +86,7 @@ public class MasterDetailLayout extends CustomComponent {
 		
 		bottonCard.addListener(new LayoutClickListener() {		
 			public void layoutClick(LayoutClickEvent event) {
-				cssInjectSelecorColor.setValue(".botton_card_selected_label { background-color:" + color + "; }");
+				cssInjectSelecorColor.setValue("." + MODULE_SELECTED_STYLE + " .botton_card_selected_label { background-color:" + color + "; }");
 								
 				if (listenerClickCard != null)
 					listenerClickCard.cardClick(new ClickCardEvent(BOTTON_CARD, event.getComponent()));

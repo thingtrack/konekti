@@ -41,6 +41,17 @@ public class ProductDaoImpl extends JpaDao<Product, Integer> implements ProductD
 	}
 
 	@Override
+	public Product getByCode(String code, String version) throws Exception {
+		Product product = (Product)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code AND p.version = :version")
+				.setParameter("code", code)
+				.setParameter("version", version).getSingleResult();
+
+		return product;
+		
+	}
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<Product> getAllProductByWarehouse(Warehouse warehouse) throws Exception {
 		String queryString = "SELECT pr";

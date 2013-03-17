@@ -18,9 +18,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Product;
+import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Warehouse;
 import com.thingtrack.konekti.dao.api.ProductDao;
 import com.thingtrack.konekti.service.api.ProductService;
+import com.thingtrack.konekti.service.api.SequenceService;
 
 /**
  * @author Thingtrack S.L.
@@ -29,7 +31,10 @@ import com.thingtrack.konekti.service.api.ProductService;
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
-
+	
+	@Autowired
+	private SequenceService sequenceService;
+	
 	@Override
 	public List<Product> getAll() throws Exception {
 		return this.productDao.getAll();
@@ -49,6 +54,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	public Product getByCode(String code, String version) throws Exception {
+		return this.productDao.getByCode(code, version);
+		
+	}
+	
+	@Override
 	public Product save(Product product) throws Exception {
 		return this.productDao.save(product);
 		
@@ -64,6 +75,17 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> getAllProductByWarehouse(Warehouse warehouse)
 			throws Exception {
 		return this.productDao.getAllProductByWarehouse(warehouse);
+	}
+	
+	@Override
+	public Product createNewEntity(Warehouse warehouse) throws Exception {
+		Product product = new Product();
+		
+		product.setCode(sequenceService.setNextSequence(Sequence.CODE.PRODUCT.name()));
+		product.getWarehouses().add(warehouse);
+		product.setProductActive(true);
+		
+		return product;
 	}
 
 }

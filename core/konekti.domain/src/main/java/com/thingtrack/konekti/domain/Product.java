@@ -82,6 +82,9 @@ public class Product implements Serializable {
 			   inverseJoinColumns=@JoinColumn(name="PRODUCT_UNIT_ID"))	
 	private List<ProductUnit> productUnits = new ArrayList<ProductUnit>();
 	
+	@Column(name="VERSION")
+	private String version;
+	
 	@Column(name="PRODUCT_ACTIVE", nullable=false)
 	private Boolean productActive = true;
 
@@ -297,5 +300,19 @@ public class Product implements Serializable {
 		} else if (!productId.equals(other.productId))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the version
+	 */
+	public String getVersion() {
+		return version;
+	}
+
+	/**
+	 * @param version the version to set
+	 */
+	public void setVersion(String version) {
+		this.version = version;
 	}
 }
