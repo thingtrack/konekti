@@ -26,7 +26,9 @@ public interface ProductService {
 	public List<Product> getAll() throws Exception;
 	public Product get( Integer productId ) throws Exception;
 	public Product getByCode( String code ) throws Exception;
+	public Product getByCode( String code, String version ) throws Exception;
 	public Product save(Product product) throws Exception;
 	public void delete(Product product) throws Exception;
 	public List<Product> getAllProductByWarehouse(Warehouse warehouse) throws Exception;
+	public Product createNewEntity(Warehouse warehouse) throws Exception;
 }

@@ -91,7 +91,7 @@ public class NavigationToolbar extends AbstractToolbar {
 		
 		setBindingSource(bindingSource);
 				
-		btnFirstRegister.addListener(new Button.ClickListener() {			
+		btnFirstRegister.addListener(new Button.ClickListener() {
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
 				// set status register
 				register = bindingSource.firstItem();	
@@ -111,7 +111,7 @@ public class NavigationToolbar extends AbstractToolbar {
 		});
 		
 		// set previous button listener
-		btnPreviousRegister.addListener(new Button.ClickListener() {			
+		btnPreviousRegister.addListener(new Button.ClickListener() {
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
 				// set status register
 				register = bindingSource.prevItem();
@@ -140,7 +140,7 @@ public class NavigationToolbar extends AbstractToolbar {
 		});
 		
 		// set next button listener
-		btnNextRegister.addListener(new Button.ClickListener() {				
+		btnNextRegister.addListener(new Button.ClickListener() {
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
 				// set status register
 				register = bindingSource.nextItem();
@@ -169,7 +169,7 @@ public class NavigationToolbar extends AbstractToolbar {
 		});
 		
 		// set last button listener
-		btnLastRegister.addListener(new Button.ClickListener() {			
+		btnLastRegister.addListener(new Button.ClickListener() {
 			public void buttonClick(com.vaadin.ui.Button.ClickEvent event) {
 				// set status register
 				register = bindingSource.lastItem();
@@ -258,8 +258,9 @@ public class NavigationToolbar extends AbstractToolbar {
 	@Override
 	public void bindingSourceIndexChange(IndexChangeEvent event) {
 		if (bindingSource != null) {
-			lblCountRegister.setCaption(Integer.toString(event.getIndex() + 1) + "/" + bindingSource.size());
 			
+			lblCountRegister.setCaption(Integer.toString(event.getIndex() + 1) + "/" + bindingSource.size());
+										
 			// set horizontal status navigation buttons
 			if (event.getIndex() == -1) {
 				btnFirstRegister.setEnabled(false);

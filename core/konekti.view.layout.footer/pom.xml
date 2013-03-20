@@ -28,6 +28,20 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+				
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
     </dependencies>
 
     

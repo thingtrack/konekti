@@ -55,6 +55,13 @@ public class BindingSource<BEANTYPE> extends BeanItemContainer<BEANTYPE>
 	}
 	
 	@Override
+    public void addAll(Collection<? extends BEANTYPE> collection) {
+		index = -1;
+		
+		super.addAll(collection);
+	}
+	
+	@Override
 	public BeanItem<BEANTYPE> addItem(Object itemId) {
 		BeanItem<BEANTYPE> beanItem = super.addItem(itemId);
 
@@ -159,7 +166,10 @@ public class BindingSource<BEANTYPE> extends BeanItemContainer<BEANTYPE>
 	}
 
 	public BEANTYPE getItemId() {
-		return getIdByIndex(index);
+		if (size() > 0)
+			return getIdByIndex(index);
+		
+		return null;
 		
 	}
 

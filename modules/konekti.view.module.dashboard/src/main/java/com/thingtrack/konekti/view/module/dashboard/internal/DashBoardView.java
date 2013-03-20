@@ -43,7 +43,7 @@ public class DashBoardView extends AbstractView {
 	private void initView() {
 		CalculatorPortlet calculatorPortlet = new CalculatorPortlet(portalDashBoard);
 		AlarmPortlet testPortlet = new AlarmPortlet(context, portalDashBoard);
-		StatisticalPortlet statisticalPortlet = new StatisticalPortlet(context, portalDashBoard);
+		YoutubePortlet statisticalPortlet = new YoutubePortlet(context, portalDashBoard);
 		
 		portalDashBoard.addPortlet(calculatorPortlet);
 		portalDashBoard.addPortlet(testPortlet);

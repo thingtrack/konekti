@@ -247,6 +247,7 @@ public class ProductViewForm extends CustomComponent {
 		productSupplierField.setWidth("327px");
 		productSupplierField.setHeight("-1px");
 		productSupplierField.setTabIndex(6);
+		productSupplierField.setRequired(true);
 		mainLayout.addComponent(productSupplierField,
 				"top:176.0px;left:20.0px;");
 		

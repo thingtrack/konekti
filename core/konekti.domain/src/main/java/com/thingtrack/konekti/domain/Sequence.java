@@ -52,7 +52,8 @@ public class Sequence implements Serializable {
 		WORKSHOP,
 		GAS_STATION,
 		SUPPLIER,
-		REPORT
+		REPORT,
+		PRODUCT
     }
 	
 	/**
