@@ -6,7 +6,7 @@ public interface IWorkbenchPanel {
 	public void setLocationLayout(LOCATION locationLayout);
 	public LOCATION getLocationLayout();	
 	
-	public void addModule(String id, String name, IViewContainer componentView, Resource icon, LOCATION location);
+	public void addModule(String id, String name, IViewContainer viewComponent, boolean closeable, Resource icon, LOCATION location);
 	public void removeModule(String id);
 	
 	public void addListener(IModuleCloseListener listener);

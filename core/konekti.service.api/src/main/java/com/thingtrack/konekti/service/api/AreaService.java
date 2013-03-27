@@ -17,18 +17,18 @@ import java.util.List;
 
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 /**
  * @author Thingtrack S.L.
  *
  */
-public interface WarehouseService {
-	public List<Warehouse> getAll() throws Exception;
-	public Warehouse get( Integer warehouseId ) throws Exception;
-	public Warehouse getByCode( String code ) throws Exception;
-	public Warehouse save(Warehouse warehouse) throws Exception;
-	public void delete(Warehouse warehouse) throws Exception;
-	public Warehouse createEntity(Location location) throws Exception;
-	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception;
+public interface AreaService {
+	public List<Area> getAll() throws Exception;
+	public Area get( Integer areaId ) throws Exception;
+	public Area getByCode( String code ) throws Exception;
+	public Area save(Area area) throws Exception;
+	public void delete(Area area) throws Exception;
+	public Area createEntity(Location location) throws Exception;
+	public List<Area> getAreasFromOrganization(Organization organization) throws Exception;
 }

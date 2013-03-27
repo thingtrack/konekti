@@ -67,16 +67,10 @@ public class User implements Serializable {
 	private List<Location> locations = new ArrayList<Location>();
 	
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-	@JoinTable(name="USER_WAREHOUSE",
+	@JoinTable(name="USER_AREA",
 			   joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))	
-	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
-	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-	@JoinTable(name="USER_WORKSHOP",
-			   joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WORKSHOP_ID"))	
-	private List<Workshop> workshops = new ArrayList<Workshop>();
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))	
+	private List<Area> areas = new ArrayList<Area>();
 	
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;
@@ -90,12 +84,8 @@ public class User implements Serializable {
 	private Location defaultLocation;
 	
 	@ManyToOne
-	@JoinColumn(name="DEFAULT_WAREHOUSE_ID")
-	private Warehouse defaultWarehouse;
-	
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_WORKSHOP_ID")
-	private Workshop defaultWorkshop;
+	@JoinColumn(name="DEFAULT_AREA_ID")
+	private Area defaultArea;
 	
 	@Column(name="COMMENT", length=256)
 	private String comment;
@@ -291,31 +281,17 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the defaultWarehouse
+	 * @return the defaultArea
 	 */
-	public Warehouse getDefaultWarehouse() {
-		return defaultWarehouse;
+	public Area getDefaultArea() {
+		return defaultArea;
 	}
 
 	/**
-	 * @param defaultWarehouse the defaultWarehouse to set
+	 * @param defaultArea the defaultArea to set
 	 */
-	public void setDefaultWarehouse(Warehouse defaultWarehouse) {
-		this.defaultWarehouse = defaultWarehouse;
-	}
-
-	/**
-	 * @return the defaultWorkshop
-	 */
-	public Workshop getDefaultWorkshop() {
-		return defaultWorkshop;
-	}
-
-	/**
-	 * @param defaultWorkshop the defaultWorkshop to set
-	 */
-	public void setDefaultWorkshop(Workshop defaultWorkshop) {
-		this.defaultWorkshop = defaultWorkshop;
+	public void setDefaultArea(Area defaultArea) {
+		this.defaultArea = defaultArea;
 	}
 
 	/**
@@ -347,31 +323,17 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the warehouses
+	 * @return the areas
 	 */
-	public List<Warehouse> getWarehouses() {
-		return warehouses;
+	public List<Area> getAreas() {
+		return areas;
 	}
 
 	/**
-	 * @param warehouses the warehouses to set
+	 * @param areas the areas to set
 	 */
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
-	}
-
-	/**
-	 * @return the workshops
-	 */
-	public List<Workshop> getWorkshops() {
-		return workshops;
-	}
-
-	/**
-	 * @param workshops the workshops to set
-	 */
-	public void setWorkshops(List<Workshop> workshops) {
-		this.workshops = workshops;
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 
 }

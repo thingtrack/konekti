@@ -16,7 +16,7 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.Product;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 /**
  * @author Thingtrack S.L.
@@ -29,6 +29,6 @@ public interface ProductService {
 	public Product getByCode( String code, String version ) throws Exception;
 	public Product save(Product product) throws Exception;
 	public void delete(Product product) throws Exception;
-	public List<Product> getAllProductByWarehouse(Warehouse warehouse) throws Exception;
-	public Product createNewEntity(Warehouse warehouse) throws Exception;
+	public List<Product> getAllProductByArea(Area area) throws Exception;
+	public Product createNewEntity(Area area) throws Exception;
 }

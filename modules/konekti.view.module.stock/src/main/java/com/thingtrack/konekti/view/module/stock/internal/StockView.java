@@ -77,7 +77,7 @@ public class StockView extends AbstractView
 		// STEP 01: create grid view for slide Organization View
 		try {			
 			dgStock.setBindingSource(bsStock);
-			dgStock.setVisibleColumns(new String[] { "warehouse.description", "product.description", "quantity", "productUnit.description", "price", "stockStatus.description", "serialNumber", "lote", "expeditionDate", "stockDate" } );       
+			dgStock.setVisibleColumns(new String[] { "area.description", "product.description", "quantity", "productUnit.description", "price", "stockStatus.description", "serialNumber", "lote", "expeditionDate", "stockDate" } );       
 			dgStock.setColumnHeaders(new String[] { "Almacén", "Producto", "Cantidad", "Unidad", "Precio", "Estado", "Número Serie", "Lote", "Fecha Caducidad", "Fecha Stock" } );
 
 			dgStock.setColumnCollapsed("serialNumber", true);
@@ -125,7 +125,7 @@ public class StockView extends AbstractView
 			bsStock.addNestedContainerProperty("product.description");
 			bsStock.addNestedContainerProperty("productUnit.description");
 			bsStock.addNestedContainerProperty("stockStatus.description");
-			bsStock.addNestedContainerProperty("warehouse.description");
+			bsStock.addNestedContainerProperty("area.description");
 			
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -157,7 +157,7 @@ public class StockView extends AbstractView
 	public void addButtonClick(ClickNavigationEvent event) {
 		Stock stock;
 		try {
-			stock = stockService.createNewStock(context.getWarehouse());
+			stock = stockService.createNewStock(context.getArea());
 		} catch (Exception e) {
 			throw new RuntimeException("¡No se pudo crear nueva entidad stock!", e);
 		}

@@ -17,7 +17,7 @@ import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Product;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 /**
  * @author Thingtrack S.L.
@@ -26,5 +26,5 @@ import com.thingtrack.konekti.domain.Warehouse;
 public interface ProductDao extends Dao<Product, Integer> {
 	public Product getByCode(String code) throws Exception;
 	public Product getByCode(String code, String version) throws Exception;
-	public List<Product> getAllProductByWarehouse(Warehouse warehouse) throws Exception;
+	public List<Product> getAllProductByArea(Area area) throws Exception;
 }

@@ -152,17 +152,17 @@ public class WorkbenchLayout extends CustomComponent implements IWorkbenchLayout
 	}
 	
 	@Override
-	public void addModule(String id, String name, IViewContainer viewComponent, Resource icon, LOCATION location) {
+	public void addModule(String id, String name, IViewContainer viewComponent, boolean closeable, Resource icon, LOCATION location) {
 		if (location == LOCATION.TOP)
-			getTopPanelWorkbench().addModule(id, name, viewComponent, icon, location);
+			getTopPanelWorkbench().addModule(id, name, viewComponent, closeable, icon, location);
 		else if (location == LOCATION.LEFT)
-			getLeftPanelWorkbench().addModule(id, name, viewComponent, icon, location);
+			getLeftPanelWorkbench().addModule(id, name, viewComponent, closeable, icon, location);
 		else if(location == LOCATION.CENTER)
-			getCentralPanelWorkbench().addModule(id, name, viewComponent, icon, location);
+			getCentralPanelWorkbench().addModule(id, name, viewComponent, closeable, icon, location);
 		else if(location == LOCATION.RIGHT)
-			getRightPanelWorkbench().addModule(id, name, viewComponent, icon, location);
+			getRightPanelWorkbench().addModule(id, name, viewComponent, closeable, icon, location);
 		else if(location == LOCATION.BOTTON)
-			getBottonPanelWorkbench().addModule(id, name, viewComponent, icon, location);
+			getBottonPanelWorkbench().addModule(id, name, viewComponent, closeable, icon, location);
 		
 		modules.put(id, location);
 	}

@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.vaadin.addon.customfield.CustomField;
 
-import com.thingtrack.konekti.domain.Workshop;
+import com.thingtrack.konekti.domain.Area;
 import com.vaadin.data.Container;
 import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanItemContainer;
@@ -23,29 +23,29 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 
 @SuppressWarnings("serial")
-public class WorkshopCollectionField extends CustomField {
+public class AreaCollectionField extends CustomField {
 	private VerticalLayout mainLayout;
-	private VerticalLayout vlWorkshop;
+	private VerticalLayout vlArea;
 	private HorizontalLayout hlToolbar;
 	private Button btnRemove;
 	private Button btnAdd;	
-	private Table tbWorkshop;
-	
-	private BeanItemContainer<Workshop> workshopTableContainer;
-	
-	public WorkshopCollectionField() {
+	private Table tbArea;
+
+	private BeanItemContainer<Area> areaTableContainer;
+
+	public AreaCollectionField() {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
-		
-		workshopTableContainer = new BeanItemContainer<Workshop>(Workshop.class);
-		tbWorkshop.setContainerDataSource(workshopTableContainer);
-		
-		tbWorkshop.setVisibleColumns(new String[] { "code", "name", "description", "comment", "active"} );       
-		tbWorkshop.setColumnHeaders(new String[] { "Código", "Nombre", "Descriptión", "Comentarios", "Activa" } );
-		
-		tbWorkshop.setColumnCollapsed("code", true);
-		tbWorkshop.setColumnCollapsed("comment", true);		
-		
+
+		areaTableContainer = new BeanItemContainer<Area>(Area.class);
+		tbArea.setContainerDataSource(areaTableContainer);
+
+		tbArea.setVisibleColumns(new String[] { "code", "name", "description", "comment", "active"} );       
+		tbArea.setColumnHeaders(new String[] { "Código", "Nombre", "Descriptión", "Comentarios", "Activa" } );
+
+		tbArea.setColumnCollapsed("code", true);
+		tbArea.setColumnCollapsed("comment", true);		
+
 		// set button event handlers
 		btnAdd.addListener(new ClickListener() {
 			@Override
@@ -53,7 +53,7 @@ public class WorkshopCollectionField extends CustomField {
 				// TODO
 			}
 		});
-		
+
 		btnRemove.addListener(new ClickListener() {
 			@Override
 			public void buttonClick(ClickEvent event) {
@@ -61,30 +61,30 @@ public class WorkshopCollectionField extends CustomField {
 			}
 		});
 	}
-	
+
 	@Override
 	public Class<?> getType() {
 		return List.class;
-		
+
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public void setPropertyDataSource(Property newDataSource) {
 		List collectionsValue = (List) newDataSource.getValue();
-		
-		workshopTableContainer.removeAllItems();
-		workshopTableContainer.addAll(collectionsValue);
-				
+
+		areaTableContainer.removeAllItems();
+		areaTableContainer.addAll(collectionsValue);
+
 		super.setPropertyDataSource(newDataSource);
 	}
-	
+
 	@Override
 	public Object getValue() {		
-		return new ArrayList<Workshop>(
-				(Collection<? extends Workshop>) workshopTableContainer.getItemIds());
+		return new ArrayList<Area>(
+				(Collection<? extends Area>) areaTableContainer.getItemIds());
 	}
-	
+
 	private VerticalLayout buildMainLayout() {
 		// common part: create layout
 		mainLayout = new VerticalLayout();
@@ -92,58 +92,58 @@ public class WorkshopCollectionField extends CustomField {
 		mainLayout.setWidth("100%");
 		mainLayout.setHeight("100%");
 		mainLayout.setMargin(false);
-		
+
 		// top-level component properties
 		setWidth("100.0%");
 		setHeight("100.0%");
-		
+
 		// vlOrganization
-		vlWorkshop = buildVlOrganization();
-		mainLayout.addComponent(vlWorkshop);
-		mainLayout.setExpandRatio(vlWorkshop, 1.0f);
-		
+		vlArea = buildVlOrganization();
+		mainLayout.addComponent(vlArea);
+		mainLayout.setExpandRatio(vlArea, 1.0f);
+
 		return mainLayout;
 	}
 
 	private VerticalLayout buildVlOrganization() {
 		// common part: create layout
-		vlWorkshop = new VerticalLayout();
-		vlWorkshop.setImmediate(false);
-		vlWorkshop.setWidth("100.0%");
-		vlWorkshop.setHeight("100.0%");
-		vlWorkshop.setMargin(false);
-		
+		vlArea = new VerticalLayout();
+		vlArea.setImmediate(false);
+		vlArea.setWidth("100.0%");
+		vlArea.setHeight("100.0%");
+		vlArea.setMargin(false);
+
 		// tbTable
-		tbWorkshop = new Table();
-		tbWorkshop.setImmediate(true);
-		tbWorkshop.setSelectable(true);
-		tbWorkshop.setMultiSelect(false);
-		tbWorkshop.setColumnCollapsingAllowed(true);
-		tbWorkshop.setWidth("100.0%");
-		tbWorkshop.setHeight("100.0%");
-		tbWorkshop.setEditable(true);
-		tbWorkshop.setTableFieldFactory(new TableFieldFactory() {					
+		tbArea = new Table();
+		tbArea.setImmediate(true);
+		tbArea.setSelectable(true);
+		tbArea.setMultiSelect(false);
+		tbArea.setColumnCollapsingAllowed(true);
+		tbArea.setWidth("100.0%");
+		tbArea.setHeight("100.0%");
+		tbArea.setEditable(true);
+		tbArea.setTableFieldFactory(new TableFieldFactory() {					
 			@Override
 			public Field createField(Container container, Object itemId, Object propertyId, Component uiContext) {
 				if("active".equals(propertyId)) {
-					
+
 					CheckBox field = new CheckBox();
 					field.setReadOnly(true);
 					return field;
 				}
-				
+
 				return null;
 			}
 		});
-		
-		vlWorkshop.addComponent(tbWorkshop);
-		vlWorkshop.setExpandRatio(tbWorkshop, 1.0f);
-		
+
+		vlArea.addComponent(tbArea);
+		vlArea.setExpandRatio(tbArea, 1.0f);
+
 		// hlToolbar
 		hlToolbar = buildHlToolbar();
-		vlWorkshop.addComponent(hlToolbar);
-		
-		return vlWorkshop;
+		vlArea.addComponent(hlToolbar);
+
+		return vlArea;
 	}
 
 	private HorizontalLayout buildHlToolbar() {
@@ -153,7 +153,7 @@ public class WorkshopCollectionField extends CustomField {
 		hlToolbar.setWidth("100.0%");
 		hlToolbar.setHeight("26px");
 		hlToolbar.setMargin(false);
-		
+
 		// btnAdd
 		btnAdd = new Button();
 		btnAdd.setCaption("Añadir");
@@ -161,7 +161,7 @@ public class WorkshopCollectionField extends CustomField {
 		btnAdd.setWidth("-1px");
 		btnAdd.setHeight("-1px");
 		hlToolbar.addComponent(btnAdd);
-		
+
 		// btnRemove
 		btnRemove = new Button();
 		btnRemove.setCaption("Borrar");
@@ -171,7 +171,8 @@ public class WorkshopCollectionField extends CustomField {
 		hlToolbar.addComponent(btnRemove);
 		hlToolbar.setExpandRatio(btnRemove, 1.0f);
 		hlToolbar.setComponentAlignment(btnRemove, new Alignment(33));
-		
+
 		return hlToolbar;
 	}
+
 }

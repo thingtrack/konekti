@@ -362,17 +362,17 @@ public class ClientView extends AbstractView implements
 
 			Client client = (Client) itemId;
 
-			if (client.getClientAddress() != null) {
-				String direction = client.getClientAddress().getStreet();
+			if (client.getAddress() != null) {
+				String direction = client.getAddress().getStreet();
 
-				if (client.getClientAddress().getLetter() != null)
-					direction += "," + client.getClientAddress().getLetter();
+				if (client.getAddress().getLetter() != null)
+					direction += "," + client.getAddress().getLetter();
 
-				if (client.getClientAddress().getNumber() != null)
-					direction += "," + client.getClientAddress().getNumber();
+				if (client.getAddress().getNumber() != null)
+					direction += "," + client.getAddress().getNumber();
 
-				if (client.getClientAddress().getCity() != null)
-					direction += "," + client.getClientAddress().getCity();
+				if (client.getAddress().getCity() != null)
+					direction += "," + client.getAddress().getCity();
 
 				addressStreetLabel.setValue(direction);
 			}

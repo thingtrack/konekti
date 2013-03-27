@@ -19,7 +19,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Stock;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.dao.api.StockDao;
 import com.thingtrack.konekti.dao.api.StockStatusDao;
 import com.thingtrack.konekti.service.api.StockService;
@@ -59,10 +59,10 @@ public class StockServiceImpl implements StockService {
 	}
 
 	@Override
-	public Stock createNewStock(Warehouse warehouse) throws Exception {
+	public Stock createNewStock(Area area) throws Exception {
 		Stock stock = new Stock();
 		
-		stock.setWarehouse(warehouse);
+		stock.setArea(area);
 		stock.setStockDate(new Date());
 		stock.setStockStatus(stockStatusDao.getByCode(Stock.STATUS.WAREHOUSED.name()));
 		

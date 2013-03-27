@@ -44,6 +44,8 @@
 	<bean id="alarmTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTriggerTypeDaoImpl" />
 	<bean id="alarmStatusDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmStatusDaoImpl" />
 	<bean id="alarmTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTypeDaoImpl" />
+	<bean id="areaDao" class="com.thingtrack.konekti.dao.impl.internal.AreaDaoImpl" />
+	<bean id="areaTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AreaTypeDaoImpl" />	
 	<bean id="attachmentDao" class="com.thingtrack.konekti.dao.impl.internal.AttachmentDaoImpl" />
 	<bean id="calendarDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarDaoImpl" />
 	<bean id="calendarCardDao" class="com.thingtrack.konekti.dao.impl.internal.CalendarCardDaoImpl" />
@@ -100,8 +102,4 @@
 	<bean id="supplierGroupDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierGroupDaoImpl" />					
 	<bean id="supplierTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierTypeDaoImpl" />
 	<bean id="userDao" class="com.thingtrack.konekti.dao.impl.internal.UserDaoImpl" />
-	<bean id="warehouseDao" class="com.thingtrack.konekti.dao.impl.internal.WarehouseDaoImpl" />
-	<bean id="warehouseTypeDao" class="com.thingtrack.konekti.dao.impl.internal.WarehouseTypeDaoImpl" />
-	<bean id="workshopDao" class="com.thingtrack.konekti.dao.impl.internal.WorkshopDaoImpl" />
-	<bean id="workshopTypeDao" class="com.thingtrack.konekti.dao.impl.internal.WorkshopTypeDaoImpl" />
 </beans>

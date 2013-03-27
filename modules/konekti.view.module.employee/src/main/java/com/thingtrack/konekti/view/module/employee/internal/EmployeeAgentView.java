@@ -389,17 +389,17 @@ public class EmployeeAgentView extends AbstractView
 			
 			EmployeeAgent employeeAgent = (EmployeeAgent) itemId;
 			
-			if(employeeAgent.getEmployeeAddress() != null) {
-				String direction = employeeAgent.getEmployeeAddress().getStreet();
+			if(employeeAgent.getAddress() != null) {
+				String direction = employeeAgent.getAddress().getStreet();
 				
-				if (employeeAgent.getEmployeeAddress().getLetter() != null)
-					direction += "," + employeeAgent.getEmployeeAddress().getLetter();
+				if (employeeAgent.getAddress().getLetter() != null)
+					direction += "," + employeeAgent.getAddress().getLetter();
 				
-				if (employeeAgent.getEmployeeAddress().getNumber() != null)
-					direction += "," + employeeAgent.getEmployeeAddress().getNumber();
+				if (employeeAgent.getAddress().getNumber() != null)
+					direction += "," + employeeAgent.getAddress().getNumber();
 				
-				if (employeeAgent.getEmployeeAddress().getCity() != null)
-					direction += "," + employeeAgent.getEmployeeAddress().getCity();
+				if (employeeAgent.getAddress().getCity() != null)
+					direction += "," + employeeAgent.getAddress().getCity();
 				
 				addressStreetLabel.setValue(direction);
 			}

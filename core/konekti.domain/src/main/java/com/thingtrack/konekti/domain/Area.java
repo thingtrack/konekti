@@ -30,12 +30,12 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="WAREHOUSE")
-public class Warehouse implements Serializable  {
+@Table(name="AREA")
+public class Area implements Serializable  {
 	@Id
-	@Column(name="WAREHOUSE_ID")
+	@Column(name="AREA_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer warehouseId;
+	private Integer areaId;
 	
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
@@ -47,8 +47,8 @@ public class Warehouse implements Serializable  {
 	private String description;
 
 	@ManyToOne
-	@JoinColumn(name="WAREHOUSE_TYPE_ID", nullable=false)
-	private WarehouseType warehouseType;
+	@JoinColumn(name="AREA_TYPE_ID", nullable=false)
+	private AreaType areaType;
 	
 	@ManyToOne
 	@JoinColumn(name="LOCATION_ID", nullable=false)
@@ -60,34 +60,34 @@ public class Warehouse implements Serializable  {
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active=true;
 
-	public Warehouse() {
+	public Area() {
 		
 	}
 
-	public Warehouse(String code, WarehouseType warehouseType) {
-		this(code, warehouseType, true);
+	public Area(String code, AreaType areaType) {
+		this(code, areaType, true);
 		
 	}
 	
-	public Warehouse(String code, WarehouseType warehouseType, Boolean active) {
+	public Area(String code, AreaType areaType, Boolean active) {
 		this.code = code;
-		this.warehouseType = warehouseType;
+		this.areaType = areaType;
 		this.active = active;		
 		
 	}
 	
 	/**
-	 * @param warehouseId the warehouseId to set
+	 * @param areaId the areaId to set
 	 */
-	public void setWarehouseId(Integer warehouseId) {
-		this.warehouseId = warehouseId;
+	public void setAreaId(Integer areaId) {
+		this.areaId = areaId;
 	}
 
 	/**
-	 * @return the warehouseId
+	 * @return the areaId
 	 */
-	public Integer getWarehouseId() {
-		return warehouseId;
+	public Integer getAreaId() {
+		return areaId;
 	}
 
 	/**
@@ -161,17 +161,17 @@ public class Warehouse implements Serializable  {
 	}
 	
 	/**
-	 * @param warehouseType the warehouseType to set
+	 * @param areaType the areaType to set
 	 */
-	public void setWarehouseType(WarehouseType warehouseType) {
-		this.warehouseType = warehouseType;
+	public void setAreaType(AreaType areaType) {
+		this.areaType = areaType;
 	}
 
 	/**
-	 * @return the warehouseType
+	 * @return the areaType
 	 */
-	public WarehouseType getWarehouseType() {
-		return warehouseType;
+	public AreaType getAreaType() {
+		return areaType;
 	}
 
 	/**
@@ -197,7 +197,7 @@ public class Warehouse implements Serializable  {
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
-				+ ((warehouseId == null) ? 0 : warehouseId.hashCode());
+				+ ((areaId == null) ? 0 : areaId.hashCode());
 		return result;
 	}
 
@@ -210,18 +210,18 @@ public class Warehouse implements Serializable  {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Warehouse))
+		if (!(obj instanceof Area))
 			return false;
-		Warehouse other = (Warehouse) obj;
+		Area other = (Area) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (warehouseId == null) {
-			if (other.warehouseId != null)
+		if (areaId == null) {
+			if (other.areaId != null)
 				return false;
-		} else if (!warehouseId.equals(other.warehouseId))
+		} else if (!areaId.equals(other.areaId))
 			return false;
 		return true;
 	}
@@ -231,7 +231,7 @@ public class Warehouse implements Serializable  {
 	 */
 	@Override
 	public String toString() {
-		return "Warehouse [warehouseId=" + warehouseId + ", code=" + code + "]";
+		return "Area [areaId=" + areaId + ", code=" + code + "]";
 	}
 
 }

@@ -125,7 +125,7 @@ public class ClientViewForm extends CustomComponent {
 			@Override
 			public void addressChange(AddressChangeEvent event) {
 				if (client != null)
-					client.setClientAddress(event.getAddress());
+					client.setAddress(event.getAddress());
 				
 			}
 		});

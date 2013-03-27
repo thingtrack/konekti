@@ -5,8 +5,7 @@ import java.util.Locale;
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
-import com.thingtrack.konekti.domain.Warehouse;
-import com.thingtrack.konekti.domain.Workshop;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.view.kernel.IToolbarManager;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 
@@ -14,8 +13,7 @@ public class WorkbenchContext implements IWorkbenchContext {
 	
 	private Organization organization;
 	private Location location;
-	private Warehouse warehouse;
-	private Workshop workshop;
+	private Area area;
 	
 	private User user;
 	private Locale locale;
@@ -24,8 +22,7 @@ public class WorkbenchContext implements IWorkbenchContext {
 	
 	public WorkbenchContext(Organization organization,
 							Location location,
-			                Warehouse warehouse,
-			                Workshop workshop,
+			                Area area,
 			                User user, 
 			                Locale locale, 
 			                IToolbarManager toolbarManager, 
@@ -33,8 +30,7 @@ public class WorkbenchContext implements IWorkbenchContext {
 		
 		this.organization = organization;
 		this.location = location;
-		this.warehouse = warehouse;
-		this.workshop = workshop;
+		this.area = area;
 		this.user = user;
 		this.locale = locale;
 		this.toolbarManager = toolbarManager;
@@ -47,8 +43,8 @@ public class WorkbenchContext implements IWorkbenchContext {
 	}
 	
 	@Override
-	public Warehouse getWarehouse() {
-		return warehouse;
+	public Area getArea() {
+		return area;
 	}
 	
 	@Override

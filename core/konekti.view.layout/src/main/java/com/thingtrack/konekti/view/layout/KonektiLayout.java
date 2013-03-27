@@ -216,8 +216,8 @@ public class KonektiLayout extends CustomComponent {
 	}
 	
 	// Module Interface
-	public void addModule(String id, String name, IViewContainer componentView, Resource icon, LOCATION location) {
-		workbenchLayout.addModule(id, name, componentView, icon, location);		
+	public void addModule(String id, String name, IViewContainer componentView, boolean closeable, Resource icon, LOCATION location) {
+		workbenchLayout.addModule(id, name, componentView, closeable, icon, location);		
 		
 	}
 	

@@ -16,7 +16,7 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.Stock;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 /**
  * @author Thingtrack S.L.
@@ -27,5 +27,5 @@ public interface StockService {
 	public Stock get( Integer stockId ) throws Exception;
 	public Stock save(Stock stock) throws Exception;
 	public void delete(Stock stock) throws Exception;
-	public Stock createNewStock(Warehouse warehouse) throws Exception;
+	public Stock createNewStock(Area area) throws Exception;
 }

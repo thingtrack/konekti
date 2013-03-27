@@ -10,11 +10,14 @@
 	    <!-- Koneti Domain -->
 		<class>com.thingtrack.konekti.domain.Action</class>
 	    <class>com.thingtrack.konekti.domain.Address</class>
+	    <class>com.thingtrack.konekti.domain.Agent</class>
 	    <class>com.thingtrack.konekti.domain.Alarm</class>
 	    <class>com.thingtrack.konekti.domain.AlarmJob</class>
 	    <class>com.thingtrack.konekti.domain.AlarmStatus</class>
 	    <class>com.thingtrack.konekti.domain.AlarmTriggerType</class>	    
 	    <class>com.thingtrack.konekti.domain.AlarmType</class>
+	    <class>com.thingtrack.konekti.domain.Area</class>
+	    <class>com.thingtrack.konekti.domain.AreaType</class>	    
 	    <class>com.thingtrack.konekti.domain.Attachment</class>
 	    <class>com.thingtrack.konekti.domain.Calendar</class>
 	    <class>com.thingtrack.konekti.domain.CalendarCard</class>
@@ -72,10 +75,6 @@
 	    <class>com.thingtrack.konekti.domain.SupplierGroup</class>
 	    <class>com.thingtrack.konekti.domain.SupplierType</class>	    	    
 	    <class>com.thingtrack.konekti.domain.User</class>
-	    <class>com.thingtrack.konekti.domain.Warehouse</class>
-	    <class>com.thingtrack.konekti.domain.WarehouseType</class>
-	    <class>com.thingtrack.konekti.domain.Workshop</class>
-	    <class>com.thingtrack.konekti.domain.WorkshopType</class>
 		
 		<!-- Sensor Domain -->
 	    <class>com.thingtrack.konekti.domain.sensor.Sensor</class>

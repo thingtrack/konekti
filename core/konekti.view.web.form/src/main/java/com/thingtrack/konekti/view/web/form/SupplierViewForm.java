@@ -123,7 +123,7 @@ public class SupplierViewForm extends CustomComponent {
 			@Override
 			public void addressChange(AddressChangeEvent event) {
 				if (supplier != null)
-					supplier.setSupplierAddress(event.getAddress());
+					supplier.setAddress(event.getAddress());
 				
 			}
 		});

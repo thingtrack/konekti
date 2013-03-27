@@ -20,29 +20,29 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
-import com.thingtrack.konekti.dao.api.WarehouseDao;
+import com.thingtrack.konekti.dao.api.AreaDao;
 import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 /**
  * @author Thingtrack S.L.
  *
  */
 @Repository
-public class WarehouseDaoImpl extends JpaDao<Warehouse, Integer> implements WarehouseDao {
+public class AreaDaoImpl extends JpaDao<Area, Integer> implements AreaDao {
 	@Override
-	public Warehouse getByCode(String code) throws Exception {
-		Warehouse warehouse = (Warehouse)getEntityManager()
+	public Area getByCode(String code) throws Exception {
+		Area area = (Area)getEntityManager()
 				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
 				.setParameter("code", code).getSingleResult();
 
-		return warehouse;
+		return area;
 		
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Warehouse> getWarehousesFromOrganization(Organization organization) throws Exception {
+	public List<Area> getAreasFromOrganization(Organization organization) throws Exception {
 		Query query = (Query)getEntityManager()
 				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
 				.setParameter("organization", organization);

@@ -19,6 +19,8 @@
        <osgi:reference id="alarmDao" interface="com.thingtrack.konekti.dao.api.AlarmDao" />
        <osgi:reference id="alarmStatusDao" interface="com.thingtrack.konekti.dao.api.AlarmStatusDao" />
        <osgi:reference id="alarmTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTypeDao" />
+       <osgi:reference id="areaDao" interface="com.thingtrack.konekti.dao.api.AreaDao" />
+       <osgi:reference id="areaTypeDao" interface="com.thingtrack.konekti.dao.api.AreaTypeDao" />
        <osgi:reference id="calendarDao" interface="com.thingtrack.konekti.dao.api.CalendarDao" />
        <osgi:reference id="calendarCardDao" interface="com.thingtrack.konekti.dao.api.CalendarCardDao" />
        <osgi:reference id="calendarDetailDao" interface="com.thingtrack.konekti.dao.api.CalendarDetailDao" />
@@ -71,18 +73,15 @@
        <osgi:reference id="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao" />       
        <osgi:reference id="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao" />
        <osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />
-       <osgi:reference id="warehouseDao" interface="com.thingtrack.konekti.dao.api.WarehouseDao" />
-       <osgi:reference id="warehouseTypeDao" interface="com.thingtrack.konekti.dao.api.WarehouseTypeDao" />
-       <osgi:reference id="workshopDao" interface="com.thingtrack.konekti.dao.api.WorkshopDao" />
-       <osgi:reference id="workshopTypeDao" interface="com.thingtrack.konekti.dao.api.WorkshopTypeDao" />
        	   
-	   
 	   <!-- Konekti services -->
 	   <osgi:reference id="actionService" interface="com.thingtrack.konekti.service.api.ActionService"/>
        <osgi:reference id="addressService" interface="com.thingtrack.konekti.service.api.AddressService" />
        <osgi:reference id="alarmService" interface="com.thingtrack.konekti.service.api.AlarmService" />
        <osgi:reference id="alarmStatusService" interface="com.thingtrack.konekti.service.api.AlarmStatusService" />
        <osgi:reference id="alarmTypeService" interface="com.thingtrack.konekti.service.api.AlarmTypeService" />
+       <osgi:reference id="areaService" interface="com.thingtrack.konekti.service.api.AreaService" />
+       <osgi:reference id="areaTypeService" interface="com.thingtrack.konekti.service.api.AreaTypeService" />       
        <osgi:reference id="calendarService" interface="com.thingtrack.konekti.service.api.CalendarService" />
        <osgi:reference id="calendarCardService" interface="com.thingtrack.konekti.service.api.CalendarCardService" />
        <osgi:reference id="calendarDetailService" interface="com.thingtrack.konekti.service.api.CalendarDetailService" />
@@ -136,10 +135,6 @@
        <osgi:reference id="supplierGroupService" interface="com.thingtrack.konekti.service.api.SupplierGroupService" />
        <osgi:reference id="supplierTypeService" interface="com.thingtrack.konekti.service.api.SupplierTypeService" />
        <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />
-       <osgi:reference id="warehouseService" interface="com.thingtrack.konekti.service.api.WarehouseService" />
-       <osgi:reference id="warehouseTypeService" interface="com.thingtrack.konekti.service.api.WarehouseTypeService" />
-       <osgi:reference id="workshopService" interface="com.thingtrack.konekti.service.api.WorkshopService" />
-       <osgi:reference id="workshopTypeService" interface="com.thingtrack.konekti.service.api.WorkshopTypeService" />
 	   	   	   	   
 	   	   
        <!-- Knowledge service -->

@@ -17,12 +17,12 @@ import javax.validation.constraints.Size;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="WAREHOUSE_TYPE")
-public class WarehouseType implements Serializable {
+@Table(name="AREA_TYPE")
+public class AreaType implements Serializable {
 	@Id
-	@Column(name="WAREHOUSE_TYPE_ID")
+	@Column(name="AREA_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer warehouseTypeId;
+	private Integer areaTypeId;
 	
 	@Column(name="NAME", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
@@ -34,17 +34,17 @@ public class WarehouseType implements Serializable {
 	private String description;
 
 	/**
-	 * @param warehouseTypeId the warehouseTypeId to set
+	 * @param areaTypeId the areaTypeId to set
 	 */
-	public void setWarehouseTypeId(Integer warehouseTypeId) {
-		this.warehouseTypeId = warehouseTypeId;
+	public void setAreaTypeId(Integer areaTypeId) {
+		this.areaTypeId = areaTypeId;
 	}
 
 	/**
-	 * @return the warehouseTypeId
+	 * @return the areaTypeId
 	 */
-	public Integer getWarehouseTypeId() {
-		return warehouseTypeId;
+	public Integer getAreaTypeId() {
+		return areaTypeId;
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class WarehouseType implements Serializable {
 		int result = 1;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
-				+ ((warehouseTypeId == null) ? 0 : warehouseTypeId.hashCode());
+				+ ((areaTypeId == null) ? 0 : areaTypeId.hashCode());
 		return result;
 	}
 
@@ -97,18 +97,18 @@ public class WarehouseType implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof WarehouseType))
+		if (!(obj instanceof AreaType))
 			return false;
-		WarehouseType other = (WarehouseType) obj;
+		AreaType other = (AreaType) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (warehouseTypeId == null) {
-			if (other.warehouseTypeId != null)
+		if (areaTypeId == null) {
+			if (other.areaTypeId != null)
 				return false;
-		} else if (!warehouseTypeId.equals(other.warehouseTypeId))
+		} else if (!areaTypeId.equals(other.areaTypeId))
 			return false;
 		return true;
 	}
@@ -118,7 +118,7 @@ public class WarehouseType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "WarehouseType [warehouseTypeId=" + warehouseTypeId + ", name="
+		return "AreaType [areaTypeId=" + areaTypeId + ", name="
 				+ name + ", description=" + description + "]";
 	}
 }

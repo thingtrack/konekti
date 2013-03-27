@@ -135,7 +135,7 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 	}
 
 	@Override
-	public void addModule(String id, String name, IViewContainer viewComponent, Resource icon, LOCATION location) {
+	public void addModule(String id, String name, IViewContainer viewComponent, boolean closeable, Resource icon, LOCATION location) {
 		if (tabSheetModule.getComponentCount() == 0) 
 			tabSheetModule.hideTabs(false);
 
@@ -143,8 +143,10 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 		modules.put(id, viewComponent);
 		
 		// create new tab for the current module
-		Tab tab = tabSheetModule.addTab((Component) viewComponent, name, icon);			
-		tab.setClosable(true); // default closable tabs
+		Tab tab = tabSheetModule.addTab((Component) viewComponent, name, icon);
+		
+		// set closable flag
+		tab.setClosable(closeable);
 				
 		tabSheetModule.setSelectedTab((Component) viewComponent);
 				

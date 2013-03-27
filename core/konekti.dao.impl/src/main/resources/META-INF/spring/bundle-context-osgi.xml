@@ -22,6 +22,8 @@
 		<osgi:service ref="alarmTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTriggerTypeDao"/>
 		<osgi:service ref="alarmStatusDao" interface="com.thingtrack.konekti.dao.api.AlarmStatusDao"/>		
 		<osgi:service ref="alarmTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTypeDao"/>
+		<osgi:service ref="areaDao" interface="com.thingtrack.konekti.dao.api.AreaDao"/>
+		<osgi:service ref="areaTypeDao" interface="com.thingtrack.konekti.dao.api.AreaTypeDao"/>		
 		<osgi:service ref="attachmentDao" interface="com.thingtrack.konekti.dao.api.AttachmentDao"/>
 		<osgi:service ref="calendarDao" interface="com.thingtrack.konekti.dao.api.CalendarDao"/>
 		<osgi:service ref="calendarCardDao" interface="com.thingtrack.konekti.dao.api.CalendarCardDao"/>
@@ -77,9 +79,5 @@
 		<osgi:service ref="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao"/>		
 		<osgi:service ref="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao"/>
 		<osgi:service ref="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao"/>				
-		<osgi:service ref="userDao" interface="com.thingtrack.konekti.dao.api.UserDao"/>
-		<osgi:service ref="warehouseDao" interface="com.thingtrack.konekti.dao.api.WarehouseDao"/>
-		<osgi:service ref="warehouseTypeDao" interface="com.thingtrack.konekti.dao.api.WarehouseTypeDao"/>
-		<osgi:service ref="workshopDao" interface="com.thingtrack.konekti.dao.api.WorkshopDao"/>
-		<osgi:service ref="workshopTypeDao" interface="com.thingtrack.konekti.dao.api.WorkshopTypeDao"/>				
+		<osgi:service ref="userDao" interface="com.thingtrack.konekti.dao.api.UserDao"/>				
 </beans>

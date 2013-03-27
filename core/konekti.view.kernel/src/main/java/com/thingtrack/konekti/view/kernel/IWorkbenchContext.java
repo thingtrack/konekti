@@ -4,11 +4,11 @@ import java.util.Locale;
 
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 
 public interface IWorkbenchContext {
 	public Organization getOrganization();
-	public Warehouse getWarehouse();
+	public Area getArea();
 	public User getUser();
 	public Locale getLocale();
 	public IToolbarManager getToolbarManager();

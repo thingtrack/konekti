@@ -63,10 +63,7 @@ public class Location implements Serializable {
 	private LocationType locationType;
 
 	@OneToMany(mappedBy="location")			
-	private List<Warehouse> warehouses = new ArrayList<Warehouse>();		
-
-	@OneToMany(mappedBy="location")		
-	private List<Workshop> workshops = new ArrayList<Workshop>();	
+	private List<Area> areas = new ArrayList<Area>();		
 
 	@Column(name="COMMENT", length=512)
 	private String comment;
@@ -160,18 +157,18 @@ public class Location implements Serializable {
 		return locationType;
 	}
 
-	public void addWarehouse(Warehouse warehouse) {
-		warehouses.add(warehouse);
+	public void addArea(Area area) {
+		areas.add(area);
 
-		if (warehouse.getLocation() != this)
-			warehouse.setLocation(this);
+		if (area.getLocation() != this)
+			area.setLocation(this);
 	}
 
 	/**
-	 * @return the warehouses
+	 * @return the areas
 	 */
-	public List<Warehouse> getWarehouses() {
-		return Collections.unmodifiableList(warehouses);
+	public List<Area> getAreas() {
+		return Collections.unmodifiableList(areas);
 	}
 
 	/**
@@ -231,20 +228,6 @@ public class Location implements Serializable {
 	 */
 	public List<Organization> getOrganizations() {
 		return Collections.unmodifiableList(organizations);
-	}
-
-	/**
-	 * @param workshops the workshops to set
-	 */
-	public void setWorkshops(List<Workshop> workshops) {
-		this.workshops = workshops;
-	}
-
-	/**
-	 * @return the workshops
-	 */
-	public List<Workshop> getWorkshops() {
-		return workshops;
 	}
 
 	/* (non-Javadoc)
