@@ -30,5 +30,6 @@ public interface AreaService {
 	public Area save(Area area) throws Exception;
 	public void delete(Area area) throws Exception;
 	public Area createEntity(Location location) throws Exception;
+	public List<Area> getAllByLocation(Location location) throws Exception;
 	public List<Area> getAreasFromOrganization(Organization organization) throws Exception;
 }

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.AreaDao;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Area;
 
@@ -38,6 +39,16 @@ public class AreaDaoImpl extends JpaDao<Area, Integer> implements AreaDao {
 
 		return area;
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Area> getAllByLocation(Location location) throws Exception {
+		Query query = (Query)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.location = :location")
+				.setParameter("location", location);
+		
+		return query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")

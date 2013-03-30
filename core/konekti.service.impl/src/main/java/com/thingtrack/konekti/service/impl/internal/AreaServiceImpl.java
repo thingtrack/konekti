@@ -78,6 +78,12 @@ public class AreaServiceImpl implements AreaService {
 	}
 
 	@Override
+	public List<Area> getAllByLocation(Location location) throws Exception {
+		return this.areaDao.getAllByLocation(location);
+		
+	}
+
+	@Override
 	public List<Area> getAreasFromOrganization(Organization organization) throws Exception {
 		return this.areaDao.getAreasFromOrganization(organization);
 		
