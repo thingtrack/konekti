@@ -18,8 +18,6 @@
 		<osgi:service ref="actionDao" interface="com.thingtrack.konekti.dao.api.ActionDao"/>
 		<osgi:service ref="addressDao" interface="com.thingtrack.konekti.dao.api.AddressDao"/>
 		<osgi:service ref="alarmDao" interface="com.thingtrack.konekti.dao.api.AlarmDao"/>
-		<osgi:service ref="alarmJobDao" interface="com.thingtrack.konekti.dao.api.AlarmJobDao"/>
-		<osgi:service ref="alarmTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTriggerTypeDao"/>
 		<osgi:service ref="alarmStatusDao" interface="com.thingtrack.konekti.dao.api.AlarmStatusDao"/>		
 		<osgi:service ref="alarmTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTypeDao"/>
 		<osgi:service ref="areaDao" interface="com.thingtrack.konekti.dao.api.AreaDao"/>
@@ -45,7 +43,9 @@
 		<osgi:service ref="invoiceLineStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineStatusDao"/>
 		<osgi:service ref="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao"/>
 		<osgi:service ref="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao"/>
-		<osgi:service ref="ivaDao" interface="com.thingtrack.konekti.dao.api.IvaDao"/>				
+		<osgi:service ref="ivaDao" interface="com.thingtrack.konekti.dao.api.IvaDao"/>		
+		<osgi:service ref="jobDao" interface="com.thingtrack.konekti.dao.api.JobDao"/>
+		<osgi:service ref="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao"/>				
 		<osgi:service ref="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao"/>
 		<osgi:service ref="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao"/>
 		<osgi:service ref="menuFolderResourceDao" interface="com.thingtrack.konekti.dao.api.MenuFolderResourceDao"/>

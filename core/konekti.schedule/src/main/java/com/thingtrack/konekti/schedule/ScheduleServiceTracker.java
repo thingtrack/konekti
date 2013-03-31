@@ -12,28 +12,28 @@ import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 
-import com.thingtrack.konekti.domain.AlarmJob;
+import com.thingtrack.konekti.domain.Job;
 
 public class ScheduleServiceTracker extends ServiceTracker {
 	public ScheduleServiceTracker(BundleContext context) {
-		super(context, AlarmJobApi.class.getName(), null);
+		super(context, JobApi.class.getName(), null);
 		
 	}	
 
 	@Override
 	public Object addingService(ServiceReference reference) {
-		AlarmJobApi alarmJobImpl = (AlarmJobApi) super.addingService(reference);
+		JobApi jobImpl = (JobApi) super.addingService(reference);
 		
-	    if (alarmJobImpl == null)
+	    if (jobImpl == null)
 	      return null;
 	 	    
-	    System.out.println("schedulling alarm job ...");
+	    System.out.println("schedulling job ...");
 	      
-	    // get alarm job configuration
-		AlarmJob alarmJob = null;
+	    // get job configuration
+		Job job = null;
 		
 	    try {
-	    	alarmJob = ScheduleActivator.getAlarmJob(alarmJobImpl.getGroup(), alarmJobImpl.getName());
+	    	job = ScheduleActivator.getJob(jobImpl.getGroup(), jobImpl.getName());
 	    }
 	    catch(Exception ex) {
 	    	ex.getMessage();
@@ -42,48 +42,48 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	    }
 	      
 	    JobDetail jobDetail = null;
-	    Integer locationId = null;
+	    Integer areaId = null;
 	    
-	    if (alarmJob.getLocation() != null)
-	    	locationId = alarmJob.getLocation().getLocationId();	    
+	    if (job.getArea() != null)
+	    	areaId = job.getArea().getAreaId();	    
 	    	
 	    try {
-	    	// create alarm job passing Location Id
-	    	jobDetail = JobBuilder.newJob(alarmJobImpl.getClass()).withIdentity(alarmJob.getAlarmName(), alarmJob.getAlarmGroup())
-	    				.usingJobData("locationId", locationId)
+	    	// create job passing area Id
+	    	jobDetail = JobBuilder.newJob(jobImpl.getClass()).withIdentity(job.getJobName(), job.getJobGroup())
+	    				.usingJobData("areaId", areaId)
 	    				.build();
 	      
-	    	// create alarm job trigger
-	    	Trigger trigger = configureTriggerJob(alarmJob);
+	    	// create job trigger
+	    	Trigger trigger = configureTriggerJob(job);
 	    		      
-	    	// schedule the alarm job associated to the trigger
+	    	// schedule the job associated to the trigger
 	    	ScheduleActivator.getScheduler().scheduleJob(jobDetail, trigger);
 	     
-	    	// add alarm job to scheduler collection
-	    	ScheduleActivator.getJobDetails().put(alarmJobImpl, jobDetail);	      
+	    	// add job to scheduler collection
+	    	ScheduleActivator.getJobDetails().put(jobImpl, jobDetail);	      
 	    } catch (Exception ex) {
 	    	ex.printStackTrace();
 	    	
 	    	return null;
 	    }
 	 	    
-    	System.out.println("alarm job scheduled ...");
+    	System.out.println("job scheduled ...");
     	
-	    return alarmJobImpl;
+	    return jobImpl;
 	 }
 	
 	 public void removedService(ServiceReference reference, Object service) {
-		 AlarmJobApi alarmJob = (AlarmJobApi) service;
+		 JobApi job = (JobApi) service;
 		 
-		 System.out.println("Unscheduling alarm job ");
+		 System.out.println("Unscheduling job ");
 		    
-	     JobDetail alarmJobDetail = ScheduleActivator.getJobDetails().get(alarmJob);
+	     JobDetail jobDetail = ScheduleActivator.getJobDetails().get(job);
 	    
-	     if (alarmJobDetail == null)
+	     if (jobDetail == null)
 	    	return;
 	    
 	     try {
-	    	 ScheduleActivator.getScheduler().deleteJob(alarmJobDetail.getKey());
+	    	 ScheduleActivator.getScheduler().deleteJob(jobDetail.getKey());
 	     } catch (SchedulerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,39 +92,41 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	    super.removedService(reference, service);
 	  }
 	 	
-	 private Trigger configureTriggerJob(AlarmJob alarmJob) {
+	 private Trigger configureTriggerJob(Job job) {
 		 TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 		 
 		 // base trigger configuration 
-		 triggerBuilder.withIdentity(alarmJob.getAlarmName(), alarmJob.getAlarmGroup());
+		 triggerBuilder.withIdentity(job.getJobName(), job.getJobGroup());
 		 
-		 if (alarmJob.getStartTime() != null)
-			 triggerBuilder.startAt(alarmJob.getStartTime());
-		 else
-			 triggerBuilder.startNow();
+		 if (job.getStartTime() != null)
+			 triggerBuilder.startAt(job.getStartTime());
+		 else {
+			 if (job.getActive())
+				 triggerBuilder.startNow();
+		 }
 
-		 if (alarmJob.getEndTime() != null)
-			 triggerBuilder.endAt(alarmJob.getEndTime());		 
+		 if (job.getEndTime() != null)
+			 triggerBuilder.endAt(job.getEndTime());		 
 			 
-		 triggerBuilder.withPriority(alarmJob.getAlarmTriggerPriority());
+		 triggerBuilder.withPriority(job.getJobTriggerPriority());
 		 
 		 // propietary trigger configuration
-		 if (alarmJob.getAlarmTriggerType().getCode().equals(AlarmJob.ALARM_TRIGGER_TYPE.SIMPLE.name())) {
+		 if (job.getJobTriggerType().getCode().equals(Job.JOB_TRIGGER_TYPE.SIMPLE.name())) {
 			 SimpleScheduleBuilder simpleScheduleBuilder = SimpleScheduleBuilder.simpleSchedule();
 			 
-			 if (alarmJob.getAlarmInterval() != null)
-				 simpleScheduleBuilder.withIntervalInSeconds(alarmJob.getAlarmInterval());
+			 if (job.getJobInterval() != null)
+				 simpleScheduleBuilder.withIntervalInSeconds(job.getJobInterval());
 			
-			 if (alarmJob.getRepeatCount() != null)
-				 simpleScheduleBuilder.withRepeatCount(alarmJob.getRepeatCount());
+			 if (job.getRepeatCount() != null)
+				 simpleScheduleBuilder.withRepeatCount(job.getRepeatCount());
 			 else
 				 simpleScheduleBuilder.repeatForever();
 			 
 		     triggerBuilder.withSchedule(simpleScheduleBuilder);
 				 
 		 }
-		 else if (alarmJob.getAlarmTriggerType().getCode().equals(AlarmJob.ALARM_TRIGGER_TYPE.CRON.name())) {
-			 CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(alarmJob.getCronExpression());
+		 else if (job.getJobTriggerType().getCode().equals(Job.JOB_TRIGGER_TYPE.CRON.name())) {
+			 CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(job.getCronExpression());
 			 
 			 triggerBuilder.withSchedule(cronScheduleBuilder);
 		 }

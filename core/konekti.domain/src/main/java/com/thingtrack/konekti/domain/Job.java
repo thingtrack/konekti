@@ -21,22 +21,22 @@ import javax.persistence.TemporalType;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="ALARM_JOB")
-public class AlarmJob implements Serializable {
+@Table(name="JOB")
+public class Job implements Serializable {
 	@Id
-	@Column(name="ALARM_JOB_ID")
+	@Column(name="JOB_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer alarmJobId;
+	private Integer jobId;
 
-	@Column(name="ALARM_NAME", nullable=false)
-	private String alarmName;
+	@Column(name="JOB_NAME", nullable=false)
+	private String jobName;
 
-	@Column(name="ALARM_GROUP", nullable=false)
-	private String alarmGroup;
+	@Column(name="JOB_GROUP", nullable=false)
+	private String jobGroup;
 		
 	@ManyToOne
-	@JoinColumn(name = "LOCATION_ID")
-	private Location location;
+	@JoinColumn(name = "AREA_ID")
+	private Area area;
 	
 	@Column(name="DESCRIPTION")
 	private String description;
@@ -49,22 +49,22 @@ public class AlarmJob implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	
-	@Column(name="ALARM_TRIGGER_PRIORITY", nullable=false)
-	private Integer alarmTriggerPriority = 5;
+	@Column(name="JOB_TRIGGER_PRIORITY", nullable=false)
+	private Integer jobTriggerPriority = 5;
 		
-	@Column(name="ALARM_INTERVAL")
-	private Integer alarmInterval = 1;
+	@Column(name="JOB_INTERVAL")
+	private Integer jobInterval = 1;
 	
 	@ManyToOne
-	@JoinColumn(name = "ALARM_TRIGGER_TYPE_ID", nullable = false)
-	private AlarmTriggerType alarmTriggerType;
+	@JoinColumn(name = "JOB_TRIGGER_TYPE_ID", nullable = false)
+	private JobTriggerType jobTriggerType;
 	
 	@Column(name="REPEAT_COUNT")
 	private Integer repeatCount;
 	
-	@Column(name="ALARM_CALENDAR")
+	@Column(name="JOB_CALENDAR")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Calendar alarmCalendar;
+	private Calendar jobCalendar;
 	
 	@Column(name="FUTURE", nullable=false)
 	private Boolean future = false;
@@ -85,51 +85,51 @@ public class AlarmJob implements Serializable {
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active = false;
 
-	public enum ALARM_TRIGGER_TYPE{		
+	public enum JOB_TRIGGER_TYPE{		
 		SIMPLE,
 		CRON
 	} 
 	
 	/**
-	 * @return the alarmJobId
+	 * @return the JobId
 	 */
-	public Integer getAlarmJobId() {
-		return alarmJobId;
+	public Integer getJobId() {
+		return jobId;
 	}
 
 	/**
-	 * @param alarmJobId the alarmJobId to set
+	 * @param jobId the jobId to set
 	 */
-	public void setAlarmJobId(Integer alarmJobId) {
-		this.alarmJobId = alarmJobId;
+	public void setJobId(Integer jobId) {
+		this.jobId = jobId;
 	}
 
 	/**
-	 * @return the alarmName
+	 * @return the jobName
 	 */
-	public String getAlarmName() {
-		return alarmName;
+	public String getJobName() {
+		return jobName;
 	}
 
 	/**
-	 * @param alarmName the alarmName to set
+	 * @param jobName the jobName to set
 	 */
-	public void setAlarmName(String alarmName) {
-		this.alarmName = alarmName;
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 
 	/**
-	 * @return the alarmGroup
+	 * @return the jobGroup
 	 */
-	public String getAlarmGroup() {
-		return alarmGroup;
+	public String getJobGroup() {
+		return jobGroup;
 	}
 
 	/**
-	 * @param alarmGroup the alarmGroup to set
+	 * @param jobGroup the jobGroup to set
 	 */
-	public void setAlarmGroup(String alarmGroup) {
-		this.alarmGroup = alarmGroup;
+	public void setJobGroup(String jobGroup) {
+		this.jobGroup = jobGroup;
 	}
 
 	/**
@@ -175,17 +175,17 @@ public class AlarmJob implements Serializable {
 	}
 
 	/**
-	 * @return the alarmInterval
+	 * @return the jobInterval
 	 */
-	public Integer getAlarmInterval() {
-		return alarmInterval;
+	public Integer getJobInterval() {
+		return jobInterval;
 	}
 
 	/**
-	 * @param alarmInterval the alarmInterval to set
+	 * @param jobInterval the jobInterval to set
 	 */
-	public void setAlarmInterval(Integer alarmInterval) {
-		this.alarmInterval = alarmInterval;
+	public void setJobInterval(Integer jobInterval) {
+		this.jobInterval = jobInterval;
 	}
 
 	/**
@@ -203,17 +203,17 @@ public class AlarmJob implements Serializable {
 	}
 
 	/**
-	 * @return the alarmCalendar
+	 * @return the jobCalendar
 	 */
-	public Calendar getAlarmCalendar() {
-		return alarmCalendar;
+	public Calendar getJobCalendar() {
+		return jobCalendar;
 	}
 
 	/**
-	 * @param alarmCalendar the alarmCalendar to set
+	 * @param jobCalendar the jobCalendar to set
 	 */
-	public void setAlarmCalendar(Calendar alarmCalendar) {
-		this.alarmCalendar = alarmCalendar;
+	public void setJobCalendar(Calendar jobCalendar) {
+		this.jobCalendar = jobCalendar;
 	}
 
 	/**
@@ -280,11 +280,11 @@ public class AlarmJob implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((alarmGroup == null) ? 0 : alarmGroup.hashCode());
+				+ ((jobGroup == null) ? 0 : jobGroup.hashCode());
 		result = prime * result
-				+ ((alarmJobId == null) ? 0 : alarmJobId.hashCode());
+				+ ((jobId == null) ? 0 : jobId.hashCode());
 		result = prime * result
-				+ ((alarmName == null) ? 0 : alarmName.hashCode());
+				+ ((jobName == null) ? 0 : jobName.hashCode());
 		return result;
 	}
 
@@ -299,21 +299,21 @@ public class AlarmJob implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AlarmJob other = (AlarmJob) obj;
-		if (alarmGroup == null) {
-			if (other.alarmGroup != null)
+		Job other = (Job) obj;
+		if (jobGroup == null) {
+			if (other.jobGroup != null)
 				return false;
-		} else if (!alarmGroup.equals(other.alarmGroup))
+		} else if (!jobGroup.equals(other.jobGroup))
 			return false;
-		if (alarmJobId == null) {
-			if (other.alarmJobId != null)
+		if (jobId == null) {
+			if (other.jobId != null)
 				return false;
-		} else if (!alarmJobId.equals(other.alarmJobId))
+		} else if (!jobId.equals(other.jobId))
 			return false;
-		if (alarmName == null) {
-			if (other.alarmName != null)
+		if (jobName == null) {
+			if (other.jobName != null)
 				return false;
-		} else if (!alarmName.equals(other.alarmName))
+		} else if (!jobName.equals(other.jobName))
 			return false;
 		return true;
 	}
@@ -323,36 +323,36 @@ public class AlarmJob implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "AlarmJob [alarmJobId=" + alarmJobId + ", alarmName="
-				+ alarmName + ", alarmGroup=" + alarmGroup + "]";
+		return "Job [jobId=" + jobId + ", jobName="
+				+ jobName + ", jobGroup=" + jobGroup + "]";
 	}
 
 	/**
-	 * @return the alarmTriggerType
+	 * @return the jobTriggerType
 	 */
-	public AlarmTriggerType getAlarmTriggerType() {
-		return alarmTriggerType;
+	public JobTriggerType getJobTriggerType() {
+		return jobTriggerType;
 	}
 
 	/**
-	 * @param alarmTriggerType the alarmTriggerType to set
+	 * @param jobTriggerType the jobTriggerType to set
 	 */
-	public void setAlarmTriggerType(AlarmTriggerType alarmTriggerType) {
-		this.alarmTriggerType = alarmTriggerType;
+	public void setJobTriggerType(JobTriggerType jobTriggerType) {
+		this.jobTriggerType = jobTriggerType;
 	}
 
 	/**
-	 * @return the alarmTriggerPriority
+	 * @return the jobTriggerPriority
 	 */
-	public Integer getAlarmTriggerPriority() {
-		return alarmTriggerPriority;
+	public Integer getJobTriggerPriority() {
+		return jobTriggerPriority;
 	}
 
 	/**
-	 * @param alarmTriggerPriority the alarmTriggerPriority to set
+	 * @param jobTriggerPriority the jobTriggerPriority to set
 	 */
-	public void setAlarmTriggerPriority(Integer alarmTriggerPriority) {
-		this.alarmTriggerPriority = alarmTriggerPriority;
+	public void setJobTriggerPriority(Integer jobTriggerPriority) {
+		this.jobTriggerPriority = jobTriggerPriority;
 	}
 
 	/**
@@ -384,17 +384,17 @@ public class AlarmJob implements Serializable {
 	}
 
 	/**
-	 * @return the location
+	 * @return the area
 	 */
-	public Location getLocation() {
-		return location;
+	public Area getArea() {
+		return area;
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param area the area to set
 	 */
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 

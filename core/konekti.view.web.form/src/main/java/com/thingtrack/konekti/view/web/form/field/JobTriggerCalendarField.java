@@ -9,12 +9,12 @@ import com.vaadin.ui.DateField;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class TriggerCalendarField  extends CustomField {
+public class JobTriggerCalendarField  extends CustomField {
 	private VerticalLayout mainLayout;
-	private Calendar alarmCalendar;
-	private DateField alarmCalendarField;
+	private Calendar jobCalendar;
+	private DateField jobCalendarField;
 	
-	public TriggerCalendarField() {
+	public JobTriggerCalendarField() {
 		mainLayout = buildMainLayout();
 		setCompositionRoot(mainLayout);
 	}
@@ -27,25 +27,25 @@ public class TriggerCalendarField  extends CustomField {
 	
 	@Override
 	public Object getValue() {
-		if (alarmCalendarField.getValue() == null)
+		if (jobCalendarField.getValue() == null)
 			return null;
 			
 		Calendar cal = Calendar.getInstance();
-		cal.setTime((Date)alarmCalendarField.getValue());
+		cal.setTime((Date)jobCalendarField.getValue());
 				
 		return cal;
 	}
 	
 	@Override
 	public void setPropertyDataSource(Property newDataSource) {
-		alarmCalendar = (Calendar)newDataSource.getValue();
+		jobCalendar = (Calendar)newDataSource.getValue();
 		
-		if (alarmCalendar == null) {
+		if (jobCalendar == null) {
 			super.setPropertyDataSource(newDataSource);
 			return;
 		}
 		
-		alarmCalendarField.setValue(alarmCalendar.getTime());
+		jobCalendarField.setValue(jobCalendar.getTime());
 		
 		super.setPropertyDataSource(newDataSource);
 	}
@@ -56,16 +56,16 @@ public class TriggerCalendarField  extends CustomField {
 		mainLayout.setSpacing(true);
 
 		// Map definition
-		alarmCalendarField = new DateField();
-		alarmCalendarField = new DateField();
-		alarmCalendarField.setCaption("Alarma Calendario");
-		alarmCalendarField.setImmediate(false);
-		alarmCalendarField.setInvalidAllowed(false);
-		alarmCalendarField.setResolution(DateField.RESOLUTION_SEC);
-		alarmCalendarField.setWidth("160px");
-		alarmCalendarField.setHeight("-1px");
+		jobCalendarField = new DateField();
+		jobCalendarField = new DateField();
+		jobCalendarField.setCaption("Job Calendario");
+		jobCalendarField.setImmediate(false);
+		jobCalendarField.setInvalidAllowed(false);
+		jobCalendarField.setResolution(DateField.RESOLUTION_SEC);
+		jobCalendarField.setWidth("160px");
+		jobCalendarField.setHeight("-1px");
 
-		mainLayout.addComponent(alarmCalendarField);
+		mainLayout.addComponent(jobCalendarField);
 		
 		return mainLayout;
 	}

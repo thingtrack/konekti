@@ -11,17 +11,17 @@ import org.springframework.beans.factory.annotation.Configurable;
 import com.thingtrack.konekti.domain.Alarm;
 import com.thingtrack.konekti.domain.AlarmStatus;
 import com.thingtrack.konekti.domain.AlarmType;
-import com.thingtrack.konekti.domain.Location;
-import com.thingtrack.konekti.schedule.AlarmJobApi;
+import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.schedule.JobApi;
 import com.thingtrack.konekti.service.api.AlarmService;
 import com.thingtrack.konekti.service.api.AlarmStatusService;
 import com.thingtrack.konekti.service.api.AlarmTypeService;
-import com.thingtrack.konekti.service.api.LocationService;
+import com.thingtrack.konekti.service.api.AreaService;
 
 @Configurable
-public class AlarmTest implements AlarmJobApi {
-	private static final String ALARM_JOB_NAME = "test";
-	private static final String ALARM_JOB_GROUP = "thingtrack";
+public class JobTest implements JobApi {
+	private static final String JOB_NAME = "test";
+	private static final String JOB_GROUP = "thingtrack";
 	
 	@Autowired(required=false)
 	private AlarmService alarmService;
@@ -33,35 +33,32 @@ public class AlarmTest implements AlarmJobApi {
 	private AlarmStatusService alarmStatusService;
 	
 	@Autowired(required=false)
-	private LocationService locationService;
+	private AreaService areaService;
 	
-    public AlarmTest() {
+    public JobTest() {
   	
     }
 
 	@Override
 	public String getName() {
-		return ALARM_JOB_NAME;
+		return JOB_NAME;
 	}
 
 	@Override
 	public String getGroup() {
-		return ALARM_JOB_GROUP;
+		return JOB_GROUP;
 	}
 
 	@Override
-	public void execute(JobExecutionContext context) throws JobExecutionException {
-		Location location;
-		
+	public void execute(JobExecutionContext context) throws JobExecutionException {		
 		JobDataMap dataMap = context.getJobDetail().getJobDataMap();
 
-	    Integer locationId = dataMap.getInt("locationId");
+	    Integer areaId = dataMap.getInt("areaId");
 	    
+		Area area = null;
 		try {
-			if (locationId != null)
-				location = locationService.get(locationId);				
-			else
-				location = locationService.get(1);
+			if (areaId != null)
+				area = areaService.get(areaId);
 		}
 		catch (Exception e) {
 			throw new JobExecutionException(e.getMessage());
@@ -87,9 +84,9 @@ public class AlarmTest implements AlarmJobApi {
 		
 		Alarm alarm = new Alarm();
 		
-		alarm.setLocation(location);
-		alarm.setAlarmName(ALARM_JOB_NAME);
-		alarm.setAlarmGroup(ALARM_JOB_GROUP);
+		alarm.setArea(area);
+		alarm.setAlarmName(JOB_NAME);
+		alarm.setAlarmGroup(JOB_GROUP);
 		alarm.setAlarmType(alarmType);
 		alarm.setAlarmStatus(alarmStatus);
 		alarm.setAlarmDate(new Date());

@@ -40,8 +40,6 @@
 	<bean id="actionDao" class="com.thingtrack.konekti.dao.impl.internal.ActionDaoImpl" />
 	<bean id="addressDao" class="com.thingtrack.konekti.dao.impl.internal.AddressDaoImpl" />
 	<bean id="alarmDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmDaoImpl" />
-	<bean id="alarmJobDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmJobDaoImpl" />
-	<bean id="alarmTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTriggerTypeDaoImpl" />
 	<bean id="alarmStatusDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmStatusDaoImpl" />
 	<bean id="alarmTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTypeDaoImpl" />
 	<bean id="areaDao" class="com.thingtrack.konekti.dao.impl.internal.AreaDaoImpl" />
@@ -67,7 +65,9 @@
 	<bean id="invoiceLineStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceLineStatusDaoImpl" />
 	<bean id="invoiceStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceStatusDaoImpl" />		
 	<bean id="invoiceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceTypeDaoImpl" />
-	<bean id="ivaDao" class="com.thingtrack.konekti.dao.impl.internal.IvaDaoImpl" />	
+	<bean id="ivaDao" class="com.thingtrack.konekti.dao.impl.internal.IvaDaoImpl" />
+	<bean id="jobDao" class="com.thingtrack.konekti.dao.impl.internal.JobDaoImpl" />
+	<bean id="jobTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobTriggerTypeDaoImpl" />		
 	<bean id="locationDao" class="com.thingtrack.konekti.dao.impl.internal.LocationDaoImpl" />
 	<bean id="locationTypeDao" class="com.thingtrack.konekti.dao.impl.internal.LocationTypeDaoImpl" />	
 	<bean id="offerDao" class="com.thingtrack.konekti.dao.impl.internal.OfferDaoImpl" />

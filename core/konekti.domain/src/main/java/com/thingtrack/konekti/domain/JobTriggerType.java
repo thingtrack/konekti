@@ -15,12 +15,12 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="ALARM_TRIGGER_TYPE")
-public class AlarmTriggerType implements Serializable {
+@Table(name="JOB_TRIGGER_TYPE")
+public class JobTriggerType implements Serializable {
 	@Id
-	@Column(name="ALARM_TRIGGER_TYPE_ID")
+	@Column(name="JOB_TRIGGER_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer alarmTriggerTypeId;
+	private Integer jobTriggerTypeId;
 	
 	@Column(name="CODE")
 	private String code;
@@ -29,17 +29,17 @@ public class AlarmTriggerType implements Serializable {
 	private String description;
 	
 	/**
-	 * @return the alarmTriggerTypeId
+	 * @return the jobTriggerTypeId
 	 */
-	public Integer getAlarmTriggerTypeId() {
-		return alarmTriggerTypeId;
+	public Integer getJobTriggerTypeId() {
+		return jobTriggerTypeId;
 	}
 
 	/**
-	 * @param alarmTriggerTypeId the alarmTriggerTypeId to set
+	 * @param jobTriggerTypeId the jobTriggerTypeId to set
 	 */
-	public void setAlarmTriggerId(Integer alarmTriggerTypeId) {
-		this.alarmTriggerTypeId = alarmTriggerTypeId;
+	public void setJobTriggerId(Integer jobTriggerTypeId) {
+		this.jobTriggerTypeId = jobTriggerTypeId;
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class AlarmTriggerType implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((alarmTriggerTypeId == null) ? 0 : alarmTriggerTypeId.hashCode());
+				+ ((jobTriggerTypeId == null) ? 0 : jobTriggerTypeId.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		return result;
 	}
@@ -94,11 +94,11 @@ public class AlarmTriggerType implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AlarmTriggerType other = (AlarmTriggerType) obj;
-		if (alarmTriggerTypeId == null) {
-			if (other.alarmTriggerTypeId != null)
+		JobTriggerType other = (JobTriggerType) obj;
+		if (jobTriggerTypeId == null) {
+			if (other.jobTriggerTypeId != null)
 				return false;
-		} else if (!alarmTriggerTypeId.equals(other.alarmTriggerTypeId))
+		} else if (!jobTriggerTypeId.equals(other.jobTriggerTypeId))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -113,7 +113,7 @@ public class AlarmTriggerType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "AlarmJobType [alarmJobTypeId=" + alarmTriggerTypeId + ", code="
+		return "jobType [jobTypeId=" + jobTriggerTypeId + ", code="
 				+ code + ", description=" + description + "]";
 	}
 }

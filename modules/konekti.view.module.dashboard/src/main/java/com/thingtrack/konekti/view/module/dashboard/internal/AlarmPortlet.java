@@ -38,9 +38,9 @@ public class AlarmPortlet extends KonektiPortlet {
 		// STEP 01: create grid view for slide Organization View
 		try {
 			dgAlarm.setBindingSource(bsAlarm);
-			dgAlarm.setVisibleColumns(new String[] { "location.name", "alarmType.description", 
+			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmType.description", 
 					                                 "message",	"alarmDate", "alarmStatus.description" });
-			dgAlarm.setColumnHeaders(new String[] { "Ubicación",  "Tipo", "Mensaje",
+			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo",  "Tipo", "Mensaje",
 													"Fecha Alarma", "Estado" });
 
 		} catch (Exception ex) {
@@ -56,7 +56,7 @@ public class AlarmPortlet extends KonektiPortlet {
 
 			bsAlarm.addNestedContainerProperty("alarmType.description");
 			bsAlarm.addNestedContainerProperty("alarmStatus.description");
-			bsAlarm.addNestedContainerProperty("location.name");
+			bsAlarm.addNestedContainerProperty("area.description");
 			
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();

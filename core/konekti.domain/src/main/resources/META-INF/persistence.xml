@@ -12,9 +12,7 @@
 	    <class>com.thingtrack.konekti.domain.Address</class>
 	    <class>com.thingtrack.konekti.domain.Agent</class>
 	    <class>com.thingtrack.konekti.domain.Alarm</class>
-	    <class>com.thingtrack.konekti.domain.AlarmJob</class>
-	    <class>com.thingtrack.konekti.domain.AlarmStatus</class>
-	    <class>com.thingtrack.konekti.domain.AlarmTriggerType</class>	    
+	    <class>com.thingtrack.konekti.domain.AlarmStatus</class>	    
 	    <class>com.thingtrack.konekti.domain.AlarmType</class>
 	    <class>com.thingtrack.konekti.domain.Area</class>
 	    <class>com.thingtrack.konekti.domain.AreaType</class>	    
@@ -40,6 +38,8 @@
 		<class>com.thingtrack.konekti.domain.InvoiceStatus</class>
 		<class>com.thingtrack.konekti.domain.InvoiceType</class>
 		<class>com.thingtrack.konekti.domain.Iva</class>
+	    <class>com.thingtrack.konekti.domain.Job</class>
+	    <class>com.thingtrack.konekti.domain.JobTriggerType</class>		
 	    <class>com.thingtrack.konekti.domain.Location</class>
 	    <class>com.thingtrack.konekti.domain.LocationType</class>
 	    <class>com.thingtrack.konekti.domain.MenuWorkbench</class>

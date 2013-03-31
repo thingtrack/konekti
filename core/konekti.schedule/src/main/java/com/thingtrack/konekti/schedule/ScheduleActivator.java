@@ -15,12 +15,12 @@ import org.quartz.SchedulerException;
 import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 
-import com.thingtrack.konekti.domain.AlarmJob;
-import com.thingtrack.konekti.service.api.AlarmJobService;
+import com.thingtrack.konekti.domain.Job;
+import com.thingtrack.konekti.service.api.JobService;
 
 public class ScheduleActivator implements BundleActivator {
 	private BundleContext bundleContext;
-	private static AlarmJobService alarmJobService;
+	private static JobService jobService;
 	
 	private static Scheduler scheduler;
 	private ScheduleServiceTracker scheduleServiceTracker;
@@ -28,15 +28,15 @@ public class ScheduleActivator implements BundleActivator {
 	private ServiceRegistration schedulerService;
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static HashMap<AlarmJobApi, JobDetail> jobdetails = new HashMap();
+	private static HashMap<JobApi, JobDetail> jobdetails = new HashMap();
 	
 	private static String JOBLISTENER_NAME = "thingtrack_listener";
 	
 	public void start(BundleContext context) throws Exception {
 		this.bundleContext = context;
 		
-		// get alarm job service
-		alarmJobService = getAlarmJobService();
+		// get job service
+		jobService = getJobService();
 		
 		// create scheduler 
 		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
@@ -48,10 +48,10 @@ public class ScheduleActivator implements BundleActivator {
 			scheduler.getListenerManager().addJobListener(new JobListener() {				
 				@Override
 				public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
-					// get alarm job executed from scheduler
-					AlarmJob alarmJob = null;
+					// get job executed from scheduler
+					Job job = null;
 					try {
-						alarmJob = getAlarmJob(context.getJobDetail().getKey().getGroup(), context.getJobDetail().getKey().getName());
+						job = getJob(context.getJobDetail().getKey().getGroup(), context.getJobDetail().getKey().getName());
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -62,9 +62,9 @@ public class ScheduleActivator implements BundleActivator {
 					// set last execution and control if exist any error
 					try {
 						if (jobException == null)
-							alarmJobService.setLastExecution(alarmJob, false);
+							jobService.setLastExecution(job, false);
 						else
-							alarmJobService.setLastExecution(alarmJob, true);
+							jobService.setLastExecution(job, true);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -122,26 +122,26 @@ public class ScheduleActivator implements BundleActivator {
 		
 	}
 
-	public static HashMap<AlarmJobApi, JobDetail> getJobDetails() {
+	public static HashMap<JobApi, JobDetail> getJobDetails() {
 		return jobdetails;
 		
 	}
 	
-	 private AlarmJobService getAlarmJobService() {
-		 ServiceReference alarmJobServiceReference = bundleContext.getServiceReference(AlarmJobService.class.getName());
+	 private JobService getJobService() {
+		 ServiceReference jobServiceReference = bundleContext.getServiceReference(JobService.class.getName());
 		 
-		 if(alarmJobServiceReference != null) {
-			 AlarmJobService alarmJobService = (AlarmJobService)bundleContext.getService(alarmJobServiceReference);
-			 if(alarmJobService != null)
-			 	return alarmJobService;
+		 if(jobServiceReference != null) {
+			 JobService jobService = (JobService)bundleContext.getService(jobServiceReference);
+			 if(jobService != null)
+			 	return jobService;
 				 
 		 }
 		 
 		 return null;
 	 }
 	 
-	 public static AlarmJob getAlarmJob(String group, String name) throws Exception {
-		 return alarmJobService.getByGroupName(group, name);
+	 public static Job getJob(String group, String name) throws Exception {
+		 return jobService.getByGroupName(group, name);
 		 		 
 	 }
 }

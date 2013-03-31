@@ -72,12 +72,12 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 			
 			bsAlarm.addNestedContainerProperty("alarmType.description");
 			bsAlarm.addNestedContainerProperty("alarmStatus.description");
-			bsAlarm.addNestedContainerProperty("location.name");
+			bsAlarm.addNestedContainerProperty("area.description");
 			
 			dgAlarm.setBindingSource(bsAlarm);
 			
-			dgAlarm.setVisibleColumns(new String[] { "alarmGroup", "alarmName", "message", "alarmType.description", "alarmStatus.description", "location.name", "alarmDate" });
-			dgAlarm.setColumnHeaders(new String[] { "Grupo Alarma", "Nombre Alarma", "Mensaje", "Tipo", "Estado", "Ubicación", "Fecha Alarma" });
+			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmGroup", "alarmName","alarmType.description", "message", "alarmStatus.description", "alarmDate" });
+			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo", "Grupo Alarma", "Nombre Alarma", "Tipo", "Mensaje", "Estado", "Fecha Alarma" });
 
 		} catch (Exception ex) {
 			ex.getMessage();

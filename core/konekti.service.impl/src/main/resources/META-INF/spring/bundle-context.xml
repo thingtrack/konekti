@@ -37,9 +37,7 @@
         
 	<bean id="actionService" class="com.thingtrack.konekti.service.impl.internal.ActionServiceImpl"/>
 	<bean id="addressService" class="com.thingtrack.konekti.service.impl.internal.AddressServiceImpl"/>
-	<bean id="alarmService" class="com.thingtrack.konekti.service.impl.internal.AlarmServiceImpl"/>
-	<bean id="alarmJobService" class="com.thingtrack.konekti.service.impl.internal.AlarmJobServiceImpl"/>
-	<bean id="alarmTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.AlarmTriggerTypeServiceImpl"/>  
+	<bean id="alarmService" class="com.thingtrack.konekti.service.impl.internal.AlarmServiceImpl"/>  
 	<bean id="alarmStatusService" class="com.thingtrack.konekti.service.impl.internal.AlarmStatusServiceImpl"/>
 	<bean id="alarmTypeService" class="com.thingtrack.konekti.service.impl.internal.AlarmTypeServiceImpl"/>
 	<bean id="areaService" class="com.thingtrack.konekti.service.impl.internal.AreaServiceImpl"/>
@@ -65,7 +63,9 @@
 	<bean id="invoiceLineStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceLineStatusServiceImpl"/>	
 	<bean id="invoiceStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceStatusServiceImpl"/>
 	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>
-	<bean id="ivaService" class="com.thingtrack.konekti.service.impl.internal.IvaServiceImpl"/>				
+	<bean id="ivaService" class="com.thingtrack.konekti.service.impl.internal.IvaServiceImpl"/>
+	<bean id="jobService" class="com.thingtrack.konekti.service.impl.internal.JobServiceImpl"/>
+	<bean id="jobTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.JobTriggerTypeServiceImpl"/>					
 	<bean id="locationService" class="com.thingtrack.konekti.service.impl.internal.LocationServiceImpl"/>					 					
 	<bean id="locationTypeService" class="com.thingtrack.konekti.service.impl.internal.LocationTypeServiceImpl"/>
 	<bean id="menuFolderResourceService" class="com.thingtrack.konekti.service.impl.internal.MenuFolderResourceServiceImpl"/>
