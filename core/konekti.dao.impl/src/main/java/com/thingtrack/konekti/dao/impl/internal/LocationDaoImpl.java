@@ -46,4 +46,5 @@ public class LocationDaoImpl extends JpaDao<Location, Integer> implements Locati
 				.setParameter("organization", organization).getResultList();
 		
 	}
+
 }

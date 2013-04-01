@@ -67,6 +67,12 @@ public class Supplier extends Agent implements Serializable {
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
 	
+	@ManyToMany
+	@JoinTable(name="SUPPLIER_AREA",
+			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
+	private List<Area> areas = new ArrayList<Area>();
+	
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
 	
@@ -180,5 +186,19 @@ public class Supplier extends Agent implements Serializable {
 	 */
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * @return the areas
+	 */
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * @param areas the areas to set
+	 */
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 }

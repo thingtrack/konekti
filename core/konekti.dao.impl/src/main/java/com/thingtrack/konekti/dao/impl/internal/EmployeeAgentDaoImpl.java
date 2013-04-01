@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.api.EmployeeAgentDao;
 import com.thingtrack.konekti.dao.template.JpaDao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -81,4 +83,39 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 		return (EmployeeAgent) query.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Location> getAllLocationByOrganization(Organization organization, EmployeeAgent employeeAgent) throws Exception {
+		
+		String queryString = "SELECT lc";
+		queryString += " FROM " + getEntityName() + " em";
+		queryString += " JOIN em.locations lc";
+		queryString += " JOIN lc.organizations org";
+		queryString += " WHERE org.organizationId = :organizationId";
+		queryString += " AND em.agentId = :agentId";
+
+		Query query = (Query) getEntityManager().createQuery(queryString)
+		.setParameter("organizationId", organization.getOrganizationId())
+		.setParameter("agentId", employeeAgent.getAgentId());
+
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Area> getAllLocationByLocation(Location location, EmployeeAgent employeeAgent) throws Exception {
+		
+		String queryString = "SELECT ar";
+		queryString += " FROM " + getEntityName() + " em";
+		queryString += " JOIN em.areas ar";
+		queryString += " JOIN ar.location lc";
+		queryString += " WHERE lc.locationId = :locationId";
+		queryString += " AND em.agentId = :agentId";
+
+		Query query = (Query) getEntityManager().createQuery(queryString)
+		.setParameter("locationId", location.getLocationId())
+		.setParameter("agentId", employeeAgent.getAgentId());
+
+		return query.getResultList();
+	}
 }

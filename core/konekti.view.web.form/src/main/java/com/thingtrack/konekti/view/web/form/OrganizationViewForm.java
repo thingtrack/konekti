@@ -49,10 +49,6 @@ public class OrganizationViewForm extends CustomComponent {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
 	private ChildOrganizationCollectionField childOrganizationCollectionField;
 	private LocationCollectionField locationCollectionField;
 	

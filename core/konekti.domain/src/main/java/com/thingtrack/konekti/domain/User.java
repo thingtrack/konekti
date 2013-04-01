@@ -14,10 +14,8 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,25 +51,7 @@ public class User implements Serializable {
 			   joinColumns=@JoinColumn(name="USER_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ROLE_ID"))
 	private List<Role> roles;
-			
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-	@JoinTable(name="USER_ORGANIZATION",
-			   joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))	
-	private List<Organization> organizations = new ArrayList<Organization>();
-	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-	@JoinTable(name="USER_LOCATION",
-			   joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))	
-	private List<Location> locations = new ArrayList<Location>();
-	
-	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
-	@JoinTable(name="USER_AREA",
-			   joinColumns=@JoinColumn(name="USER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))	
-	private List<Area> areas = new ArrayList<Area>();
-	
+
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;
 	
@@ -292,48 +272,6 @@ public class User implements Serializable {
 	 */
 	public void setDefaultArea(Area defaultArea) {
 		this.defaultArea = defaultArea;
-	}
-
-	/**
-	 * @return the organizations
-	 */
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	/**
-	 * @param organizations the organizations to set
-	 */
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	/**
-	 * @return the locations
-	 */
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
-
-	/**
-	 * @return the areas
-	 */
-	public List<Area> getAreas() {
-		return areas;
-	}
-
-	/**
-	 * @param areas the areas to set
-	 */
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
 	}
 
 }

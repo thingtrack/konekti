@@ -3,8 +3,10 @@ package com.thingtrack.konekti.dao.api;
 import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -18,5 +20,7 @@ public interface EmployeeAgentDao extends Dao<EmployeeAgent, Integer> {
 	public EmployeeAgent getByUser(User user) throws Exception;
 	public List<EmployeeAgent> getByType(Organization organization, EmployeeAgentType employeeAgentType) throws Exception;
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception;
+	public List<Location> getAllLocationByOrganization(Organization organization, EmployeeAgent employeeAgent) throws Exception;
+	public List<Area> getAllLocationByLocation(Location location, EmployeeAgent employeeAgent) throws Exception;
 	 
 }

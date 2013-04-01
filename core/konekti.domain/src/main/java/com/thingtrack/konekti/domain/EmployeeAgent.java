@@ -83,7 +83,13 @@ public class EmployeeAgent extends Agent implements Serializable {
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
-		
+
+	@ManyToMany
+	@JoinTable(name="EMPLOYEE_AGENT_AREA",
+			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
+	private List<Area> areas = new ArrayList<Area>();
+	
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
 	
@@ -280,6 +286,20 @@ public class EmployeeAgent extends Agent implements Serializable {
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+	/**
+	 * @return the areas
+	 */
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * @param areas the areas to set
+	 */
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 
 }
