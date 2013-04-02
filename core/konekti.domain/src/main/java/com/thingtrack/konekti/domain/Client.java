@@ -59,7 +59,7 @@ public class Client extends Agent implements Serializable {
 	@JoinTable(name = "CLIENT_ORGANIZATION", 
 			   joinColumns = @JoinColumn(name = "CLIENT_ID"), 
 			   inverseJoinColumns = @JoinColumn(name = "ORGANIZATION_ID"))
-	private List<Organization> organizations;
+	private List<Organization> organizations = new ArrayList<Organization>();
 
 	@ManyToMany
 	@JoinTable(name="CLIENT_LOCATION",

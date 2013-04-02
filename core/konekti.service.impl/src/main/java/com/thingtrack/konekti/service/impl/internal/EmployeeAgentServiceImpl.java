@@ -76,12 +76,12 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	}
 
 	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, EmployeeAgent employeeAgent) throws Exception {
-		return this.employeeAgentDao.getAllLocationByOrganization(organization, employeeAgent);
+	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
+		return this.employeeAgentDao.getAllLocationByOrganization(organization, agentId);
 	}
 	
 	@Override
-	public List<Area> getAllLocationByLocation(Location location, EmployeeAgent employeeAgent) throws Exception {
-		return this.employeeAgentDao.getAllLocationByLocation(location, employeeAgent);
+	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
+		return this.employeeAgentDao.getAllAreaByLocation(location, agentId);
 	}
 }

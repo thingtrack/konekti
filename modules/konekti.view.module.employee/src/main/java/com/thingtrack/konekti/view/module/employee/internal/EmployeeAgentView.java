@@ -321,8 +321,7 @@ public class EmployeeAgentView extends AbstractView
 		// dgEmployee
 		dgEmployeeAgent = new DataGridView() {
 		    @Override
-		    protected String formatPropertyValue(Object rowId,
-		            Object colId, Property property) {
+		    protected String formatPropertyValue(Object rowId, Object colId, Property property) {
 		    	// Format by property type
 		        if (property.getType() == Date.class && property.getValue() != null) {
 		            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");

@@ -15,6 +15,8 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
@@ -31,4 +33,6 @@ public interface SupplierService {
 	public void delete(Supplier supplier) throws Exception;
 	public Supplier createNewSupplier(Organization organization) throws Exception;
 	public Supplier getByUser(User user) throws Exception;
+	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
+	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
 }

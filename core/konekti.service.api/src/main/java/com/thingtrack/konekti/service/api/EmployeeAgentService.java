@@ -22,6 +22,6 @@ public interface EmployeeAgentService {
 	public EmployeeAgent getByUser(User user) throws Exception;
 	public List<EmployeeAgent> getDrivers(Organization organizatio) throws Exception;
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception;
-	public List<Location> getAllLocationByOrganization(Organization organization, EmployeeAgent employeeAgent) throws Exception;
-	public List<Area> getAllLocationByLocation(Location location, EmployeeAgent employeeAgent) throws Exception;
+	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
+	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
 }

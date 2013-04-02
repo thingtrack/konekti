@@ -85,7 +85,7 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, EmployeeAgent employeeAgent) throws Exception {
+	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
 		
 		String queryString = "SELECT lc";
 		queryString += " FROM " + getEntityName() + " em";
@@ -96,14 +96,14 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 
 		Query query = (Query) getEntityManager().createQuery(queryString)
 		.setParameter("organizationId", organization.getOrganizationId())
-		.setParameter("agentId", employeeAgent.getAgentId());
+		.setParameter("agentId", agentId);
 
 		return query.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Area> getAllLocationByLocation(Location location, EmployeeAgent employeeAgent) throws Exception {
+	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
 		
 		String queryString = "SELECT ar";
 		queryString += " FROM " + getEntityName() + " em";
@@ -114,7 +114,7 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 
 		Query query = (Query) getEntityManager().createQuery(queryString)
 		.setParameter("locationId", location.getLocationId())
-		.setParameter("agentId", employeeAgent.getAgentId());
+		.setParameter("agentId", agentId);
 
 		return query.getResultList();
 	}

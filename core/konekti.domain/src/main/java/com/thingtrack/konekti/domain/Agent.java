@@ -18,7 +18,7 @@ import javax.persistence.OneToOne;
 @SuppressWarnings("serial")
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-public class Agent implements Serializable {
+public abstract class Agent implements Serializable {
 	@Id
 	@Column(name = "AGENT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,6 +56,18 @@ public class Agent implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="USER_ID")		
 	private User user;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")
+	private Organization defaultOrganization;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_LOCATION_ID")
+	private Location defaultLocation;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_AREA_ID")
+	private Area defaultArea;
 	
 	/**
 	 * @return the agentId
@@ -248,5 +260,47 @@ public class Agent implements Serializable {
 		} else if (!agentId.equals(other.agentId))
 			return false;
 		return true;
+	}
+
+	/**
+	 * @return the defaultOrganization
+	 */
+	public Organization getDefaultOrganization() {
+		return defaultOrganization;
+	}
+
+	/**
+	 * @param defaultOrganization the defaultOrganization to set
+	 */
+	public void setDefaultOrganization(Organization defaultOrganization) {
+		this.defaultOrganization = defaultOrganization;
+	}
+
+	/**
+	 * @return the defaultLocation
+	 */
+	public Location getDefaultLocation() {
+		return defaultLocation;
+	}
+
+	/**
+	 * @param defaultLocation the defaultLocation to set
+	 */
+	public void setDefaultLocation(Location defaultLocation) {
+		this.defaultLocation = defaultLocation;
+	}
+
+	/**
+	 * @return the defaultArea
+	 */
+	public Area getDefaultArea() {
+		return defaultArea;
+	}
+
+	/**
+	 * @param defaultArea the defaultArea to set
+	 */
+	public void setDefaultArea(Area defaultArea) {
+		this.defaultArea = defaultArea;
 	}
 }

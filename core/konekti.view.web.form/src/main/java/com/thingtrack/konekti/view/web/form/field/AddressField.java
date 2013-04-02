@@ -139,7 +139,7 @@ public class AddressField extends CustomField {
 		addressTextField = new LocationTextField<GeocodedLocation>(googleGeocoder, GeocodedLocation.class, "Dirección");
 		addressTextField.setWidth("100%");
 		addressTextField.setHeight("-1px");
-		addressTextField.setRequired(true);
+		//addressTextField.setRequired(true);
 		addressTextField.setRequiredError(addressTextField.getCaption() + " es un campo requerido");
 		addressTextField.setImmediate(true);
 		

@@ -24,7 +24,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -55,24 +55,21 @@ public class User implements Serializable {
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;
 	
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")
-	private Organization defaultOrganization;
-	
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_LOCATION_ID")
-	private Location defaultLocation;
-	
-	@ManyToOne
-	@JoinColumn(name="DEFAULT_AREA_ID")
-	private Area defaultArea;
-	
 	@Column(name="COMMENT", length=256)
 	private String comment;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
 
+	@OneToOne(mappedBy="user")
+	private EmployeeAgent employeeAgent;
+
+	@OneToOne(mappedBy="user")
+	private Client client;
+
+	@OneToOne(mappedBy="user")
+	private Supplier supplier;
+	
 	public User() {
 		
 	}
@@ -233,45 +230,45 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the defaultOrganization
+	 * @return the employeeAgent
 	 */
-	public Organization getDefaultOrganization() {
-		return defaultOrganization;
+	public EmployeeAgent getEmployeeAgent() {
+		return employeeAgent;
 	}
 
 	/**
-	 * @param defaultOrganization the defaultOrganization to set
+	 * @param employeeAgent the employeeAgent to set
 	 */
-	public void setDefaultOrganization(Organization defaultOrganization) {
-		this.defaultOrganization = defaultOrganization;
+	public void setEmployeeAgent(EmployeeAgent employeeAgent) {
+		this.employeeAgent = employeeAgent;
 	}
 
 	/**
-	 * @return the defaultLocation
+	 * @return the client
 	 */
-	public Location getDefaultLocation() {
-		return defaultLocation;
+	public Client getClient() {
+		return client;
 	}
 
 	/**
-	 * @param defaultLocation the defaultLocation to set
+	 * @param client the client to set
 	 */
-	public void setDefaultLocation(Location defaultLocation) {
-		this.defaultLocation = defaultLocation;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	/**
-	 * @return the defaultArea
+	 * @return the supplier
 	 */
-	public Area getDefaultArea() {
-		return defaultArea;
+	public Supplier getSupplier() {
+		return supplier;
 	}
 
 	/**
-	 * @param defaultArea the defaultArea to set
+	 * @param supplier the supplier to set
 	 */
-	public void setDefaultArea(Area defaultArea) {
-		this.defaultArea = defaultArea;
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 }

@@ -478,7 +478,6 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private void loadWorkbenchContext(User user) throws Exception {
 		Locale defaultLocale = null;
 	
-	
 		// create locale for employee agent
 		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
 			
@@ -486,18 +485,40 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		String country = localeParams[1];
 		
 		defaultLocale = new Locale(language, country);
-		
-		
-		// konekti context
-		workbenchContext = new WorkbenchContext(
-				user.getDefaultOrganization(),
-				user.getDefaultLocation(),
-				user.getDefaultArea(),
-				user,
-				defaultLocale,				
-				toolbarManager,
-				resourceManager);
-
+				
+		if (user.getEmployeeAgent() != null) {
+			// employee konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getEmployeeAgent().getDefaultOrganization(),
+					user.getEmployeeAgent().getDefaultLocation(),
+					user.getEmployeeAgent().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
+		else if (user.getClient() != null) {
+			// client konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getClient().getDefaultOrganization(),
+					user.getClient().getDefaultLocation(),
+					user.getClient().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
+		else if (user.getSupplier() != null) {
+			// supplier konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getSupplier().getDefaultOrganization(),
+					user.getSupplier().getDefaultLocation(),
+					user.getSupplier().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
 	}
 	
 	@Override
