@@ -198,6 +198,7 @@ public class SupplierViewForm extends CustomComponent {
 			WindowDialog<Supplier> supplierWindowDialog = (WindowDialog<Supplier>)getParent().getWindow();
 			supplier = supplierWindowDialog.getDomainEntity();
     		
+			userField.setAgent(supplier);
 			supplierOrganizationCollectionField.setValue(supplier);
 		}
 	}

@@ -201,6 +201,7 @@ public class ClientViewForm extends CustomComponent {
 			WindowDialog<Client> clientWindowDialog = (WindowDialog<Client>)getParent().getWindow();
 			client = clientWindowDialog.getDomainEntity();
 			
+			userField.setAgent(client);
 			clientOrganizationCollectionField.setValue(client);
 		}
 	}

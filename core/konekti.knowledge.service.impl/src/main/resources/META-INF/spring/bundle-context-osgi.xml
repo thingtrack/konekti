@@ -40,7 +40,6 @@
        <osgi:reference id="invoiceLineStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineStatusDao" />
        <osgi:reference id="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao" />
        <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />
-       <osgi:reference id="ivaDao" interface="com.thingtrack.konekti.dao.api.IvaDao" />
        <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
        <osgi:reference id="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao" />
        <osgi:reference id="menuFolderResourceDao" interface="com.thingtrack.konekti.dao.api.MenuFolderResourceDao" />
@@ -72,6 +71,7 @@
 	   <osgi:reference id="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao" />          
        <osgi:reference id="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao" />       
        <osgi:reference id="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao" />
+       <osgi:reference id="taxDao" interface="com.thingtrack.konekti.dao.api.TaxDao" />       
        <osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />
        	   
 	   <!-- Konekti services -->
@@ -100,8 +100,7 @@
        <osgi:reference id="invoiceLineService" interface="com.thingtrack.konekti.service.api.InvoiceLineService" />
        <osgi:reference id="invoiceLineStatusService" interface="com.thingtrack.konekti.service.api.InvoiceLineStatusService" />
        <osgi:reference id="invoiceStatusService" interface="com.thingtrack.konekti.service.api.InvoiceStatusService" />
-       <osgi:reference id="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
-       <osgi:reference id="ivaService" interface="com.thingtrack.konekti.service.api.IvaService" />
+       <osgi:reference id="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />       
        <osgi:reference id="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
        <osgi:reference id="locationTypeService" interface="com.thingtrack.konekti.service.api.LocationTypeService" />
        <osgi:reference id="menuFolderResourceService" interface="com.thingtrack.konekti.service.api.MenuFolderResourceService" />
@@ -134,6 +133,7 @@
        <osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
        <osgi:reference id="supplierGroupService" interface="com.thingtrack.konekti.service.api.SupplierGroupService" />
        <osgi:reference id="supplierTypeService" interface="com.thingtrack.konekti.service.api.SupplierTypeService" />
+	   <osgi:reference id="taxService" interface="com.thingtrack.konekti.service.api.TaxService" />       
        <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />
 	   	   	   	   
 	   	   

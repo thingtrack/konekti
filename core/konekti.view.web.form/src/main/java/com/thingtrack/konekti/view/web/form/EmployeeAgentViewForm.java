@@ -127,7 +127,7 @@ public class EmployeeAgentViewForm extends CustomComponent {
 		employeeAgentStatusField.setNullSelectionAllowed(false);
 		employeeAgentStatusField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
 		employeeAgentStatusField.setItemCaptionPropertyId("description");
-		
+				
 		// get form services from OSGi Service Registry
 		getServices();
 		
@@ -204,6 +204,7 @@ public class EmployeeAgentViewForm extends CustomComponent {
 			employeeAgent = employeeAgentWindowDialog.getDomainEntity(); 
 					
 			employeeAgentOrganizationCollectionField.setValue(employeeAgent);
+			userField.setAgent(employeeAgent);
 		}
 	}
 		

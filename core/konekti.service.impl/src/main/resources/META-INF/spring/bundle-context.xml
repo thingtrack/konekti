@@ -62,8 +62,7 @@
 	<bean id="invoiceLineService" class="com.thingtrack.konekti.service.impl.internal.InvoiceLineServiceImpl"/>
 	<bean id="invoiceLineStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceLineStatusServiceImpl"/>	
 	<bean id="invoiceStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceStatusServiceImpl"/>
-	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>
-	<bean id="ivaService" class="com.thingtrack.konekti.service.impl.internal.IvaServiceImpl"/>
+	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>	
 	<bean id="jobService" class="com.thingtrack.konekti.service.impl.internal.JobServiceImpl"/>
 	<bean id="jobTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.JobTriggerTypeServiceImpl"/>					
 	<bean id="locationService" class="com.thingtrack.konekti.service.impl.internal.LocationServiceImpl"/>					 					
@@ -99,6 +98,7 @@
 	<bean id="supplierService" class="com.thingtrack.konekti.service.impl.internal.SupplierServiceImpl"/>
 	<bean id="supplierGroupService" class="com.thingtrack.konekti.service.impl.internal.SupplierGroupServiceImpl"/>	
 	<bean id="supplierTypeService" class="com.thingtrack.konekti.service.impl.internal.SupplierTypeServiceImpl"/>
+	<bean id="taxService" class="com.thingtrack.konekti.service.impl.internal.TaxServiceImpl"/>	
 	<bean id="userService" class="com.thingtrack.konekti.service.impl.internal.UserServiceImpl"/>
 	
 	<bean id="filterClientService" class="com.thingtrack.konekti.filter.service.impl.internal.FilterClientServiceImpl"/>

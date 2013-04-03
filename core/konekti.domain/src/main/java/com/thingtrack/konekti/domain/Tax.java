@@ -15,12 +15,12 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="IVA")
-public class Iva implements Serializable {
+@Table(name="TAX")
+public class Tax implements Serializable {
 	@Id
-	@Column(name="IVA_ID")
+	@Column(name="TAX_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer ivaId;
+	private Integer taxId;
 	
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
@@ -32,17 +32,17 @@ public class Iva implements Serializable {
 	private double percent;
 
 	/**
-	 * @return the ivaId
+	 * @return the taxId
 	 */
-	public Integer getIvaId() {
-		return ivaId;
+	public Integer getTaxId() {
+		return taxId;
 	}
 
 	/**
-	 * @param ivaId the ivaId to set
+	 * @param taxId the taxId to set
 	 */
-	public void setIvaId(Integer ivaId) {
-		this.ivaId = ivaId;
+	public void setTaxId(Integer taxId) {
+		this.taxId = taxId;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class Iva implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((ivaId == null) ? 0 : ivaId.hashCode());
+		result = prime * result + ((taxId == null) ? 0 : taxId.hashCode());
 		return result;
 	}
 
@@ -108,18 +108,18 @@ public class Iva implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Iva))
+		if (!(obj instanceof Tax))
 			return false;
-		Iva other = (Iva) obj;
+		Tax other = (Tax) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (ivaId == null) {
-			if (other.ivaId != null)
+		if (taxId == null) {
+			if (other.taxId != null)
 				return false;
-		} else if (!ivaId.equals(other.ivaId))
+		} else if (!taxId.equals(other.taxId))
 			return false;
 		return true;
 	}
@@ -129,7 +129,7 @@ public class Iva implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Iva [ivaId=" + ivaId + ", code=" + code + ", description="
+		return "Tax [TaxId=" + taxId + ", code=" + code + ", description="
 				+ description + ", percent=" + percent + "]";
 	}
 	

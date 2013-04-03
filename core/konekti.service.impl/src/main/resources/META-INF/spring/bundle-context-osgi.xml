@@ -40,8 +40,7 @@
        <osgi:reference id="invoiceLineDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineDao" />
        <osgi:reference id="invoiceLineStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceLineStatusDao" />
        <osgi:reference id="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao" />
-       <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />
-       <osgi:reference id="ivaDao" interface="com.thingtrack.konekti.dao.api.IvaDao" />
+       <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />       
        <osgi:reference id="jobDao" interface="com.thingtrack.konekti.dao.api.JobDao" />
        <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />       
        <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
@@ -77,6 +76,7 @@
 	   <osgi:reference id="supplierDao" interface="com.thingtrack.konekti.dao.api.SupplierDao" />
        <osgi:reference id="supplierGroupDao" interface="com.thingtrack.konekti.dao.api.SupplierGroupDao" />       
        <osgi:reference id="supplierTypeDao" interface="com.thingtrack.konekti.dao.api.SupplierTypeDao" />
+	   <osgi:reference id="taxDao" interface="com.thingtrack.konekti.dao.api.TaxDao" />       
        <osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />
        
        <osgi:service ref="actionService" interface="com.thingtrack.konekti.service.api.ActionService"/>
@@ -114,7 +114,6 @@
        <osgi:service ref="invoiceLineStatusService" interface="com.thingtrack.konekti.service.api.InvoiceLineStatusService" />
        <osgi:service ref="invoiceStatusService" interface="com.thingtrack.konekti.service.api.InvoiceStatusService" />
        <osgi:service ref="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
-       <osgi:service ref="ivaService" interface="com.thingtrack.konekti.service.api.IvaService" />
        <osgi:service ref="jobService" interface="com.thingtrack.konekti.service.api.JobService" />
        <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />       
        <osgi:service ref="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
@@ -150,6 +149,7 @@
        <osgi:service ref="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
        <osgi:service ref="supplierGroupService" interface="com.thingtrack.konekti.service.api.SupplierGroupService" />
        <osgi:service ref="supplierTypeService" interface="com.thingtrack.konekti.service.api.SupplierTypeService" />
+       <osgi:service ref="taxService" interface="com.thingtrack.konekti.service.api.TaxService" />       
        <osgi:service ref="userService" interface="com.thingtrack.konekti.service.api.UserService" />
        
        <!-- Metamodel services -->

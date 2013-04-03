@@ -65,7 +65,6 @@
 	<bean id="invoiceLineStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceLineStatusDaoImpl" />
 	<bean id="invoiceStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceStatusDaoImpl" />		
 	<bean id="invoiceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceTypeDaoImpl" />
-	<bean id="ivaDao" class="com.thingtrack.konekti.dao.impl.internal.IvaDaoImpl" />
 	<bean id="jobDao" class="com.thingtrack.konekti.dao.impl.internal.JobDaoImpl" />
 	<bean id="jobTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobTriggerTypeDaoImpl" />		
 	<bean id="locationDao" class="com.thingtrack.konekti.dao.impl.internal.LocationDaoImpl" />
@@ -101,5 +100,6 @@
 	<bean id="supplierDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierDaoImpl" />	
 	<bean id="supplierGroupDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierGroupDaoImpl" />					
 	<bean id="supplierTypeDao" class="com.thingtrack.konekti.dao.impl.internal.SupplierTypeDaoImpl" />
+	<bean id="taxDao" class="com.thingtrack.konekti.dao.impl.internal.TaxDaoImpl" />	
 	<bean id="userDao" class="com.thingtrack.konekti.dao.impl.internal.UserDaoImpl" />
 </beans>

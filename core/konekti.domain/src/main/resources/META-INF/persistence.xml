@@ -37,7 +37,6 @@
 		<class>com.thingtrack.konekti.domain.InvoiceLineStatus</class>
 		<class>com.thingtrack.konekti.domain.InvoiceStatus</class>
 		<class>com.thingtrack.konekti.domain.InvoiceType</class>
-		<class>com.thingtrack.konekti.domain.Iva</class>
 	    <class>com.thingtrack.konekti.domain.Job</class>
 	    <class>com.thingtrack.konekti.domain.JobTriggerType</class>		
 	    <class>com.thingtrack.konekti.domain.Location</class>
@@ -73,7 +72,8 @@
 	    <class>com.thingtrack.konekti.domain.StockStatus</class>
 	    <class>com.thingtrack.konekti.domain.Supplier</class>
 	    <class>com.thingtrack.konekti.domain.SupplierGroup</class>
-	    <class>com.thingtrack.konekti.domain.SupplierType</class>	    	    
+	    <class>com.thingtrack.konekti.domain.SupplierType</class>	 
+		<class>com.thingtrack.konekti.domain.Tax</class>	       	    
 	    <class>com.thingtrack.konekti.domain.User</class>
 		
 		<!-- Sensor Domain -->
@@ -90,7 +90,7 @@
 			    
 		<exclude-unlisted-classes>true</exclude-unlisted-classes>
 				
-		<shared-cache-mode>NONE</shared-cache-mode>
+<!-- 		<shared-cache-mode>NONE</shared-cache-mode> -->
 		
 	   	<properties>
             <!--
