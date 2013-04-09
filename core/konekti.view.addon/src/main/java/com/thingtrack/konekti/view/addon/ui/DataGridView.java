@@ -1,9 +1,9 @@
 package com.thingtrack.konekti.view.addon.ui;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.tepi.filtertable.FilterTable;
@@ -16,14 +16,12 @@ import com.thingtrack.konekti.view.addon.data.BindingSourceComponent;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickAddButtonListener;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickEditButtonListener;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickRemoveButtonListener;
-
 import com.vaadin.event.Action;
 import com.vaadin.event.Action.Handler;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
-import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.ui.Component;
 
 @SuppressWarnings("serial")

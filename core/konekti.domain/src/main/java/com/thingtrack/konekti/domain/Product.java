@@ -67,10 +67,10 @@ public class Product implements Serializable {
 	private float averagePrice;
 	
 	@ManyToMany
-	@JoinTable(name="PRODUCT_WAREHOUSE",
+	@JoinTable(name="PRODUCT_AREA",
 			   joinColumns=@JoinColumn(name="PRODUCT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="WAREHOUSE_ID"))	
-	private List<Warehouse> warehouses = new ArrayList<Warehouse>();
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))	
+	private List<Area> areas = new ArrayList<Area>();
 	
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_SUPPLIER_ID")	
@@ -201,17 +201,17 @@ public class Product implements Serializable {
 	}
 
 	/**
-	 * @param warehouses the warehouses to set
+	 * @param areas the areas to set
 	 */
-	public void setWarehouses(List<Warehouse> warehouses) {
-		this.warehouses = warehouses;
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 
 	/**
-	 * @return the warehouses
+	 * @return the areas
 	 */
-	public List<Warehouse> getWarehouses() {
-		return warehouses;
+	public List<Area> getAreas() {
+		return areas;
 	}
 
 	/**

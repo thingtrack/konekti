@@ -1,16 +1,11 @@
 package com.thingtrack.konekti.service.impl.internal;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.ServiceDao;
 import com.thingtrack.konekti.dao.api.ServiceStatusDao;
-import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Service;
@@ -73,47 +68,9 @@ public class ServiceServiceImpl implements ServiceService {
 	}
 	
 	@Override
-	public List<Service> getAllPlanned(Organization organization) throws Exception {
-		return this.serviceDao.getAllPlanned(organization);
-		
-		
-	}
-	
-	@Override
-	public List<Service> getAllPlanned(Organization organization, EmployeeAgent employeeAgent) throws Exception {
-		return this.serviceDao.getAllPlanned(organization, employeeAgent);
-		
-		
-	}
-
-	@Override
-	public List<Service> getAllNonPlanned(Organization organization) throws Exception {
-		return this.serviceDao.getAllNonPlanned(organization);		
-		
-	}
-	
-	@Override
-	public List<Service> getAllNonPlanned(Organization organization, EmployeeAgent employeeAgent) throws Exception {
-		return this.serviceDao.getAllNonPlanned(organization, employeeAgent);		
-		
-	}
-
-	@Override
-	public List<Service> getAllNonPlanned(Organization organization,
-			Date routeStartDate) throws Exception {
-		return this.serviceDao.getAllNonPlanned(organization, routeStartDate);
-	}
-
-	@Override
-	public List<Service> getAllPlanned(Organization organization,
-			EmployeeAgent employeeAgent, Date routeStartDate) throws Exception {
-		return this.serviceDao.getAllPlanned(organization, employeeAgent, routeStartDate);
-	}
-
-	@Override
-	public List<Service> getAllNoTurnAssigned(Organization organization)
+	public List<Service> getAll(Organization currentOrganization)
 			throws Exception {
-		return this.serviceDao.getAllNoTurnAssigned(organization);
+		return serviceDao.getAll(currentOrganization);
 	}
 	
 }

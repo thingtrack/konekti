@@ -42,8 +42,7 @@ public class CalendarServiceImpl implements CalendarService {
 
 	@Override
 	public void delete(Calendar calendar) throws Exception {
-		this.calendarDao.delete(calendar);
-		
+		this.calendarDao.delete(calendar);	
 	}
 
 }

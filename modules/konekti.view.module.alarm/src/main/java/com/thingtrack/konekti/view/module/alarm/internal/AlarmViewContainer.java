@@ -6,7 +6,7 @@ import javax.annotation.PreDestroy;
 import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.thingtrack.konekti.service.api.AlarmJobService;
+import com.thingtrack.konekti.service.api.JobService;
 import com.thingtrack.konekti.service.api.AlarmService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -27,19 +27,19 @@ public class AlarmViewContainer extends AbstractViewContainer {
 
 	/** Views **/
 	private AlarmView alarmView;
-	private AlarmJobView alarmJobView;
+	private JobView jobView;
 	
 	/** Business services **/
 	@Autowired
 	private AlarmService alarmService;	
 	@Autowired
-	private AlarmJobService alarmJobService;
+	private JobService jobService;
 	@Autowired	
 	private Scheduler scheduler;
 	
 	// Thread Local Bundle Business Services
 	private static ThreadLocal<AlarmService> threadAlarmService = new ThreadLocal<AlarmService>();
-	private static ThreadLocal<AlarmJobService> threadAlarmJobService = new ThreadLocal<AlarmJobService>();
+	private static ThreadLocal<JobService> threadJobService = new ThreadLocal<JobService>();
 	private static ThreadLocal<Scheduler> threadScheduler = new ThreadLocal<Scheduler>();
 	
 	private IWorkbenchContext context; 
@@ -66,7 +66,7 @@ public class AlarmViewContainer extends AbstractViewContainer {
 	private void createViews() {
 		// initialize thread local bundle services
 		threadAlarmService.set(alarmService);
-		threadAlarmJobService.set(alarmJobService);
+		threadJobService.set(jobService);
 		threadScheduler.set(scheduler);
 		
 		// add all views controlled by SliderView Component
@@ -74,9 +74,9 @@ public class AlarmViewContainer extends AbstractViewContainer {
 		sliderView.addView(alarmView);
 		views.put(0, alarmView);
 		
-		alarmJobView = new AlarmJobView(context, this);
-		sliderView.addView(alarmJobView);
-		views.put(1, alarmJobView);
+		jobView = new JobView(context, this);
+		sliderView.addView(jobView);
+		views.put(1, jobView);
 	}
 		
 	@SuppressWarnings("unused")
@@ -84,7 +84,7 @@ public class AlarmViewContainer extends AbstractViewContainer {
 	private void destroyViews() {
 		// destroy thread local bundle services
 		threadAlarmService.set(null);
-		threadAlarmJobService.set(null);
+		threadJobService.set(null);
 		threadScheduler.set(null);
 	}
 	
@@ -93,8 +93,8 @@ public class AlarmViewContainer extends AbstractViewContainer {
         
     }
     	
-    public static AlarmJobService getAlarmJobService() {
-        return threadAlarmJobService.get();
+    public static JobService getJobService() {
+        return threadJobService.get();
         
     }
     

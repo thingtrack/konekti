@@ -13,8 +13,11 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Location;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
@@ -22,5 +25,6 @@ import com.thingtrack.konekti.domain.Location;
  */
 public interface LocationDao extends Dao<Location, Integer> {;
 	public Location getByName(String name) throws Exception;
+	public List<Location> getAllByOrganization(Organization organization) throws Exception;
 	
 }

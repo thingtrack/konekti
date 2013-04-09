@@ -17,18 +17,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -38,46 +34,18 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="SUPPLIER")
-public class Supplier implements Serializable {
-	@Id
-	@Column(name="SUPPLIER_ID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer supplierId;
-	
-	@Column(name="CODE", nullable=false, unique=true, length=64)
+@AttributeOverrides({
+	@AttributeOverride(name="agentId", column=@Column(name="SUPPLIER_ID"))
+})
+public class Supplier extends Agent implements Serializable {
+	@Column(name = "CODE", nullable = false, unique = true, length = 64)
 	private String code;
 	
-	@Column(name="NAME", nullable=false)
-	private String name;
-	
-	@Column(name="DESCRIPTION", length=512)
+	@Column(name = "DESCRIPTION", length = 256)
 	private String description;
 	
-	@Column(name="VAT", length=64)
+	@Column(name = "VAT", length = 64)
 	private String vat;
-	
-	@Column(name="PHONE", length=32)	
-	private String phone;
-	
-	@Column(name="FAX", length=32)
-	private String fax;
-	
-	@Column(name="MOBILE", length=32)
-	private String mobile;
-	
-	@Column(name="EMAIL", length=64)
-	private String email;
-	
-	@Column(name="PHOTO")
-	@Lob
-	private byte[] photo;
-	
-	@Column(name="FACEBOOK_ID", length=32)
-	private String facebookId;
-	
-	@ManyToOne
-	@JoinColumn(name="SUPPLIER_ADDRESS_ID")
-	private Address supplierAddress;
 	
 	@ManyToOne
 	@JoinColumn(name="SUPPLIER_TYPE_ID", nullable=false)	
@@ -99,37 +67,15 @@ public class Supplier implements Serializable {
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
 	
-	@Column(name="COMMNET", length=512)	
-	private String comment;
+	@ManyToMany
+	@JoinTable(name="SUPPLIER_AREA",
+			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
+	private List<Area> areas = new ArrayList<Area>();
 	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="USER_ID")		
-	private User user;
+	@Column(name = "ACTIVE", nullable = false)
+	private Boolean active = true;
 	
-	@Column(name="ACTIVE", nullable=false)
-	private Boolean active=true;
-
-	/**
-	 * @param supplierId the supplierId to set
-	 */
-	public void setSupplierId(Integer supplierId) {
-		this.supplierId = supplierId;
-	}
-
-	/**
-	 * @return the supplierId
-	 */
-	public Integer getSupplierId() {
-		return supplierId;
-	}
-
-	/**
-	 * @param code the code to set
-	 */
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	/**
 	 * @return the code
 	 */
@@ -138,26 +84,12 @@ public class Supplier implements Serializable {
 	}
 
 	/**
-	 * @param name the name to set
+	 * @param code the code to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setCode(String code) {
+		this.code = code;
 	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
 	/**
 	 * @return the description
 	 */
@@ -166,12 +98,12 @@ public class Supplier implements Serializable {
 	}
 
 	/**
-	 * @param vat the vat to set
+	 * @param description the description to set
 	 */
-	public void setVat(String vat) {
-		this.vat = vat;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-
+	
 	/**
 	 * @return the vat
 	 */
@@ -180,19 +112,12 @@ public class Supplier implements Serializable {
 	}
 
 	/**
-	 * @param supplierAddress the supplierAddress to set
+	 * @param vat the vat to set
 	 */
-	public void setSupplierAddress(Address supplierAddress) {
-		this.supplierAddress = supplierAddress;
+	public void setVat(String vat) {
+		this.vat = vat;
 	}
-
-	/**
-	 * @return the supplierAddress
-	 */
-	public Address getSupplierAddress() {
-		return supplierAddress;
-	}
-
+	
 	/**
 	 * @param supplierType the supplierType to set
 	 */
@@ -236,172 +161,6 @@ public class Supplier implements Serializable {
 	}
 
 	/**
-	 * @param comment the comment to set
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
-	 * @param active the active to set
-	 */
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	/**
-	 * @return the active
-	 */
-	public Boolean getActive() {
-		return active;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	/**
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
-	 * @param fax the fax to set
-	 */
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	/**
-	 * @return the mobile
-	 */
-	public String getMobile() {
-		return mobile;
-	}
-
-	/**
-	 * @param mobile the mobile to set
-	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the photo
-	 */
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	/**
-	 * @param photo the photo to set
-	 */
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-
-	/**
-	 * @return the facebookId
-	 */
-	public String getFacebookId() {
-		return facebookId;
-	}
-
-	/**
-	 * @param facebookId the facebookId to set
-	 */
-	public void setFacebookId(String facebookId) {
-		this.facebookId = facebookId;
-	}
-	
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((supplierId == null) ? 0 : supplierId.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Supplier other = (Supplier) obj;
-		if (supplierId == null) {
-			if (other.supplierId != null)
-				return false;
-		} else if (!supplierId.equals(other.supplierId))
-			return false;
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Supplier [supplierId=" + supplierId + "]";
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	/**
 	 * @return the locations
 	 */
 	public List<Location> getLocations() {
@@ -413,5 +172,33 @@ public class Supplier implements Serializable {
 	 */
 	public void setLocations(List<Location> locations) {
 		this.locations = locations;
+	}
+	
+	/**
+	 * @return the active
+	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * @param active the active to set
+	 */
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	/**
+	 * @return the areas
+	 */
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * @param areas the areas to set
+	 */
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 }

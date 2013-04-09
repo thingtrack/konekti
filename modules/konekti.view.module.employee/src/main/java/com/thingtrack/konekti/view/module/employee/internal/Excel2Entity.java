@@ -121,7 +121,7 @@ public class Excel2Entity {
 			
 			}
 			
-			employeeAgent.setEmployeeAddress(address);
+			employeeAgent.setAddress(address);
 		}
 				
 		if(row.getCell(TYPE) != null) {

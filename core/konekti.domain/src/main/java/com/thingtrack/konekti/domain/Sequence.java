@@ -48,7 +48,7 @@ public class Sequence implements Serializable {
 		SERVICE,
 		ORGANIZATION,
 		LOCATION,
-		WAREHOUSE,
+		AREA,
 		WORKSHOP,
 		GAS_STATION,
 		SUPPLIER,

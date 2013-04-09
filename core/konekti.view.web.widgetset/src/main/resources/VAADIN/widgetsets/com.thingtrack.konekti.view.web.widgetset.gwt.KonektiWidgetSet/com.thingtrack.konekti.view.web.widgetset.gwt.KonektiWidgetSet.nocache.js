@@ -244,7 +244,7 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
   $stats && $stats({moduleName:'com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
-      strongName = '896806AAD0DF69FDB531425131021476';
+      strongName = '5F00955119602967ED6B40FF393D4232';
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = Number(strongName.substring(idx + 1));
@@ -370,6 +370,13 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
         __gwt_stylesLoaded['eventtimeline-widget/styles.css'] = l;
         l.setAttribute('rel', 'stylesheet');
         l.setAttribute('href', base + 'eventtimeline-widget/styles.css');
+        $doc_0.getElementsByTagName('head')[0].appendChild(l);
+      }
+      if (!__gwt_stylesLoaded['styles.css']) {
+        var l = $doc_0.createElement('link');
+        __gwt_stylesLoaded['styles.css'] = l;
+        l.setAttribute('rel', 'stylesheet');
+        l.setAttribute('href', base + 'styles.css');
         $doc_0.getElementsByTagName('head')[0].appendChild(l);
       }
       maybeStartModule();

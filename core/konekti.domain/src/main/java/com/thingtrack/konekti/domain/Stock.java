@@ -65,8 +65,8 @@ public class Stock implements Serializable {
 	private Date expeditionDate;
 	
 	@ManyToOne
-	@JoinColumn(name="WAREHOUSE_ID", nullable=false)
-	private Warehouse warehouse;
+	@JoinColumn(name="AREA_ID", nullable=false)
+	private Area area;
 	
 	@Column(name="COMMENT", length=512)
 	private String comment;
@@ -200,17 +200,17 @@ public class Stock implements Serializable {
 	}
 
 	/**
-	 * @param warehouse the warehouse to set
+	 * @param area the area to set
 	 */
-	public void setWarehouse(Warehouse warehouse) {
-		this.warehouse = warehouse;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	/**
-	 * @return the warehouse
+	 * @return the area
 	 */
-	public Warehouse getWarehouse() {
-		return warehouse;
+	public Area getArea() {
+		return area;
 	}
 
 	/* (non-Javadoc)

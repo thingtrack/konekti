@@ -120,7 +120,7 @@ public class SupplierSelectorField extends CustomField {
 							    		Supplier savingSupplier = event.getDomainEntity();
 							    		
 							    		Supplier savedsupplier = supplierService.save(savingSupplier);
-							    		savingSupplier.setSupplierId(savedsupplier.getSupplierId());
+							    		savingSupplier.setAgentId(savedsupplier.getAgentId());
 							    		
 							    		supplierField.setValue(savingSupplier.getName());
 							    		

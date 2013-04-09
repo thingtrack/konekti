@@ -13,11 +13,14 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.LocationDao;
 import com.thingtrack.konekti.domain.Location;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
@@ -32,6 +35,15 @@ public class LocationDaoImpl extends JpaDao<Location, Integer> implements Locati
 				.setParameter("name", name).getSingleResult();
 
 		return location;
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Location> getAllByOrganization(Organization organization) throws Exception {
+		return getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE :organization MEMBER OF p.organizations")
+				.setParameter("organization", organization).getResultList();
 		
 	}
 

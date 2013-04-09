@@ -111,7 +111,7 @@ public class EmployeeAgentSelectorField extends CustomField {
 					    		EmployeeAgent savingEmployeeAgent = event.getDomainEntity();
 					    		
 					    		EmployeeAgent savedEmployeeAgent = employeeAgentService.save(savingEmployeeAgent);
-					    		savingEmployeeAgent.setEmployeeAgentId(savedEmployeeAgent.getEmployeeAgentId());
+					    		savingEmployeeAgent.setAgentId(savedEmployeeAgent.getAgentId());
 					    		
 					    		employeeAgentField.setValue(savingEmployeeAgent.getName());	
 					    		

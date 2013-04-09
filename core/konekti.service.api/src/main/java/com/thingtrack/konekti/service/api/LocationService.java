@@ -29,4 +29,5 @@ public interface LocationService {
 	public Location save(Location location) throws Exception;
 	public void delete(Location location) throws Exception;
 	public Location createEntity(Organization organization) throws Exception;
+	public List<Location> getAllByOrganization(Organization organization) throws Exception;
 }

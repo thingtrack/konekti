@@ -34,6 +34,9 @@ public class MenuCommandResource extends MenuResource {
 	@Column(name = "AUTOSTART")
 	private boolean autostart = false;
 
+	@Column(name = "CLOSABLE")
+	private boolean closable = true;
+	
 	public enum LOCATION {
 		TOP("Top"),
 		LEFT("Left"),
@@ -149,6 +152,20 @@ public class MenuCommandResource extends MenuResource {
 	 */
 	public void setAutostart(boolean autostart) {
 		this.autostart = autostart;
+	}
+
+	/**
+	 * @return the closable
+	 */
+	public boolean isClosable() {
+		return closable;
+	}
+
+	/**
+	 * @param closable the closable to set
+	 */
+	public void setClosable(boolean closable) {
+		this.closable = closable;
 	}
 		
 }

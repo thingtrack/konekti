@@ -76,4 +76,8 @@ public class LocationServiceImpl  implements LocationService {
 		return location;
 	}	
 	
+	@Override
+	public List<Location> getAllByOrganization(Organization organization) throws Exception {
+		return this.locationDao.getAllByOrganization(organization);
+	}
 }

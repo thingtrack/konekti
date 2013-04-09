@@ -16,7 +16,9 @@ package com.thingtrack.konekti.dao.api;
 import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Client;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -29,4 +31,6 @@ public interface ClientDao extends Dao<Client, Integer> {
 	public Client getByCode(String code) throws Exception;
 	public List<Client> getByCode(Organization organization, String code) throws Exception;
 	public Client getByUser(User user) throws Exception;
+	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
+	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
 }

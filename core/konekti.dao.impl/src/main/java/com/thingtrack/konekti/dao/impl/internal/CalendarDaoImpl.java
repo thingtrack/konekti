@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.CalendarDao;
 import com.thingtrack.konekti.domain.Calendar;
+import com.thingtrack.konekti.domain.CalendarCard;
+import com.thingtrack.konekti.domain.CalendarDetail;
+import com.thingtrack.konekti.domain.CalendarGroup;
 
 /**
  * @author Thingtrack S.L.
@@ -20,6 +23,26 @@ public class CalendarDaoImpl extends JpaDao<Calendar, Integer> implements Calend
 
 		return calendar;
 		
+	}
+
+	@Override
+	public Calendar copy(Calendar calendar) throws Exception {
+		
+		getEntityManager().detach(calendar);
+		
+		//Remove ids
+		for(CalendarCard calendarCard : calendar.getCalendarCards()){
+			for(CalendarDetail calendarDetail : calendarCard.getCalendarDetails())
+				calendarDetail.setCalendarDetailId(null);
+			calendarCard.setCalendarCardId(null);
+		}
+		
+		for(CalendarGroup calendarGroup : calendar.getCalendarGroups())
+			calendarGroup.setCalendarGroupId(null);
+		
+		calendar.setCalendarId(null);
+
+		return calendar;
 	}
 
 }

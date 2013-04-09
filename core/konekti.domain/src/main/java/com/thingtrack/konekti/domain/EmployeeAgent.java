@@ -18,19 +18,15 @@ import java.util.List;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,15 +38,10 @@ import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="EMPLOYEE_AGENT")
-public class EmployeeAgent implements Serializable {
-	@Id
-	@Column(name="EMPLOYEE_AGENT_ID")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer employeeAgentId;
-	
-	@Column(name="NAME", nullable=false, length=64)
-	private String name;
-	
+@AttributeOverrides({
+	@AttributeOverride(name="agentId", column=@Column(name="EMPLOYEE_AGENT_ID"))
+})
+public class EmployeeAgent extends Agent implements Serializable {
 	@Column(name="SURNAME", length=64)
 	private String surname;
 	
@@ -59,36 +50,9 @@ public class EmployeeAgent implements Serializable {
 	
 	@Column(name="WORKNUMBER", unique=true, length=64)
 	private String workNumber;
-	
-	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_AGENT_TYPE_ID", nullable=false)		
-	private EmployeeAgentType employeeAgentType;
-	
+		
 	@Column(name="NIF", length=64)
 	private String nif;
-
-	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ADDRESS_ID")	
-	private Address employeeAddress;
-	
-	@Column(name="PHONE", length=32)
-	private String phone;
-	
-	@Column(name="FAX", length=32)
-	private String fax;
-	
-	@Column(name="MOBILE", length=32)
-	private String mobile;
-	
-	@Column(name="EMAIL", length=32)
-	private String email;
-	
-	@Column(name="PHOTO")
-	@Lob
-	private byte[] photo;
-	
-	@Column(name="FACEBOOK_ID", length=32)
-	private String facebookId;
 	
 	@Column(name="TITTLE", length=32)
 	private String tittle;
@@ -104,6 +68,10 @@ public class EmployeeAgent implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
+	@ManyToOne
+	@JoinColumn(name="EMPLOYEE_AGENT_TYPE_ID", nullable=false)		
+	private EmployeeAgentType employeeAgentType;
+	
 	@ManyToMany
 	@JoinTable(name="EMPLOYEE_AGENT_ORGANIZATION",
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
@@ -115,14 +83,13 @@ public class EmployeeAgent implements Serializable {
 			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
 	private List<Location> locations = new ArrayList<Location>();
+
+	@ManyToMany
+	@JoinTable(name="EMPLOYEE_AGENT_AREA",
+			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
+	private List<Area> areas = new ArrayList<Area>();
 	
-	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
-	@JoinColumn(name="USER_ID")		
-	private User user;
-	
-	@Column(name="COMMENT", length=512)
-	private String comment;
-		
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
 	
@@ -137,48 +104,6 @@ public class EmployeeAgent implements Serializable {
 		DRIVER
 	} 
 	
-	/**
-	 * @param employeeAgentId the employeeAgentId to set
-	 */
-	public void setEmployeeAgentId(Integer employeeAgentId) {
-		this.employeeAgentId = employeeAgentId;
-	}
-
-	/**
-	 * @return the employeeAgentId
-	 */
-	public Integer getEmployeeAgentId() {
-		return employeeAgentId;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param surname the surname to set
-	 */
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	/**
-	 * @return the surname
-	 */
-	public String getSurname() {
-		return surname;
-	}
-
 	/**
 	 * @param workNumber the workNumber to set
 	 */
@@ -219,90 +144,6 @@ public class EmployeeAgent implements Serializable {
 	 */
 	public String getNif() {
 		return nif;
-	}
-
-	/**
-	 * @param employeeAddress the employeeAddress to set
-	 */
-	public void setEmployeeAddress(Address employeeAddress) {
-		this.employeeAddress = employeeAddress;
-	}
-
-	/**
-	 * @return the employeeAddress
-	 */
-	public Address getEmployeeAddress() {
-		return employeeAddress;
-	}
-
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param mobile the mobile to set
-	 */
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
-	/**
-	 * @return the mobile
-	 */
-	public String getMobile() {
-		return mobile;
-	}
-
-	/**
-	 * @param email the email to set
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	/**
-	 * @return the email
-	 */
-	public String getEmail() {
-		return email;
-	}
-
-	/**
-	 * @param photo the photo to set
-	 */
-	public void setPhoto(byte[] photo) {
-		this.photo = photo;
-	}
-
-	/**
-	 * @return the photo
-	 */
-	public byte[] getPhoto() {
-		return photo;
-	}
-
-	/**
-	 * @param facebookId the facebookId to set
-	 */
-	public void setFacebookId(String facebookId) {
-		this.facebookId = facebookId;
-	}
-
-	/**
-	 * @return the facebookId
-	 */
-	public String getFacebookId() {
-		return facebookId;
 	}
 
 	/**
@@ -348,34 +189,6 @@ public class EmployeeAgent implements Serializable {
 	}
 
 	/**
-	 * @param user the user to set
-	 */
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	/**
-	 * @return the user
-	 */
-	public User getUser() {
-		return user;
-	}
-
-	/**
-	 * @param comment the comment to set
-	 */
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	/**
-	 * @return the comment
-	 */
-	public String getComment() {
-		return comment;
-	}
-
-	/**
 	 * @param employeeAgentStatus the employeeAgentStatus to set
 	 */
 	public void setEmployeeAgentStatus(EmployeeAgentStatus employeeAgentStatus) {
@@ -418,20 +231,6 @@ public class EmployeeAgent implements Serializable {
 	}
 
 	/**
-	 * @param fax the fax to set
-	 */
-	public void setFax(String fax) {
-		this.fax = fax;
-	}
-
-	/**
-	 * @return the fax
-	 */
-	public String getFax() {
-		return fax;
-	}
-
-	/**
 	 * @param offerRequestLines the offerRequestLines to set
 	 */
 	public void setOfferRequestLines(List<OfferRequestLine> offerRequestLines) {
@@ -443,46 +242,6 @@ public class EmployeeAgent implements Serializable {
 	 */
 	public List<OfferRequestLine> getOfferRequestLines() {
 		return offerRequestLines;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((employeeAgentId == null) ? 0 : employeeAgentId.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		EmployeeAgent other = (EmployeeAgent) obj;
-		if (employeeAgentId == null) {
-			if (other.employeeAgentId != null)
-				return false;
-		} else if (!employeeAgentId.equals(other.employeeAgentId))
-			return false;
-		return true;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "EmployeeAgent [employeeAgentId=" + employeeAgentId + "]";
 	}
 	
 	/**
@@ -511,6 +270,34 @@ public class EmployeeAgent implements Serializable {
 	 */
 	public void setLocations(List<Location> locations) {
 		this.locations = locations;
+	}
+
+	/**
+	 * @return the surname
+	 */
+	public String getSurname() {
+		return surname;
+	}
+
+	/**
+	 * @param surname the surname to set
+	 */
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	/**
+	 * @return the areas
+	 */
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * @param areas the areas to set
+	 */
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
 	}
 
 }

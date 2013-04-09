@@ -77,7 +77,11 @@
     
     
 
-    <inherits name="com.thingtrack.com.vaadin.addons.sliderlayout.gwt.SliderLayoutWidgetSet" />
+    
 
     <inherits name="com.spaceapplications.vaadin.addon.eventtimeline.gwt.EventTimelineWidgetSet" />
+
+    <inherits name="org.vaadin.tokenfield.TokenfieldWidgetset" />
+
+    <inherits name="com.vaadin.addons.sliderlayout.gwt.SliderLayoutWidgetSet" />
 </module>

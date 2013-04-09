@@ -102,7 +102,7 @@ public class Excel2Entity {
 			
 			}
 			
-			supplier.setSupplierAddress(address);
+			supplier.setAddress(address);
 		}
 		
 		if(row.getCell(VAT) != null)

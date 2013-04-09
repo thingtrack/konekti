@@ -119,16 +119,12 @@ public class SupplierView extends AbstractView implements
 		// STEP 01: create grid view for slide Organization View
 		try {
 			dgSupplier.setBindingSource(bsSupplier);
-			dgSupplier.addGeneratedColumn(
-					AddressStreetColumn.ADDRESS_STREET_COLUMN_ID,
-					new AddressStreetColumn());
-			dgSupplier.setVisibleColumns(new String[] { "code", "name",
-					"description", "vat", "comment",
-					"supplierType.description", "supplierGroup.description",
-					AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
-			dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre",
-					"Descripción", "VAT", "Comentarios", "Tipo", "Grupo",
-					"Dirección", "Activo" });
+			dgSupplier.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
+			
+			dgSupplier.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
+			dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });
+			//dgSupplier.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", "active" });
+			//dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Activo" });			
 			dgSupplier.setEditable(true);
 			dgSupplier.setTableFieldFactory(new TableFieldFactory() {
 				@Override
@@ -362,19 +358,19 @@ public class SupplierView extends AbstractView implements
 
 			Supplier supplier = (Supplier) itemId;
 
-			if (supplier.getSupplierAddress() != null) {
-				String direction = supplier.getSupplierAddress().getStreet();
+			if (supplier.getAddress() != null) {
+				String direction = supplier.getAddress().getStreet();
 
-				if (supplier.getSupplierAddress().getLetter() != null)
+				if (supplier.getAddress().getLetter() != null)
 					direction += ","
-							+ supplier.getSupplierAddress().getLetter();
+							+ supplier.getAddress().getLetter();
 
-				if (supplier.getSupplierAddress().getNumber() != null)
+				if (supplier.getAddress().getNumber() != null)
 					direction += ","
-							+ supplier.getSupplierAddress().getNumber();
+							+ supplier.getAddress().getNumber();
 
-				if (supplier.getSupplierAddress().getCity() != null)
-					direction += "," + supplier.getSupplierAddress().getCity();
+				if (supplier.getAddress().getCity() != null)
+					direction += "," + supplier.getAddress().getCity();
 
 				addressStreetLabel.setValue(direction);
 			}

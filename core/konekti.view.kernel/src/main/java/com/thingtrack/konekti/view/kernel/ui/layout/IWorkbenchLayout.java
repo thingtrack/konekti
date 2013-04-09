@@ -18,7 +18,7 @@ public interface IWorkbenchLayout {
 	public void setBottonPanelWorkbenchVisible(boolean visible);
 	public boolean isBottonPanelWorkbenchVisible();
 	
-	public void addModule(String id, String name, IViewContainer componentView, Resource icon, LOCATION location);
+	public void addModule(String id, String name, IViewContainer componentView, boolean closeable, Resource icon, LOCATION location);
 	public void removeModule(String id);
 	
 }

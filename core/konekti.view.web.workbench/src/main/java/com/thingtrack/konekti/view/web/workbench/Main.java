@@ -256,6 +256,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 					String hint = ((MenuCommandResource) menuResource).getHint();
 					
 					boolean autoStart = ((MenuCommandResource) menuResource).isAutostart();
+					boolean closeable = ((MenuCommandResource) menuResource).isClosable();
+					
 					com.vaadin.terminal.Resource resource = null;
 					if (((MenuCommandResource) menuResource) != null)
 						resource = getIcon(((MenuCommandResource) menuResource).getIcon(), caption);
@@ -267,27 +269,27 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 					if (((MenuCommandResource) menuResource).getLocation()
 							.name().equals("TOP"))
 						resourceManager.addResource(id, caption, resource,
-								LOCATION.TOP, autoStart, null, headMenuItem,
+								LOCATION.TOP, autoStart, closeable, null, headMenuItem,
 								null);
 					else if (((MenuCommandResource) menuResource).getLocation()
 							.name().equals("LEFT"))
 						resourceManager.addResource(id, caption, resource,
-								LOCATION.LEFT, autoStart, null, headMenuItem,
+								LOCATION.LEFT, autoStart, closeable, null, headMenuItem,
 								null);
 					else if (((MenuCommandResource) menuResource).getLocation()
 							.name().equals("CENTER"))
 						resourceManager.addResource(id, caption, resource,
-								LOCATION.CENTER, autoStart, null, headMenuItem,
+								LOCATION.CENTER, autoStart, closeable, null, headMenuItem,
 								null);
 					else if (((MenuCommandResource) menuResource).getLocation()
 							.name().equals("RIGHT"))
 						resourceManager.addResource(id, caption, resource,
-								LOCATION.RIGHT, autoStart, null, headMenuItem,
+								LOCATION.RIGHT, autoStart, closeable, null, headMenuItem,
 								null);
 					else if (((MenuCommandResource) menuResource).getLocation()
 							.name().equals("BOTTON"))
 						resourceManager.addResource(id, caption, resource,
-								LOCATION.BOTTON, autoStart, null, headMenuItem,
+								LOCATION.BOTTON, autoStart, closeable, null, headMenuItem,
 								null);
 
 					// set module payload if is register in service registry
@@ -373,7 +375,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				@Override
 				public void menuSelected(MenuItem selectedItem) {
 					konektiLayout.addModule(resource.getId(),
-							resource.getCaption(), resource.getComponentView(),
+							resource.getCaption(), resource.getComponentView(), resource.isCloseable(),
 							resource.getResource(), resource.getLocation());
 
 				}
@@ -382,7 +384,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			// autostart if the flag is active
 			if (resource.isAutoStart())
 				konektiLayout.addModule(resource.getId(),
-						resource.getCaption(), resource.getComponentView(),
+						resource.getCaption(), resource.getComponentView(), resource.isCloseable(),
 						resource.getResource(), resource.getLocation());
 		}
 	}
@@ -476,7 +478,6 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private void loadWorkbenchContext(User user) throws Exception {
 		Locale defaultLocale = null;
 	
-	
 		// create locale for employee agent
 		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
 			
@@ -484,19 +485,40 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		String country = localeParams[1];
 		
 		defaultLocale = new Locale(language, country);
-		
-		
-		// konekti context
-		workbenchContext = new WorkbenchContext(
-				user.getDefaultOrganization(),
-				user.getDefaultLocation(),
-				user.getDefaultWarehouse(),
-				user.getDefaultWorkshop(),
-				user,
-				defaultLocale,				
-				toolbarManager,
-				resourceManager);
-
+				
+		if (user.getEmployeeAgent() != null) {
+			// employee konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getEmployeeAgent().getDefaultOrganization(),
+					user.getEmployeeAgent().getDefaultLocation(),
+					user.getEmployeeAgent().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
+		else if (user.getClient() != null) {
+			// client konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getClient().getDefaultOrganization(),
+					user.getClient().getDefaultLocation(),
+					user.getClient().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
+		else if (user.getSupplier() != null) {
+			// supplier konekti context
+			workbenchContext = new WorkbenchContext(
+					user.getSupplier().getDefaultOrganization(),
+					user.getSupplier().getDefaultLocation(),
+					user.getSupplier().getDefaultArea(),
+					user,
+					defaultLocale,				
+					toolbarManager,
+					resourceManager);
+		}
 	}
 	
 	@Override

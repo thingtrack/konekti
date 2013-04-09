@@ -48,7 +48,7 @@ public class InvoiceLine implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name="IVA_ID")
-	private Iva iva;
+	private Tax iva;
 	
 	@Column(name="PRICE_TAX", length = 5, precision = 2)
 	private double priceFinal;
@@ -199,14 +199,14 @@ public class InvoiceLine implements Serializable {
 	/**
 	 * @return the iva
 	 */
-	public Iva getIva() {
+	public Tax getIva() {
 		return iva;
 	}
 
 	/**
 	 * @param iva the iva to set
 	 */
-	public void setIva(Iva iva) {
+	public void setIva(Tax iva) {
 		this.iva = iva;
 	}
 

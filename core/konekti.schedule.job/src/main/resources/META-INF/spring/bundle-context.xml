@@ -19,5 +19,5 @@
     <context:component-scan base-package="com.thingtrack.konekti.schedule.job" />
         	
 	<!-- Job bean test-->
-	<bean id="alarmTest" class="com.thingtrack.konekti.schedule.job.AlarmTest" />		
+	<bean id="jobTest" class="com.thingtrack.konekti.schedule.job.JobTest" />		
 </beans>

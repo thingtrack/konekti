@@ -65,26 +65,53 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 		initView();
 	}
 
-	private void initView() {
-		// initialize Slide View Organization View
-		dgAlarm.setImmediate(true);
-
-		refreshBindindSource();
-
-		// STEP 01: create grid view for slide Organization View
+	private void initView() {		
 		try {
+			dgAlarm.setImmediate(true);
+			dgAlarm.setSelectable(true);
+			
+			bsAlarm.addNestedContainerProperty("alarmType.description");
+			bsAlarm.addNestedContainerProperty("alarmStatus.description");
+			bsAlarm.addNestedContainerProperty("area.description");
+			
 			dgAlarm.setBindingSource(bsAlarm);
-			dgAlarm.setVisibleColumns(new String[] { "message",
-					"alarmType.description", "alarmStatus.description",
-					"location.name", "alarmDate" });
-			dgAlarm.setColumnHeaders(new String[] { "Mensaje", "Tipo",
-					"Estado", "Ubicación", "Fecha Alarma" });
+			
+			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmGroup", "alarmName","alarmType.description", "message", "alarmStatus.description", "alarmDate" });
+			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo", "Grupo Alarma", "Nombre Alarma", "Tipo", "Mensaje", "Estado", "Fecha Alarma" });
 
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
 
-		// STEP 02: create toolbar for slide Employee Agent View
+		refreshAlarmBindindSource();
+		injectAlarmBindingSource();
+	}
+
+	private void refreshAlarmBindindSource() {
+		try {
+			bsAlarm.removeAllItems();
+			bsAlarm.addAll(alarmService.getAll());
+
+			// select the first item if exist
+			if (bsAlarm.size() > 0)
+				bsAlarm.setItemId(bsAlarm.getIdByIndex(0));
+			
+//			// TEST: open Vehicle module version 0.0.1.SNAPSHOT
+//			try {
+//				context.openBundle("com.thingtrack.bustrack.view.module.vehicle", "0.0.1.SNAPSHOT");
+//			}
+//			catch (Exception ex) {
+//				throw new  RuntimeException(ex.getMessage());
+//			}
+			
+		} catch (IllegalArgumentException e) {
+			throw new RuntimeException("¡No se pudo refrescar las Alarmas!", e);
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo refrescar las Alarmas!", e);
+		}
+	}
+
+	private void injectAlarmBindingSource() {
 		navigationToolbar = new NavigationToolbar(0, bsAlarm, viewContainer);
 		boxToolbar = new BoxToolbar(1, bsAlarm);
 
@@ -98,36 +125,11 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 
 		addToolbar(navigationToolbar);
 		addToolbar(boxToolbar);
-
 	}
-
-	private void refreshBindindSource() {
-		try {
-			bsAlarm.removeAllItems();
-			bsAlarm.addAll(alarmService.getAll());
-
-			bsAlarm.addNestedContainerProperty("alarmType.description");
-			bsAlarm.addNestedContainerProperty("alarmStatus.description");
-			bsAlarm.addNestedContainerProperty("location.name");
-
-//			// TEST: open Vehicle module version 0.0.1.SNAPSHOT
-//			try {
-//				context.openBundle("com.thingtrack.bustrack.view.module.vehicle", "0.0.1.SNAPSHOT");
-//			}
-//			catch (Exception ex) {
-//				throw new  RuntimeException(ex.getMessage());
-//			}
-			
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	@Override
 	public void refreshButtonClick(NavigationToolbar.ClickNavigationEvent event) {
-		refreshBindindSource();
+		refreshAlarmBindindSource();
 
 	}
 
@@ -171,14 +173,13 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 		// dgEmployee
 		dgAlarm = new DataGridView() {
 			@Override
-			protected String formatPropertyValue(Object rowId, Object colId,
-					Property property) {
+			protected String formatPropertyValue(Object rowId, Object colId, Property property) {
 				// Format by property type
 				if (property.getType() == Date.class) {
-					SimpleDateFormat df = new SimpleDateFormat(
-							"dd/MM/yyyy HH:mm:ss");
+					SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-					return df.format((Date) property.getValue());
+					if (property.getValue() != null)
+						return df.format((Date) property.getValue());
 				}
 
 				return super.formatPropertyValue(rowId, colId, property);

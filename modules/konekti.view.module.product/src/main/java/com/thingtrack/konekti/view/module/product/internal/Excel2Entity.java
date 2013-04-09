@@ -9,7 +9,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import com.thingtrack.konekti.domain.Product;
 import com.thingtrack.konekti.domain.ProductType;
 import com.thingtrack.konekti.domain.Supplier;
-import com.thingtrack.konekti.domain.Warehouse;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.service.api.ProductTypeService;
 import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
@@ -40,10 +40,10 @@ public class Excel2Entity {
 		this.row = row;
 		
 		product = new Product();
-		List<Warehouse> warehouses = new ArrayList<Warehouse>();
-		warehouses.add(context.getWarehouse());
+		List<Area> areas = new ArrayList<Area>();
+		areas.add(context.getArea());
 			
-		product.setWarehouses(warehouses);
+		product.setAreas(areas);
 	}
 	
 	public Product parse() throws Exception {		

@@ -54,8 +54,8 @@ public class Alarm implements Serializable {
 	private AlarmType alarmType;
 	
 	@ManyToOne
-	@JoinColumn(name="LOCATION_ID")
-	private Location location;
+	@JoinColumn(name="AREA_ID")
+	private Area area;
 	
 	@ManyToOne
 	@JoinColumn(name="ALARM_STATUS_ID", nullable=false)
@@ -108,17 +108,17 @@ public class Alarm implements Serializable {
 	}
 
 	/**
-	 * @param location the location to set
+	 * @param area the area to set
 	 */
-	public void setLocation(Location location) {
-		this.location = location;
+	public void setArea(Area area) {
+		this.area = area;
 	}
 
 	/**
-	 * @return the location
+	 * @return the area
 	 */
-	public Location getLocation() {
-		return location;
+	public Area getArea() {
+		return area;
 	}
 
 	/**

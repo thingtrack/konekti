@@ -119,7 +119,7 @@ public class ClientSelectorField extends CustomField {
 										Client savingClient = event.getDomainEntity();
 
 										Client savedClient = clientService.save(savingClient);
-										savingClient.setClientId(savedClient.getClientId());
+										savingClient.setAgentId(savedClient.getAgentId());
 										
 										clientField.setValue(savingClient.getName());
 										

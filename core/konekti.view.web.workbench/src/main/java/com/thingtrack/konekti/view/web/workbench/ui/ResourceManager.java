@@ -16,17 +16,19 @@ public class ResourceManager {
 		private com.vaadin.terminal.Resource resource;				 // bundle icon	
 		private LOCATION location;   								 // bundle location layout
 		private boolean autoStart;   								 // bundle autostart flag
+		private boolean closeable;									 // bundle closeable flag
 		
 		private IViewContainer componentView; 						 // bundle payload: visual component resource	
 		private MenuItem menu; 										 // bundle payload: menu item resource
 		private Tab tab; 											 // bundle payload: tab resource 
 		
-		public Resource(String id, String caption, com.vaadin.terminal.Resource resource, LOCATION location, boolean autoStart, IViewContainer componentView, MenuItem menu, Tab tab) {
+		public Resource(String id, String caption, com.vaadin.terminal.Resource resource, LOCATION location, boolean autoStart, boolean closeable, IViewContainer componentView, MenuItem menu, Tab tab) {
 			this.id = id;
 			this.caption = caption;
 			this.resource = resource;
 			this.location = location;			
 			this.autoStart = autoStart;
+			this.closeable = closeable;
 			this.componentView = componentView;
 			this.menu = menu;
 			this.tab = tab;
@@ -144,6 +146,20 @@ public class ResourceManager {
 		public com.vaadin.terminal.Resource getResource() {
 			return resource;
 		}
+
+		/**
+		 * @return the closeable
+		 */
+		public boolean isCloseable() {
+			return closeable;
+		}
+
+		/**
+		 * @param closeable the closeable to set
+		 */
+		public void setCloseable(boolean closeable) {
+			this.closeable = closeable;
+		}
 		
 	}
 	
@@ -152,8 +168,8 @@ public class ResourceManager {
 		
 	}
 	
-	public void addResource(String id, String caption, com.vaadin.terminal.Resource resource, LOCATION location, boolean autoStart, IViewContainer componentView, MenuItem menu, Tab tab) {
-		resources.put(id, new Resource(id, caption, resource, location, autoStart, componentView, menu, tab));
+	public void addResource(String id, String caption, com.vaadin.terminal.Resource resource, LOCATION location, boolean autoStart, boolean closeable, IViewContainer componentView, MenuItem menu, Tab tab) {
+		resources.put(id, new Resource(id, caption, resource, location, autoStart, closeable, componentView, menu, tab));
 		
 	}
 	
