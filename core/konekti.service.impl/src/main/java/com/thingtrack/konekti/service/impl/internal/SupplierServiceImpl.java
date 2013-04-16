@@ -17,8 +17,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.thingtrack.konekti.domain.Area;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Supplier;
@@ -82,15 +80,5 @@ public class SupplierServiceImpl implements SupplierService {
 	public Supplier getByUser(User user) throws Exception {
 		return this.supplierDao.getByUser(user);
 		
-	}
-	
-	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
-		return this.supplierDao.getAllLocationByOrganization(organization, agentId);
-	}
-	
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		return this.supplierDao.getAllAreaByLocation(location, agentId);
 	}
 }

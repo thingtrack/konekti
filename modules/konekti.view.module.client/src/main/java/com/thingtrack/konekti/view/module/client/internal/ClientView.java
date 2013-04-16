@@ -210,7 +210,7 @@ public class ClientView extends AbstractView implements
 	public void addButtonClick(ClickNavigationEvent event) {
 		Client client = null;
 		try {
-			client = clientService.createNewClient(context.getOrganization());
+			client = clientService.createNewClient(context.getUser().getActiveOrganization());
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"¡No se pudo crear el nuevo código cliente!",

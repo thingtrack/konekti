@@ -157,7 +157,7 @@ public class StockView extends AbstractView
 	public void addButtonClick(ClickNavigationEvent event) {
 		Stock stock;
 		try {
-			stock = stockService.createNewStock(context.getArea());
+			stock = stockService.createNewStock(context.getUser().getActiveArea());
 		} catch (Exception e) {
 			throw new RuntimeException("¡No se pudo crear nueva entidad stock!", e);
 		}

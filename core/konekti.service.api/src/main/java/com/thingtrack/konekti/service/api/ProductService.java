@@ -17,6 +17,7 @@ import java.util.List;
 
 import com.thingtrack.konekti.domain.Product;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -29,6 +30,6 @@ public interface ProductService {
 	public Product getByCode( String code, String version ) throws Exception;
 	public Product save(Product product) throws Exception;
 	public void delete(Product product) throws Exception;
-	public List<Product> getAllProductByArea(Area area) throws Exception;
+	public List<Product> getAll(User user) throws Exception;
 	public Product createNewEntity(Area area) throws Exception;
 }

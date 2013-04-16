@@ -41,7 +41,7 @@ public class Excel2Entity {
 		
 		product = new Product();
 		List<Area> areas = new ArrayList<Area>();
-		areas.add(context.getArea());
+		areas.add(context.getUser().getActiveArea());
 			
 		product.setAreas(areas);
 	}

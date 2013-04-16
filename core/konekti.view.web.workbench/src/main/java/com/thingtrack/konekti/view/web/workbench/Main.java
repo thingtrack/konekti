@@ -51,6 +51,7 @@ import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.thingtrack.konekti.view.kernel.ui.layout.LOCATION;
 import com.thingtrack.konekti.view.kernel.ui.layout.ViewEvent;
 import com.thingtrack.konekti.view.layout.KonektiLayout;
+import com.thingtrack.konekti.view.web.workbench.ui.MenuManager;
 import com.thingtrack.konekti.view.web.workbench.ui.ResourceManager;
 import com.thingtrack.konekti.view.web.workbench.ui.ResourceManager.Resource;
 import com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager;
@@ -96,19 +97,20 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private ToolbarManager toolbarManager;
 
 	@Autowired
+	private MenuManager menuManager;
+	
+	@Autowired
 	private KonektiLayout konektiLayout;
 
 	private Window window;
 	
-	//private MenuItem aboutSubHelpMenuItem;
-
 	private SliderView sliderView;
 
 	private IWorkbenchContext workbenchContext;
 	
 	private String name;
 	private String version;
-	private String logo_init;
+	private String logoInit;
 	private boolean demo;
 	
 	@Override
@@ -158,9 +160,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		
 		try {
 			configuration = configurationService.getByTag(Configuration.TAG.LOGO_INIT.name());
-			logo_init = configuration.getValue();
+			logoInit = configuration.getValue();
 		} catch (Exception e) {
-			logo_init = "logo_konekti_init.png";
+			logoInit = "logo_konekti_init.png";
 		}	
 		
 		try {
@@ -173,13 +175,11 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 	
 	private void createViews() {
-
 		sliderView = new SliderView();
 
 		sliderView.addListener(this);
 
-		sliderView.addView(new SecurityAccessView(securityService, sliderView, version, logo_init, demo));
-		
+		sliderView.addView(new SecurityAccessView(securityService, sliderView, version, logoInit, demo));		
 		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}
 
@@ -209,17 +209,13 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		}
 	}
 
-	private void getMenu(MenuFolderResource menuFolderResource,
-			MenuItem itemParentId) {
-		for (final MenuResource menuResource : menuFolderResource
-				.getMenuResources()) {
+	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId) {
+		for (final MenuResource menuResource : menuFolderResource.getMenuResources()) {
 			if (menuResource instanceof MenuFolderResource) {
 				// add new header menu item
-				MenuItem headMenuItem = konektiLayout.getMenuLayout()
-						.addMenuItem(
+				MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(
 								menuResource.getCaption(),
-								getIcon(menuResource.getIcon(),
-										menuResource.getCaption()),
+								getIcon(menuResource.getIcon(),menuResource.getCaption()),
 								itemParentId, null);
 
 				// recursive menu manage
@@ -246,8 +242,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 						}
 					};
 
-					// create the new menu item
-					// recover commanda data
+					// create the new menu item; recover commanda data
 					String symbolicName = ((MenuCommandResource) menuResource).getModuleId();
 					String version = ((MenuCommandResource) menuResource).getModuleVersion();
 
@@ -266,31 +261,16 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 					MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(caption, hint, resource, itemParentId, defaultCommand);
 
 					// add command to the menu manager list
-					if (((MenuCommandResource) menuResource).getLocation()
-							.name().equals("TOP"))
-						resourceManager.addResource(id, caption, resource,
-								LOCATION.TOP, autoStart, closeable, null, headMenuItem,
-								null);
-					else if (((MenuCommandResource) menuResource).getLocation()
-							.name().equals("LEFT"))
-						resourceManager.addResource(id, caption, resource,
-								LOCATION.LEFT, autoStart, closeable, null, headMenuItem,
-								null);
-					else if (((MenuCommandResource) menuResource).getLocation()
-							.name().equals("CENTER"))
-						resourceManager.addResource(id, caption, resource,
-								LOCATION.CENTER, autoStart, closeable, null, headMenuItem,
-								null);
-					else if (((MenuCommandResource) menuResource).getLocation()
-							.name().equals("RIGHT"))
-						resourceManager.addResource(id, caption, resource,
-								LOCATION.RIGHT, autoStart, closeable, null, headMenuItem,
-								null);
-					else if (((MenuCommandResource) menuResource).getLocation()
-							.name().equals("BOTTON"))
-						resourceManager.addResource(id, caption, resource,
-								LOCATION.BOTTON, autoStart, closeable, null, headMenuItem,
-								null);
+					if (((MenuCommandResource) menuResource).getLocation().name().equals("TOP"))
+						resourceManager.addResource(id, caption, resource, LOCATION.TOP, autoStart, closeable, null, headMenuItem, null);
+					else if (((MenuCommandResource) menuResource).getLocation().name().equals("LEFT"))
+						resourceManager.addResource(id, caption, resource, LOCATION.LEFT, autoStart, closeable, null, headMenuItem, null);
+					else if (((MenuCommandResource) menuResource).getLocation().name().equals("CENTER"))
+						resourceManager.addResource(id, caption, resource, LOCATION.CENTER, autoStart, closeable, null, headMenuItem, null);
+					else if (((MenuCommandResource) menuResource).getLocation().name().equals("RIGHT"))
+						resourceManager.addResource(id, caption, resource, LOCATION.RIGHT, autoStart, closeable, null, headMenuItem, null);
+					else if (((MenuCommandResource) menuResource).getLocation().name().equals("BOTTON"))
+						resourceManager.addResource(id, caption, resource, LOCATION.BOTTON, autoStart, closeable, null, headMenuItem, null);
 
 					// set module payload if is register in service registry
 					MetadataModule metadataModule = moduleService.get(
@@ -413,7 +393,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				konektiLayout.removeModule(resource.getId());
 				resource.setTab(null);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.getMessage();
 			}
 
 			// set default command to the bundle menu resource
@@ -449,8 +429,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		if (arg0.getViewFrom() instanceof SecurityAccessView) {
 
-			SecurityAccessView securityAccessView = (SecurityAccessView) arg0
-					.getViewFrom();
+			SecurityAccessView securityAccessView = (SecurityAccessView) arg0.getViewFrom();
 			try {
 				
 				
@@ -459,8 +438,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				
 				WorkbenchView workbenchView =  (WorkbenchView) arg0.getViewTo();
 				workbenchView.setLoggedUser(loggedUser);
-				
-				konektiLayout.setLoggedUser(loggedUser.getUsername());
+								
+				menuManager.setUser(loggedUser);
 				
 				// construct the menu from scratch
 				initMenuManager();
@@ -485,40 +464,18 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		String country = localeParams[1];
 		
 		defaultLocale = new Locale(language, country);
-				
-		if (user.getEmployeeAgent() != null) {
-			// employee konekti context
-			workbenchContext = new WorkbenchContext(
-					user.getEmployeeAgent().getDefaultOrganization(),
-					user.getEmployeeAgent().getDefaultLocation(),
-					user.getEmployeeAgent().getDefaultArea(),
-					user,
-					defaultLocale,				
-					toolbarManager,
-					resourceManager);
-		}
-		else if (user.getClient() != null) {
-			// client konekti context
-			workbenchContext = new WorkbenchContext(
-					user.getClient().getDefaultOrganization(),
-					user.getClient().getDefaultLocation(),
-					user.getClient().getDefaultArea(),
-					user,
-					defaultLocale,				
-					toolbarManager,
-					resourceManager);
-		}
-		else if (user.getSupplier() != null) {
-			// supplier konekti context
-			workbenchContext = new WorkbenchContext(
-					user.getSupplier().getDefaultOrganization(),
-					user.getSupplier().getDefaultLocation(),
-					user.getSupplier().getDefaultArea(),
-					user,
-					defaultLocale,				
-					toolbarManager,
-					resourceManager);
-		}
+		
+		// initialize active Organization tree
+		user.setActiveOrganization(user.getDefaultOrganization());
+		user.setActiveLocation(user.getDefaultLocation());
+		user.setActiveArea(user.getDefaultArea());
+		user.setActiveLocale(defaultLocale);
+		
+		workbenchContext = new WorkbenchContext(
+				user,	
+				menuManager,
+				toolbarManager,
+				resourceManager);
 	}
 	
 	@Override

@@ -464,7 +464,7 @@ public class EmployeeAgentView extends AbstractView
 					}
 					
 					try {
-						employeeAgentKnowledgeService.importEmployeeAgent(context.getOrganization(), employeeAgents);
+						employeeAgentKnowledgeService.importEmployeeAgent(context.getUser().getActiveOrganization(), employeeAgents);
 					} catch (Exception e) {
 						throw new RuntimeException("¡No se pudo importar el fichero!", e);
 					}

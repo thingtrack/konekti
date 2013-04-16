@@ -57,9 +57,9 @@ public class Excel2Entity {
 		
 		employeeAgent = new EmployeeAgent();
 		List<Organization> organizations = new ArrayList<Organization>();
-		organizations.add(context.getOrganization());
+		organizations.add(context.getUser().getActiveOrganization());
 			
-		employeeAgent.setOrganizations(organizations);
+		//employeeAgent.setOrganizations(organizations);
 		
 		try {
 			defaultEmployeeAgentStatus = employeeAgentStatusService.getByName("ACTIVE");

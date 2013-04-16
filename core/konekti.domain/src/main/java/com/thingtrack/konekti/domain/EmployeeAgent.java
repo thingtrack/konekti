@@ -13,7 +13,6 @@
  */
 package com.thingtrack.konekti.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.io.Serializable;
 import java.util.Date;
@@ -23,8 +22,6 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -71,24 +68,6 @@ public class EmployeeAgent extends Agent implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_TYPE_ID", nullable=false)		
 	private EmployeeAgentType employeeAgentType;
-	
-	@ManyToMany
-	@JoinTable(name="EMPLOYEE_AGENT_ORGANIZATION",
-			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))		
-	private List<Organization> organizations = new ArrayList<Organization>();
-	
-	@ManyToMany
-	@JoinTable(name="EMPLOYEE_AGENT_LOCATION",
-			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
-	private List<Location> locations = new ArrayList<Location>();
-
-	@ManyToMany
-	@JoinTable(name="EMPLOYEE_AGENT_AREA",
-			   joinColumns=@JoinColumn(name="EMPLOYEE_AGENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
-	private List<Area> areas = new ArrayList<Area>();
 	
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
@@ -177,20 +156,6 @@ public class EmployeeAgent extends Agent implements Serializable {
 	}
 
 	/**
-	 * @param organizations the organizations to set
-	 */
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	/**
-	 * @return the organizations
-	 */
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	/**
 	 * @param employeeAgentStatus the employeeAgentStatus to set
 	 */
 	public void setEmployeeAgentStatus(EmployeeAgentStatus employeeAgentStatus) {
@@ -261,20 +226,6 @@ public class EmployeeAgent extends Agent implements Serializable {
 	}
 
 	/**
-	 * @return the locations
-	 */
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
-
-	/**
 	 * @return the surname
 	 */
 	public String getSurname() {
@@ -286,20 +237,6 @@ public class EmployeeAgent extends Agent implements Serializable {
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
-	}
-
-	/**
-	 * @return the areas
-	 */
-	public List<Area> getAreas() {
-		return areas;
-	}
-
-	/**
-	 * @param areas the areas to set
-	 */
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
 	}
 
 }

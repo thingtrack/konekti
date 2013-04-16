@@ -42,7 +42,7 @@ public class Configuration implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="MENU_RESOURCE_ID", nullable=true)
-	private MenuResource menuResouce;
+	private MenuCommandResource menuCommandResource;
 
 	public enum TAG {        
         NAME,
@@ -52,14 +52,23 @@ public class Configuration implements Serializable {
         LOGO_WORKBENCH,
         DEMO
     }
-	
-	public enum TYPE {        
-        STRING,
-        BOOLEAN,
-        INTEGER,
-        DOUBLE,
-        DATE
-    }
+	public enum TYPE {
+		STRING("String"),
+		BOOLEAN("Boolean"),
+		INTEGER("Integer"),
+		DOUBLE("Double"),
+		DATE("Date");
+		
+		private String name;
+		private TYPE(String name){
+			this.name = name;
+		}
+		
+		@Override
+		public String toString() {
+			return name;
+		}
+	}
 	
 	/**
 	 * @return the configurationId
@@ -148,15 +157,15 @@ public class Configuration implements Serializable {
 	/**
 	 * @return the menuResouce
 	 */
-	public MenuResource getMenuResouce() {
-		return menuResouce;
+	public MenuCommandResource getMenuCommandResource() {
+		return menuCommandResource;
 	}
 
 	/**
 	 * @param menuResouce the menuResouce to set
 	 */
-	public void setMenuResouce(MenuResource menuResouce) {
-		this.menuResouce = menuResouce;
+	public void setMenuCommandResource(MenuCommandResource menuResouce) {
+		this.menuCommandResource = menuResouce;
 	}
 
 }

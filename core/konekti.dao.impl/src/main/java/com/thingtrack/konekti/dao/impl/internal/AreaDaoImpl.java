@@ -21,9 +21,8 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.AreaDao;
-import com.thingtrack.konekti.domain.Location;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -43,22 +42,18 @@ public class AreaDaoImpl extends JpaDao<Area, Integer> implements AreaDao {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Area> getAllByLocation(Location location) throws Exception {
-		Query query = (Query)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.location = :location")
-				.setParameter("location", location);
+	public List<Area> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveLocation() != null)
+			queryString += " WHERE p.location = :location";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		if (user.getActiveLocation() != null)
+			query.setParameter("location", user.getActiveLocation());
 		
 		return query.getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Area> getAreasFromOrganization(Organization organization) throws Exception {
-		Query query = (Query)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
-				.setParameter("organization", organization);
-		
-		return query.getResultList();
-	}
-
 }

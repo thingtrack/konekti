@@ -21,9 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ClientDao;
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Client;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -69,39 +67,4 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
-		
-		String queryString = "SELECT lc";
-		queryString += " FROM " + getEntityName() + " cl";
-		queryString += " JOIN cl.locations lc";
-		queryString += " JOIN lc.organizations org";
-		queryString += " WHERE org.organizationId = :organizationId";
-		queryString += " AND cl.agentId = :agentId";
-
-		Query query = (Query) getEntityManager().createQuery(queryString)
-		.setParameter("organizationId", organization.getOrganizationId())
-		.setParameter("agentId", agentId);
-
-		return query.getResultList();
-	}
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		
-		String queryString = "SELECT ar";
-		queryString += " FROM " + getEntityName() + " cl";
-		queryString += " JOIN cl.areas ar";
-		queryString += " JOIN ar.location lc";
-		queryString += " WHERE lc.locationId = :locationId";
-		queryString += " AND cl.agentId = :agentId";
-
-		Query query = (Query) getEntityManager().createQuery(queryString)
-		.setParameter("locationId", location.getLocationId())
-		.setParameter("agentId", agentId);
-
-		return query.getResultList();
-	}
 }

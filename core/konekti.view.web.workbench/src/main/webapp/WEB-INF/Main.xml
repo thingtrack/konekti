@@ -19,4 +19,5 @@
 
 	<bean id="toolbarManager" class="com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager" depends-on="konektiLayout" />
 
+	<bean id="menuManager" class="com.thingtrack.konekti.view.web.workbench.ui.MenuManager" depends-on="konektiLayout" />
 </beans>

@@ -215,7 +215,7 @@ public class SupplierView extends AbstractView implements
 	public void addButtonClick(ClickNavigationEvent event) {
 		Supplier supplier = null;
 		try {
-			supplier = supplierService.createNewSupplier(context.getOrganization());
+			supplier = supplierService.createNewSupplier(context.getUser().getActiveOrganization());
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"¡No se pudo crear el nuevo código proveedor!",

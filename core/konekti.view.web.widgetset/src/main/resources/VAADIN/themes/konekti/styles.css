@@ -21,7 +21,7 @@
 	background: url("common/img/vertical-sprites.png") repeat-x scroll left -383px #323336;	
 }
 
-.v-popupbutton.v-button-link .v.button.wrap{
+.v-popupbutton.v-button-link .v.button.wrap {
 	
 	color: #D1D3D6;
 	text-shadow: 0 1px 0 rgba (0,0,0,0.9);

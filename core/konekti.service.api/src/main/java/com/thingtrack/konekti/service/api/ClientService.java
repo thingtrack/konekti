@@ -34,6 +34,4 @@ public interface ClientService {
 	public void delete(Client client) throws Exception;
 	public Client createNewClient(Organization organization) throws Exception;
 	public Client getByUser(User user) throws Exception;
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
 }

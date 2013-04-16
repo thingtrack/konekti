@@ -30,6 +30,7 @@
 		<module>konekti.view.module.sensor</module>
 		<module>konekti.view.module.dashboard</module>
 		<module>konekti.view.module.calendar</module>
+		<module>konekti.view.module.configuration</module>
 	</modules>
 
 	<dependencies>

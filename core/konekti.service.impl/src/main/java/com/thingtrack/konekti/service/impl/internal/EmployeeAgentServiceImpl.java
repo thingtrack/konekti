@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.EmployeeAgentDao;
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.EmployeeAgentService;
@@ -73,15 +71,5 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception {
 		return this.employeeAgentDao.getByWorkNumber(organization, workNumber);
 		
-	}
-
-	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
-		return this.employeeAgentDao.getAllLocationByOrganization(organization, agentId);
-	}
-	
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		return this.employeeAgentDao.getAllAreaByLocation(location, agentId);
 	}
 }

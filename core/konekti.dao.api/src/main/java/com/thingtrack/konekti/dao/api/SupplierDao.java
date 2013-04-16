@@ -29,6 +29,4 @@ import com.thingtrack.konekti.domain.User;
 public interface SupplierDao extends Dao<Supplier, Integer> {
 	public Supplier getByCode(String code) throws Exception;
 	public Supplier getByUser(User user) throws Exception;
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
 }

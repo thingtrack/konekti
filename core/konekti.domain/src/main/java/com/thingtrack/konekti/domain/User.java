@@ -14,7 +14,9 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,8 +26,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Thingtrack S.L
@@ -54,6 +58,48 @@ public class User implements Serializable {
 
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;
+	
+	@Transient
+	private Locale activeLocale;
+	
+	@ManyToMany
+	@JoinTable(name = "USER_ORGANIZATION", 
+			   joinColumns = @JoinColumn(name = "USER_ID"), 
+			   inverseJoinColumns = @JoinColumn(name = "ORGANIZATION_ID"))
+	private List<Organization> organizations = new ArrayList<Organization>();
+
+	@ManyToMany
+	@JoinTable(name="USER_LOCATION",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
+	private List<Location> locations = new ArrayList<Location>();
+
+	@ManyToMany
+	@JoinTable(name="USER_AREA",
+			   joinColumns=@JoinColumn(name="USER_ID"),
+			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
+	private List<Area> areas = new ArrayList<Area>();
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")
+	private Organization defaultOrganization;
+		
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_LOCATION_ID")
+	private Location defaultLocation;
+	
+	@ManyToOne
+	@JoinColumn(name="DEFAULT_AREA_ID")
+	private Area defaultArea;
+	
+	@Transient
+	private Organization activeOrganization;
+		
+	@Transient
+	private Location activeLocation;
+	
+	@Transient
+	private Area activeArea;
 	
 	@Column(name="COMMENT", length=256)
 	private String comment;
@@ -269,6 +315,146 @@ public class User implements Serializable {
 	 */
 	public void setSupplier(Supplier supplier) {
 		this.supplier = supplier;
+	}
+
+	/**
+	 * @return the organizations
+	 */
+	public List<Organization> getOrganizations() {
+		return organizations;
+	}
+
+	/**
+	 * @param organizations the organizations to set
+	 */
+	public void setOrganizations(List<Organization> organizations) {
+		this.organizations = organizations;
+	}
+
+	/**
+	 * @return the locations
+	 */
+	public List<Location> getLocations() {
+		return locations;
+	}
+
+	/**
+	 * @param locations the locations to set
+	 */
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
+	}
+
+	/**
+	 * @return the areas
+	 */
+	public List<Area> getAreas() {
+		return areas;
+	}
+
+	/**
+	 * @param areas the areas to set
+	 */
+	public void setAreas(List<Area> areas) {
+		this.areas = areas;
+	}
+
+	/**
+	 * @return the defaultOrganization
+	 */
+	public Organization getDefaultOrganization() {
+		return defaultOrganization;
+	}
+
+	/**
+	 * @param defaultOrganization the defaultOrganization to set
+	 */
+	public void setDefaultOrganization(Organization defaultOrganization) {
+		this.defaultOrganization = defaultOrganization;
+	}
+
+	/**
+	 * @return the defaultLocation
+	 */
+	public Location getDefaultLocation() {
+		return defaultLocation;
+	}
+
+	/**
+	 * @param defaultLocation the defaultLocation to set
+	 */
+	public void setDefaultLocation(Location defaultLocation) {
+		this.defaultLocation = defaultLocation;
+	}
+
+	/**
+	 * @return the defaultArea
+	 */
+	public Area getDefaultArea() {
+		return defaultArea;
+	}
+
+	/**
+	 * @param defaultArea the defaultArea to set
+	 */
+	public void setDefaultArea(Area defaultArea) {
+		this.defaultArea = defaultArea;
+	}
+
+	/**
+	 * @return the activeOrganization
+	 */
+	public Organization getActiveOrganization() {
+		return activeOrganization;
+	}
+
+	/**
+	 * @param activeOrganization the activeOrganization to set
+	 */
+	public void setActiveOrganization(Organization activeOrganization) {
+		this.activeOrganization = activeOrganization;
+	}
+
+	/**
+	 * @return the activeLocation
+	 */
+	public Location getActiveLocation() {
+		return activeLocation;
+	}
+
+	/**
+	 * @param activeLocation the activeLocation to set
+	 */
+	public void setActiveLocation(Location activeLocation) {
+		this.activeLocation = activeLocation;
+	}
+
+	/**
+	 * @return the activeArea
+	 */
+	public Area getActiveArea() {
+		return activeArea;
+	}
+
+	/**
+	 * @param activeArea the activeArea to set
+	 */
+	public void setActiveArea(Area activeArea) {
+		this.activeArea = activeArea;
+	}
+
+	/**
+	 * @return the activeLocale
+	 */
+	public Locale getActiveLocale() {
+		return activeLocale;
+	}
+
+	/**
+	 * @param activeLocale the activeLocale to set
+	 */
+	public void setActiveLocale(Locale activeLocale) {
+		this.activeLocale = activeLocale;
 	}
 
 }

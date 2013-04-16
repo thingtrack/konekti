@@ -97,7 +97,7 @@ public class ClientSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				Client client = null;
 				try {
-					client = clientService.createNewClient(ClientSelectorField.this.context.getOrganization());
+					client = clientService.createNewClient(ClientSelectorField.this.context.getUser().getActiveOrganization());
 				} catch (Exception e) {
 					throw new RuntimeException(
 							"¡No se pudo crear el nuevo código cliente!",

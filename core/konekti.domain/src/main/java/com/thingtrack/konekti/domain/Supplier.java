@@ -14,16 +14,12 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -54,25 +50,7 @@ public class Supplier extends Agent implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="SUPPLIER_GROUP_ID")	
 	private SupplierGroup supplierGroup;
-	
-	@ManyToMany
-	@JoinTable(name="SUPPLIER_ORGANIZATION",
-			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="ORGANIZATION_ID"))	
-	private List<Organization> organizations = new ArrayList<Organization>();
-	
-	@ManyToMany
-	@JoinTable(name="SUPPLIER_LOCATION",
-			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
-	private List<Location> locations = new ArrayList<Location>();
-	
-	@ManyToMany
-	@JoinTable(name="SUPPLIER_AREA",
-			   joinColumns=@JoinColumn(name="SUPPLIER_ID"),
-			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
-	private List<Area> areas = new ArrayList<Area>();
-	
+		
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
 	
@@ -145,34 +123,6 @@ public class Supplier extends Agent implements Serializable {
 	public SupplierGroup getSupplierGroup() {
 		return supplierGroup;
 	}
-
-	/**
-	 * @param organizations the organizations to set
-	 */
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	/**
-	 * @return the organizations
-	 */
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-
-	/**
-	 * @return the locations
-	 */
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
 	
 	/**
 	 * @return the active
@@ -188,17 +138,4 @@ public class Supplier extends Agent implements Serializable {
 		this.active = active;
 	}
 
-	/**
-	 * @return the areas
-	 */
-	public List<Area> getAreas() {
-		return areas;
-	}
-
-	/**
-	 * @param areas the areas to set
-	 */
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
-	}
 }

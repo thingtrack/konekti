@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thingtrack.konekti.domain.Product;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.dao.api.ProductDao;
 import com.thingtrack.konekti.service.api.ProductService;
 import com.thingtrack.konekti.service.api.SequenceService;
@@ -72,9 +73,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAllProductByArea(Area area)
-			throws Exception {
-		return this.productDao.getAllProductByArea(area);
+	public List<Product> getAll(User user) throws Exception {
+		return this.productDao.getAll(user);
 	}
 	
 	@Override

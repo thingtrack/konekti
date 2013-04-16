@@ -19,6 +19,7 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -26,6 +27,7 @@ import com.thingtrack.konekti.domain.Area;
  */
 public interface AreaDao extends Dao<Area, Integer> {
 	public Area getByCode(String code) throws Exception;
-	public List<Area> getAllByLocation(Location location) throws Exception;
-	public List<Area> getAreasFromOrganization(Organization organization) throws Exception;
+	public List<Area> getAll(User user) throws Exception;
+//	public List<Area> getAllByLocation(Location location) throws Exception;
+//	public List<Area> getAreasFromOrganization(Organization organization) throws Exception;
 }
