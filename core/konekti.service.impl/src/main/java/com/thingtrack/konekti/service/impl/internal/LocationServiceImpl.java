@@ -70,7 +70,7 @@ public class LocationServiceImpl  implements LocationService {
 		Location location = new Location();
 		
 		location.setCode(sequenceService.setNextSequence(Sequence.CODE.LOCATION.name()));
-		location.addOrganization(organization);	
+		location.addOrganization(organization);			
 		location.setActive(true);
 		
 		return location;

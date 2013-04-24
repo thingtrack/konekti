@@ -167,6 +167,7 @@ public class LocationViewForm extends CustomComponent {
 		locationAddressField.setImmediate(false);
 		locationAddressField.setWidth("640px");
 		locationAddressField.setHeight("135px");
+		locationAddressField.setRequired(true);
 		mainLayout.addComponent(locationAddressField,
 				"top:100.0px;left:20.0px;");
 		

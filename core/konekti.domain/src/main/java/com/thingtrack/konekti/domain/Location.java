@@ -167,6 +167,13 @@ public class Location implements Serializable {
 			area.setLocation(this);
 	}
 
+	public void removeArea(Area area) {
+		areas.remove(area);
+		
+		if (area.getLocation().equals(this))
+			area.setLocation(null);
+	}
+	
 	/**
 	 * @return the areas
 	 */

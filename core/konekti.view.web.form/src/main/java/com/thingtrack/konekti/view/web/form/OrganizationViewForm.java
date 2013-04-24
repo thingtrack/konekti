@@ -196,6 +196,7 @@ public class OrganizationViewForm extends CustomComponent {
 		socialAddressField.setImmediate(false);
 		socialAddressField.setWidth("680px");
 		socialAddressField.setHeight("160px");
+		socialAddressField.setRequired(true);
 		mainLayout.addComponent(socialAddressField, "top:100.0px;left:20.0px;");
 		
 		return mainLayout;
