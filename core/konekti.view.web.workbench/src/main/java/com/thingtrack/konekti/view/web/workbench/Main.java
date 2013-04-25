@@ -112,6 +112,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private String version;
 	private String logoInit;
 	private boolean demo;
+	private boolean jira;
 	
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext arg0) {
@@ -139,7 +140,18 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		// add module listener to list bundle install/uninstall
 		moduleService.addListener(this);
-
+			
+		// jira issue collector button
+		if (jira) {
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("jQuery.ajax({");
+			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
+			buffer.append(",type: \"get\"");
+			buffer.append(",cache: true");
+			buffer.append(",dataType: \"script\"});");
+			getMainWindow().executeJavaScript(buffer.toString()); 
+		}
+						
 	}
 
 	private void getConfiguration() {
@@ -170,6 +182,13 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			demo = Boolean.parseBoolean(configuration.getValue());
 		} catch (Exception e) {
 			demo = false;
+		}
+		
+		try {
+			configuration = configurationService.getByTag("JIRA");
+			jira = Boolean.parseBoolean(configuration.getValue());
+		} catch (Exception e) {
+			jira = false;
 		}
 			
 	}

@@ -102,6 +102,10 @@
 	background-color: red;
 }
 
+.atlwdg-trigger {
+	z-index: 1000;
+}
+
 /* .filter-pressed { */
 /* 	background-image: url("../reindeer/button/img/button-sprintes.png"); */
 /* 	background-position: left -52px; */

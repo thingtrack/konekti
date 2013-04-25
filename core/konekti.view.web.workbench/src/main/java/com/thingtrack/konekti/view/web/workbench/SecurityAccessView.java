@@ -160,7 +160,7 @@ public class SecurityAccessView extends AbstractView {
 			
 			grantedUser = securityService.authenticate(userName, password);
 			getWindow().removeWindow(loginWindow);
-			
+						
 			sliderView.rollNext();
 			
 		}catch(Exception e){
