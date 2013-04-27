@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -34,8 +35,9 @@ public class Report implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 	
-	@Column(name="FILE_NAME")	
-	private String fileName;
+	@Column(name="TEMPLATE")	
+	@Lob
+	private byte[] template;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
@@ -111,16 +113,16 @@ public class Report implements Serializable {
 	}
 
 	/**
-	 * @return the fileName
+	 * @return the template
 	 */
-	public String getFileName() {
-		return fileName;
+	public byte[] getTemplate() {
+		return template;
 	}
 
 	/**
-	 * @param fileName the fileName to set
+	 * @param template the template to set
 	 */
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setTemplate(byte[] template) {
+		this.template = template;
 	}
 }

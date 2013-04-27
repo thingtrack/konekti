@@ -177,7 +177,7 @@ public class ClientView extends AbstractView implements
 	private void refreshBindindSource() {
 		try {
 			bsClient.removeAllItems();
-			bsClient.addAll(clientService.getAll());
+			bsClient.addAll(clientService.getAll(context.getUser()));
 
 			bsClient.addNestedContainerProperty("clientType.description");
 			bsClient.addNestedContainerProperty("clientGroup.description");

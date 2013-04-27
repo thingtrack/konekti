@@ -81,4 +81,8 @@ public class SupplierServiceImpl implements SupplierService {
 		return this.supplierDao.getByUser(user);
 		
 	}
+	
+	public List<Supplier> getAll(User user) throws Exception {
+		return this.supplierDao.getAll(user);
+	}
 }

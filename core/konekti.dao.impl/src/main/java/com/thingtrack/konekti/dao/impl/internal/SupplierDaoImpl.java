@@ -12,6 +12,9 @@
  * the License.
  */
 package com.thingtrack.konekti.dao.impl.internal;
+
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -49,6 +52,22 @@ public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements Suppli
 		
 		return (Supplier) query.getSingleResult();
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Supplier> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveArea() != null)
+			queryString += " WHERE p.organization = :organization";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
+		return query.getResultList();
 	}
 	
 }

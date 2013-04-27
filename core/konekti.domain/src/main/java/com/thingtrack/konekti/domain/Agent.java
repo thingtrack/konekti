@@ -56,19 +56,7 @@ public abstract class Agent implements Serializable {
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="USER_ID")		
 	private User user;
-	
-//	@ManyToOne
-//	@JoinColumn(name="DEFAULT_ORGANIZATION_ID")
-//	private Organization defaultOrganization;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="DEFAULT_LOCATION_ID")
-//	private Location defaultLocation;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="DEFAULT_AREA_ID")
-//	private Area defaultArea;
-	
+		
 	/**
 	 * @return the agentId
 	 */

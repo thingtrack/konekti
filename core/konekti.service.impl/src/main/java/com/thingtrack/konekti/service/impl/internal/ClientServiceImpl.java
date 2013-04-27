@@ -87,4 +87,9 @@ public class ClientServiceImpl implements ClientService {
 		
 	}
 	
+	@Override
+	public List<Client> getAll(User user) throws Exception {
+		return this.clientDao.getAll(user);
+	}
+	
 }

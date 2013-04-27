@@ -41,6 +41,22 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Client> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveArea() != null)
+			queryString += " WHERE p.organization = :organization";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
+		return query.getResultList();
+	}
+	
 	@Override
 	public List<Client> getByCode(Organization organization, String code) throws Exception {		
 		@SuppressWarnings("unchecked")

@@ -88,7 +88,7 @@ public class ClientViewForm extends CustomComponent {
 	private TextField codeField;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-	
+		
 	private ClientTypeService clientTypeService;
 	private ClientGroupService clientGroupService;
 	
@@ -487,8 +487,8 @@ public class ClientViewForm extends CustomComponent {
 		userOrganizationCollectionField.setWidth("100.0%");
 		userOrganizationCollectionField.setHeight("100.0%");
 		organizationLayout.addComponent(userOrganizationCollectionField);
-		organizationLayout.setExpandRatio(userOrganizationCollectionField,
-				1.0f);
+		organizationLayout
+				.setExpandRatio(userOrganizationCollectionField, 1.0f);
 		
 		return organizationLayout;
 	}

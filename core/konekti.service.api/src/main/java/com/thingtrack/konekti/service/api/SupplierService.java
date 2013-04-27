@@ -31,4 +31,5 @@ public interface SupplierService {
 	public void delete(Supplier supplier) throws Exception;
 	public Supplier createNewSupplier(Organization organization) throws Exception;
 	public Supplier getByUser(User user) throws Exception;
+	public List<Supplier> getAll(User user) throws Exception;
 }
