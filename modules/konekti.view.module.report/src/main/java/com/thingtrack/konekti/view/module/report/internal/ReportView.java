@@ -1,8 +1,5 @@
 package com.thingtrack.konekti.view.module.report.internal;
 
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.thingtrack.konekti.domain.Report;
@@ -12,6 +9,7 @@ import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
 import com.thingtrack.konekti.view.addon.ui.BoxToolbar;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar;
+import com.thingtrack.konekti.view.addon.ui.PrintViewForm;
 import com.thingtrack.konekti.view.addon.ui.WindowDialog;
 import com.thingtrack.konekti.view.addon.ui.BoxToolbar.ClickFilterButtonListener;
 import com.thingtrack.konekti.view.addon.ui.BoxToolbar.ClickPrintButtonListener;
@@ -323,10 +321,13 @@ public class ReportView extends AbstractView implements
 		if (editingReport == null)
 			return;
 		
-		JasperPrint jasperPrint = null;
 		try {
-			jasperPrint = reportManagerService.executeReport(editingReport.getCode(), null);
-			JasperExportManager.exportReportToPdfFile(jasperPrint, "/home/thk01/temp/" + editingReport.getCode() + ".pdf"); 
+			//reportManagerService.exportReportToPdfFile(editingReport.getCode(), null, "/home/thk01/temp/" + editingReport.getCode() + ".pdf");
+			
+			PrintViewForm printViewForm = new PrintViewForm();
+			printViewForm.generateTemplateReport(editingReport.getCode(), null);
+			
+			getWindow().addWindow(printViewForm);
 			
 		} catch (Exception e) {
 			throw new RuntimeException("¡No se pudo ejecutar el informe!", e);

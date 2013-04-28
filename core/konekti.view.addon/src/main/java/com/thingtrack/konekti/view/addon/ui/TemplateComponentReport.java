@@ -28,32 +28,21 @@ import net.sf.jasperreports.engine.export.ooxml.JRXlsxExporter;
 import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 import org.dellroad.stuff.vaadin.VaadinConfigurable;
-import org.springframework.beans.factory.annotation.Autowire;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.vaadin.hene.popupbutton.PopupButton;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 import org.vaadin.hene.splitbutton.SplitButton;
 import org.vaadin.hene.splitbutton.SplitButton.SplitButtonClickEvent;
 import org.vaadin.hene.splitbutton.SplitButton.SplitButtonClickListener;
 
-import ar.com.fdvs.dj.core.DynamicJasperHelper;
-import ar.com.fdvs.dj.core.layout.ClassicLayoutManager;
 import ar.com.fdvs.dj.domain.Style;
 import ar.com.fdvs.dj.domain.builders.ColumnBuilder;
-import ar.com.fdvs.dj.domain.builders.ColumnBuilderException;
 import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
-import ar.com.fdvs.dj.domain.builders.FastReportBuilder;
-import ar.com.fdvs.dj.domain.builders.GroupBuilder;
-import ar.com.fdvs.dj.domain.builders.StyleBuilder;
-import ar.com.fdvs.dj.domain.constants.Font;
-import ar.com.fdvs.dj.domain.constants.GroupLayout;
-import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
-import ar.com.fdvs.dj.domain.constants.Page;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
-import ar.com.fdvs.dj.domain.entities.columns.PropertyColumn;
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
 
 import com.thingtrack.konekti.report.ReportManagerService;
+
 import com.vaadin.Application;
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.UserError;
@@ -124,11 +113,15 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 	private String[] columnTitles;
 	private Collection<?> data;
 	private Component parametersComponent;
-	
-	@Autowired
+
 	private ReportManagerService reportManagerService;
     
 	private JasperPrint jasperPrint;
+	
+	public TemplateComponentReport() {
+		getServices();
+		
+	}
 	
 	@Override
 	public void attach() {
@@ -138,6 +131,7 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 		
 		initLayout();
 		build();
+		
 	}
 	
 	/**
@@ -219,6 +213,21 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 	
 	public List<ConditionalStyle> getColumnConditionalStyle(String property) { return null; };
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void getServices() {
+		try {
+			BundleContext bundleContext = FrameworkUtil.getBundle(TemplateComponentReport.class).getBundleContext();
+			
+			ServiceReference reportManagerServiceReference = bundleContext.getServiceReference(ReportManagerService.class.getName());
+			reportManagerService = ReportManagerService.class.cast(bundleContext.getService(reportManagerServiceReference));
+		}
+		catch (Exception e) {
+			e.getMessage();
+			
+		}
+		
+	}
+	
 	public static int mmToPoints(float f) {
 		return Math.round(f / 25.4f * 72); // 1in = 25.4mm = 72pt
 	}
@@ -266,14 +275,7 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 	protected ByteArrayOutputStream getOutputStream(JRExporter exporter) {
 		ByteArrayOutputStream outputStream = null;
 		
-		try {
-			//DynamicReportBuilder reportBuilder = getReportBuilder();
-			//buildColumns(reportBuilder);
-			
-			//Collection<?> data = getData();
-			//JasperPrint jasperPrint = DynamicJasperHelper.generateJasperPrint(reportBuilder.build(), new ClassicLayoutManager(), data);
-			//JasperPrint jasperPrint = null;
-			
+		try {			
 			outputStream = new ByteArrayOutputStream();
 			
 			WebApplicationContext context = (WebApplicationContext) getApplication().getContext();

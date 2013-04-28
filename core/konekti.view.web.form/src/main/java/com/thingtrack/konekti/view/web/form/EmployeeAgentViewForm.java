@@ -442,7 +442,7 @@ public class EmployeeAgentViewForm extends CustomComponent {
 		
 		// workMobileField
 		workMobileField = new TextField();
-		workMobileField.setCaption("Móbil trabajo");
+		workMobileField.setCaption("Móvil trabajo");
 		workMobileField.setImmediate(false);
 		workMobileField.setWidth("115px");
 		workMobileField.setHeight("-1px");

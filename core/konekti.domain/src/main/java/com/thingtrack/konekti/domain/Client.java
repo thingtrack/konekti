@@ -51,6 +51,10 @@ public class Client extends Agent implements Serializable {
 	@JoinColumn(name = "CLIENT_GROUP_ID", nullable = false)
 	private ClientGroup clientGroup;
 	
+	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
+	
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
 	
@@ -138,6 +142,20 @@ public class Client extends Agent implements Serializable {
 	 */
 	public void setActive(Boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * @return the organization
+	 */
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	/**
+	 * @param organization the organization to set
+	 */
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 
 }

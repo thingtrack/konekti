@@ -71,6 +71,7 @@ public class SupplierServiceImpl implements SupplierService {
 		Supplier supplier = new Supplier();
 		
 		supplier.setCode(sequenceService.setNextSequence(Sequence.CODE.SUPPLIER.name()));
+		supplier.setOrganization(organization);
 		supplier.setActive(true);
 		
 		return supplier;

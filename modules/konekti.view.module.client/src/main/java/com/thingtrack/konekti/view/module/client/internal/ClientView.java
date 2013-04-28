@@ -90,12 +90,12 @@ public class ClientView extends AbstractView implements
 	 * editor.
 	 */
 	public ClientView(IWorkbenchContext context, IViewContainer viewContainer) {
+		this.context = context;
+		
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		this.context = context;
-		
 		// set Slide View Services and ViewContainer to navigate		
 		this.viewContainer = viewContainer;
 		this.sequenceService = ClientViewContainer.getSequenceService();

@@ -76,6 +76,7 @@ public class ClientServiceImpl implements ClientService {
 		Client client = new Client();
 		
 		client.setCode(sequenceService.setNextSequence(Sequence.CODE.CLIENT.name()));
+		client.setOrganization(organization);
 		client.setActive(true);
 		
 		return client;

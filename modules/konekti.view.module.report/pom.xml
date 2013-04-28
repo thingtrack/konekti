@@ -77,9 +77,9 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 		</dependency>
 		
 		<dependency>
-			<groupId>ar.com.fdvs</groupId>
-			<artifactId>DynamicJasper</artifactId>
-			<version>4.0.0</version>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

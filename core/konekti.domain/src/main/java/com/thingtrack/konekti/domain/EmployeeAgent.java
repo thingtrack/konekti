@@ -73,6 +73,10 @@ public class EmployeeAgent extends Agent implements Serializable {
 	private List<OfferRequestLine> offerRequestLines;
 	
 	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
+	
+	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_STATUS_ID", nullable=false)
 	private EmployeeAgentStatus employeeAgentStatus;
 
@@ -84,6 +88,11 @@ public class EmployeeAgent extends Agent implements Serializable {
 		MANAGER_TYPE_1,
 		MANAGER_TYPE_2
 	} 
+	
+	public enum STATUS {
+		ACTIVE,
+		DECLINE
+	}
 	
 	/**
 	 * @param workNumber the workNumber to set
@@ -237,6 +246,20 @@ public class EmployeeAgent extends Agent implements Serializable {
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+	/**
+	 * @return the organization
+	 */
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	/**
+	 * @param organization the organization to set
+	 */
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 
 }
