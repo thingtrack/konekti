@@ -146,6 +146,11 @@ public class ReportToolbar extends AbstractToolbar {
 			
 			if(reportSelected == null)
 				return;
+						
+			if (reportSelected.isActive())
+				btnExecuteReport.setEnabled(true);
+			else 
+				btnExecuteReport.setEnabled(false);
 		}
 		
 	}
