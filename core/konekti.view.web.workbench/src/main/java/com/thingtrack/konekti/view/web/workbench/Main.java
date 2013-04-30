@@ -209,10 +209,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		}
 	}
 
-	private void getMenu(MenuFolderResource menuFolderResource,
-			MenuItem itemParentId) {
-		for (final MenuResource menuResource : menuFolderResource
-				.getMenuResources()) {
+	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId) {
+		
+		for (final MenuResource menuResource : menuFolderResource.getMenuResources()) {
 			if (menuResource instanceof MenuFolderResource) {
 				// add new header menu item
 				MenuItem headMenuItem = konektiLayout.getMenuLayout()
