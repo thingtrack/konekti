@@ -274,11 +274,5 @@ public class KonektiLayout extends CustomComponent {
 		
 		return mainLayout;
 	}
-	
-	
-	public void setLoggedUser(String loggedUsername){
-		
-		menuLayout.setUsernameLogoutMenuItem(loggedUsername);
-	} 
 		
 }

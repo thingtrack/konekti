@@ -22,7 +22,7 @@ import org.springframework.stereotype.Repository;
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ProductDao;
 import com.thingtrack.konekti.domain.Product;
-import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -53,14 +53,17 @@ public class ProductDaoImpl extends JpaDao<Product, Integer> implements ProductD
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public List<Product> getAllProductByArea(Area area) throws Exception {
-		String queryString = "SELECT pr";
-		queryString += " FROM Product pr";
-		queryString += " WHERE pr.area = :area";
-
-		Query query = (Query) getEntityManager().createQuery(queryString)
-				.setParameter("area", area);
-
+	public List<Product> getAll(User user) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		
+		if (user.getActiveArea() != null)
+			queryString.append( " WHERE :area MEMBER OF p.areas");
+			
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("area", user.getActiveArea());
+		
 		return query.getResultList();
 		
 	}

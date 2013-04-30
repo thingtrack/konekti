@@ -18,9 +18,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Location;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.dao.api.AreaDao;
 import com.thingtrack.konekti.service.api.SequenceService;
 import com.thingtrack.konekti.service.api.AreaService;
@@ -76,16 +76,9 @@ public class AreaServiceImpl implements AreaService {
 		
 		return area;
 	}
-
-	@Override
-	public List<Area> getAllByLocation(Location location) throws Exception {
-		return this.areaDao.getAllByLocation(location);
-		
+	
+	public List<Area> getAll(User user) throws Exception {
+		return this.areaDao.getAll(user);
 	}
-
-	@Override
-	public List<Area> getAreasFromOrganization(Organization organization) throws Exception {
-		return this.areaDao.getAreasFromOrganization(organization);
-		
-	}
+	
 }

@@ -5,7 +5,6 @@ import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
-import com.vaadin.ui.themes.Reindeer;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
@@ -13,6 +12,7 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.VerticalLayout;
 
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.view.kernel.ui.layout.IHeaderLayout;
 
 @SuppressWarnings("serial")
@@ -47,6 +47,8 @@ public class HeaderLayout extends CustomComponent implements IHeaderLayout {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
+	private User user;
+	
 	@SuppressWarnings("unused")
 	private ClickListener closeSessionListener;
 	
@@ -78,9 +80,17 @@ public class HeaderLayout extends CustomComponent implements IHeaderLayout {
 		
 	}
 	
+
 	@Override
-	public void setLogon(String username) {		
-		lblUser.setValue("Usuario: " + username);
+	public User getUser() {
+		return user;
+	}
+	
+	@Override
+	public void setUser(User user) {
+		this.user = user;
+		
+		lblUser.setValue("Usuario: " + user.getUsername());
 		
 	}
 	

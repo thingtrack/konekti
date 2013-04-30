@@ -13,7 +13,4 @@
        configuration file so that this file can easily be used
        for integration testing outside of an OSGi environment -->
        
-	<context:annotation-config/>
- 	<context:spring-configured />		
-    <context:load-time-weaver aspectj-weaving="on"/>
 </beans>

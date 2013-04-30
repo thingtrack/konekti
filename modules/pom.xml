@@ -16,8 +16,9 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<modules>
+	<modules>	    
 		<module>konekti.view.module.modulemanager</module>
+		<module>konekti.view.module.organization</module>
 		<module>konekti.view.module.product</module>
 		<module>konekti.view.module.feedback</module>
 		<module>konekti.view.module.address</module>
@@ -30,6 +31,8 @@
 		<module>konekti.view.module.sensor</module>
 		<module>konekti.view.module.dashboard</module>
 		<module>konekti.view.module.calendar</module>
+		<module>konekti.view.module.configuration</module>
+		<module>konekti.view.module.report</module>
 	</modules>
 
 	<dependencies>

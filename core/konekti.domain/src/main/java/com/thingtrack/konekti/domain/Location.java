@@ -52,6 +52,9 @@ public class Location implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	@Column(name="CIF", length=32)
+	private String cif;
+	
 	@ManyToOne
 	@JoinColumn(name="LOCATION_ADDRESS_ID")	
 	private Address locationAddress = new Address();
@@ -165,6 +168,13 @@ public class Location implements Serializable {
 			area.setLocation(this);
 	}
 
+	public void removeArea(Area area) {
+		areas.remove(area);
+		
+		if (area.getLocation().equals(this))
+			area.setLocation(null);
+	}
+	
 	/**
 	 * @return the areas
 	 */
@@ -220,8 +230,8 @@ public class Location implements Serializable {
 	public void addOrganization(Organization organization) {
 		organizations.add(organization);
 
-		if (!organization.getLocations().contains(this))
-			organization.addLocation(this);
+		/*if (!organization.getLocations().contains(this))
+			organization.addLocation(this);*/
 	}
 
 	/**
@@ -275,6 +285,20 @@ public class Location implements Serializable {
 	@Override
 	public String toString() {
 		return "Location [locationId=" + locationId + ", code=" + code + "]";
+	}
+
+	/**
+	 * @return the cif
+	 */
+	public String getCif() {
+		return cif;
+	}
+
+	/**
+	 * @param cif the cif to set
+	 */
+	public void setCif(String cif) {
+		this.cif = cif;
 	}
 
 }

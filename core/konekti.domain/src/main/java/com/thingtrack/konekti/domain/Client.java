@@ -14,16 +14,12 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.AttributeOverrides;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -54,24 +50,10 @@ public class Client extends Agent implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "CLIENT_GROUP_ID", nullable = false)
 	private ClientGroup clientGroup;
-
-	@ManyToMany
-	@JoinTable(name = "CLIENT_ORGANIZATION", 
-			   joinColumns = @JoinColumn(name = "CLIENT_ID"), 
-			   inverseJoinColumns = @JoinColumn(name = "ORGANIZATION_ID"))
-	private List<Organization> organizations = new ArrayList<Organization>();
-
-	@ManyToMany
-	@JoinTable(name="CLIENT_LOCATION",
-			   joinColumns=@JoinColumn(name="CLIENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))		
-	private List<Location> locations = new ArrayList<Location>();
-
-	@ManyToMany
-	@JoinTable(name="CLIENT_AREA",
-			   joinColumns=@JoinColumn(name="CLIENT_ID"),
-			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))		
-	private List<Area> areas = new ArrayList<Area>();
+	
+	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
 	
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
@@ -149,35 +131,6 @@ public class Client extends Agent implements Serializable {
 	}
 
 	/**
-	 * @param organizations
-	 *            the organizations to set
-	 */
-	public void setOrganizations(List<Organization> organizations) {
-		this.organizations = organizations;
-	}
-
-	/**
-	 * @return the organizations
-	 */
-	public List<Organization> getOrganizations() {
-		return organizations;
-	}
-	
-	/**
-	 * @return the locations
-	 */
-	public List<Location> getLocations() {
-		return locations;
-	}
-
-	/**
-	 * @param locations the locations to set
-	 */
-	public void setLocations(List<Location> locations) {
-		this.locations = locations;
-	}
-	
-	/**
 	 * @return the active
 	 */
 	public Boolean getActive() {
@@ -192,16 +145,17 @@ public class Client extends Agent implements Serializable {
 	}
 
 	/**
-	 * @return the areas
+	 * @return the organization
 	 */
-	public List<Area> getAreas() {
-		return areas;
+	public Organization getOrganization() {
+		return organization;
 	}
 
 	/**
-	 * @param areas the areas to set
+	 * @param organization the organization to set
 	 */
-	public void setAreas(List<Area> areas) {
-		this.areas = areas;
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
+
 }

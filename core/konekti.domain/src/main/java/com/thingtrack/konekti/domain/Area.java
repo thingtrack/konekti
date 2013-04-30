@@ -179,6 +179,10 @@ public class Area implements Serializable  {
 	 */
 	public void setLocation(Location location) {
 		this.location = location;
+		
+		if (!location.getAreas().contains(this)) {
+			location.addArea(this);
+		}
 	}
 
 	/**

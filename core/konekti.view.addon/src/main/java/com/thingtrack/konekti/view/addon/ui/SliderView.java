@@ -14,6 +14,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.thingtrack.konekti.view.kernel.ui.layout.ISliderView;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.ViewEvent;
+
 import com.thingtrack.konekti.view.kernel.ui.layout.IView;
 
 @SuppressWarnings("serial")

@@ -97,7 +97,7 @@ public class SupplierSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				Supplier supplier = null;
 				try {
-					supplier = supplierService.createNewSupplier(SupplierSelectorField.this.context.getOrganization());
+					supplier = supplierService.createNewSupplier(SupplierSelectorField.this.context.getUser().getActiveOrganization());
 				} catch (Exception e) {
 					throw new RuntimeException(
 							"¡No se pudo crear el nuevo código proveedor!",

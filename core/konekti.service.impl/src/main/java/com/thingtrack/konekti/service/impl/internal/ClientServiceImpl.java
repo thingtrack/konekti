@@ -17,7 +17,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
@@ -98,14 +97,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public List<Location> getAllLocationByOrganization(
-			Organization organization, int agentId) throws Exception {
-		return this.clientDao.getAllLocationByOrganization(organization,
-				agentId);
-	}
-
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		return this.clientDao.getAllAreaByLocation(location, agentId);
+	public List<Client> getAll(User user) throws Exception {
+		return this.clientDao.getAll(user);
 	}
 }

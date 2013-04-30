@@ -52,9 +52,9 @@ public class Excel2Entity {
 		
 		client = new Client();
 		List<Organization> organizations = new ArrayList<Organization>();
-		organizations.add(context.getOrganization());
+		organizations.add(context.getUser().getActiveOrganization());
 			
-		client.setOrganizations(organizations);
+		//client.setOrganizations(organizations);
 	}
 	
 	public Client parse() {		

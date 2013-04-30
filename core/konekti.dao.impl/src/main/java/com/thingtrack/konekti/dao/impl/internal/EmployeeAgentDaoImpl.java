@@ -44,7 +44,6 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 		
 		String queryString = "SELECT em";
 		queryString += " FROM " + getEntityName() + " em";
-		queryString += " JOIN  em.organizations org";
 		queryString += " WHERE em.user = :user";
 		
 		Query query = (Query) getEntityManager().createQuery(queryString)

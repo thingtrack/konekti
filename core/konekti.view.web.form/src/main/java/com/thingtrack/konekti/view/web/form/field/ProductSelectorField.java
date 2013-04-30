@@ -37,6 +37,7 @@ public class ProductSelectorField extends CustomField {
 	private TextField productField;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
+	
 	private IWorkbenchContext context;
 	
 	private Product product;
@@ -68,7 +69,7 @@ public class ProductSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				try {
 					@SuppressWarnings("unused")
-					ProductSelectorWindow windowDialog = new ProductSelectorWindow(getApplication().getMainWindow(), product, new ProductSelectorWindow.CloseWindowDialogListener() {
+					ProductSelectorWindow windowDialog = new ProductSelectorWindow(context, getApplication().getMainWindow(), product, new ProductSelectorWindow.CloseWindowDialogListener() {
 					    public void windowDialogClose(ProductSelectorWindow.CloseWindowDialogEvent event) {
 					    	if (event.getDialogResult() != ProductSelectorWindow.DialogResult.SELECT)
 					    		return ;
@@ -135,10 +136,18 @@ public class ProductSelectorField extends CustomField {
 			}
 		});
 		
+		productField.addListener(new ValueChangeListener() {	
+			@Override
+			public void valueChange(Property.ValueChangeEvent event) {
+				fireValueChange(false);
+				
+			}
+		});
+		
 		btnClearEntity.setVisible(clearEntityVisible);
 		btnAddEntity.setVisible(addEntityVisible);
 	}
-
+	
 	@Override
     public void focus() {
 		productField.focus();

@@ -199,7 +199,14 @@ public class EmployeeAgentView extends AbstractView
 	
 	@Override
 	public void addButtonClick(ClickNavigationEvent event) {
-		EmployeeAgent employeeAgent = new EmployeeAgent();
+		EmployeeAgent employeeAgent = null;
+		try {
+			employeeAgent = employeeAgentService.createNewEntity(context.getUser().getActiveOrganization());
+		} catch (Exception e) {
+			throw new RuntimeException(
+					"¡No se pudo crear el nuevo empleado!",
+					e);
+		}
 
 		try {
 			@SuppressWarnings("unused")
@@ -464,7 +471,7 @@ public class EmployeeAgentView extends AbstractView
 					}
 					
 					try {
-						employeeAgentKnowledgeService.importEmployeeAgent(context.getOrganization(), employeeAgents);
+						employeeAgentKnowledgeService.importEmployeeAgent(context.getUser().getActiveOrganization(), employeeAgents);
 					} catch (Exception e) {
 						throw new RuntimeException("¡No se pudo importar el fichero!", e);
 					}

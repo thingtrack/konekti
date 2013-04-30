@@ -26,7 +26,7 @@ public class UserRoleCollectionField extends CustomField {
 	private Table rolesTable;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
+	
 	private BindingSource<Role> rolesBindingSource;
 	private List<Role> assignedRoles;
 

@@ -90,12 +90,12 @@ public class ClientView extends AbstractView implements
 	 * editor.
 	 */
 	public ClientView(IWorkbenchContext context, IViewContainer viewContainer) {
+		this.context = context;
+		
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		this.context = context;
-		
 		// set Slide View Services and ViewContainer to navigate		
 		this.viewContainer = viewContainer;
 		this.sequenceService = ClientViewContainer.getSequenceService();
@@ -177,7 +177,7 @@ public class ClientView extends AbstractView implements
 	private void refreshBindindSource() {
 		try {
 			bsClient.removeAllItems();
-			bsClient.addAll(clientService.getAll());
+			bsClient.addAll(clientService.getAll(context.getUser()));
 
 			bsClient.addNestedContainerProperty("clientType.description");
 			bsClient.addNestedContainerProperty("clientGroup.description");
@@ -210,7 +210,7 @@ public class ClientView extends AbstractView implements
 	public void addButtonClick(ClickNavigationEvent event) {
 		Client client = null;
 		try {
-			client = clientService.createNewClient(context.getOrganization());
+			client = clientService.createNewClient(context.getUser().getActiveOrganization());
 		} catch (Exception e) {
 			throw new RuntimeException(
 					"¡No se pudo crear el nuevo código cliente!",

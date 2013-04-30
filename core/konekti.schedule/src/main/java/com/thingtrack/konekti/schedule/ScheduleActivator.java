@@ -30,6 +30,9 @@ public class ScheduleActivator implements BundleActivator {
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static HashMap<JobApi, JobDetail> jobdetails = new HashMap();
 	
+	private static boolean OK = false;
+	private static boolean ERROR = true;
+	
 	private static String JOBLISTENER_NAME = "thingtrack_listener";
 	
 	public void start(BundleContext context) throws Exception {
@@ -62,9 +65,9 @@ public class ScheduleActivator implements BundleActivator {
 					// set last execution and control if exist any error
 					try {
 						if (jobException == null)
-							jobService.setLastExecution(job, false);
+							jobService.setLastExecution(job, OK);
 						else
-							jobService.setLastExecution(job, true);
+							jobService.setLastExecution(job, ERROR);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

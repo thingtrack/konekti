@@ -5,23 +5,23 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.EmployeeAgentDao;
-import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.dao.api.EmployeeAgentStatusDao;
 import com.thingtrack.konekti.domain.EmployeeAgent;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.EmployeeAgentService;
 import com.thingtrack.konekti.service.api.EmployeeAgentTypeService;
 
 public class EmployeeAgentServiceImpl implements EmployeeAgentService {
-	
-	
 	@Autowired
 	private EmployeeAgentDao employeeAgentDao;
 	
 	@Autowired 
 	private EmployeeAgentTypeService employeeAgentTypeService;
+	
+	@Autowired 
+	private EmployeeAgentStatusDao employeeAgentStatusDao;
 	
 	@Override
 	public List<EmployeeAgent> getAll() throws Exception {
@@ -61,6 +61,16 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	}
 
 	@Override
+	public EmployeeAgent createNewEntity(Organization organization) throws Exception {
+		EmployeeAgent employeeAgent = new EmployeeAgent();
+		
+		employeeAgent.setOrganization(organization);
+		employeeAgent.setEmployeeAgentStatus(employeeAgentStatusDao.getByName(EmployeeAgent.STATUS.ACTIVE.name()));
+		
+		return employeeAgent;
+	}
+	
+	@Override
 	public List<EmployeeAgent> getDrivers(Organization organization) throws Exception {
 
 		EmployeeAgentType employeeAgentType = employeeAgentTypeService.getByName(EmployeeAgent.EMPLOYEE_AGENT_TYPE.DRIVER.name());
@@ -73,15 +83,5 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception {
 		return this.employeeAgentDao.getByWorkNumber(organization, workNumber);
 		
-	}
-
-	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
-		return this.employeeAgentDao.getAllLocationByOrganization(organization, agentId);
-	}
-	
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		return this.employeeAgentDao.getAllAreaByLocation(location, agentId);
 	}
 }

@@ -186,6 +186,14 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
     return value == null?null:value;
   }
 
+  function unflattenKeylistIntoAnswers(propValArray, value){
+    var answer = answers;
+    for (var i = 0, n = propValArray.length - 1; i < n; ++i) {
+      answer = answer[propValArray[i]] || (answer[propValArray[i]] = []);
+    }
+    answer[propValArray[n]] = value;
+  }
+
   function computePropValue(propName){
     var value = providers[propName](), allowedValuesMap = values[propName];
     if (value in allowedValuesMap) {
@@ -216,6 +224,48 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
     }
   }
 
+  providers['user.agent'] = function(){
+    var ua = navigator.userAgent.toLowerCase();
+    var makeVersion = function(result){
+      return parseInt(result[1]) * 1000 + parseInt(result[2]);
+    }
+    ;
+    if (function(){
+      return ua.indexOf('opera') != -1;
+    }
+    ())
+      return 'opera';
+    if (function(){
+      return ua.indexOf('webkit') != -1;
+    }
+    ())
+      return 'safari';
+    if (function(){
+      return ua.indexOf('msie') != -1 && $doc_0.documentMode >= 9;
+    }
+    ())
+      return 'ie9';
+    if (function(){
+      return ua.indexOf('msie') != -1 && $doc_0.documentMode >= 8;
+    }
+    ())
+      return 'ie8';
+    if (function(){
+      var result = /msie ([0-9]+)\.([0-9]+)/.exec(ua);
+      if (result && result.length == 3)
+        return makeVersion(result) >= 6000;
+    }
+    ())
+      return 'ie6';
+    if (function(){
+      return ua.indexOf('gecko') != -1;
+    }
+    ())
+      return 'gecko1_8';
+    return 'unknown';
+  }
+  ;
+  values['user.agent'] = {gecko1_8:0, ie6:1, ie8:2, ie9:3, opera:4, safari:5};
   com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet.onScriptLoad = function(){
     if (frameInjected) {
       loadDone = true;
@@ -244,7 +294,17 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
   $stats && $stats({moduleName:'com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet', sessionId:$sessionId_0, subSystem:'startup', evtGroup:'bootstrap', millis:(new Date).getTime(), type:'selectingPermutation'});
   if (!isHostedMode()) {
     try {
+<<<<<<< HEAD
       strongName = '5F00955119602967ED6B40FF393D4232';
+=======
+      unflattenKeylistIntoAnswers(['ie6'], '038AA892B48630A45746CAB4A892EF56');
+      unflattenKeylistIntoAnswers(['ie8'], '1D7206703F690013EB202D5F4309E5E5');
+      unflattenKeylistIntoAnswers(['opera'], '9BF77535B4B4F04F3BE05235278DAB7C');
+      unflattenKeylistIntoAnswers(['ie9'], 'A17FC95D756C42B97384495D94A45436');
+      unflattenKeylistIntoAnswers(['safari'], 'B321F5F192CB71CD27C72DE861EDFB24');
+      unflattenKeylistIntoAnswers(['gecko1_8'], 'D2CAB89C4B20B4FD930E72D3E243EA52');
+      strongName = answers[computePropValue('user.agent')];
+>>>>>>> branch 'master' of https://github.com/thingtrack/konekti.git
       var idx = strongName.indexOf(':');
       if (idx != -1) {
         softPermutationId = Number(strongName.substring(idx + 1));
@@ -372,6 +432,7 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
         l.setAttribute('href', base + 'eventtimeline-widget/styles.css');
         $doc_0.getElementsByTagName('head')[0].appendChild(l);
       }
+<<<<<<< HEAD
       if (!__gwt_stylesLoaded['styles.css']) {
         var l = $doc_0.createElement('link');
         __gwt_stylesLoaded['styles.css'] = l;
@@ -379,6 +440,8 @@ function com_thingtrack_konekti_view_web_widgetset_gwt_KonektiWidgetSet(){
         l.setAttribute('href', base + 'styles.css');
         $doc_0.getElementsByTagName('head')[0].appendChild(l);
       }
+=======
+>>>>>>> branch 'master' of https://github.com/thingtrack/konekti.git
       maybeStartModule();
       if ($doc_0.removeEventListener) {
         $doc_0.removeEventListener('DOMContentLoaded', onBodyDone, false);

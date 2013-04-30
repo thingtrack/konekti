@@ -28,7 +28,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -60,13 +59,6 @@ public class Organization implements Serializable {
 	@ManyToOne(optional=false)
 	@JoinColumn(name="ORGANIZATION_TYPE_ID", nullable=false)	
 	private OrganizationType organizationType;
-
-	@ManyToOne
-	@JoinColumn(name="PARENT_ORGANIZATION_ID")
-	private Organization parentOrganization;
-
-	@OneToMany(mappedBy="parentOrganization")
-	private List<Organization> childOrganizations = new ArrayList<Organization>();
 
 	@OneToOne(optional=false)
 	@JoinColumn(name="SOCIAL_ADDRESS_ID", nullable=false)
@@ -158,20 +150,6 @@ public class Organization implements Serializable {
 	}
 
 	/**
-	 * @param parentOrganization the parentOrganization to set
-	 */
-	public void setParentOrganization(Organization parentOrganization) {
-		this.parentOrganization = parentOrganization;
-	}
-
-	/**
-	 * @return the parentOrganization
-	 */
-	public Organization getParentOrganization() {
-		return parentOrganization;
-	}
-
-	/**
 	 * @param cif the cif to set
 	 */
 	public void setCif(String cif) {
@@ -224,20 +202,6 @@ public class Organization implements Serializable {
 	 */
 	public List<Location> getLocations() {
 		return Collections.unmodifiableList(locations);		
-	}
-
-	/**
-	 * @param childOrganizations the childOrganizations to set
-	 */
-	public void setChildOrganizations(List<Organization> childOrganizations) {
-		this.childOrganizations = childOrganizations;
-	}
-
-	/**
-	 * @return the childOrganizations
-	 */
-	public List<Organization> getChildOrganizations() {
-		return childOrganizations;
 	}
 
 	/**

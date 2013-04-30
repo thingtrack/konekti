@@ -92,8 +92,7 @@ public class PrintViewForm extends Window {
 	}
 	
 	public void generateTemplateReport(String code, Map<String,Object> parameters) throws Exception {
-		TemplateComponentReport templateComponentReport = new TemplateComponentReport();
-    	
+		TemplateComponentReport templateComponentReport = new TemplateComponentReport();  	
     	templateComponentReport.executeReport(code, parameters);
     	
     	mainLayout.addComponent(templateComponentReport);

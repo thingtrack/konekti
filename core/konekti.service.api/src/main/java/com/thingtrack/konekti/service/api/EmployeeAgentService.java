@@ -2,9 +2,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.EmployeeAgent;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -22,6 +20,5 @@ public interface EmployeeAgentService {
 	public EmployeeAgent getByUser(User user) throws Exception;
 	public List<EmployeeAgent> getDrivers(Organization organizatio) throws Exception;
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception;
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception;
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception;
+	public EmployeeAgent createNewEntity(Organization organization) throws Exception;
 }

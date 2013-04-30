@@ -8,6 +8,7 @@ import com.thingtrack.konekti.dao.api.ConfigurationDao;
 import com.thingtrack.konekti.domain.Configuration;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.ConfigurationService;
 
 public class ConfigurationServiceImpl implements ConfigurationService {
@@ -23,18 +24,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public Configuration get(Integer configurationId) throws Exception {
 		return this.configurationDao.get(configurationId);
 	}
-
-	@Override
-	public Configuration getByTag(String tag) throws Exception {
-		return this.configurationDao.getByTag(tag);
-	}
-	
-
-	@Override
-	public Configuration getByTag(String tag, Organization organization, MenuResource menuResource) throws Exception {
-		return this.configurationDao.getByTag(tag, organization, menuResource);
-	}
-	
+		
 	@Override
 	public Configuration save(Configuration configuration) throws Exception {
 		return this.configurationDao.save(configuration);
@@ -44,6 +34,30 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public void delete(Configuration configuration) throws Exception {
 		this.configurationDao.delete(configuration);
 		
+	}
+
+	@Override
+	public Configuration getByTag(String tag) throws Exception {
+		return this.configurationDao.getByTag(tag);
+	}
+	
+	@Override
+	public List<Configuration> getAll(User user) throws Exception {
+		return this.configurationDao.getAll(user);
+	}
+	
+	@Override
+	public Configuration getByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		return this.configurationDao.getByTag(user, tag, menuResource);
+	}
+	
+	@Override
+	public Configuration createNewEntity(Organization organization) throws Exception {
+		Configuration configuration = new Configuration();
+		
+		configuration.setOrganization(organization);
+		
+		return configuration;
 	}
 
 }

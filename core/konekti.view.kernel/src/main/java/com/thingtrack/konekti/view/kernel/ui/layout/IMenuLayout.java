@@ -15,6 +15,7 @@ package com.thingtrack.konekti.view.kernel.ui.layout;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.User;
 import com.vaadin.terminal.Resource;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
@@ -36,4 +37,6 @@ public interface IMenuLayout {
 	public void removeItems();
 	public boolean getCollapse();
 	public int getSize();
+	public User getUser();
+	public void setUser(User user);
 }

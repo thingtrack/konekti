@@ -10,12 +10,8 @@ import com.thingtrack.konekti.domain.CalendarGroup;
 import com.thingtrack.konekti.knowledge.service.api.CalendarKnowledgeService;
 import com.thingtrack.konekti.service.api.CalendarCardService;
 import com.thingtrack.konekti.service.api.CalendarGroupService;
-import com.thingtrack.konekti.service.api.CalendarService;
 
 public class CalendarKnowledgeServiceImpl implements CalendarKnowledgeService {
-	@Autowired
-	private CalendarService calendarService;
-	
 	@Autowired
 	private CalendarCardService calendarCardService;
 	

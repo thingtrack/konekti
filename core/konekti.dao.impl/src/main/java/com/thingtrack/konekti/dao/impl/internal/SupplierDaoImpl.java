@@ -21,9 +21,6 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.SupplierDao;
-import com.thingtrack.konekti.domain.Area;
-import com.thingtrack.konekti.domain.Location;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
 
@@ -59,37 +56,18 @@ public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements Suppli
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Location> getAllLocationByOrganization(Organization organization, int agentId) throws Exception {
+	public List<Supplier> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveArea() != null)
+			queryString += " WHERE p.organization = :organization";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
 		
-		String queryString = "SELECT lc";
-		queryString += " FROM " + getEntityName() + " sp";
-		queryString += " JOIN sp.locations lc";
-		queryString += " JOIN lc.organizations org";
-		queryString += " WHERE org.organizationId = :organizationId";
-		queryString += " AND sp.agentId = :agentId";
-
-		Query query = (Query) getEntityManager().createQuery(queryString)
-		.setParameter("organizationId", organization.getOrganizationId())
-		.setParameter("agentId", agentId);
-
+		if (user.getActiveArea() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
 		return query.getResultList();
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Area> getAllAreaByLocation(Location location, int agentId) throws Exception {
-		
-		String queryString = "SELECT ar";
-		queryString += " FROM " + getEntityName() + " sp";
-		queryString += " JOIN sp.areas ar";
-		queryString += " JOIN ar.location lc";
-		queryString += " WHERE lc.locationId = :locationId";
-		queryString += " AND sp.agentId = :agentId";
-
-		Query query = (Query) getEntityManager().createQuery(queryString)
-		.setParameter("locationId", location.getLocationId())
-		.setParameter("agentId", agentId);
-
-		return query.getResultList();
-	}
 }
