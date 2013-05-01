@@ -81,12 +81,10 @@ public class EmployeeAgent extends Agent implements Serializable {
 	private EmployeeAgentStatus employeeAgentStatus;
 
 	public enum EMPLOYEE_AGENT_TYPE{		
-		OFFICER_TYPE_1,
-		OFFICER_TYPE_2,
-		OPERATOR_TYPE_1,
-		OPERATOR_TYPE_2,
-		MANAGER_TYPE_1,
-		MANAGER_TYPE_2
+		MANAGER,
+		OFFICER,
+		WORKER,
+		DRIVER
 	} 
 	
 	public enum STATUS {

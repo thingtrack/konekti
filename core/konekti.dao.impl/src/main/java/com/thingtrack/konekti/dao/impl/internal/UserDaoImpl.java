@@ -27,8 +27,17 @@ import com.thingtrack.konekti.domain.User;
 public class UserDaoImpl extends JpaDao<User, Integer> implements UserDao {
 	@Override
 	public User getByUsername(String username) throws Exception {
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("SELECT p FROM " + getEntityName() + " p");
+//		buffer.append(" LEFT JOIN p.client c");
+//		buffer.append(" LEFT JOIN p.employeeAgent e");
+//		buffer.append(" LEFT JOIN p.supplier s");
+		buffer.append(" WHERE p.username = :username");
+		
+		
 		User user = (User)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.username = :username")
+				.createQuery(buffer.toString())
 				.setParameter("username", username).getSingleResult();
 
 		return user;

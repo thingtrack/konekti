@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Client;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.User;
@@ -27,7 +28,7 @@ import com.thingtrack.konekti.service.api.SequenceService;
 
 /**
  * @author Thingtrack S.L.
- *
+ * 
  */
 public class ClientServiceImpl implements ClientService {
 	@Autowired
@@ -35,7 +36,7 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	private SequenceService sequenceService;
-	
+
 	@Override
 	public List<Client> getAll() throws Exception {
 		return this.clientDao.getAll();
@@ -44,53 +45,59 @@ public class ClientServiceImpl implements ClientService {
 	@Override
 	public Client get(Integer clientGroupId) throws Exception {
 		return this.clientDao.get(clientGroupId);
-		
+
 	}
 
 	@Override
 	public Client getByCode(String code) throws Exception {
 		return this.clientDao.getByCode(code);
-		
+
 	}
 
 	@Override
-	public List<Client> getByCode(Organization organization, String code) throws Exception {
+	public List<Client> getByCode(Organization organization, String code)
+			throws Exception {
 		return this.clientDao.getByCode(organization, code);
-		
+
 	}
-	
+
 	@Override
 	public Client save(Client client) throws Exception {
 		return this.clientDao.save(client);
-		
+
 	}
 
 	@Override
 	public void delete(Client client) throws Exception {
-		this.clientDao.delete(client);		
-		
+		this.clientDao.delete(client);
+
 	}
 
 	@Override
 	public Client createNewClient(Organization organization) throws Exception {
 		Client client = new Client();
-		
-		client.setCode(sequenceService.setNextSequence(Sequence.CODE.CLIENT.name()));
-		client.setOrganization(organization);
+
+		client.setCode(sequenceService.setNextSequence(Sequence.CODE.CLIENT
+				.name()));
 		client.setActive(true);
-		
+
 		return client;
 	}
-	
+
 	@Override
 	public Client getByUser(User user) throws Exception {
 		return this.clientDao.getByUser(user);
-		
+
 	}
-	
+
+	@Override
+	public List<Client> getAll(Organization currentOrganization)
+			throws Exception {
+		return this.clientDao.getAll(currentOrganization);
+	}
+
 	@Override
 	public List<Client> getAll(User user) throws Exception {
 		return this.clientDao.getAll(user);
 	}
-	
 }

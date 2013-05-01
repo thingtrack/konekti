@@ -299,6 +299,11 @@ Export-Package: VAADIN.themes.konekti,
 			<version>0.5.1</version>
 		</dependency>
 		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>tokenfield</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
 			<groupId>com.google.gwt.google-apis</groupId>
 			<artifactId>gwt-visualization</artifactId>
 			<version>1.1.2</version>

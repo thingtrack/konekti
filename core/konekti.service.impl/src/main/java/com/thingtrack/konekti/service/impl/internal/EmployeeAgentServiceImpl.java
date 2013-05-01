@@ -77,7 +77,7 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	@Override
 	public List<EmployeeAgent> getDrivers(Organization organization) throws Exception {
 
-		EmployeeAgentType employeeAgentType = employeeAgentTypeService.getByName(EmployeeAgent.EMPLOYEE_AGENT_TYPE.OPERATOR_TYPE_1.name());
+		EmployeeAgentType employeeAgentType = employeeAgentTypeService.getByName(EmployeeAgent.EMPLOYEE_AGENT_TYPE.DRIVER.name());
 		
 		return this.employeeAgentDao.getByType(organization, employeeAgentType);
 

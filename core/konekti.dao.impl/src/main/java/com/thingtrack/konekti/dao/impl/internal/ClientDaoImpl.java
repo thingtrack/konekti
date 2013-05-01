@@ -19,8 +19,8 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ClientDao;
+import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
@@ -82,5 +82,17 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 		return (Client) query.getSingleResult();
 
 	}
+	
+	@Override
+	public List<Client> getAll(Organization organization)
+			throws Exception {
+		
+		List<Client> clients =  ((List<Client>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE :organization MEMBER OF p.organizations")
+						.setParameter("organization", (organization != null ? organization : "%")).getResultList());
+
+		return clients;
+	}
+	
 	
 }
