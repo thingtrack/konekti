@@ -25,8 +25,12 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 	
 	@Override
 	public List<EmployeeAgent> getAll() throws Exception {
-		//TODO: Pass the Organization to DAO
 		return this.employeeAgentDao.getAll();
+	}
+	
+	@Override
+	public List<EmployeeAgent> getAll(User user) throws Exception {
+		return this.employeeAgentDao.getAll(user);
 		
 	}
 
@@ -84,4 +88,5 @@ public class EmployeeAgentServiceImpl implements EmployeeAgentService {
 		return this.employeeAgentDao.getByWorkNumber(organization, workNumber);
 		
 	}
+
 }

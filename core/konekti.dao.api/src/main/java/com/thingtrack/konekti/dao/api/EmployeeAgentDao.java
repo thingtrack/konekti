@@ -15,7 +15,7 @@ import com.thingtrack.konekti.domain.User;
  *
  */
 public interface EmployeeAgentDao extends Dao<EmployeeAgent, Integer> {
-	
+	public List<EmployeeAgent> getAll(User user) throws Exception;
 	public EmployeeAgent getByName(Organization organization, String name) throws Exception;
 	public EmployeeAgent getByUser(User user) throws Exception;
 	public List<EmployeeAgent> getByType(Organization organization, EmployeeAgentType employeeAgentType) throws Exception;

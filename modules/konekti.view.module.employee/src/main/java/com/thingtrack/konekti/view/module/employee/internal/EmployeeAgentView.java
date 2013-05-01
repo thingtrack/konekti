@@ -168,7 +168,7 @@ public class EmployeeAgentView extends AbstractView
 	private void refreshBindindSource() {
 		try {		
 			bsEmployeeAgent.removeAllItems();
-			bsEmployeeAgent.addAll(employeeAgentService.getAll());
+			bsEmployeeAgent.addAll(employeeAgentService.getAll(context.getUser()));
 			
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentType.description");
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentStatus.description");
