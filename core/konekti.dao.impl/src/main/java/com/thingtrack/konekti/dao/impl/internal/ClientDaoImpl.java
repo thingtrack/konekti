@@ -46,12 +46,12 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 	public List<Client> getAll(User user) throws Exception {
 		String queryString =  "SELECT p FROM " + getEntityName() + " p";
 
-		if (user.getActiveArea() != null)
+		if (user.getActiveOrganization() != null)
 			queryString += " WHERE p.organization = :organization";
 
 		Query query = (Query) getEntityManager().createQuery(queryString);
 		
-		if (user.getActiveArea() != null)
+		if (user.getActiveOrganization() != null)
 			query.setParameter("organization", user.getActiveOrganization());
 		
 		return query.getResultList();
@@ -82,17 +82,5 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 		return (Client) query.getSingleResult();
 
 	}
-	
-	@Override
-	public List<Client> getAll(Organization organization)
-			throws Exception {
-		
-		List<Client> clients =  ((List<Client>)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE :organization MEMBER OF p.organizations")
-						.setParameter("organization", (organization != null ? organization : "%")).getResultList());
-
-		return clients;
-	}
-	
 	
 }

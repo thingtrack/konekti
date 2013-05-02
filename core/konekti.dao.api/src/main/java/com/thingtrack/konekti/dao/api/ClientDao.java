@@ -25,7 +25,6 @@ import com.thingtrack.konekti.domain.User;
  *
  */
 public interface ClientDao extends Dao<Client, Integer> {
-	public List<Client> getAll(Organization organization) throws Exception;
 	public Client getByCode(String code) throws Exception;
 	public List<Client> getByCode(Organization organization, String code) throws Exception;
 	public Client getByUser(User user) throws Exception;
