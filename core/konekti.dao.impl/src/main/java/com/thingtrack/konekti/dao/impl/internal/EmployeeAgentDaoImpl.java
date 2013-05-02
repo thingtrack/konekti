@@ -21,6 +21,22 @@ import com.thingtrack.konekti.domain.User;
  */
 @Repository
 public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> implements EmployeeAgentDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EmployeeAgent> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveArea() != null)
+			queryString += " WHERE p.organization = :organization";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
+		return query.getResultList();
+	}
+	
 	@Override
 	public EmployeeAgent getByName(Organization organization, String name) throws Exception {
 		

@@ -18,6 +18,7 @@ public interface EmployeeAgentService {
 	public EmployeeAgent save(EmployeeAgent employeeAgent) throws Exception;
 	public void delete(EmployeeAgent employeeAgent) throws Exception;
 	public EmployeeAgent getByUser(User user) throws Exception;
+	public List<EmployeeAgent> getAll(User user) throws Exception;
 	public List<EmployeeAgent> getDrivers(Organization organizatio) throws Exception;
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception;
 	public EmployeeAgent createNewEntity(Organization organization) throws Exception;
