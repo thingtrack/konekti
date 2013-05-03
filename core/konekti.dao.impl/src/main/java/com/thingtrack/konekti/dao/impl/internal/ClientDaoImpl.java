@@ -83,16 +83,4 @@ public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao 
 
 	}
 	
-	@Override
-	public List<Client> getAll(Organization organization)
-			throws Exception {
-		
-		List<Client> clients =  ((List<Client>)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE :organization MEMBER OF p.organizations")
-						.setParameter("organization", (organization != null ? organization : "%")).getResultList());
-
-		return clients;
-	}
-	
-	
 }

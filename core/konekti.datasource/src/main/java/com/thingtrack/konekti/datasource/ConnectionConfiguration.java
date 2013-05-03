@@ -40,7 +40,7 @@ public class ConnectionConfiguration {
 	 
 	        // Must include the punit name
 	        props.put("gemini.jpa.punit.name", "konekti");
-	 
+	        
 	        // Specify JDBC properties for this installation
 	        props.put("javax.persistence.jdbc.driver", driverClass);
 	        props.put("javax.persistence.jdbc.url", url);

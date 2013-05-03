@@ -13,12 +13,22 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>com.springsource.javax.persistence</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.compendium</artifactId>
 			<version>4.2.0</version>
 			<scope>provided</scope>
 		</dependency>
-</dependencies>
+		<dependency>
+			<groupId>org.eclipse</groupId>
+			<artifactId>org.eclipse.gemini.jpa</artifactId>
+			<version>1.1.0.RELEASE</version>
+		</dependency>
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -66,4 +76,12 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 	</build>
 
 	<description>Konekti Datasource</description>
+
+	<repositories>
+		<repository>
+			<id>Eclipse Gemini</id>
+			<name>Eclipse Gemini Repository</name>
+			<url>http://download.eclipse.org/gemini/mvn</url>
+		</repository>
+	</repositories>
 </project>
