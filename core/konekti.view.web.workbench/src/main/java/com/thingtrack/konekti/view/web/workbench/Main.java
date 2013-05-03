@@ -366,6 +366,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 			IViewContainer viewComponent = metadataModule.getModule()
 					.createViewComponent(workbenchContext);
+						
 			viewComponent.addListener((IViewChangeListener) toolbarManager);
 
 			resource.setComponentView(viewComponent);
