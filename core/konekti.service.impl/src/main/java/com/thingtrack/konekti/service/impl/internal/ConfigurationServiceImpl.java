@@ -1,5 +1,7 @@
 package com.thingtrack.konekti.service.impl.internal;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +51,38 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	@Override
 	public Configuration getByTag(User user, String tag, MenuResource menuResource) throws Exception {
 		return this.configurationDao.getByTag(user, tag, menuResource);
+	}
+	
+	@Override
+	public String getStringByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		return this.configurationDao.getByTag(user, tag, menuResource).getValue().toString();
+		
+	}
+	
+	@Override
+	public Integer getIntegerByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		return Integer.parseInt(this.configurationDao.getByTag(user, tag, menuResource).getValue());
+		
+	}
+	
+	@Override
+	public Float getFloatByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		return Float.parseFloat(this.configurationDao.getByTag(user, tag, menuResource).getValue());
+		
+	}
+	
+	@Override
+	public Boolean getBooleanByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		return Boolean.parseBoolean(this.configurationDao.getByTag(user, tag, menuResource).getValue());
+		
+	}
+	
+	@Override
+	public Date getDateByTag(User user, String tag, MenuResource menuResource) throws Exception {
+		SimpleDateFormat thingtrackDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		
+		return thingtrackDateFormat.parse(this.configurationDao.getByTag(user, tag, menuResource).getValue().toString());
+		
 	}
 	
 	@Override

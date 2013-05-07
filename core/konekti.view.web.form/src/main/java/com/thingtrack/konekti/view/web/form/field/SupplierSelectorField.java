@@ -68,7 +68,7 @@ public class SupplierSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				try {
 					@SuppressWarnings("unused")
-					SupplierSelectorWindow windowDialog = new SupplierSelectorWindow(getApplication().getMainWindow(), supplier, new SupplierSelectorWindow.CloseWindowDialogListener() {
+					SupplierSelectorWindow windowDialog = new SupplierSelectorWindow(context, getApplication().getMainWindow(), supplier, new SupplierSelectorWindow.CloseWindowDialogListener() {
 					    public void windowDialogClose(SupplierSelectorWindow.CloseWindowDialogEvent event) {
 					    	if (event.getDialogResult() != SupplierSelectorWindow.DialogResult.SELECT)
 					    		return ;

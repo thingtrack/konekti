@@ -59,12 +59,12 @@ public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements Suppli
 	public List<Supplier> getAll(User user) throws Exception {
 		String queryString =  "SELECT p FROM " + getEntityName() + " p";
 
-		if (user.getActiveArea() != null)
+		if (user.getActiveOrganization() != null)
 			queryString += " WHERE p.organization = :organization";
 
 		Query query = (Query) getEntityManager().createQuery(queryString);
 		
-		if (user.getActiveArea() != null)
+		if (user.getActiveOrganization() != null)
 			query.setParameter("organization", user.getActiveOrganization());
 		
 		return query.getResultList();

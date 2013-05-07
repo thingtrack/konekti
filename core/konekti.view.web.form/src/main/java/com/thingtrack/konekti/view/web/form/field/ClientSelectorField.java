@@ -68,7 +68,7 @@ public class ClientSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				try {
 					@SuppressWarnings("unused")
-					ClientSelectorWindow windowDialog = new ClientSelectorWindow(getApplication().getMainWindow(), client, new ClientSelectorWindow.CloseWindowDialogListener() {
+					ClientSelectorWindow windowDialog = new ClientSelectorWindow(context, getApplication().getMainWindow(), client, new ClientSelectorWindow.CloseWindowDialogListener() {
 					    public void windowDialogClose(ClientSelectorWindow.CloseWindowDialogEvent event) {
 					    	if (event.getDialogResult() != ClientSelectorWindow.DialogResult.SELECT)
 					    		return ;

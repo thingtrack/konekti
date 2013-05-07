@@ -64,6 +64,7 @@ public class ClientView extends AbstractView implements
 	private DataGridView dgClient;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */	
+	
 	private SequenceService sequenceService;
 	private ClientService clientService;
 	private AddressService addressService;
