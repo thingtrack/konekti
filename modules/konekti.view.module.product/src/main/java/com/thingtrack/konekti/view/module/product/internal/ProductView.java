@@ -208,7 +208,7 @@ public class ProductView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<Product> windowDialog = new WindowDialog<Product>(getWindow(), "Nuevo Producto", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new ProductViewForm(),  product, 
+					new ProductViewForm(context),  product, 
 					new WindowDialog.CloseWindowDialogListener<Product>() {
 			    public void windowDialogClose(WindowDialog<Product>.CloseWindowDialogEvent<Product> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
@@ -247,7 +247,7 @@ public class ProductView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<Product> windowDialog = new WindowDialog<Product>(getWindow(), "Editor Producto", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new ProductViewForm(), editingsavingProduct, 
+					new ProductViewForm(context), editingsavingProduct, 
 					new WindowDialog.CloseWindowDialogListener<Product>() {
 			    public void windowDialogClose(WindowDialog<Product>.CloseWindowDialogEvent<Product> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

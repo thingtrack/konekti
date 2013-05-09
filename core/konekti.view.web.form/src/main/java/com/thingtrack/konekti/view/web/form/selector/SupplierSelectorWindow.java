@@ -55,6 +55,8 @@ public class SupplierSelectorWindow extends Window {
 		CANCEL
 	}
 	
+	private static final boolean ACTIVE = true;
+	
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
@@ -136,7 +138,7 @@ public class SupplierSelectorWindow extends Window {
 	private void refreshBindindSource() {
 		try {		
 			bsSupplier.removeAllItems();
-			bsSupplier.addAll(supplierService.getAll(context.getUser()));
+			bsSupplier.addAll(supplierService.getAll(context.getUser(), ACTIVE));
 			
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException("¡No se pudo refrescar los proveedores!", e);

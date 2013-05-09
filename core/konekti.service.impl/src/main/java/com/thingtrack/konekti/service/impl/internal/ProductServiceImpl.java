@@ -78,6 +78,12 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List<Product> getAll(User user, boolean active) throws Exception {
+		return this.productDao.getAll(user, active);
+		
+	}
+	
+	@Override
 	public Product createNewEntity(Area area) throws Exception {
 		Product product = new Product();
 		

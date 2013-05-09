@@ -27,4 +27,5 @@ public interface SupplierDao extends Dao<Supplier, Integer> {
 	public Supplier getByCode(String code) throws Exception;
 	public Supplier getByUser(User user) throws Exception;
 	public List<Supplier> getAll(User user) throws Exception;
+	public List<Supplier> getAll(User user, boolean active) throws Exception;
 }

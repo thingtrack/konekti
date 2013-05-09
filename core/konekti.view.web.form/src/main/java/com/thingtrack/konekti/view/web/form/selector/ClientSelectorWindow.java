@@ -49,11 +49,13 @@ public class ClientSelectorWindow extends Window {
 	private BindingSource<Client> bsClient = new BindingSource<Client>(Client.class, 0);
 		
 	private DialogResult dialogResultSelected;
-	 
+	 	
 	public enum DialogResult {
 		SELECT, 
 		CANCEL
 	}
+	
+	private static final boolean ACTIVE = true;
 	
 	/**
 	 * The constructor should first build the main layout, set the
@@ -136,7 +138,7 @@ public class ClientSelectorWindow extends Window {
 	private void refreshBindindSource() {
 		try {		
 			bsClient.removeAllItems();
-			bsClient.addAll(clientService.getAll(context.getUser()));
+			bsClient.addAll(clientService.getAll(context.getUser(), ACTIVE));
 			
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException("¡No se pudo refrescar los clientes!", e);

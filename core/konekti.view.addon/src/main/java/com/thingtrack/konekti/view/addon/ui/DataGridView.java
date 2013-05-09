@@ -186,8 +186,11 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 	
 	@Override
 	public void bindingSourceIndexChange(IndexChangeEvent event) {
-		if (bindingSource != null) 
+		if (bindingSource != null) {
 			select(event.getRegister());
+			
+			//setCurrentPageFirstItemId(event.getRegister());
+		}
 	}
 
 	@Override

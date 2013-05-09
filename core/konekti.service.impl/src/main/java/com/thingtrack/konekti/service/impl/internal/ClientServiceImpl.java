@@ -82,15 +82,20 @@ public class ClientServiceImpl implements ClientService {
 
 		return client;
 	}
-
-	@Override
-	public Client getByUser(User user) throws Exception {
-		return this.clientDao.getByUser(user);
-
-	}
 	
 	@Override
 	public List<Client> getAll(User user) throws Exception {
 		return this.clientDao.getAll(user);
+	}
+	
+	@Override
+	public List<Client> getAll(User user, boolean active) throws Exception {
+		return this.clientDao.getAll(user, active);
+	}
+	
+	@Override
+	public Client getByUser(User user) throws Exception {
+		return this.clientDao.getByUser(user);
+
 	}
 }
