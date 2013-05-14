@@ -52,7 +52,7 @@ public class AlarmPortlet extends KonektiPortlet {
 	private void refreshBindindSource() {
 		try {
 			bsAlarm.removeAllItems();
-			bsAlarm.addAll(alarmService.getAll());
+			bsAlarm.addAll(alarmService.getAll(context.getUser()));
 
 			bsAlarm.addNestedContainerProperty("alarmType.description");
 			bsAlarm.addNestedContainerProperty("alarmStatus.description");

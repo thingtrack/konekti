@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Alarm;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.dao.api.AlarmDao;
 import com.thingtrack.konekti.service.api.AlarmService;
 
@@ -59,5 +60,9 @@ public class AlarmServiceImpl implements AlarmService {
 		
 	}
 
-	
+	@Override
+	public List<Alarm> getAll(User user) throws Exception {
+		return this.alarmDao.getAll(user);
+		
+	}
 }

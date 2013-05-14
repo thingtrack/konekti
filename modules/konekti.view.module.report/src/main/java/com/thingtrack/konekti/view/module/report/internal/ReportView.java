@@ -151,7 +151,7 @@ public class ReportView extends AbstractView implements
 	private void refreshBindindSource() {
 		try {
 			bsReport.removeAllItems();
-			bsReport.addAll(reportService.getAll());
+			bsReport.addAll(reportService.getAll(context.getUser()));
 
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
