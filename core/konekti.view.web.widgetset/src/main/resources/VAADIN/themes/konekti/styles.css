@@ -111,3 +111,14 @@
 /* 	background-position: left -52px; */
 /* 	outline: medium none;   */
 /* } */
+
+.v-gridlayout-shelf .v-gridlayout-margin {
+    background: orange;
+    padding: 2px;
+}
+
+.v-gridlayout-shelf > div > div > div {
+    background: white;
+    padding-top: 2px;
+    padding-left: 2px;
+}
