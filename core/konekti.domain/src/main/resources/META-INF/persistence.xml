@@ -14,6 +14,7 @@
 	    <class>com.thingtrack.konekti.domain.Alarm</class>
 	    <class>com.thingtrack.konekti.domain.AlarmStatus</class>	    
 	    <class>com.thingtrack.konekti.domain.AlarmType</class>
+	    <class>com.thingtrack.konekti.domain.Application</class>
 	    <class>com.thingtrack.konekti.domain.Area</class>
 	    <class>com.thingtrack.konekti.domain.AreaType</class>	    
 	    <class>com.thingtrack.konekti.domain.Attachment</class>

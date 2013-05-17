@@ -108,7 +108,7 @@ public class ClientSelectorField extends CustomField {
 					@SuppressWarnings("unused")
 					WindowDialog<Client> windowDialog = new WindowDialog<Client>(
 							getApplication().getMainWindow(), "Nuevo Cliente", "Guardar", DialogResult.SAVE,
-							"Cancelar", DialogResult.CANCEL, new ClientViewForm(), client,
+							"Cancelar", DialogResult.CANCEL, new ClientViewForm(context), client,
 							new WindowDialog.CloseWindowDialogListener<Client>() {
 								public void windowDialogClose(
 										WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {

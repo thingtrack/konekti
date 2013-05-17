@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.vaadin.addon.formbinder.ViewBoundForm;
 
+import com.thingtrack.konekti.domain.Application;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.UserService;
 import com.thingtrack.konekti.service.security.SecurityService;
@@ -42,6 +43,8 @@ public class SecurityAccessView extends AbstractView {
 	
 	private static final String DEMO_USERNAME = "demo";
 	private static final String DEMO_PASSWORD = "demo";
+	
+	private static final String APP_NAME = "konekti.view.web.workbench";
 	
 	public User getGrantedUser() {
 		return grantedUser;
@@ -174,6 +177,13 @@ public class SecurityAccessView extends AbstractView {
 				
 			}
 				
+			// check if the user have access to this application
+			if (!access(user)) {
+				viewBoundForm.setComponentError(new UserError("No tiene acceso a usar esta aplicación"));
+				
+				return;
+			}
+			
 			getWindow().removeWindow(loginWindow);
 						
 			sliderView.rollNext();
@@ -184,6 +194,15 @@ public class SecurityAccessView extends AbstractView {
 
 	}
 
+	private boolean access(User user) {
+		for (Application app : user.getApplications()) {
+			if (app.getName().equals(APP_NAME))
+				return true;
+		}
+			
+		return false;
+	}
+	
 	@Override
 	public void addPanelView(IPanelView arg0) {
 		// TODO Auto-generated method stub

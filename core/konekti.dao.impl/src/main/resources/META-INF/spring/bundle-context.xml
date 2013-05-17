@@ -42,6 +42,7 @@
 	<bean id="alarmDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmDaoImpl" />
 	<bean id="alarmStatusDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmStatusDaoImpl" />
 	<bean id="alarmTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AlarmTypeDaoImpl" />
+	<bean id="applicationDao" class="com.thingtrack.konekti.dao.impl.internal.ApplicationDaoImpl" />
 	<bean id="areaDao" class="com.thingtrack.konekti.dao.impl.internal.AreaDaoImpl" />
 	<bean id="areaTypeDao" class="com.thingtrack.konekti.dao.impl.internal.AreaTypeDaoImpl" />	
 	<bean id="attachmentDao" class="com.thingtrack.konekti.dao.impl.internal.AttachmentDaoImpl" />

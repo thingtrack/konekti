@@ -48,7 +48,8 @@ public class UserField extends CustomField {
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
 	private static final int TAB_USER_ORGANIZATION = 3;
-	private static final int TAB_USER_ROL = 4;
+	private static final int TAB_USER_APPLICATION = 4;
+	private static final int TAB_USER_ROL = 5;	
 	
 	private TabSheet tabSheet;
 	
@@ -59,6 +60,7 @@ public class UserField extends CustomField {
 	private final static String DEFAULT_LOCALE = "es" + LocaleField.LOCALE_SEPARATOR + "ES";
 	
 	private UserOrganizationCollectionField userOrganizationCollectionField;
+	private UserApplicationCollectionField userApplicationCollectionField;
 	
 	public UserField() {		
 		buildMainLayout();
@@ -90,7 +92,8 @@ public class UserField extends CustomField {
 			@Override
 			public void valueChange(
 					com.vaadin.data.Property.ValueChangeEvent event) {
-				user.setActive(Boolean.parseBoolean(activeField.getValue().toString()));
+				if (user != null)
+					user.setActive(Boolean.parseBoolean(activeField.getValue().toString()));
 				
 			}
 		});
@@ -124,8 +127,10 @@ public class UserField extends CustomField {
 				passwordConfirmField.setEnabled(false);
 												
 				userOrganizationCollectionField.setValue(user);
+				userApplicationCollectionField.setValue(user);
 				
 				tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(true);
+				tabSheet.getTab(TAB_USER_APPLICATION).setVisible(true);
 				tabSheet.getTab(TAB_USER_ROL).setVisible(true);
 			}
 		});
@@ -166,8 +171,10 @@ public class UserField extends CustomField {
 				btnCancelUser.setEnabled(false);
 				
 				userOrganizationCollectionField.setValue(null);
+				userApplicationCollectionField.setValue(null);
 				
 				tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(false);
+				tabSheet.getTab(TAB_USER_APPLICATION).setVisible(false);
 				tabSheet.getTab(TAB_USER_ROL).setVisible(false);
 				
 			}
@@ -178,10 +185,13 @@ public class UserField extends CustomField {
 		this.tabSheet = tabSheet;
 		
 		// get userOrganizationCollectionField from Tab component
-		Tab useOrganization = tabSheet.getTab(TAB_USER_ORGANIZATION);
-		VerticalLayout useOrganizationLayout = (VerticalLayout)useOrganization.getComponent();
-		userOrganizationCollectionField = (UserOrganizationCollectionField) useOrganizationLayout.getComponent(0);
-		  
+		Tab userOrganization = tabSheet.getTab(TAB_USER_ORGANIZATION);
+		VerticalLayout userOrganizationLayout = (VerticalLayout)userOrganization.getComponent();
+		userOrganizationCollectionField = (UserOrganizationCollectionField) userOrganizationLayout.getComponent(0);
+
+		Tab userApplication = tabSheet.getTab(TAB_USER_APPLICATION);
+		VerticalLayout userApplicationLayout = (VerticalLayout)userApplication.getComponent();
+		userApplicationCollectionField = (UserApplicationCollectionField) userApplicationLayout.getComponent(0);		
 	}
 	
 	public void setAgent(Agent agent) {
@@ -204,13 +214,16 @@ public class UserField extends CustomField {
 			defaultLocaleField.setPropertyDataSource(propertyLocale);
 			
 			userOrganizationCollectionField.setValue(user);
+			userApplicationCollectionField.setValue(user);
 			
 			tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(true);
+			tabSheet.getTab(TAB_USER_APPLICATION).setVisible(true);
 			tabSheet.getTab(TAB_USER_ROL).setVisible(true);
 			
 		}
 		else {
 			tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(false);
+			tabSheet.getTab(TAB_USER_APPLICATION).setVisible(false);
 			tabSheet.getTab(TAB_USER_ROL).setVisible(false);
 		}
 		
