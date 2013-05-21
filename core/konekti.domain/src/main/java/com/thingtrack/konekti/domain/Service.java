@@ -625,6 +625,6 @@ public class Service implements Serializable {
 	 * @param template the template to set
 	 */
 	public void setTemplate(boolean template) {
-		template = template;
+		this.template = template;
 	}
 }

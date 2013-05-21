@@ -68,7 +68,7 @@ public class EmployeeAgentSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				try {
 					@SuppressWarnings("unused")
-					EmployeeAgentSelectorWindow windowDialog = new EmployeeAgentSelectorWindow(getApplication().getMainWindow(), employeeAgent, new EmployeeAgentSelectorWindow.CloseWindowDialogListener() {
+					EmployeeAgentSelectorWindow windowDialog = new EmployeeAgentSelectorWindow(context, getApplication().getMainWindow(), employeeAgent, new EmployeeAgentSelectorWindow.CloseWindowDialogListener() {
 					    public void windowDialogClose(EmployeeAgentSelectorWindow.CloseWindowDialogEvent event) {
 					    	if (event.getDialogResult() != EmployeeAgentSelectorWindow.DialogResult.SELECT)
 					    		return ;
@@ -101,7 +101,7 @@ public class EmployeeAgentSelectorField extends CustomField {
 					@SuppressWarnings("unused")
 					WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getApplication().getMainWindow(), "Nuevo Empleado", 
 							"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-							new EmployeeAgentViewForm(), employeeAgent, 
+							new EmployeeAgentViewForm(context), employeeAgent, 
 							new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 					    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
 					    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

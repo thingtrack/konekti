@@ -64,6 +64,7 @@ public class ClientView extends AbstractView implements
 	private DataGridView dgClient;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */	
+	
 	private SequenceService sequenceService;
 	private ClientService clientService;
 	private AddressService addressService;
@@ -221,7 +222,7 @@ public class ClientView extends AbstractView implements
 			@SuppressWarnings("unused")
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
 					getWindow(), "Nuevo Cliente", "Guardar", DialogResult.SAVE,
-					"Cancelar", DialogResult.CANCEL, new ClientViewForm(), client,
+					"Cancelar", DialogResult.CANCEL, new ClientViewForm(context), client,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
 								WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {
@@ -263,7 +264,7 @@ public class ClientView extends AbstractView implements
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
 					getWindow(), "Editor Cliente", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new ClientViewForm(), editingClient,
+					new ClientViewForm(context), editingClient,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
 								WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {

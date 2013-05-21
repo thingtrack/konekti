@@ -68,4 +68,26 @@ public class ProductDaoImpl extends JpaDao<Product, Integer> implements ProductD
 		
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> getAll(User user, boolean active) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		
+		queryString.append( " WHERE p.productActive = :active");
+		
+		if (user.getActiveArea() != null)
+			queryString.append( " AND :area MEMBER OF p.areas");		
+							
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("active", active);
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("area", user.getActiveArea());
+					
+		// trigger query to refresh the cache.
+		query.setHint("javax.persistence.cache.storeMode", "REFRESH");
+		
+		return query.getResultList();
+	}
 }

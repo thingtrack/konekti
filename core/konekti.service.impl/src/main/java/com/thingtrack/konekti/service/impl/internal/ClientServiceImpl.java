@@ -18,7 +18,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Client;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.domain.User;
@@ -77,21 +76,26 @@ public class ClientServiceImpl implements ClientService {
 	public Client createNewClient(Organization organization) throws Exception {
 		Client client = new Client();
 
-		client.setCode(sequenceService.setNextSequence(Sequence.CODE.CLIENT
-				.name()));
+		client.setCode(sequenceService.setNextSequence(Sequence.CODE.CLIENT.name()));
+		client.setOrganization(organization);
 		client.setActive(true);
 
 		return client;
-	}
-
-	@Override
-	public Client getByUser(User user) throws Exception {
-		return this.clientDao.getByUser(user);
-
 	}
 	
 	@Override
 	public List<Client> getAll(User user) throws Exception {
 		return this.clientDao.getAll(user);
+	}
+	
+	@Override
+	public List<Client> getAll(User user, boolean active) throws Exception {
+		return this.clientDao.getAll(user, active);
+	}
+	
+	@Override
+	public Client getByUser(User user) throws Exception {
+		return this.clientDao.getByUser(user);
+
 	}
 }

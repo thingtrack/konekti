@@ -27,4 +27,5 @@ public interface ProductDao extends Dao<Product, Integer> {
 	public Product getByCode(String code) throws Exception;
 	public Product getByCode(String code, String version) throws Exception;
 	public List<Product> getAll(User user) throws Exception;
+	public List<Product> getAll(User user, boolean active) throws Exception;
 }

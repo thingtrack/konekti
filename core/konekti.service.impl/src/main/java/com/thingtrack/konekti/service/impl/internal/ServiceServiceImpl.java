@@ -1,7 +1,5 @@
 package com.thingtrack.konekti.service.impl.internal;
 
-
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

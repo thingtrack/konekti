@@ -212,7 +212,7 @@ public class EmployeeAgentView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Nuevo Empleado", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new EmployeeAgentViewForm(), employeeAgent, 
+					new EmployeeAgentViewForm(context), employeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
@@ -251,7 +251,7 @@ public class EmployeeAgentView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Editor Empleado", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new EmployeeAgentViewForm(), editingEmployeeAgent, 
+					new EmployeeAgentViewForm(context), editingEmployeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

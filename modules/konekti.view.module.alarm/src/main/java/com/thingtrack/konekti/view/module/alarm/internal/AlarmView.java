@@ -90,7 +90,7 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 	private void refreshAlarmBindindSource() {
 		try {
 			bsAlarm.removeAllItems();
-			bsAlarm.addAll(alarmService.getAll());
+			bsAlarm.addAll(alarmService.getAll(context.getUser()));
 
 			// select the first item if exist
 			if (bsAlarm.size() > 0)

@@ -102,7 +102,7 @@ public class ProductSelectorField extends CustomField {
 					@SuppressWarnings("unused")
 					WindowDialog<Product> windowDialog = new WindowDialog<Product>(getApplication().getMainWindow(), "Nuevo Producto", 
 							"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-							new ProductViewForm(),  product, 
+							new ProductViewForm(context),  product, 
 							new WindowDialog.CloseWindowDialogListener<Product>() {
 					    public void windowDialogClose(WindowDialog<Product>.CloseWindowDialogEvent<Product> event) {
 					    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

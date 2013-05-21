@@ -7,6 +7,7 @@ import org.osgi.framework.FrameworkUtil;
 import org.osgi.framework.ServiceReference;
 import org.vaadin.addon.customfield.CustomField;
 
+import com.thingtrack.konekti.domain.Product;
 import com.thingtrack.konekti.domain.ProductUnit;
 import com.thingtrack.konekti.service.api.ProductUnitService;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
@@ -31,6 +32,8 @@ public class ProductUnitCollectionField extends CustomField {
 	private List<ProductUnit> assignedProductUnit;
 
 	private ProductUnitService productUnitService;
+	
+	private Product product; 
 
 	/**
 	 * The constructor should first build the main layout, set the
@@ -165,6 +168,14 @@ public class ProductUnitCollectionField extends CustomField {
 		}
 		
 		
+	}
+
+
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 	
 }

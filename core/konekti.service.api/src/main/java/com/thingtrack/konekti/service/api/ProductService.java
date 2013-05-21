@@ -31,5 +31,6 @@ public interface ProductService {
 	public Product save(Product product) throws Exception;
 	public void delete(Product product) throws Exception;
 	public List<Product> getAll(User user) throws Exception;
+	public List<Product> getAll(User user, boolean active) throws Exception;
 	public Product createNewEntity(Area area) throws Exception;
 }

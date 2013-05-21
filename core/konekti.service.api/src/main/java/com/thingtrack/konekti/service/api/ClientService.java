@@ -33,4 +33,5 @@ public interface ClientService {
 	public Client createNewClient(Organization organization) throws Exception;
 	public Client getByUser(User user) throws Exception;
 	public List<Client> getAll(User user) throws Exception;
+	public List<Client> getAll(User user, boolean active) throws Exception;
 }

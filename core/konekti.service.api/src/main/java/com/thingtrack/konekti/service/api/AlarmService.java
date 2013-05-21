@@ -16,6 +16,7 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.Alarm;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L
@@ -27,4 +28,5 @@ public interface AlarmService {
 	public Alarm getByMessage( String message ) throws Exception;
 	public Alarm save(Alarm alarm) throws Exception;
 	public void delete(Alarm alarm) throws Exception;
+	public List<Alarm> getAll(User user) throws Exception;
 }

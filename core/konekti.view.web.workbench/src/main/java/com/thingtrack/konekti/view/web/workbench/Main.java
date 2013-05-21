@@ -198,7 +198,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		sliderView.addListener(this);
 
-		sliderView.addView(new SecurityAccessView(securityService, sliderView, version, logoInit, demo));		
+		sliderView.addView(new SecurityAccessView(securityService, userService, sliderView, version, logoInit, demo));		
 		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}
 

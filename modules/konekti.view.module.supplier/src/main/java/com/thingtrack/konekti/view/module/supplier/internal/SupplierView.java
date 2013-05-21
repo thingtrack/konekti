@@ -225,7 +225,7 @@ public class SupplierView extends AbstractView implements
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
 					getWindow(), "Nuevo Proveedor", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new SupplierViewForm(), supplier,
+					new SupplierViewForm(context), supplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
 								WindowDialog<Supplier>.CloseWindowDialogEvent<Supplier> event) {
@@ -263,7 +263,7 @@ public class SupplierView extends AbstractView implements
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
 					getWindow(), "Editor Proveedor", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new SupplierViewForm(), editingSupplier,
+					new SupplierViewForm(context), editingSupplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
 								WindowDialog<Supplier>.CloseWindowDialogEvent<Supplier> event) {

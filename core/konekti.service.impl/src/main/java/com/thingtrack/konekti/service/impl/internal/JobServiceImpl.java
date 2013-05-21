@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.JobDao;
 import com.thingtrack.konekti.domain.Job;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.JobService;
 
 public class JobServiceImpl implements JobService {
@@ -34,6 +35,12 @@ public class JobServiceImpl implements JobService {
 		
 	}
 
+	@Override
+	public List<Job> getAll(User user) throws Exception {
+		return this.jobDao.getAll(user);
+		
+	}
+	
 	@Override
 	public Job getByGroupName(String group, String name) throws Exception {
 		return jobDao.getByGroupName(group, name);

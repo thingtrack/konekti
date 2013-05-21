@@ -86,4 +86,9 @@ public class SupplierServiceImpl implements SupplierService {
 	public List<Supplier> getAll(User user) throws Exception {
 		return this.supplierDao.getAll(user);
 	}
+	
+	@Override
+	public List<Supplier> getAll(User user, boolean active) throws Exception {
+		return this.supplierDao.getAll(user, active);
+	}
 }

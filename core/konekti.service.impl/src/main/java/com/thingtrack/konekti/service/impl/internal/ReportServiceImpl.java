@@ -9,6 +9,7 @@ import com.thingtrack.konekti.dao.api.ReportDao;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Report;
 import com.thingtrack.konekti.domain.Sequence;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.ReportService;
 import com.thingtrack.konekti.service.api.SequenceService;
 
@@ -46,9 +47,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public List<Report> getAllByOrganization(Organization organization)
-			throws Exception {
-		return this.reportDao.getAllByOrganization(organization);
+	public List<Report> getAll(User user) throws Exception {
+		return this.reportDao.getAll(user);
 	}
 
 	@Override
