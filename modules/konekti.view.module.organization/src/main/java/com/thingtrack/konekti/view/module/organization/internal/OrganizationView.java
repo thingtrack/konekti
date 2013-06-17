@@ -189,7 +189,7 @@ public class OrganizationView extends AbstractView
 	}
 	
 	private Tree createOrganizationTree(Organization organization) {		        
-		Tree organizationTree = new Tree();		
+		Tree organizationTree = new Tree();	
 		organizationTree.setImmediate(false);
 		organizationTree.setWidth("100.0%");
 		organizationTree.setHeight("100.0%");

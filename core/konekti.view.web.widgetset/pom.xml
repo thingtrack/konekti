@@ -307,17 +307,17 @@ Export-Package: VAADIN.themes.konekti,
 			<groupId>com.google.gwt.google-apis</groupId>
 			<artifactId>gwt-visualization</artifactId>
 			<version>1.1.2</version>
-		</dependency>            		
+		</dependency>
 		<dependency>
-		   <groupId>org.vaadin.addons</groupId>
-		   <artifactId>visualizationsforvaadin</artifactId>
-		   <version>1.1.2</version>
-		</dependency>		
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>visualizationsforvaadin</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 		<dependency>
-		   <groupId>com.lexaden.components</groupId>
-		   <artifactId>organisationchart</artifactId>
-		   <version>1.6.0</version>
-		</dependency>		
+			<groupId>com.lexaden.components</groupId>
+			<artifactId>organisationchart</artifactId>
+			<version>1.6.0</version>
+		</dependency>
 	</dependencies>
 
 	<profiles>
@@ -372,6 +372,20 @@ Export-Package: VAADIN.themes.konekti,
 							</dependency>
 						</dependencies>
 					</plugin>
+					<!-- As we are doing "inplace" GWT compilation, ensure the widgetset -->
+					<!-- directory is cleaned properly -->
+					<plugin>
+						<artifactId>maven-clean-plugin</artifactId>
+						<version>2.4.1</version>
+						<configuration>
+							<filesets>
+								<fileset>
+									<directory>src/main/resources/VAADIN/widgetsets</directory>
+								</fileset>
+							</filesets>
+						</configuration>
+					</plugin>
+
 					<plugin>
 						<groupId>com.vaadin</groupId>
 						<artifactId>vaadin-maven-plugin</artifactId>

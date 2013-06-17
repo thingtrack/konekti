@@ -61,7 +61,7 @@ public class EmployeeAgent extends Agent implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date seniority;
 	
-	@Column(name="BIRTHDAY", nullable=false)
+	@Column(name="BIRTHDAY")
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	

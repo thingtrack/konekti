@@ -30,7 +30,7 @@
     <!-- nodes -->
     <startEvent id="_1" name="StartProcess" />
     <endEvent id="_3" name="End" >
-        <terminateEventDefinition/>
+        <terminateEventDefinition />
     </endEvent>
     <subProcess id="_11" name="Import Client"  >
       <ioSpecification>
@@ -85,7 +85,7 @@ client.setPhone(item.getPhone());
 client.setFax(item.getFax());
 client.setMobile(item.getMobile());
 client.setEmail(item.getEmail());
-client.setClientAddress(item.getClientAddress());
+client.setAddress(item.getAddress());
 client.setVat(item.getVat());
 client.setClientType(item.getClientType());
 client.setClientGroup(item.getClientGroup());

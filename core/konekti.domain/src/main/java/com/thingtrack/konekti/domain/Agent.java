@@ -23,8 +23,8 @@ public abstract class Agent implements Serializable {
 	@Column(name = "AGENT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer agentId;
-
-	@Column(name = "NAME", length = 64)
+	
+	@Column(name = "NAME", length = 256)
 	private String name;
 
 	@Column(name="PHONE", length=32)	

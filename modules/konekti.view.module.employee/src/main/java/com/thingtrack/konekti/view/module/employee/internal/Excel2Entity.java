@@ -73,7 +73,7 @@ public class Excel2Entity {
 	
 	public EmployeeAgent parse() throws Exception {		
 		if(row.getCell(WORKNUMBER) != null) {
-			row.getCell(WORKMOBILE).setCellType(Cell.CELL_TYPE_STRING);
+			row.getCell(WORKNUMBER).setCellType(Cell.CELL_TYPE_STRING);
 			employeeAgent.setWorkNumber(row.getCell(WORKNUMBER).getStringCellValue());
 		}
 		
@@ -144,7 +144,7 @@ public class Excel2Entity {
 		if(row.getCell(SENIORITY) != null)			 			   			  
 			employeeAgent.setSeniority(formatter.parse(row.getCell(SENIORITY).getStringCellValue()));
 		
-		if(row.getCell(BIRTHDAY) != null)			 			   			  
+		if(row.getCell(BIRTHDAY) != null && row.getCell(BIRTHDAY).getStringCellValue() != "")		 			   			  
 			employeeAgent.setBirthday(formatter.parse(row.getCell(BIRTHDAY).getStringCellValue()));
 		
 		EmployeeAgentStatus employeeAgentStatus = null;
