@@ -59,6 +59,15 @@ public interface Dao<T, ID extends Serializable> {
     T save(final T entity) throws Exception;
     
     /**
+     * refresh an entity. This can be either a INSERT or UPDATE in the database.
+     * 
+     * @param entity the entity to save
+     * 
+     * @return the saved entity
+     */
+    void refresh(final T entity) throws Exception;
+    
+    /**
      * delete an entity from the database. This can be DELETE in the database.
      * 
      * @param entity the entity to delete
