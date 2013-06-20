@@ -9,5 +9,6 @@ import com.thingtrack.konekti.domain.Calendar;
  */
 public interface CalendarDao extends Dao<Calendar, Integer> {
 	public Calendar getByName(String name) throws Exception;
+	public Calendar copy(Calendar calendar) throws Exception;
 
 }

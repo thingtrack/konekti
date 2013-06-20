@@ -30,7 +30,7 @@
     <!-- nodes -->
     <startEvent id="_1" name="StartProcess" />
     <endEvent id="_3" name="End" >
-        <terminateEventDefinition/>
+        <terminateEventDefinition />
     </endEvent>
     <subProcess id="_11" name="Import Supplier"  >
       <ioSpecification>
@@ -85,7 +85,7 @@ supplier.setPhone(item.getPhone());
 supplier.setFax(item.getFax());
 supplier.setMobile(item.getMobile());
 supplier.setEmail(item.getEmail());
-supplier.setSupplierAddress(item.getSupplierAddress());
+supplier.setAddress(item.getAddress());
 supplier.setVat(item.getVat());
 supplier.setSupplierType(item.getSupplierType());
 supplier.setSupplierGroup(item.getSupplierGroup());

@@ -16,7 +16,6 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.Location;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.User;
 
@@ -32,6 +31,4 @@ public interface AreaService {
 	public void delete(Area area) throws Exception;
 	public Area createEntity(Location location) throws Exception;
 	public List<Area> getAll(User user) throws Exception;
-//	public List<Area> getAllByLocation(Location location) throws Exception;
-//	public List<Area> getAreasFromOrganization(Organization organization) throws Exception;
 }

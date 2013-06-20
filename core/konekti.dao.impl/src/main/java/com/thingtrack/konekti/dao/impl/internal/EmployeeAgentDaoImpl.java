@@ -21,6 +21,22 @@ import com.thingtrack.konekti.domain.User;
  */
 @Repository
 public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> implements EmployeeAgentDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EmployeeAgent> getAll(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		if (user.getActiveArea() != null)
+			queryString += " WHERE p.organization = :organization";
+
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
+		return query.getResultList();
+	}
+	
 	@Override
 	public EmployeeAgent getByName(Organization organization, String name) throws Exception {
 		
@@ -28,7 +44,7 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 		queryString += " FROM " + getEntityName() + " em";
 		queryString += " JOIN  em.organizations org";
 		queryString += " WHERE em.name = :name";
-		queryString += " AND EXISTS (SELECT org FROM em.organizations org WHERE org = :organization)";
+		queryString += " AND em.organization = :organization";
 		
 		
 		Query query = (Query) getEntityManager().createQuery(queryString)
@@ -60,7 +76,7 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 		String queryString = "SELECT em";
 		queryString += " FROM " + getEntityName() + " em";
 		queryString += " WHERE em.employeeAgentType = :type";
-		queryString += " AND EXISTS (SELECT org FROM em.organizations org WHERE org = :organization)";
+		queryString += " AND  em.organization = :organization";
 
 		Query query = (Query) getEntityManager().createQuery(queryString)
 		.setParameter("type", employeeAgentType)
@@ -73,7 +89,6 @@ public class EmployeeAgentDaoImpl extends JpaDao<EmployeeAgent, Integer> impleme
 	public EmployeeAgent getByWorkNumber(Organization organization, String workNumber) throws Exception {
 		String queryString = "SELECT em";
 		queryString += " FROM " + getEntityName() + " em";
-		queryString += " JOIN  em.organizations org";
 		queryString += " WHERE em.workNumber = :workNumber";
 		
 		Query query = (Query) getEntityManager().createQuery(queryString)

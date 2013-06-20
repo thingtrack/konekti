@@ -28,4 +28,6 @@ public interface ClientDao extends Dao<Client, Integer> {
 	public Client getByCode(String code) throws Exception;
 	public List<Client> getByCode(Organization organization, String code) throws Exception;
 	public Client getByUser(User user) throws Exception;
+	public List<Client> getAll(User user) throws Exception;
+	public List<Client> getAll(User user, boolean active) throws Exception;
 }

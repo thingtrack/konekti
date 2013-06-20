@@ -63,6 +63,12 @@ public class User implements Serializable {
 	private Locale activeLocale;
 	
 	@ManyToMany
+	@JoinTable(name = "USER_APPLICATION", 
+			   joinColumns = @JoinColumn(name = "USER_ID"), 
+			   inverseJoinColumns = @JoinColumn(name = "APPLICATION_ID"))
+	private List<Application> applications = new ArrayList<Application>();
+	
+	@ManyToMany
 	@JoinTable(name = "USER_ORGANIZATION", 
 			   joinColumns = @JoinColumn(name = "USER_ID"), 
 			   inverseJoinColumns = @JoinColumn(name = "ORGANIZATION_ID"))
@@ -455,6 +461,20 @@ public class User implements Serializable {
 	 */
 	public void setActiveLocale(Locale activeLocale) {
 		this.activeLocale = activeLocale;
+	}
+
+	/**
+	 * @return the applications
+	 */
+	public List<Application> getApplications() {
+		return applications;
+	}
+
+	/**
+	 * @param applications the applications to set
+	 */
+	public void setApplications(List<Application> applications) {
+		this.applications = applications;
 	}
 
 }

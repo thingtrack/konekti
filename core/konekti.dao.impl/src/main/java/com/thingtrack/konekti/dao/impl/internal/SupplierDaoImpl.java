@@ -12,6 +12,9 @@
  * the License.
  */
 package com.thingtrack.konekti.dao.impl.internal;
+
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
@@ -51,4 +54,39 @@ public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements Suppli
 
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Supplier> getAll(User user) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+
+		if (user.getActiveOrganization() != null)
+			queryString.append(" WHERE p.organization = :organization");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		if (user.getActiveOrganization() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+		
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Supplier> getAll(User user, boolean active) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		
+		queryString.append( " WHERE p.active = :active");
+		
+		if (user.getActiveOrganization() != null)
+			queryString.append( " AND p.organization = :organization");		
+							
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("active", active);
+		
+		if (user.getActiveOrganization() != null)
+			query.setParameter("organization", user.getActiveOrganization());
+						
+		return query.getResultList();
+	}
 }

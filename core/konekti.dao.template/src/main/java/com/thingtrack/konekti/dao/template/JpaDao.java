@@ -89,6 +89,12 @@ public abstract class JpaDao<T, ID extends Serializable> implements Dao<T, ID> {
 		
 	}
 
+	@Override
+	public void refresh(T entity) {
+		getEntityManager().refresh(entity);
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getFiltered(List<DaoFilter> filters) throws Exception {

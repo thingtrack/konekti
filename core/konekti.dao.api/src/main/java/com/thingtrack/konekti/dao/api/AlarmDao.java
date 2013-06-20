@@ -13,8 +13,11 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Alarm;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L
@@ -22,5 +25,6 @@ import com.thingtrack.konekti.domain.Alarm;
  */
 public interface AlarmDao extends Dao<Alarm, Integer> {
 	public Alarm getByMessage(String message) throws Exception;
+	public List<Alarm> getAll(User user) throws Exception;
 
 }

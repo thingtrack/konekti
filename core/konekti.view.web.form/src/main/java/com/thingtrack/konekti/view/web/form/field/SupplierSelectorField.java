@@ -68,7 +68,7 @@ public class SupplierSelectorField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				try {
 					@SuppressWarnings("unused")
-					SupplierSelectorWindow windowDialog = new SupplierSelectorWindow(getApplication().getMainWindow(), supplier, new SupplierSelectorWindow.CloseWindowDialogListener() {
+					SupplierSelectorWindow windowDialog = new SupplierSelectorWindow(context, getApplication().getMainWindow(), supplier, new SupplierSelectorWindow.CloseWindowDialogListener() {
 					    public void windowDialogClose(SupplierSelectorWindow.CloseWindowDialogEvent event) {
 					    	if (event.getDialogResult() != SupplierSelectorWindow.DialogResult.SELECT)
 					    		return ;
@@ -109,7 +109,7 @@ public class SupplierSelectorField extends CustomField {
 					WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
 							getApplication().getMainWindow(), "Nuevo Proveedor", "Guardar",
 							DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-							new SupplierViewForm(), supplier,
+							new SupplierViewForm(context), supplier,
 							new WindowDialog.CloseWindowDialogListener<Supplier>() {
 								public void windowDialogClose(
 										WindowDialog<Supplier>.CloseWindowDialogEvent<Supplier> event) {

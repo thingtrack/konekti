@@ -20,6 +20,7 @@
 		<osgi:service ref="alarmDao" interface="com.thingtrack.konekti.dao.api.AlarmDao"/>
 		<osgi:service ref="alarmStatusDao" interface="com.thingtrack.konekti.dao.api.AlarmStatusDao"/>		
 		<osgi:service ref="alarmTypeDao" interface="com.thingtrack.konekti.dao.api.AlarmTypeDao"/>
+		<osgi:service ref="applicationDao" interface="com.thingtrack.konekti.dao.api.ApplicationDao"/>
 		<osgi:service ref="areaDao" interface="com.thingtrack.konekti.dao.api.AreaDao"/>
 		<osgi:service ref="areaTypeDao" interface="com.thingtrack.konekti.dao.api.AreaTypeDao"/>		
 		<osgi:service ref="attachmentDao" interface="com.thingtrack.konekti.dao.api.AttachmentDao"/>

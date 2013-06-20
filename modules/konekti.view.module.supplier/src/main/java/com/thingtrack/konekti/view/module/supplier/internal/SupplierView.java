@@ -99,6 +99,7 @@ public class SupplierView extends AbstractView implements
 		
 		// set Slide View Services and ViewContainer to navigate
 		this.viewContainer = viewContainer;
+		
 		this.sequenceService = SupplierViewContainer.getSequenceService();
 		this.supplierService = SupplierViewContainer.getSupplierService();
 		this.addressService = SupplierViewContainer.getAddressService();
@@ -122,9 +123,7 @@ public class SupplierView extends AbstractView implements
 			dgSupplier.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
 			
 			dgSupplier.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
-			dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });
-			//dgSupplier.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", "active" });
-			//dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Activo" });			
+			dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });		
 			dgSupplier.setEditable(true);
 			dgSupplier.setTableFieldFactory(new TableFieldFactory() {
 				@Override
@@ -141,8 +140,7 @@ public class SupplierView extends AbstractView implements
 			});
 
 			dgSupplier.setColumnCollapsed("code", true);
-			dgSupplier.setColumnCollapsed(
-					AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, true);
+			dgSupplier.setColumnCollapsed(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, true);
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
@@ -181,7 +179,7 @@ public class SupplierView extends AbstractView implements
 	private void refreshBindindSource() {
 		try {
 			bsSupplier.removeAllItems();
-			bsSupplier.addAll(supplierService.getAll());
+			bsSupplier.addAll(supplierService.getAll(context.getUser()));
 
 			bsSupplier.addNestedContainerProperty("supplierType.description");
 			bsSupplier.addNestedContainerProperty("supplierGroup.description");
@@ -227,7 +225,7 @@ public class SupplierView extends AbstractView implements
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
 					getWindow(), "Nuevo Proveedor", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new SupplierViewForm(), supplier,
+					new SupplierViewForm(context), supplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
 								WindowDialog<Supplier>.CloseWindowDialogEvent<Supplier> event) {
@@ -265,7 +263,7 @@ public class SupplierView extends AbstractView implements
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
 					getWindow(), "Editor Proveedor", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new SupplierViewForm(), editingSupplier,
+					new SupplierViewForm(context), editingSupplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
 								WindowDialog<Supplier>.CloseWindowDialogEvent<Supplier> event) {

@@ -82,10 +82,9 @@ public class JobView extends AbstractView
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
-		// TODO add user code here
-		this.context = context;
-		
+		// TODO add user code here		
 		// set Slide View Services and ViewContainer to navigate
+		this.context = context;
 		this.viewContainer = viewContainer;
 		
 		this.jobService = AlarmViewContainer.getJobService();
@@ -176,7 +175,7 @@ public class JobView extends AbstractView
 	private void refreshBindindSource() {
 		try {
 			bsJob.removeAllItems();
-			bsJob.addAll(jobService.getAll());
+			bsJob.addAll(jobService.getAll(context.getUser()));
 			
 			bsJob.addNestedContainerProperty("jobTriggerType.description");
 		} catch (IllegalArgumentException e) {

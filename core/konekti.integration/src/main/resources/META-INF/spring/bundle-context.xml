@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:amq="http://activemq.apache.org/schema/core"
+	   xmlns:osgi="http://www.springframework.org/schema/osgi"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:osgi-compendium="http://www.springframework.org/schema/osgi-compendium"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd 
+	                       http://www.springframework.org/schema/osgi-compendium http://www.springframework.org/schema/osgi-compendium/spring-osgi-compendium.xsd
+	                       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+					       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+					       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+					       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
+				
+	<!-- Active @Autowired spring annotation -->
+    <context:annotation-config/>
+    					       
+	<!-- Define Message Broker -->    					       
+	<bean id="jms" class="org.apache.camel.component.jms.JmsComponent">
+	  <property name="connectionFactory">
+	    <bean class="org.apache.activemq.ActiveMQConnectionFactory">
+	      <property name="brokerURL" value="vm://localhost" />
+	    </bean>
+	  </property>
+	</bean>
+	
+	<!-- Queuing engine - ActiveMq - work locally in mode virtual memory -->
+<!-- 	<bean id="jms" class="org.apache.activemq.camel.component.ActiveMQComponent"> -->
+<!-- 		<property name="brokerURL" value="vm://localhost"/> -->
+<!-- 	</bean> -->
+					       
+	<!-- Define Message Parsers Processor -->    					       
+	<bean id="productParser" class="com.thingtrack.konekti.message.internal.ProductParser"/>
+	<bean id="clientParser" class="com.thingtrack.konekti.message.internal.ClientParser"/>
+	<bean id="supplierParser" class="com.thingtrack.konekti.message.internal.SupplierParser"/>
+	
+	<!-- Define Bindy Data Format -->
+	<bean id="productBindyDataformat" class="org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat">
+		<constructor-arg type="java.lang.Class" value="com.thingtrack.konekti.message.internal.domain.csv.product.CsvProduct" />			
+	</bean>
+
+	<bean id="clientBindyDataformat" class="org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat">
+		<constructor-arg type="java.lang.Class" value="com.thingtrack.konekti.message.internal.domain.csv.client.CsvClient" />			
+	</bean>
+	
+	<bean id="supplierBindyDataformat" class="org.apache.camel.dataformat.bindy.csv.BindyCsvDataFormat">
+		<constructor-arg type="java.lang.Class" value="com.thingtrack.konekti.message.internal.domain.csv.supplier.CsvSupplier" />			
+	</bean>
+			
+	<!-- Define Camel Context: routes -->
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	  <route>
+    	<!-- <from uri="file:/opt/virgo-tomcat-server-3.0.2.KONEKTI.MATTRACK/box/inbox?noop=true"/> -->
+	    <from uri="file:/opt/virgo-tomcat-server-3.0.2.KONEKTI.MATTRACK/box/inbox"/>
+	    	<choice>
+	    	    <when>
+	    	        <simple>${header.CamelFileName} contains 'PRO'</simple>
+				    <to uri="jms:incomingProducts"/> 	        
+	    	    </when>
+	    	    <when>
+	    	        <simple>${header.CamelFileName} contains 'CLI'</simple>	
+				    <to uri="jms:incomingClients"/> 	        
+	    	    </when>
+	    	    <when>
+	    	        <simple>${header.CamelFileName} contains 'SUP'</simple>
+				    <to uri="jms:incomingSuppliers"/> 	        
+	    	    </when>	    	    	 	    	
+				<otherwise>
+					<to uri="jms:badMessages"/>
+					<stop/>
+				</otherwise>	    	    	    	        	    	       
+			</choice>	        	    
+	  </route>	 	   
+	  <route>
+      	<from uri="jms:incomingProducts"/>
+      	<unmarshal ref="productBindyDataformat" />
+		<process ref="productParser"/>
+	  </route>	  
+	  <route>
+      	<from uri="jms:incomingClients"/>
+      	<unmarshal ref="clientBindyDataformat" />
+		<process ref="clientParser"/>
+	  </route>	  
+	  <route>
+      	<from uri="jms:incomingSuppliers"/>
+      	<unmarshal ref="supplierBindyDataformat" />
+		<process ref="supplierParser"/>
+	  </route>		
+	</camelContext>		
+</beans>

@@ -171,6 +171,7 @@ public class AreaViewForm extends CustomComponent {
 		nameField.setWidth("320px");
 		nameField.setHeight("-1px");
 		nameField.setTabIndex(1);
+		nameField.setRequired(true);
 		mainLayout.addComponent(nameField, "top:20.0px;left:160.0px;");
 		
 		// areaTypeField

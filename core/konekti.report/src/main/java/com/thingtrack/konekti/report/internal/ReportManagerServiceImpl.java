@@ -1,47 +1,27 @@
 package com.thingtrack.konekti.report.internal;
 
-/*
- * #%L
- * Konekti Report
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2010 - 2013 Thingtrack s.l.
- * %%
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- * 
- *      http://www.apache.org/licenses/LICENSE-2.0
- * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * #L%
- */
-
-import java.io.File;
-import java.net.URL;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JRExporterParameter;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.design.JasperDesign;
-import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.engine.export.JRHtmlExporter;
+import net.sf.jasperreports.engine.export.JRHtmlExporterParameter;
+import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Report;
 import com.thingtrack.konekti.report.ReportManagerService;
 import com.thingtrack.konekti.service.api.ReportService;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
 public class ReportManagerServiceImpl implements ReportManagerService {
 	@PersistenceContext
@@ -49,10 +29,7 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 
 	@Autowired
 	private ReportService reportService;
-		
-	private final static String DEFAULT_REPORT_PATH = "/template/konekti/";
 	
-	@SuppressWarnings("unused")
 	@Override
 	public JasperPrint executeReport(String code, Map<String,Object> parameters) throws Exception {
 		// get  report to execute
@@ -67,25 +44,108 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 		if (connection == null)
 			throw new Exception("We can not get the JPA connection!");
 		
-		// get report path from the fragment report templates bundle
-		String pathReport = DEFAULT_REPORT_PATH + report.getCode() + "/" + report.getFileName();		
-		URL urlResource = getClass().getResource(pathReport);
+		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
 		
-		File fileResource = new File(urlResource.toURI());
-		
-		if (fileResource == null)
-			throw new Exception("The report templeate on " + pathReport + " not exist!");
-		
-		// load jasper report xml template
-    	JasperDesign jasperDesign = JRXmlLoader.load(fileResource);
-    	
-    	// compile jasper report template
-        JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-        
-        // generate jasper report
-        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, connection);
-        
         return jasperPrint;
 			            					
 	}
+	
+	@Override
+	public void exportReportToPdfFile(String code, Map<String,Object> parameters, String destinationFile) throws Exception {
+		// get  report to execute
+		Report report = reportService.getByCode(code);
+		
+		if (report == null)
+			throw new Exception("The Report with code " + code + " not exist!");
+		
+		// get connection from jpa transaction manager to inject to jasper report template
+		Connection connection = entityManager.unwrap(java.sql.Connection.class);
+				
+		if (connection == null)
+			throw new Exception("We can not get the JPA connection!");
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
+		JasperExportManager.exportReportToPdfFile(jasperPrint, destinationFile); 
+		
+	}
+	
+	@Override
+	public void exportReportToXmlFile(String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception {
+		// get  report to execute
+		Report report = reportService.getByCode(code);
+		
+		if (report == null)
+			throw new Exception("The Report with code " + code + " not exist!");
+		
+		// get connection from jpa transaction manager to inject to jasper report template
+		Connection connection = entityManager.unwrap(java.sql.Connection.class);
+				
+		if (connection == null)
+			throw new Exception("We can not get the JPA connection!");
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
+		JasperExportManager.exportReportToXmlFile(jasperPrint, destFileName, isEmbeddingImages); 
+		
+	}
+	
+	@Override
+	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, String code, Map<String,Object> parameters, String destFileName) throws Exception {		
+		// get  report to execute
+		Report report = reportService.getByCode(code);
+		
+		if (report == null)
+			throw new Exception("The Report with code " + code + " not exist!");
+		
+		// get connection from jpa transaction manager to inject to jasper report template
+		Connection connection = entityManager.unwrap(java.sql.Connection.class);
+				
+		if (connection == null)
+			throw new Exception("We can not get the JPA connection!");
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
+		
+		// create the stream out report
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		
+		// get context uri
+		String uri = context.getHttpSession().getServletContext().getContextPath();
+		
+		JRHtmlExporter exporter = new JRHtmlExporter();
+		String random = "" + Math.random() * 1000.0;
+		random = random.replace('.', '0').replace(',', '0');	
+		
+		exporter.setParameter(JRHtmlExporterParameter.IMAGES_URI, uri + "/image?r=" + random + "&image=");
+		
+		context.getHttpSession().setAttribute(ImageServlet.DEFAULT_JASPER_PRINT_SESSION_ATTRIBUTE, jasperPrint);
+		
+		exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+		exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+		
+		exporter.exportReport();
+		
+		outputStream.flush();
+		outputStream.close();
+		
+		return outputStream;
+	}
+	
+	@Override
+	public void exportReportToHtmlFile(String code, Map<String,Object> parameters, String destFileName) throws Exception {
+		// get  report to execute
+		Report report = reportService.getByCode(code);
+		
+		if (report == null)
+			throw new Exception("The Report with code " + code + " not exist!");
+		
+		// get connection from jpa transaction manager to inject to jasper report template
+		Connection connection = entityManager.unwrap(java.sql.Connection.class);
+				
+		if (connection == null)
+			throw new Exception("We can not get the JPA connection!");
+		
+		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
+		JasperExportManager.exportReportToHtmlFile(jasperPrint, destFileName); 
+		
+	}
+	
 }

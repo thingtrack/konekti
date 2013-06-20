@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.vaadin.addon.formbinder.ViewBoundForm;
 
+import com.thingtrack.konekti.domain.Application;
 import com.thingtrack.konekti.domain.User;
+import com.thingtrack.konekti.service.api.UserService;
 import com.thingtrack.konekti.service.security.SecurityService;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -24,6 +26,7 @@ import com.vaadin.ui.Window;
 public class SecurityAccessView extends AbstractView {
 
 	private SecurityService securityService;
+	private UserService userService;
 	
 	private SliderView sliderView;
 	
@@ -41,14 +44,17 @@ public class SecurityAccessView extends AbstractView {
 	private static final String DEMO_USERNAME = "demo";
 	private static final String DEMO_PASSWORD = "demo";
 	
+	private static final String APP_NAME = "konekti.view.web.workbench";
+	
 	public User getGrantedUser() {
 		return grantedUser;
 	}
 
-	public SecurityAccessView(SecurityService securityService,
+	public SecurityAccessView(SecurityService securityService, UserService userService,
 			SliderView sliderView, String version, String logo, boolean demo) {
 		
 		this.securityService = securityService;
+		this.userService = userService;
 		this.sliderView = sliderView;
 		this.version = version;
 		this.logo = logo;
@@ -158,18 +164,45 @@ public class SecurityAccessView extends AbstractView {
 				password = userBean.getBean().getPassword();
 			}
 			
+			// get garnted user
 			grantedUser = securityService.authenticate(userName, password);
+			
+			// get Konekti user and check if is active
+			User user = userService.getByUsername(grantedUser.getUsername());
+			
+			if (!user.isActive()) {
+				viewBoundForm.setComponentError(new UserError("Cuenta de Usuario desactivada"));
+				
+				return;
+				
+			}
+				
+			// check if the user have access to this application
+			if (!access(user)) {
+				viewBoundForm.setComponentError(new UserError("No tiene acceso a usar esta aplicación"));
+				
+				return;
+			}
+			
 			getWindow().removeWindow(loginWindow);
 						
 			sliderView.rollNext();
 			
-		}catch(Exception e){
-			
+		}catch(Exception e){			
 			viewBoundForm.setComponentError(new UserError("credenciales erróneos"));
 		}
 
 	}
 
+	private boolean access(User user) {
+		for (Application app : user.getApplications()) {
+			if (app.getName().equals(APP_NAME))
+				return true;
+		}
+			
+		return false;
+	}
+	
 	@Override
 	public void addPanelView(IPanelView arg0) {
 		// TODO Auto-generated method stub

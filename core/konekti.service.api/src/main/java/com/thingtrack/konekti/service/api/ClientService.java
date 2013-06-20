@@ -15,9 +15,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Client;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
@@ -34,4 +32,6 @@ public interface ClientService {
 	public void delete(Client client) throws Exception;
 	public Client createNewClient(Organization organization) throws Exception;
 	public Client getByUser(User user) throws Exception;
+	public List<Client> getAll(User user) throws Exception;
+	public List<Client> getAll(User user, boolean active) throws Exception;
 }

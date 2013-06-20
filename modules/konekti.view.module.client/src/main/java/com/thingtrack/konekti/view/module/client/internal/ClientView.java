@@ -64,6 +64,7 @@ public class ClientView extends AbstractView implements
 	private DataGridView dgClient;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */	
+	
 	private SequenceService sequenceService;
 	private ClientService clientService;
 	private AddressService addressService;
@@ -90,12 +91,12 @@ public class ClientView extends AbstractView implements
 	 * editor.
 	 */
 	public ClientView(IWorkbenchContext context, IViewContainer viewContainer) {
+		this.context = context;
+		
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		this.context = context;
-		
 		// set Slide View Services and ViewContainer to navigate		
 		this.viewContainer = viewContainer;
 		this.sequenceService = ClientViewContainer.getSequenceService();
@@ -177,7 +178,7 @@ public class ClientView extends AbstractView implements
 	private void refreshBindindSource() {
 		try {
 			bsClient.removeAllItems();
-			bsClient.addAll(clientService.getAll());
+			bsClient.addAll(clientService.getAll(context.getUser()));
 
 			bsClient.addNestedContainerProperty("clientType.description");
 			bsClient.addNestedContainerProperty("clientGroup.description");
@@ -221,7 +222,7 @@ public class ClientView extends AbstractView implements
 			@SuppressWarnings("unused")
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
 					getWindow(), "Nuevo Cliente", "Guardar", DialogResult.SAVE,
-					"Cancelar", DialogResult.CANCEL, new ClientViewForm(), client,
+					"Cancelar", DialogResult.CANCEL, new ClientViewForm(context), client,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
 								WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {
@@ -263,7 +264,7 @@ public class ClientView extends AbstractView implements
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
 					getWindow(), "Editor Cliente", "Guardar",
 					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
-					new ClientViewForm(), editingClient,
+					new ClientViewForm(context), editingClient,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
 								WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {

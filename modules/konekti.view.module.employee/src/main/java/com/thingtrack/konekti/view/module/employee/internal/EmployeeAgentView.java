@@ -168,7 +168,7 @@ public class EmployeeAgentView extends AbstractView
 	private void refreshBindindSource() {
 		try {		
 			bsEmployeeAgent.removeAllItems();
-			bsEmployeeAgent.addAll(employeeAgentService.getAll());
+			bsEmployeeAgent.addAll(employeeAgentService.getAll(context.getUser()));
 			
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentType.description");
 			bsEmployeeAgent.addNestedContainerProperty("employeeAgentStatus.description");
@@ -199,13 +199,20 @@ public class EmployeeAgentView extends AbstractView
 	
 	@Override
 	public void addButtonClick(ClickNavigationEvent event) {
-		EmployeeAgent employeeAgent = new EmployeeAgent();
+		EmployeeAgent employeeAgent = null;
+		try {
+			employeeAgent = employeeAgentService.createNewEntity(context.getUser().getActiveOrganization());
+		} catch (Exception e) {
+			throw new RuntimeException(
+					"¡No se pudo crear el nuevo empleado!",
+					e);
+		}
 
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Nuevo Empleado", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new EmployeeAgentViewForm(), employeeAgent, 
+					new EmployeeAgentViewForm(context), employeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
@@ -244,7 +251,7 @@ public class EmployeeAgentView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Editor Empleado", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new EmployeeAgentViewForm(), editingEmployeeAgent, 
+					new EmployeeAgentViewForm(context), editingEmployeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

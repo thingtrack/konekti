@@ -95,13 +95,13 @@ public class LatLonInputComponent extends CustomField implements
 		// common part: create layout
 		mainLayout = new HorizontalLayout();
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("390px");
+		mainLayout.setWidth("100%");
 		mainLayout.setHeight("65px");
 		mainLayout.setMargin(true);
 		mainLayout.setSpacing(true);
 
 		// top-level component properties
-		setWidth("390px");
+		setWidth("100%");
 		setHeight("65px");
 
 		// latTextField

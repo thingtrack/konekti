@@ -1,9 +1,9 @@
 package com.thingtrack.konekti.view.addon.ui;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.tepi.filtertable.FilterTable;
@@ -16,14 +16,12 @@ import com.thingtrack.konekti.view.addon.data.BindingSourceComponent;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickAddButtonListener;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickEditButtonListener;
 import com.thingtrack.konekti.view.addon.ui.EditionToolbar.ClickRemoveButtonListener;
-
 import com.vaadin.event.Action;
 import com.vaadin.event.Action.Handler;
 import com.vaadin.event.ItemClickEvent;
 import com.vaadin.event.ItemClickEvent.ItemClickListener;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.event.ShortcutListener;
-import com.vaadin.terminal.gwt.client.MouseEventDetails;
 import com.vaadin.ui.Component;
 
 @SuppressWarnings("serial")
@@ -188,8 +186,11 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 	
 	@Override
 	public void bindingSourceIndexChange(IndexChangeEvent event) {
-		if (bindingSource != null) 
+		if (bindingSource != null) {
 			select(event.getRegister());
+			
+			//setCurrentPageFirstItemId(event.getRegister());
+		}
 	}
 
 	@Override
@@ -233,7 +234,7 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 		printViewForm.setHeight("100.0%");
 				
 		
-		// add column types to the report of visible columns
+		// STEP 02: add column types to the report of visible columns
 		ArrayList<String> visibleColumns = new ArrayList<String>();
 		ArrayList<String> tittleColumns = new ArrayList<String>();
 		ArrayList<Class<?>> types = new ArrayList<Class<?>>();
@@ -270,21 +271,18 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 			
 		}
 		
-		printViewForm.setReportTittle(reportTittle);
-		
+		printViewForm.setReportTittle(reportTittle);		
 		printViewForm.setColumnProperties(visibleColumns.toArray(new String[0]));
-		
 		printViewForm.setColumnClasses(types.toArray(new Class<?>[0]));
-		
 		printViewForm.setColumnTitles(tittleColumns.toArray(new String[0]));
 		
-		// add datasource to the report
+		// STEPP 03: add datasource to the report
 		printViewForm.setData(getBindingSource().getItemIds());
 		
-		// STEP03: generate report
+		// STEP 04: generate report
 		printViewForm.generateReport();
 		
-		// STEP04: show report
+		// STEP 05: show report
 		getApplication().getMainWindow().addWindow(printViewForm);
 	}
 	

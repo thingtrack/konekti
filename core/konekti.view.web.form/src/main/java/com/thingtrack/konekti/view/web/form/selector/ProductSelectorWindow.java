@@ -56,6 +56,8 @@ public class ProductSelectorWindow extends Window {
 		CANCEL
 	}
 	
+	private static final boolean ACTIVE = true;
+	
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
@@ -137,7 +139,7 @@ public class ProductSelectorWindow extends Window {
 	private void refreshBindindSource() {
 		try {		
 			bsProduct.removeAllItems();
-			bsProduct.addAll(productService.getAll(context.getUser()));
+			bsProduct.addAll(productService.getAll(context.getUser(), ACTIVE));
 			
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException("¡No se pudo refrescar los productos!", e);

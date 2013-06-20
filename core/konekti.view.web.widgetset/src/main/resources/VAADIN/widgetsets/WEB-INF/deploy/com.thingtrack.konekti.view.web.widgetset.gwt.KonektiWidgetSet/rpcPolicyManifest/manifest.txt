@@ -1,2 +1,0 @@
-# Module com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet
-# RPC service class, partial path of RPC policy file

@@ -77,6 +77,7 @@ Directory Structure
 	  |	|-konekti.view.module.sensor/
 	  |	|-konekti.view.module.stock/
 	  |	|-konekti.view.module.supplier/
+	  |-konekti.distribution/ ........... Distribution files
 	  | |-pom.xml ....... project object model
 	  |-license ....... the Apache Software License v2
 	  |-pom.xml ....... project object model

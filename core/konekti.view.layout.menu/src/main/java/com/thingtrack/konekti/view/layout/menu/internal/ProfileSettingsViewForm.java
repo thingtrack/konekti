@@ -202,6 +202,9 @@ public class ProfileSettingsViewForm extends CustomComponent {
 			    	try {
 			    		bcLocation.removeAllItems();			    		
 			    		bcLocation.addAll(getAllLocationByOrganization((Organization)organizationField.getValue(), user));
+			    		
+				    	if (bcLocation.getItemIds().size() > 0)
+				    		locationField.setValue(bcLocation.getIdByIndex(0));
 
 					} catch (Exception e) {
 						getWindow().showNotification(
@@ -233,6 +236,9 @@ public class ProfileSettingsViewForm extends CustomComponent {
 				    	bcArea.removeAllItems();				    	
 				    	bcArea.addAll(getAllAreaByLocation((Location)locationField.getValue(), user));
 			    		
+				    	if (bcArea.getItemIds().size() > 0)
+				    		areaField.setValue(bcArea.getIdByIndex(0));
+				    	
 					} catch (Exception e) {
 						getWindow().showNotification(
 								"¡Error refrescando areas!",

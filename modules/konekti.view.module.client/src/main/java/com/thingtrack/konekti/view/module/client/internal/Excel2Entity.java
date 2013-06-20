@@ -15,6 +15,7 @@ import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.service.api.AddressService;
 import com.thingtrack.konekti.service.api.ClientGroupService;
 import com.thingtrack.konekti.service.api.ClientTypeService;
+import com.thingtrack.konekti.service.api.OrganizationService;
 import com.thingtrack.konekti.service.api.SequenceService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 
@@ -51,10 +52,7 @@ public class Excel2Entity {
 		this.row = row;
 		
 		client = new Client();
-		List<Organization> organizations = new ArrayList<Organization>();
-		organizations.add(context.getUser().getActiveOrganization());
-			
-		//client.setOrganizations(organizations);
+		client.setOrganization(context.getUser().getActiveOrganization());
 	}
 	
 	public Client parse() {		
@@ -105,9 +103,12 @@ public class Excel2Entity {
 			client.setAddress(address);
 		}
 		
-		if(row.getCell(VAT) != null)
-			client.setVat(row.getCell(VAT).getStringCellValue());
-		
+		if(row.getCell(VAT) != null){
+			if(row.getCell(VAT).getCellType() == Cell.CELL_TYPE_STRING)
+				client.setVat(row.getCell(VAT).getStringCellValue());
+			else if(row.getCell(VAT).getCellType() == Cell.CELL_TYPE_NUMERIC)
+				client.setVat(String.valueOf(row.getCell(VAT).getNumericCellValue()));
+		}
 		if(row.getCell(TYPE) != null) {
 			ClientType clientType = null;
 			try {

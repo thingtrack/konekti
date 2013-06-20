@@ -75,8 +75,10 @@
 
     <inherits name="com.spaceapplications.vaadin.addon.eventtimeline.gwt.EventTimelineWidgetSet" />
 
-    
+    <inherits name="org.vaadin.tokenfield.TokenfieldWidgetset" />
 
+    <inherits name="com.vaadin.addons.sliderlayout.gwt.SliderLayoutWidgetSet" />
+    
     <inherits name="org.vaadin.vaadinvisualizations.widgetset.VaadinvisualizationApplicationWidgetset" />
 
     <inherits name="com.lexaden.business.chart.widgetset.OrganisationWidgetset" />

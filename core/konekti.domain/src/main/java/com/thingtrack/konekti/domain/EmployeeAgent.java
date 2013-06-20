@@ -61,7 +61,7 @@ public class EmployeeAgent extends Agent implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date seniority;
 	
-	@Column(name="BIRTHDAY", nullable=false)
+	@Column(name="BIRTHDAY")
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
@@ -73,17 +73,24 @@ public class EmployeeAgent extends Agent implements Serializable {
 	private List<OfferRequestLine> offerRequestLines;
 	
 	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
+	
+	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_STATUS_ID", nullable=false)
 	private EmployeeAgentStatus employeeAgentStatus;
 
 	public enum EMPLOYEE_AGENT_TYPE{		
-		OFFICER_TYPE_1,
-		OFFICER_TYPE_2,
-		OPERATOR_TYPE_1,
-		OPERATOR_TYPE_2,
-		MANAGER_TYPE_1,
-		MANAGER_TYPE_2
+		MANAGER,
+		OFFICER,
+		WORKER,
+		DRIVER
 	} 
+	
+	public enum STATUS {
+		ACTIVE,
+		DECLINE
+	}
 	
 	/**
 	 * @param workNumber the workNumber to set
@@ -237,6 +244,20 @@ public class EmployeeAgent extends Agent implements Serializable {
 	 */
 	public void setSurname(String surname) {
 		this.surname = surname;
+	}
+
+	/**
+	 * @return the organization
+	 */
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	/**
+	 * @param organization the organization to set
+	 */
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 
 }

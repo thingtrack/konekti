@@ -71,6 +71,7 @@ public class SupplierServiceImpl implements SupplierService {
 		Supplier supplier = new Supplier();
 		
 		supplier.setCode(sequenceService.setNextSequence(Sequence.CODE.SUPPLIER.name()));
+		supplier.setOrganization(organization);
 		supplier.setActive(true);
 		
 		return supplier;
@@ -80,5 +81,14 @@ public class SupplierServiceImpl implements SupplierService {
 	public Supplier getByUser(User user) throws Exception {
 		return this.supplierDao.getByUser(user);
 		
+	}
+	
+	public List<Supplier> getAll(User user) throws Exception {
+		return this.supplierDao.getAll(user);
+	}
+	
+	@Override
+	public List<Supplier> getAll(User user, boolean active) throws Exception {
+		return this.supplierDao.getAll(user, active);
 	}
 }

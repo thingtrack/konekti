@@ -22,10 +22,17 @@ package com.thingtrack.konekti.report;
  * #L%
  */
 
+import java.io.ByteArrayOutputStream;
 import java.util.Map;
+
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
 import net.sf.jasperreports.engine.JasperPrint;
 
 public interface ReportManagerService {
 	public JasperPrint executeReport(String name, Map<String,Object> parameters) throws Exception;
+	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, String code, Map<String,Object> parameters, String destFileName) throws Exception;
+	public void exportReportToPdfFile(String code, Map<String,Object> parameters, String destinationFile) throws Exception;
+	public void exportReportToXmlFile(String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception;
+	public void exportReportToHtmlFile(String code, Map<String,Object> parameters, String destFileName) throws Exception;
 }

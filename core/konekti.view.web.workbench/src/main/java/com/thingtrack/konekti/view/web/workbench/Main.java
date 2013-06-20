@@ -145,13 +145,14 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		if (jira) {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("jQuery.ajax({");
-			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
+			//buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
+			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-45l6o4-1988229788/6096/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=ec9fb1c4\"");
 			buffer.append(",type: \"get\"");
 			buffer.append(",cache: true");
 			buffer.append(",dataType: \"script\"});");
 			getMainWindow().executeJavaScript(buffer.toString()); 
 		}
-						
+					
 	}
 
 	private void getConfiguration() {
@@ -198,7 +199,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		sliderView.addListener(this);
 
-		sliderView.addView(new SecurityAccessView(securityService, sliderView, version, logoInit, demo));		
+		sliderView.addView(new SecurityAccessView(securityService, userService, sliderView, version, logoInit, demo));		
 		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}
 
@@ -229,6 +230,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 
 	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId) {
+		
 		for (final MenuResource menuResource : menuFolderResource.getMenuResources()) {
 			if (menuResource instanceof MenuFolderResource) {
 				// add new header menu item
@@ -365,6 +367,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 			IViewContainer viewComponent = metadataModule.getModule()
 					.createViewComponent(workbenchContext);
+						
 			viewComponent.addListener((IViewChangeListener) toolbarManager);
 
 			resource.setComponentView(viewComponent);

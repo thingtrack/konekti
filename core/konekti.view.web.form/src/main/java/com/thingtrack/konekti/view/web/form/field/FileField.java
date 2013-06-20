@@ -39,6 +39,8 @@ public class FileField extends CustomField {
 					public void windowClose(CloseEvent e) {
 						file = uploadViewForm.getFile();
 						
+						btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));
+						
 					}
 				});
 				

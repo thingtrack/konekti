@@ -133,7 +133,7 @@ public class Service implements Serializable {
 	private String routeAvoids;
 	
 	@Column(name="TEMPLATE")
-	private boolean Template;
+	private boolean template;
 	
 	public enum STATUS {        
         OPENED,
@@ -618,13 +618,13 @@ public class Service implements Serializable {
 	 * @return the template
 	 */
 	public boolean isTemplate() {
-		return Template;
+		return template;
 	}
 
 	/**
 	 * @param template the template to set
 	 */
 	public void setTemplate(boolean template) {
-		Template = template;
+		this.template = template;
 	}
 }

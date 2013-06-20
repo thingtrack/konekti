@@ -13,11 +13,16 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.AlarmDao;
 import com.thingtrack.konekti.domain.Alarm;
+import com.thingtrack.konekti.domain.User;
 
 /**
  * @author Thingtrack S.L.
@@ -33,6 +38,22 @@ public class AlarmDaoImpl extends JpaDao<Alarm, Integer> implements AlarmDao {
 
 		return alarm;
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Alarm> getAll(User user) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+
+		if (user.getActiveOrganization() != null)
+			queryString.append(" WHERE p.area = :area");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		if (user.getActiveArea() != null)
+			query.setParameter("area", user.getActiveArea());
+		
+		return query.getResultList();
 	}
 	
 }
