@@ -250,6 +250,13 @@
 			<id>virgo</id>
 			<url>http://build.eclipse.org/rt/virgo/maven/bundles/release</url>
 		</repository>
+
+		<!-- In-Project Repository -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file:${project.basedir}/repo</url>
+		</repository>
 	</repositories>
 
 	<pluginRepositories>

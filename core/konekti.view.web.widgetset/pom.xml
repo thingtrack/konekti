@@ -118,8 +118,8 @@ Export-Package: VAADIN.themes.konekti,
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.gwtquery.plugins</groupId>
-			<artifactId>easingext</artifactId>
+			<groupId>com.googlecode.gwtquery</groupId>
+			<artifactId>gwtquery-easingext</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
@@ -299,21 +299,31 @@ Export-Package: VAADIN.themes.konekti,
 			<version>0.5.1</version>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt.google-apis</groupId>
-			<artifactId>gwt-visualization</artifactId>
+			<groupId>com.googlecode.gwt-google-apis</groupId>
+			<artifactId>gwt-visualizations</artifactId>
 			<version>1.1.2</version>
-		</dependency>            		
+		</dependency>
 		<dependency>
-		   <groupId>org.vaadin.addons</groupId>
-		   <artifactId>visualizationsforvaadin</artifactId>
-		   <version>1.1.2</version>
-		</dependency>		
+			<groupId>com.vaadin.addons</groupId>
+			<artifactId>visualizationsforvaadin</artifactId>
+			<version>2.1</version>
+		</dependency>
 		<dependency>
-		   <groupId>com.lexaden.components</groupId>
-		   <artifactId>organisationchart</artifactId>
-		   <version>1.6.0</version>
-		</dependency>		
+			<groupId>com.lexaden.components.local</groupId>
+			<artifactId>organisationchart</artifactId>
+			<version>1.6.0</version>
+		</dependency>
 	</dependencies>
+
+
+	<repositories>
+		<!-- In-Project Repository -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file://${project.basedir}/repo</url>
+		</repository>
+	</repositories>
 
 	<profiles>
 		<profile>
