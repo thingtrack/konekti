@@ -9,7 +9,7 @@
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
 	<artifactId>konekti.view.module.configuration</artifactId>
-	<name>konekti.view.web.configuration</name>
+	<name>konekti.view.name.configuration</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

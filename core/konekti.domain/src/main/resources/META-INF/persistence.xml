@@ -94,19 +94,6 @@
 <!-- 		<shared-cache-mode>NONE</shared-cache-mode> -->
 		
 	   	<properties>
-            <!--
-            <property name="eclipselink.target-database" value="PostgreSQL"/>
-            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/bustrackdb"/>
-            <property name="javax.persistence.jdbc.user" value="konekti"/>
-            <property name="javax.persistence.jdbc.password" value="B33982307"/> 
-            -->
-							
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/konektidb"/>
-            <property name="javax.persistence.jdbc.user" value="konekti"/>
-            <property name="javax.persistence.jdbc.password" value="B33982307"/>
-                        
             <property name="eclipselink.target-database" value="MySQL"/> 
             <property name="eclipselink.logging.level" value="FINE"/>
             <property name="eclipselink.logging.timestamp" value="false"/>
@@ -115,10 +102,16 @@
             <property name="eclipselink.orm.throw.exceptions" value="true"/>
             <property name="eclipselink.jdbc.read-connections.min" value="1"/>
             <property name="eclipselink.jdbc.write-connections.min" value="1"/>    
-            <property name="eclipselink.ddl-generation" value="create-tables"/>
-<!-- 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/> -->
+			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+<!-- 			<property name="eclipselink.ddl-generation" value="create-tables"/> -->
             <property name="eclipselink.ddl-generation.output-mode" value="both"/>            
             <property name="eclipselink.weaving" value="false"/>	
+            
+            <!-- Data Seed -->
+			<property name="eclipselink.session.customizer" value="com.thingtrack.konekti.domain.data.ImportSQL"/>
+			<property name="import.sql.file" value="/scripts/import-data-seed.sql"/>
+			<property name="import.xml.file" value="/scripts/default-product-type.xml"/>
+			
         </properties>
     </persistence-unit>
 </persistence>
