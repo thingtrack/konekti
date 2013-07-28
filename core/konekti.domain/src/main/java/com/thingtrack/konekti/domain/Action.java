@@ -63,6 +63,14 @@ public class Action implements Serializable {
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active = true;
 	
+	public enum ACTION {
+		VIEW,		
+		CREATE,
+		REMOVE,
+		UPDATE,
+		ATTACH
+	}
+	
 	public Action() {
 		
 	}

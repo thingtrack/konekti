@@ -15,6 +15,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
 
 /**
@@ -27,4 +28,5 @@ public interface RoleService {
 	public Role getByCode( String code ) throws Exception;
 	public Role save(Role role) throws Exception;
 	public void delete(Role role) throws Exception;
+	public List<Role> getAll(Area area) throws Exception;
 }

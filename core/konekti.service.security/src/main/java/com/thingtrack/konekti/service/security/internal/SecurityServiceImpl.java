@@ -19,7 +19,7 @@ public class SecurityServiceImpl implements SecurityService {
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
+	
 	public User authenticate(String username, String password) throws Exception {
 
 		Authentication authRequest = new UsernamePasswordAuthenticationToken(

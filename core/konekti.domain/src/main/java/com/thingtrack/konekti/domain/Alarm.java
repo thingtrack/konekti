@@ -65,6 +65,16 @@ public class Alarm implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date alarmDate;
 
+	public enum STATUS {        
+        OK,
+        ERROR,
+        CONFIRM
+    }
+
+	public enum TYPE {
+		DEFAULT
+	}
+	
 	/**
 	 * @param alarmId the alarmId to set
 	 */

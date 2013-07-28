@@ -13,8 +13,11 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Permission;
+import com.thingtrack.konekti.domain.Role;
 
 /**
  * @author Thingtrack S.L.
@@ -22,5 +25,5 @@ import com.thingtrack.konekti.domain.Permission;
  */
 public interface PermissionDao extends Dao<Permission, Integer> {;
 	public Permission getByCode( String code ) throws Exception;
-	
+	public List<Permission> getAllByRole(Role role) throws Exception;
 }

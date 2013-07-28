@@ -18,7 +18,13 @@
 
 
     <dependencies>
-
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>org.osgi.compendium</artifactId>
+			<version>1.4.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
         <dependency>
         	<groupId>org.jbpm</groupId>
         	<artifactId>jbpm-bpmn2</artifactId>
@@ -46,6 +52,7 @@
         	<version>${org.konekti.version}</version>
         	<scope>provided</scope>
         </dependency>
+        
       </dependencies>
 
     

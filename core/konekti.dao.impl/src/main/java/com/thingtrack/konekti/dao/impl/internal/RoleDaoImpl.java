@@ -13,10 +13,15 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.RoleDao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
 
 /**
@@ -34,5 +39,16 @@ public class RoleDaoImpl extends JpaDao<Role, Integer> implements RoleDao {
 		return role;
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Role> getAll(Area area) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p WHERE p.area = :area");
 
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("area", area);
+		
+		return query.getResultList();
+	}
 }

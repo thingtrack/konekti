@@ -20,5 +20,6 @@ public interface IWorkbenchLayout {
 	
 	public void addModule(String id, String name, IViewContainer componentView, boolean closeable, Resource icon, LOCATION location);
 	public void removeModule(String id);
+	public void removeModules(LOCATION location);
 	
 }

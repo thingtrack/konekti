@@ -33,6 +33,7 @@
 		<module>konekti.view.module.calendar</module>
 		<module>konekti.view.module.configuration</module>
 		<module>konekti.view.module.report</module>
+		<module>konekti.view.module.knowledge</module>
 	</modules>
 
 	<dependencies>

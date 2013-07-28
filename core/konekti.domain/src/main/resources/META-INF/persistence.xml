@@ -39,7 +39,8 @@
 		<class>com.thingtrack.konekti.domain.InvoiceStatus</class>
 		<class>com.thingtrack.konekti.domain.InvoiceType</class>
 	    <class>com.thingtrack.konekti.domain.Job</class>
-	    <class>com.thingtrack.konekti.domain.JobTriggerType</class>		
+	    <class>com.thingtrack.konekti.domain.JobTriggerType</class>
+	    <class>com.thingtrack.konekti.domain.Knowledge</class>		
 	    <class>com.thingtrack.konekti.domain.Location</class>
 	    <class>com.thingtrack.konekti.domain.LocationType</class>
 	    <class>com.thingtrack.konekti.domain.MenuWorkbench</class>

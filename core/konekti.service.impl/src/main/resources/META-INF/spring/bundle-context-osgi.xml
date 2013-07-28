@@ -43,7 +43,8 @@
        <osgi:reference id="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao" />
        <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />       
        <osgi:reference id="jobDao" interface="com.thingtrack.konekti.dao.api.JobDao" />
-       <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />       
+       <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />
+       <osgi:reference id="knowledgeDao" interface="com.thingtrack.konekti.dao.api.KnowledgeDao" />       
        <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
        <osgi:reference id="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao" />
        <osgi:reference id="menuFolderResourceDao" interface="com.thingtrack.konekti.dao.api.MenuFolderResourceDao" />
@@ -117,7 +118,8 @@
        <osgi:service ref="invoiceStatusService" interface="com.thingtrack.konekti.service.api.InvoiceStatusService" />
        <osgi:service ref="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
        <osgi:service ref="jobService" interface="com.thingtrack.konekti.service.api.JobService" />
-       <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />       
+       <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />
+       <osgi:service ref="knowledgeService" interface="com.thingtrack.konekti.service.api.KnowledgeService" />       
        <osgi:service ref="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
        <osgi:service ref="locationTypeService" interface="com.thingtrack.konekti.service.api.LocationTypeService" />
        <osgi:service ref="menuFolderResourceService" interface="com.thingtrack.konekti.service.api.MenuFolderResourceService" />

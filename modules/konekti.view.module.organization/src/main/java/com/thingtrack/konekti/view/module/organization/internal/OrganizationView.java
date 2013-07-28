@@ -189,7 +189,7 @@ public class OrganizationView extends AbstractView
 	}
 	
 	private Tree createOrganizationTree(Organization organization) {		        
-		Tree organizationTree = new Tree();		
+		Tree organizationTree = new Tree();	
 		organizationTree.setImmediate(false);
 		organizationTree.setWidth("100.0%");
 		organizationTree.setHeight("100.0%");
@@ -215,7 +215,7 @@ public class OrganizationView extends AbstractView
 		organizationalChart.setHeight("100.0%");
 		
 		organizationalChart.setOption("size", "large");				
-		organizationalChart.setOption("allowCollapse", false);	
+		organizationalChart.setOption("allowCollapse", false);
 		
 		organizationalChart.add(organization.getName(), "", organization.getSocialAddress().getStreet());
 		

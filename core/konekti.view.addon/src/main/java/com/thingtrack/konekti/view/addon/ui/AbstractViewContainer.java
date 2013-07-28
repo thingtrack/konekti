@@ -8,7 +8,7 @@ import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.vaadin.ui.CustomComponent;
 
 @SuppressWarnings("serial")
-public abstract class AbstractViewContainer extends CustomComponent implements IViewContainer {
+public abstract class AbstractViewContainer extends CustomComponent implements IViewContainer {	
 	protected HashMap<Integer, AbstractView> views = new HashMap<Integer, AbstractView>();
 	
 	@Override

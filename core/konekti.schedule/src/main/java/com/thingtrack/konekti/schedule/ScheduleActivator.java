@@ -20,9 +20,10 @@ import com.thingtrack.konekti.service.api.JobService;
 
 public class ScheduleActivator implements BundleActivator {
 	private BundleContext bundleContext;
-	private static JobService jobService;
 	
+	private static JobService jobService;	
 	private static Scheduler scheduler;
+	
 	private ScheduleServiceTracker scheduleServiceTracker;
 	
 	private ServiceRegistration schedulerService;
@@ -33,7 +34,7 @@ public class ScheduleActivator implements BundleActivator {
 	private static boolean OK = false;
 	private static boolean ERROR = true;
 	
-	private static String JOBLISTENER_NAME = "thingtrack_listener";
+	private static String JOB_LISTENER_NAME = "thingtrack_listener";
 	
 	public void start(BundleContext context) throws Exception {
 		this.bundleContext = context;
@@ -88,7 +89,7 @@ public class ScheduleActivator implements BundleActivator {
 				
 				@Override
 				public String getName() {
-					return JOBLISTENER_NAME;
+					return JOB_LISTENER_NAME;
 				}
 			});
 			
@@ -130,21 +131,21 @@ public class ScheduleActivator implements BundleActivator {
 		
 	}
 	
-	 private JobService getJobService() {
-		 ServiceReference jobServiceReference = bundleContext.getServiceReference(JobService.class.getName());
+	private JobService getJobService() {
+		ServiceReference jobServiceReference = bundleContext.getServiceReference(JobService.class.getName());
 		 
-		 if(jobServiceReference != null) {
-			 JobService jobService = (JobService)bundleContext.getService(jobServiceReference);
-			 if(jobService != null)
-			 	return jobService;
+		if(jobServiceReference != null) {
+			JobService jobService = (JobService)bundleContext.getService(jobServiceReference);
+				if(jobService != null)
+					return jobService;
 				 
-		 }
+		}
 		 
-		 return null;
-	 }
+		return null;
+	}
 	 
-	 public static Job getJob(String group, String name) throws Exception {
-		 return jobService.getByGroupName(group, name);
+	public static Job getJob(String group, String name) throws Exception {
+		return jobService.getByGroupName(group, name);
 		 		 
-	 }
+	}
 }

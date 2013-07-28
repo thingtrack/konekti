@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
 import com.thingtrack.konekti.dao.api.RoleDao;
 import com.thingtrack.konekti.service.api.RoleService;
@@ -59,4 +60,9 @@ public class RoleServiceImpl implements RoleService {
 		
 	}
 
+	@Override
+	public List<Role> getAll(Area area) throws Exception {
+		return this.roleDao.getAll(area);
+		
+	}
 }

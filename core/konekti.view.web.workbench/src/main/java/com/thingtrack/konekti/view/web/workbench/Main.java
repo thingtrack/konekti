@@ -31,11 +31,14 @@ import org.dellroad.stuff.vaadin.SpringContextApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
+import com.thingtrack.konekti.domain.Action;
 import com.thingtrack.konekti.domain.Configuration;
 import com.thingtrack.konekti.domain.MenuCommandResource;
 import com.thingtrack.konekti.domain.MenuFolderResource;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.MenuWorkbench;
+import com.thingtrack.konekti.domain.Permission;
+import com.thingtrack.konekti.domain.Role;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.ConfigurationService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
@@ -46,6 +49,7 @@ import com.thingtrack.konekti.view.kernel.IMetadataModuleServiceListener;
 import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 import com.thingtrack.konekti.view.kernel.MetadataModule;
+import com.thingtrack.konekti.view.kernel.ui.layout.IUserChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.thingtrack.konekti.view.kernel.ui.layout.LOCATION;
@@ -72,7 +76,7 @@ import com.vaadin.ui.Window;
  */
 @SuppressWarnings("serial")
 
-public class Main extends SpringContextApplication implements IMetadataModuleServiceListener, IViewChangeListener {
+public class Main extends SpringContextApplication implements IMetadataModuleServiceListener, IViewChangeListener, IUserChangeListener {
 	private final static Logger logger = Logger.getLogger(SpringContextApplication.class.getName());
     
 	@Autowired
@@ -114,6 +118,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private boolean demo;
 	private boolean jira;
 	
+	private static int DEFAULT_MENU_ID = 0;
+	private MenuItem headMenuItem;
+	
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext arg0) {
 		// set konekti theme
@@ -140,7 +147,10 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 		// add module listener to list bundle install/uninstall
 		moduleService.addListener(this);
-			
+		
+		// add user change listener
+		konektiLayout.getMenuLayout().addListenerUserChange(this);
+		
 		// jira issue collector button
 		if (jira) {
 			StringBuffer buffer = new StringBuffer();
@@ -202,34 +212,32 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		sliderView.addView(new WorkbenchView(konektiLayout, sliderView));
 	}
 
-	protected void initMenuManager() {
+	protected void initMenuManager(User user) {
 		try {
-			// // STEP 1: construct vertical menu
+			// STEP 1: construct vertical menu
 			List<MenuWorkbench> menuResources = menuWorkbenchService.getAll();
 
 			// get the first menu
-			MenuWorkbench menuDefault = menuResources.get(0);
+			MenuWorkbench menuDefault = menuResources.get(DEFAULT_MENU_ID);
 
-			for (MenuFolderResource menuFolderResource : menuDefault
-					.getMenuFolderResource()) {
+			for (MenuFolderResource menuFolderResource : menuDefault.getMenuFolderResource()) {
 				// add new header menu item
-				MenuItem headMenuItem = konektiLayout.getMenuLayout()
+				headMenuItem = konektiLayout.getMenuLayout()
 						.addMenuItem(
 								menuFolderResource.getCaption(),
 								getIcon(menuFolderResource.getIcon(),
 										menuFolderResource.getCaption()), null);
 
 				// recursive menu manage
-				getMenu(menuFolderResource, headMenuItem);
+				getMenu(menuFolderResource, headMenuItem, user);
 			}
 
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
-
-	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId) {
-		
+	
+	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId, User user) {		
 		for (final MenuResource menuResource : menuFolderResource.getMenuResources()) {
 			if (menuResource instanceof MenuFolderResource) {
 				// add new header menu item
@@ -239,75 +247,78 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 								itemParentId, null);
 
 				// recursive menu manage
-				getMenu((MenuFolderResource) menuResource, headMenuItem);
+				getMenu((MenuFolderResource) menuResource, headMenuItem, user);
 			} else {
 				if (((MenuCommandResource) menuResource).getType() == MenuCommandResource.TYPE.SEPARATOR)
 					itemParentId.addSeparator();
 				else {
-					// default menu command
-					Command defaultCommand = new Command() {
-						@Override
-						public void menuSelected(MenuItem selectedItem) {
-							window.showNotification(
-									"Module Warning",
-									"The Module: "
-											+ ((MenuCommandResource) menuResource)
-													.getModuleId()
-											+ "["
-											+ ((MenuCommandResource) menuResource)
-													.getModuleVersion()
-											+ "] is not deploy",
-									Window.Notification.TYPE_WARNING_MESSAGE);
-
+					// check if existe VIEW permission for each module for the active user role
+					if (getCommandPermission(user, (MenuCommandResource) menuResource)) {
+						// default menu command
+						Command defaultCommand = new Command() {
+							@Override
+							public void menuSelected(MenuItem selectedItem) {
+								window.showNotification(
+										"Module Warning",
+										"The Module: "
+												+ ((MenuCommandResource) menuResource)
+														.getModuleId()
+												+ "["
+												+ ((MenuCommandResource) menuResource)
+														.getModuleVersion()
+												+ "] is not deploy",
+										Window.Notification.TYPE_WARNING_MESSAGE);
+	
+							}
+						};
+	
+						// create the new menu item; recover commanda data
+						String symbolicName = ((MenuCommandResource) menuResource).getModuleId();
+						String version = ((MenuCommandResource) menuResource).getModuleVersion();
+	
+						String id = symbolicName + "#" + version;
+						String caption = ((MenuCommandResource) menuResource).getCaption();
+						String hint = ((MenuCommandResource) menuResource).getHint();
+						
+						boolean autoStart = ((MenuCommandResource) menuResource).isAutostart();
+						boolean closeable = ((MenuCommandResource) menuResource).isClosable();
+						
+						com.vaadin.terminal.Resource resource = null;
+						if (((MenuCommandResource) menuResource) != null)
+							resource = getIcon(((MenuCommandResource) menuResource).getIcon(), caption);
+	
+						// create the new menu item
+						MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(caption, hint, resource, itemParentId, defaultCommand);
+	
+						// add command to the menu manager list
+						if (((MenuCommandResource) menuResource).getLocation().name().equals("TOP"))
+							resourceManager.addResource(id, caption, resource, LOCATION.TOP, autoStart, closeable, null, headMenuItem, null);
+						else if (((MenuCommandResource) menuResource).getLocation().name().equals("LEFT"))
+							resourceManager.addResource(id, caption, resource, LOCATION.LEFT, autoStart, closeable, null, headMenuItem, null);
+						else if (((MenuCommandResource) menuResource).getLocation().name().equals("CENTER"))
+							resourceManager.addResource(id, caption, resource, LOCATION.CENTER, autoStart, closeable, null, headMenuItem, null);
+						else if (((MenuCommandResource) menuResource).getLocation().name().equals("RIGHT"))
+							resourceManager.addResource(id, caption, resource, LOCATION.RIGHT, autoStart, closeable, null, headMenuItem, null);
+						else if (((MenuCommandResource) menuResource).getLocation().name().equals("BOTTON"))
+							resourceManager.addResource(id, caption, resource, LOCATION.BOTTON, autoStart, closeable, null, headMenuItem, null);
+	
+						// set module payload if is register in service registry
+						MetadataModule metadataModule = moduleService.get(symbolicName, version);
+	
+						if (metadataModule != null) {
+							try {
+								setModuleResource(metadataModule);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
 						}
-					};
-
-					// create the new menu item; recover commanda data
-					String symbolicName = ((MenuCommandResource) menuResource).getModuleId();
-					String version = ((MenuCommandResource) menuResource).getModuleVersion();
-
-					String id = symbolicName + "#" + version;
-					String caption = ((MenuCommandResource) menuResource).getCaption();
-					String hint = ((MenuCommandResource) menuResource).getHint();
-					
-					boolean autoStart = ((MenuCommandResource) menuResource).isAutostart();
-					boolean closeable = ((MenuCommandResource) menuResource).isClosable();
-					
-					com.vaadin.terminal.Resource resource = null;
-					if (((MenuCommandResource) menuResource) != null)
-						resource = getIcon(((MenuCommandResource) menuResource).getIcon(), caption);
-
-					// create the new menu item
-					MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(caption, hint, resource, itemParentId, defaultCommand);
-
-					// add command to the menu manager list
-					if (((MenuCommandResource) menuResource).getLocation().name().equals("TOP"))
-						resourceManager.addResource(id, caption, resource, LOCATION.TOP, autoStart, closeable, null, headMenuItem, null);
-					else if (((MenuCommandResource) menuResource).getLocation().name().equals("LEFT"))
-						resourceManager.addResource(id, caption, resource, LOCATION.LEFT, autoStart, closeable, null, headMenuItem, null);
-					else if (((MenuCommandResource) menuResource).getLocation().name().equals("CENTER"))
-						resourceManager.addResource(id, caption, resource, LOCATION.CENTER, autoStart, closeable, null, headMenuItem, null);
-					else if (((MenuCommandResource) menuResource).getLocation().name().equals("RIGHT"))
-						resourceManager.addResource(id, caption, resource, LOCATION.RIGHT, autoStart, closeable, null, headMenuItem, null);
-					else if (((MenuCommandResource) menuResource).getLocation().name().equals("BOTTON"))
-						resourceManager.addResource(id, caption, resource, LOCATION.BOTTON, autoStart, closeable, null, headMenuItem, null);
-
-					// set module payload if is register in service registry
-					MetadataModule metadataModule = moduleService.get(
-							symbolicName, version);
-
-					if (metadataModule != null)
-						try {
-							setModuleResource(metadataModule);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					}
 				}
 			}
 		}
 	}
-
+		
 	private StreamResource getIcon(final byte[] byteResource, String name) {
 		if (byteResource == null)
 			return null;
@@ -357,19 +368,15 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	}
 
-	private void setModuleResource(MetadataModule metadataModule)
-			throws Exception {
-		final Resource resource = resourceManager.getResource(metadataModule
-				.getId() + "#" + metadataModule.getVersion());
+	private void setModuleResource(MetadataModule metadataModule) throws Exception {
+		final Resource resource = resourceManager.getResource(metadataModule.getId() + "#" + metadataModule.getVersion());
 
 		if (resource != null) {
-
-			IViewContainer viewComponent = metadataModule.getModule()
-					.createViewComponent(workbenchContext);
+			IViewContainer viewContainer = metadataModule.getModule().createViewComponent(workbenchContext);
 						
-			viewComponent.addListener((IViewChangeListener) toolbarManager);
-
-			resource.setComponentView(viewComponent);
+			viewContainer.addListener((IViewChangeListener) toolbarManager);
+			
+			resource.setComponentView(viewContainer);
 
 			// set command (handler) to item menu
 			resource.getMenu().setCommand(new Command() {
@@ -390,9 +397,26 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		}
 	}
 
+	private Boolean getCommandPermission(User user, MenuCommandResource command) {
+		for  (Role role : user.getRoles()) {
+			if (role.getArea().equals(user.getActiveArea())) {
+				for (Permission permission : role.getPermissions()) {
+					if (permission.getCommand().getMenuResourceId() == command.getMenuResourceId()) {
+						for (Action action : permission.getActions()) {
+							if (action.getCode().equals(Action.ACTION.VIEW.name()) && action.isActive())
+								return permission.isActive();
+						}
+					}
+					
+				}
+			}
+		}
+		
+		return false;
+	}
+	
 	@Override
-	public void metadataModuleRegistered(IModuleService source,
-			MetadataModule metadataModule) {
+	public void metadataModuleRegistered(IModuleService source, MetadataModule metadataModule) {
 		try {
 			setModuleResource(metadataModule);
 		} catch (Exception e) {
@@ -402,8 +426,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 
 	@Override
-	public void metadataModuleUnregistered(IModuleService source,
-			final MetadataModule metadataModule) {
+	public void metadataModuleUnregistered(IModuleService source, final MetadataModule metadataModule) {
 		String id = metadataModule.getId() + "#" + metadataModule.getVersion();
 
 		Resource resource = resourceManager.getResource(id);
@@ -446,31 +469,28 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 
 	@Override
-	public void viewChanged(ViewEvent arg0) {
+	public void viewChanged(ViewEvent viewEvent) {
+		if (viewEvent.getViewFrom() instanceof SecurityAccessView) {
 
-		if (arg0.getViewFrom() instanceof SecurityAccessView) {
-
-			SecurityAccessView securityAccessView = (SecurityAccessView) arg0.getViewFrom();
-			try {
-				
-				
+			SecurityAccessView securityAccessView = (SecurityAccessView) viewEvent.getViewFrom();
+			try {								
 				User loggedUser = userService.getByUsername(securityAccessView.getGrantedUser().getUsername());
 				loadWorkbenchContext(loggedUser);
 				
-				WorkbenchView workbenchView =  (WorkbenchView) arg0.getViewTo();
+				WorkbenchView workbenchView =  (WorkbenchView) viewEvent.getViewTo();
 				workbenchView.setLoggedUser(loggedUser);
 								
 				menuManager.setUser(loggedUser);
 				
 				// construct the menu from scratch
-				initMenuManager();
+				initMenuManager(loggedUser);
 				
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 		}
 
-		if (arg0.getViewFrom() instanceof WorkbenchView) {
+		if (viewEvent.getViewFrom() instanceof WorkbenchView) {
 
 		}
 	}
@@ -524,5 +544,22 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
         // also print the error on console
         logger.log(Level.SEVERE, "Terminal error:", t);
 
+	}
+
+	@Override
+	public void userChangedButtonClick(User user) {
+		// remove all module tabs from workbech an all panels
+		konektiLayout.removeModules(LOCATION.TOP);
+		konektiLayout.removeModules(LOCATION.CENTER);
+		konektiLayout.removeModules(LOCATION.LEFT);
+		konektiLayout.removeModules(LOCATION.RIGHT);
+		konektiLayout.removeModules(LOCATION.BOTTON);
+		
+		// remove all items
+		konektiLayout.getMenuLayout().removeItems();
+		
+		// regenerate all items
+		initMenuManager(user);
+		
 	}
 }

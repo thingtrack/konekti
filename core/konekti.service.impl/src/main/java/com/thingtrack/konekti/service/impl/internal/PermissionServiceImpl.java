@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Permission;
+import com.thingtrack.konekti.domain.Role;
 import com.thingtrack.konekti.dao.api.PermissionDao;
 import com.thingtrack.konekti.service.api.PermissionService;
 
@@ -59,4 +60,9 @@ public class PermissionServiceImpl implements PermissionService {
 		
 	}
 
+	@Override
+	public List<Permission> getAllByRole(Role role) throws Exception {
+		return this.permissionDao.getAllByRole(role);
+		
+	}
 }

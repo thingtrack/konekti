@@ -7,6 +7,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
+import org.quartz.JobKey;
 import org.quartz.SchedulerException;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
@@ -15,6 +16,8 @@ import org.quartz.TriggerBuilder;
 import com.thingtrack.konekti.domain.Job;
 
 public class ScheduleServiceTracker extends ServiceTracker {
+	private JobThread thread;
+	
 	public ScheduleServiceTracker(BundleContext context) {
 		super(context, JobApi.class.getName(), null);
 		
@@ -23,13 +26,16 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	@Override
 	public Object addingService(ServiceReference reference) {
 		JobApi jobImpl = (JobApi) super.addingService(reference);
-		
-	    if (jobImpl == null)
-	      return null;
-	 	    
-	    System.out.println("schedulling job ...");
-	      
-	    // get job configuration
+			 	    	      
+	    thread = new JobThread(jobImpl);
+	    thread.start();
+	    
+	    /*if (jobImpl == null)
+	      	return null;
+	     
+	     System.out.println("schedulling job ...");
+	    
+	    // get job configuration from konekti
 		Job job = null;
 		
 	    try {
@@ -41,33 +47,39 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	    	return null;
 	    }
 	      
-	    JobDetail jobDetail = null;
 	    Integer areaId = null;
+	    JobDetail jobDetail = null;
+	    Trigger trigger = null;
 	    
 	    if (job.getArea() != null)
 	    	areaId = job.getArea().getAreaId();	    
 	    	
 	    try {
-	    	// create job passing area Id
+	    	// create job from konekti configuration
 	    	jobDetail = JobBuilder.newJob(jobImpl.getClass()).withIdentity(job.getJobName(), job.getJobGroup())
 	    				.usingJobData("areaId", areaId)
 	    				.build();
 	      
 	    	// create job trigger
-	    	Trigger trigger = configureTriggerJob(job);
+	    	trigger = configureTriggerJob(job);
 	    		      
 	    	// schedule the job associated to the trigger
 	    	ScheduleActivator.getScheduler().scheduleJob(jobDetail, trigger);
 	     
 	    	// add job to scheduler collection
-	    	ScheduleActivator.getJobDetails().put(jobImpl, jobDetail);	      
+	    	ScheduleActivator.getJobDetails().put(jobImpl, jobDetail);	
+	    	
+	    	// initial job active status management
+			if (!job.getActive())
+				ScheduleActivator.getScheduler().pauseJob(new JobKey(job.getJobName(), job.getJobGroup()));
+			 
 	    } catch (Exception ex) {
 	    	ex.printStackTrace();
 	    	
 	    	return null;
 	    }
 	 	    
-    	System.out.println("job scheduled ...");
+    	System.out.println("job scheduled ...");*/
     	
 	    return jobImpl;
 	 }
@@ -92,7 +104,7 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	    super.removedService(reference, service);
 	  }
 	 	
-	 private Trigger configureTriggerJob(Job job) {
+	 private static Trigger configureTriggerJob(Job job) {
 		 TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 		 
 		 // base trigger configuration 
@@ -130,7 +142,67 @@ public class ScheduleServiceTracker extends ServiceTracker {
 			 
 			 triggerBuilder.withSchedule(cronScheduleBuilder);
 		 }
-		 			 
+		 						 
 		 return triggerBuilder.build();
+	 }
+	 
+	 public static class JobThread extends Thread {
+		    private final JobApi service;
+
+		    public JobThread(JobApi service) {
+		      this.service = service;
+		      
+		    }
+
+		    public void run() {
+			    System.out.println("schedulling job ...");
+			    
+		    	// get job configuration from konekti
+				Job job = null;
+				
+			    try {
+			    	job = ScheduleActivator.getJob(service.getGroup(), service.getName());
+			    }
+			    catch(Exception ex) {
+			    	ex.getMessage();
+			    	
+			    }
+			      
+			    Integer areaId = null;
+			    JobDetail jobDetail = null;
+			    Trigger trigger = null;
+			    
+			    if (job.getArea() != null)
+			    	areaId = job.getArea().getAreaId();	    
+			    	
+			    try {
+			    	// create job from konekti configuration
+			    	jobDetail = JobBuilder.newJob(service.getClass()).withIdentity(job.getJobName(), job.getJobGroup())
+			    				.usingJobData("areaId", areaId)
+			    				.build();
+			      
+			    	// create job trigger
+			    	trigger = configureTriggerJob(job);
+			    		      
+			    	// schedule the job associated to the trigger
+			    	ScheduleActivator.getScheduler().scheduleJob(jobDetail, trigger);
+			     
+			    	// add job to scheduler collection
+			    	ScheduleActivator.getJobDetails().put(service, jobDetail);	
+			    	
+			    	// initial job active status management
+					if (!job.getActive())
+						ScheduleActivator.getScheduler().pauseJob(new JobKey(job.getJobName(), job.getJobGroup()));
+					 
+			    } catch (Exception ex) {
+			    	ex.printStackTrace();
+			    	
+			    }
+			 	    
+		    	System.out.println("job scheduled ...");
+		    
+		    }
+
+		 
 	 }
 }

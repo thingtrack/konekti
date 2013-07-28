@@ -24,6 +24,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -41,6 +42,10 @@ public class Role implements Serializable {
 	
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
+	
+	@ManyToOne
+	@JoinColumn(name="AREA_ID", nullable=false)
+	private Area area;
 	
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
@@ -215,5 +220,19 @@ public class Role implements Serializable {
 		return "Role [roleId=" + roleId + ", code=" + code + ", description="
 				+ description + ", users=" + users + ", comment=" + comment
 				+ ", active=" + active + "]";
+	}
+
+	/**
+	 * @return the area
+	 */
+	public Area getArea() {
+		return area;
+	}
+
+	/**
+	 * @param area the area to set
+	 */
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }
