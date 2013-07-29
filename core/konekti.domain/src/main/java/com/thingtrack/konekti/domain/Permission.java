@@ -59,7 +59,7 @@ public class Permission implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name="COMMAND_RESOURCE_ID", nullable=false)
-	private MenuCommandResource command;
+	private MenuCommandResource menuCommandResource;
 	
 	@Column(name="COMMENT", length=512)
 	private String comment;
@@ -217,14 +217,14 @@ public class Permission implements Serializable {
 	/**
 	 * @return the command
 	 */
-	public MenuCommandResource getCommand() {
-		return command;
+	public MenuCommandResource getMenuCommandResource() {
+		return menuCommandResource;
 	}
 
 	/**
 	 * @param command the command to set
 	 */
-	public void setCommand(MenuCommandResource command) {
-		this.command = command;
+	public void setMenuCommandResource(MenuCommandResource menuCommandResource) {		
+		this.menuCommandResource = menuCommandResource;
 	}	
 }

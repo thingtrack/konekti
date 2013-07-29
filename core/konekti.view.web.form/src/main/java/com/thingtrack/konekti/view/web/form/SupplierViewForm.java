@@ -98,18 +98,6 @@ public class SupplierViewForm extends CustomComponent {
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
 	// form services
 	private SupplierTypeService supplierTypeService;
 	private SupplierGroupService supplierGroupService;
@@ -139,6 +127,7 @@ public class SupplierViewForm extends CustomComponent {
 
 		// TODO add user code here
 		this.userField.setTabSheet(tabSheetSupplier);
+		this.userRoleCollectionField.setContext(context);
 		
 		supplierTypeField.setNullSelectionAllowed(false);
 		supplierTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);

@@ -97,10 +97,6 @@ public class ClientViewForm extends CustomComponent {
 	private TextField codeField;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
-
-	
-
-	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 		
 	private ClientTypeService clientTypeService;
 	private ClientGroupService clientGroupService;
@@ -133,6 +129,7 @@ public class ClientViewForm extends CustomComponent {
 		
 		// configure Organization Type data
 		this.userField.setTabSheet(tabSheetClient);
+		this.userRoleCollectionField.setContext(context);
 		
 		clientTypeField.setNullSelectionAllowed(false);
 		clientTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);

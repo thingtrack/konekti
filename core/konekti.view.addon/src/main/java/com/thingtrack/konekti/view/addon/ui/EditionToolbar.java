@@ -125,8 +125,8 @@ public class EditionToolbar extends AbstractToolbar {
 		for  (Role role : user.getRoles()) {
 			if (role.getArea().equals(user.getActiveArea())) {
 				for (Permission permission : role.getPermissions()) {
-					if (permission.getCommand().getModuleId().equals(symbolicName) &&
-					    permission.getCommand().getModuleVersion().equals(version)) {
+					if (permission.getMenuCommandResource().getModuleId().equals(symbolicName) &&
+					    permission.getMenuCommandResource().getModuleVersion().equals(version)) {
 						for (Action action : permission.getActions()) {
 							if (action.getCode().equals(Action.ACTION.CREATE.name()))
 								btnAddRegister.setEnabled(action.isActive());

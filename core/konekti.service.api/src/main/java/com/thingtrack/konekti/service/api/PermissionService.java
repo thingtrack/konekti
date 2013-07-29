@@ -28,5 +28,6 @@ public interface PermissionService {
 	public Permission getByCode( String code ) throws Exception;
 	public Permission save(Permission permission) throws Exception;
 	public void delete(Permission permission) throws Exception;
+	public Permission createNewEntity() throws Exception;
 	public List<Permission> getAllByRole(Role role) throws Exception;
 }
