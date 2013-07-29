@@ -155,13 +155,14 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		if (jira) {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("jQuery.ajax({");
-			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
+			//buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
+			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-45l6o4-1988229788/6096/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=ec9fb1c4\"");
 			buffer.append(",type: \"get\"");
 			buffer.append(",cache: true");
 			buffer.append(",dataType: \"script\"});");
 			getMainWindow().executeJavaScript(buffer.toString()); 
 		}
-						
+					
 	}
 
 	private void getConfiguration() {

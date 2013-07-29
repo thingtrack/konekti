@@ -32,7 +32,7 @@
     <!-- nodes -->
     <startEvent id="_1" name="StartProcess" />
     <endEvent id="_3" name="End" >
-        <terminateEventDefinition/>
+        <terminateEventDefinition />
     </endEvent>
     <subProcess id="_11" name="Import Employee Agent"  >
       <ioSpecification>
@@ -86,7 +86,7 @@ employeeAgent.setPhone(item.getPhone());
 employeeAgent.setFax(item.getFax());
 employeeAgent.setMobile(item.getMobile());
 employeeAgent.setEmail(item.getEmail());
-employeeAgent.setEmployeeAddress(item.getEmployeeAddress());
+employeeAgent.setAddress(item.getAddress());
 employeeAgent.setNif(item.getNif());
 employeeAgent.setEmployeeAgentType(item.getEmployeeAgentType());
 employeeAgent.setComment(item.getComment());

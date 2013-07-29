@@ -83,13 +83,10 @@
 
     <inherits name="com.lexaden.business.chart.widgetset.OrganisationWidgetset" />
 
-    <inherits name="com.github.wolfie.refresher.RefresherApplicationWidgetset" />
-
-    
-
-    
+	<inherits name="com.github.wolfie.refresher.RefresherApplicationWidgetset" />
 
     <inherits name="com.vaadin.addon.timeline.gwt.TimelineWidgetSet" />
 
     <inherits name="com.vaadin.addon.charts.Widgetset" />
+
 </module>
