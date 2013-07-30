@@ -68,14 +68,12 @@ public class KnowledgeView extends AbstractView implements
 	 */
 	public KnowledgeView(IWorkbenchContext context, IViewContainer viewContainer) {
 		this.context = context;
+		this.viewContainer = viewContainer;
 		
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
-		// TODO add user code here
-		// set Slide View Services and ViewContainer to navigate
-		this.viewContainer = viewContainer;
-		
+		// TODO add user code here		
 		this.knowledgeService = KnowledgeViewContainer.getKnowledgeService();
 		this.statefulKnowledgeSession = KnowledgeViewContainer.getStatefulKnowledgeSession();
 		
@@ -145,6 +143,7 @@ public class KnowledgeView extends AbstractView implements
 		editionToolbar.addListenerAddButton(this);
 		editionToolbar.addListenerEditButton(this);
 		editionToolbar.addListenerDeleteButton(this);
+		editionToolbar.setPermission(context.getUser(), viewContainer.getModule().getSymbolicName(), viewContainer.getModule().getVersion());
 		
 		boxToolbar.addListenerFilterButton(this);
 		boxToolbar.addListenerPrintButton(this);		

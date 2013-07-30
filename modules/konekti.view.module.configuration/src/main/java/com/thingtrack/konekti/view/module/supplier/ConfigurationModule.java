@@ -32,7 +32,10 @@ public class ConfigurationModule extends AbstractModule implements BeanFactoryAw
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("configurationViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(ConfigurationModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("configurationViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

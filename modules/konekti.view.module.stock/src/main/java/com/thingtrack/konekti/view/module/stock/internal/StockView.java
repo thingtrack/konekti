@@ -101,6 +101,7 @@ public class StockView extends AbstractView
 		editionToolbar.addListenerAddButton(this);
 		editionToolbar.addListenerEditButton(this);
 		editionToolbar.addListenerDeleteButton(this);
+		editionToolbar.setPermission(context.getUser(), viewContainer.getModule().getSymbolicName(), viewContainer.getModule().getVersion());
 		
 		boxToolbar.addListenerFilterButton(this);
 		boxToolbar.addListenerPrintButton(this);

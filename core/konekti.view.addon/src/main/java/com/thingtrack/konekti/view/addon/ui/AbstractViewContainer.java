@@ -3,6 +3,7 @@ package com.thingtrack.konekti.view.addon.ui;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import com.thingtrack.konekti.view.kernel.IModule;
 import com.thingtrack.konekti.view.kernel.ui.layout.IView;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.vaadin.ui.CustomComponent;
@@ -10,6 +11,13 @@ import com.vaadin.ui.CustomComponent;
 @SuppressWarnings("serial")
 public abstract class AbstractViewContainer extends CustomComponent implements IViewContainer {	
 	protected HashMap<Integer, AbstractView> views = new HashMap<Integer, AbstractView>();
+	
+	protected IModule module;
+	
+	public IModule getModule() {
+		return module;
+		
+	}
 	
 	@Override
 	public IView getNext() {		

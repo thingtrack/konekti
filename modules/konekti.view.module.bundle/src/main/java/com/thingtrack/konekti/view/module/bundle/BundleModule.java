@@ -32,7 +32,10 @@ public class BundleModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("bundleViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(BundleModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("bundleViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

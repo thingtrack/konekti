@@ -14,6 +14,7 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -54,7 +55,7 @@ public class Role implements Serializable {
 	@JoinTable(name="ROLE_PERMISSION",
 			   joinColumns=@JoinColumn(name="ROLE_ID"),
 			   inverseJoinColumns=@JoinColumn(name="PERMISSION_ID"))
-	private List<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<Permission>();
 	
 	@ManyToMany(mappedBy="roles")
 	private List<User> users;

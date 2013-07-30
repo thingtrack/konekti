@@ -32,7 +32,10 @@ public class AlarmModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("alarmViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(AlarmModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("alarmViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

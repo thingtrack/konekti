@@ -5,19 +5,18 @@ import org.osgi.framework.FrameworkUtil;
 
 import com.thingtrack.konekti.view.kernel.IModule;
 
-
 public abstract class AbstractModule implements IModule {
-	private static String symbolicName;
-	private static String version;
+	private String symbolicName;
+	private String version;
 	
-	public static String getSymbolicName() {
+	public String getSymbolicName() {
 		return symbolicName;
 	}
 	
-	public static String getVersion() {
+	public String getVersion() {
 		return version;
 	}
-	
+		
 	protected void getBundleIdentity(Class<?> bundleClass) {
 		try {
 			BundleContext bundleContext = FrameworkUtil.getBundle(bundleClass).getBundleContext();

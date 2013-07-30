@@ -55,7 +55,7 @@ public class Action implements Serializable {
 	private List<Resource> resources = new ArrayList<Resource>();
 
 	@ManyToMany(mappedBy="actions", cascade=CascadeType.PERSIST)
-	private List<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<Permission>();
 	
 	@Column(name="COMMENT", length=512)
 	private String comment;

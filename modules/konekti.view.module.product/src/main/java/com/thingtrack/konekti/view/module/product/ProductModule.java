@@ -32,7 +32,10 @@ public class ProductModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("productViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(ProductModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("productViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}
