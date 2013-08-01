@@ -1057,7 +1057,8 @@ public class UserRoleCollectionField extends CustomField {
 	
 	private boolean existPermissionFromCommand(MenuCommandResource command) {
 		for (Permission permission : dsActivePermission.getItemIds()) {
-			if (permission.getMenuCommandResource().getMenuResourceId() == command.getMenuResourceId())
+			if (permission.getMenuCommandResource() != null && 
+				permission.getMenuCommandResource().getMenuResourceId() == command.getMenuResourceId())
 				return true;
 		}
 		

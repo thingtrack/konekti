@@ -78,7 +78,7 @@ public class StockView extends AbstractView
 		try {			
 			dgStock.setBindingSource(bsStock);
 			dgStock.setVisibleColumns(new String[] { "area.description", "product.description", "quantity", "productUnit.description", "price", "stockStatus.description", "serialNumber", "lote", "expeditionDate", "stockDate" } );       
-			dgStock.setColumnHeaders(new String[] { "Almacén", "Producto", "Cantidad", "Unidad", "Precio", "Estado", "Número Serie", "Lote", "Fecha Caducidad", "Fecha Stock" } );
+			dgStock.setColumnHeaders(new String[] { "Area", "Producto", "Cantidad", "Unidad", "Precio", "Estado", "Número Serie", "Lote", "Fecha Caducidad", "Fecha Stock" } );
 
 			dgStock.setColumnCollapsed("serialNumber", true);
 			dgStock.setColumnCollapsed("lote", true);

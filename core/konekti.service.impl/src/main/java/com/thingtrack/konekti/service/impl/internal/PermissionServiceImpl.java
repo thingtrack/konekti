@@ -69,7 +69,7 @@ public class PermissionServiceImpl implements PermissionService {
 	public Permission createNewEntity() throws Exception {
 		Permission permission = new Permission();
 		
-		permission.setCode(sequenceService.setNextSequence(Sequence.CODE.ROLE.name()));
+		permission.setCode(sequenceService.setNextSequence(Sequence.CODE.PERMISSION.name()));
 		permission.setActive(true);
 		
 		return permission;

@@ -402,7 +402,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		for  (Role role : user.getRoles()) {
 			if (role.getArea().equals(user.getActiveArea())) {
 				for (Permission permission : role.getPermissions()) {
-					if (permission.getMenuCommandResource().getMenuResourceId() == command.getMenuResourceId()) {
+					if (permission.getMenuCommandResource() != null &&
+						permission.getMenuCommandResource().getMenuResourceId() == command.getMenuResourceId()) {
 						for (Action action : permission.getActions()) {
 							if (action.getCode().equals(Action.ACTION.VIEW.name()) && action.isActive())
 								return permission.isActive();

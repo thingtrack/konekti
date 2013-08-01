@@ -105,13 +105,14 @@ public class ProductView extends AbstractView
 
 	private void initView() {
 		// initialize Slide View Organization View
-		dgProduct.setImmediate(true);		
+		dgProduct.setImmediate(true);
 		
 		refreshBindindSource();
 		
 		// STEP 01: create grid view for slide Organization View
 		try {			
 			dgProduct.setBindingSource(bsProduct);
+						
 			dgProduct.addGeneratedColumn(SupplierNameColumn.SUPPLIER_NAME_COLUMN_ID, new SupplierNameColumn());
 			dgProduct.setVisibleColumns(new String[] { "code", "name", "description", "hasLote", "hasSerialNumber", "hasExpeditionDate", "averagePrice", "productType.description", SupplierNameColumn.SUPPLIER_NAME_COLUMN_ID, "productActive" } );       
 			dgProduct.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "Con Lote", "Con Númnero Serie", "Con Fecha Caducidad", "Precio Medio", "Tipo", "Proveedor", "Activo" } );
