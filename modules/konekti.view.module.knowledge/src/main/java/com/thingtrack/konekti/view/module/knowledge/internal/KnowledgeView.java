@@ -148,7 +148,7 @@ public class KnowledgeView extends AbstractView implements
 		boxToolbar.addListenerFilterButton(this);
 		boxToolbar.addListenerPrintButton(this);		
 		
-		knowledgeToolbar.addListenerExecuteReportButton(this);
+		knowledgeToolbar.addListenerActiveWorkflowButtonButton(this);
 		
 		dgKnowledge.addListenerAddButton(this);
 		dgKnowledge.addListenerEditButton(this);

@@ -62,8 +62,7 @@
 		<class>com.thingtrack.konekti.domain.Permission</class>
 		<class>com.thingtrack.konekti.domain.Product</class>
 		<class>com.thingtrack.konekti.domain.ProductType</class>
-		<class>com.thingtrack.konekti.domain.ProductUnit</class>				
-		<class>com.thingtrack.konekti.domain.Resource</class>
+		<class>com.thingtrack.konekti.domain.ProductUnit</class>
 		<class>com.thingtrack.konekti.domain.Report</class>
 	    <class>com.thingtrack.konekti.domain.Role</class>
 	    <class>com.thingtrack.konekti.domain.Sequence</class>

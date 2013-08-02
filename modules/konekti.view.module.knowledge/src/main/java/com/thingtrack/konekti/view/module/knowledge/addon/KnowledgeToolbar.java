@@ -84,7 +84,7 @@ public class KnowledgeToolbar extends AbstractToolbar {
 		
 	}
 	
-	public void addListenerExecuteReportButton(ClickActiveWorkflowButtonListener listener) {
+	public void addListenerActiveWorkflowButtonButton(ClickActiveWorkflowButtonListener listener) {
 		this.listenerActiveWorkflowButton = listener;
 		
 	}

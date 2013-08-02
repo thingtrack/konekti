@@ -61,7 +61,6 @@
        <osgi:reference id="productDao" interface="com.thingtrack.konekti.dao.api.ProductDao" />
        <osgi:reference id="productTypeDao" interface="com.thingtrack.konekti.dao.api.ProductTypeDao" />       
        <osgi:reference id="productUnitDao" interface="com.thingtrack.konekti.dao.api.ProductUnitDao" />
-       <osgi:reference id="resourceDao" interface="com.thingtrack.konekti.dao.api.ResourceDao" />
        <osgi:reference id="roleDao" interface="com.thingtrack.konekti.dao.api.RoleDao" />
        <osgi:reference id="serviceDao" interface="com.thingtrack.konekti.dao.api.ServiceDao" />
        <osgi:reference id="serviceStatusDao" interface="com.thingtrack.konekti.dao.api.ServiceStatusDao" />
@@ -122,7 +121,6 @@
        <osgi:reference id="productService" interface="com.thingtrack.konekti.service.api.ProductService" />
        <osgi:reference id="productTypeService" interface="com.thingtrack.konekti.service.api.ProductTypeService" />       
        <osgi:reference id="productUnitService" interface="com.thingtrack.konekti.service.api.ProductUnitService" />
-       <osgi:reference id="resourceService" interface="com.thingtrack.konekti.service.api.ResourceService" />
        <osgi:reference id="roleService" interface="com.thingtrack.konekti.service.api.RoleService" />
        <osgi:reference id="sequenceService" interface="com.thingtrack.konekti.service.api.SequenceService" />       
        <osgi:reference id="serviceService" interface="com.thingtrack.konekti.service.api.ServiceService" />

@@ -90,7 +90,6 @@
 	<bean id="productDao" class="com.thingtrack.konekti.dao.impl.internal.ProductDaoImpl" />	
 	<bean id="productTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ProductTypeDaoImpl" />	
 	<bean id="productUnitDao" class="com.thingtrack.konekti.dao.impl.internal.ProductUnitDaoImpl" />
-	<bean id="resourceDao" class="com.thingtrack.konekti.dao.impl.internal.ResourceDaoImpl" />
 	<bean id="reportDao" class="com.thingtrack.konekti.dao.impl.internal.ReportDaoImpl" />
 	<bean id="roleDao" class="com.thingtrack.konekti.dao.impl.internal.RoleDaoImpl" />
 	<bean id="sequenceDao" class="com.thingtrack.konekti.dao.impl.internal.SequenceDaoImpl"/>
