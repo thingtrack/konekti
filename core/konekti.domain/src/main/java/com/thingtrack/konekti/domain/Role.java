@@ -14,6 +14,7 @@
 package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -24,6 +25,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -42,6 +44,10 @@ public class Role implements Serializable {
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	@ManyToOne
+	@JoinColumn(name="AREA_ID", nullable=false)
+	private Area area;
+	
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
 	
@@ -49,7 +55,7 @@ public class Role implements Serializable {
 	@JoinTable(name="ROLE_PERMISSION",
 			   joinColumns=@JoinColumn(name="ROLE_ID"),
 			   inverseJoinColumns=@JoinColumn(name="PERMISSION_ID"))
-	private List<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<Permission>();
 	
 	@ManyToMany(mappedBy="roles")
 	private List<User> users;
@@ -215,5 +221,19 @@ public class Role implements Serializable {
 		return "Role [roleId=" + roleId + ", code=" + code + ", description="
 				+ description + ", users=" + users + ", comment=" + comment
 				+ ", active=" + active + "]";
+	}
+
+	/**
+	 * @return the area
+	 */
+	public Area getArea() {
+		return area;
+	}
+
+	/**
+	 * @param area the area to set
+	 */
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }

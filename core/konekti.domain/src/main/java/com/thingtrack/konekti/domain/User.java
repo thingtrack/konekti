@@ -54,7 +54,7 @@ public class User implements Serializable {
 	@JoinTable(name="USER_ROLE",
 			   joinColumns=@JoinColumn(name="USER_ID"),
 			   inverseJoinColumns=@JoinColumn(name="ROLE_ID"))
-	private List<Role> roles;
+	private List<Role> roles = new ArrayList<Role>();
 
 	@Column(name="DEFAULT_LOCALE")
 	private String defaultLocale;

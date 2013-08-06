@@ -13,7 +13,10 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
 
 /**
@@ -22,5 +25,5 @@ import com.thingtrack.konekti.domain.Role;
  */
 public interface RoleDao extends Dao<Role, Integer> {
 	public Role getByCode(String code) throws Exception;
-	
+	public List<Role> getAll(Area area) throws Exception;
 }

@@ -32,7 +32,10 @@ public class StockModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("stockViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(StockModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("stockViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

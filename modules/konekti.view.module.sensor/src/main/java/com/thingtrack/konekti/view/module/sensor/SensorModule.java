@@ -32,7 +32,10 @@ public class SensorModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("sensorViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(SensorModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("sensorViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

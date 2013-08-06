@@ -32,7 +32,10 @@ public class SupplierModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("supplierViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(SupplierModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("supplierViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

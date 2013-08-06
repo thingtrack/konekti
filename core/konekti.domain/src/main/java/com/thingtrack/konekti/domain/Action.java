@@ -24,8 +24,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -47,21 +45,23 @@ public class Action implements Serializable {
 	
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
-	
-	@ManyToMany(cascade=CascadeType.PERSIST)
-	@JoinTable(name="ACTION_RESOURCE",
-			   joinColumns=@JoinColumn(name="ACTION_ID"),
-			   inverseJoinColumns=@JoinColumn(name="RESOURCE_ID"))
-	private List<Resource> resources = new ArrayList<Resource>();
 
 	@ManyToMany(mappedBy="actions", cascade=CascadeType.PERSIST)
-	private List<Permission> permissions;
+	private List<Permission> permissions = new ArrayList<Permission>();
 	
 	@Column(name="COMMENT", length=512)
 	private String comment;
 	
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active = true;
+	
+	public enum ACTION {
+		VIEW,		
+		CREATE,
+		REMOVE,
+		UPDATE,
+		ATTACH
+	}
 	
 	public Action() {
 		
@@ -129,22 +129,7 @@ public class Action implements Serializable {
 
 	public void addPermission(Permission permission) {
 		permissions.add(permission);
-		
-		
-		//if (!permission.getActions().contains(this))
-			//permission.addTurn(this);
-	}
 	
-	/**
-	 * @return the resources
-	 */
-	public List<Resource> getResources() {
-		return Collections.unmodifiableList(resources);
-	}
-
-	public void addResouce(Resource resource) {
-		resources.add(resource);
-		
 	}
 	
 	/**

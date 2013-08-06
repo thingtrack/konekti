@@ -32,7 +32,10 @@ public class DashBoardModule extends AbstractModule implements BeanFactoryAware 
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("dashBoardViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(DashBoardModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("dashBoardViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

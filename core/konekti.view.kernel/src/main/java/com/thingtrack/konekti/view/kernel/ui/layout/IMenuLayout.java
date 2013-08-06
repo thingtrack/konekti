@@ -25,6 +25,7 @@ import com.vaadin.ui.MenuBar.MenuItem;
  *
  */
 public interface IMenuLayout {
+	public void removeMenuBar();
 	public MenuItem getMenuItem(String name);
 	public MenuItem addMenuItem(String caption, Command command);
 	public MenuItem addMenuItem(String caption, MenuItem menuItem, Command command);
@@ -39,4 +40,5 @@ public interface IMenuLayout {
 	public int getSize();
 	public User getUser();
 	public void setUser(User user);
+	public void addListenerUserChange(IUserChangeListener listener);
 }

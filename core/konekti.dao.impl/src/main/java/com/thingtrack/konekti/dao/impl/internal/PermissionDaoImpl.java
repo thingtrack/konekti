@@ -13,11 +13,16 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.PermissionDao;
 import com.thingtrack.konekti.domain.Permission;
+import com.thingtrack.konekti.domain.Role;
 
 /**
  * @author Thingtrack S.L.
@@ -35,4 +40,16 @@ public class PermissionDaoImpl extends JpaDao<Permission, Integer> implements Pe
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Permission> getAllByRole(Role role) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p WHERE :role NOT MEMBER OF p.roles");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("role", role);
+		
+		return query.getResultList();
+	}
+	
 }

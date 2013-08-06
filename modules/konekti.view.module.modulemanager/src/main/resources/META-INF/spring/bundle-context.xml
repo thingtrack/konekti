@@ -14,8 +14,8 @@
 
 
 	<!-- Configurator Component -->
-	<bean id="configuratorComponent"
-		class="com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratorComponent"
+	<bean id="configuratorViewContainer"
+		class="com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratorViewContainer"
 		lazy-init="true" scope="prototype" />
 
 	<!-- Configurator Module -->

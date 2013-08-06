@@ -90,32 +90,6 @@ public class KonektiLayout extends CustomComponent {
 	public KonektiLayout() {
 		this(null);
 		
-		/*buildMainLayout();
-		setCompositionRoot(mainLayout);
-
-		// TODO add user code here
-		headerLayout.setStyleName("headerLayout");
-		toolbarLayout.setStyleName(ToolbarLayout.TOOLBAR_LAYOUT_STYLE);
-		menuLayout.setStyleName("menuLayout");
-		workbenchLayout.setStyleName("workbenchLayout");
-		footerLayout.setStyleName("footerLayout");
-		
-		//Notifications initialization
-		notifications = new Notifique(true);
-		notifications.setWidth("100%");
-		
-		notifications.setClickListener(new ClickListener() {
-			
-			@Override
-			public void messageClicked(Message message) {
-				message.hide();
-			}
-		});
-		
-		this.setImmediate(true);
-		menuLayout.setImmediate(true);
-		
-		headerLayout.setVisible(false);*/
 	}
 		
 	public KonektiLayout(ConfigurationService configurationService) {
@@ -145,7 +119,7 @@ public class KonektiLayout extends CustomComponent {
 			}
 		});
 		
-		this.setImmediate(true);
+		setImmediate(true);
 		menuLayout.setImmediate(true);
 		
 		headerLayout.setVisible(false);
@@ -223,6 +197,11 @@ public class KonektiLayout extends CustomComponent {
 	
 	public void removeModule(String id) {
 		workbenchLayout.removeModule(id);
+		
+	}
+	
+	public void removeModules(LOCATION location) {
+		workbenchLayout.removeModules(location);
 		
 	}
 	

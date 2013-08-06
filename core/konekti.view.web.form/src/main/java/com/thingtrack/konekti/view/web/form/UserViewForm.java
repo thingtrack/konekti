@@ -59,12 +59,12 @@ public class UserViewForm extends CustomComponent {
 		// common part: create layout
 		mainLayout = new AbsoluteLayout();
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("580px");
+		mainLayout.setWidth("700px");
 		mainLayout.setHeight("440px");
 		mainLayout.setMargin(true);
 		
 		// top-level component properties
-		setWidth("580px");
+		setWidth("700px");
 		setHeight("440px");
 		
 		// activeField

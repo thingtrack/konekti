@@ -202,6 +202,9 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 		else
 			cellSelected = "";
 				
+		if (bindingSource == null)
+			return;
+		
 		bindingSource.setItemId(this, true, event.getItemId());
 		
 		if (event.getItemId() != null && event.isDoubleClick()) {

@@ -215,7 +215,7 @@ public class OrganizationView extends AbstractView
 		organizationalChart.setHeight("100.0%");
 		
 		organizationalChart.setOption("size", "large");				
-		organizationalChart.setOption("allowCollapse", false);	
+		organizationalChart.setOption("allowCollapse", false);
 		
 		organizationalChart.add(organization.getName(), "", organization.getSocialAddress().getStreet());
 		

@@ -17,9 +17,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
+import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.dao.api.RoleDao;
 import com.thingtrack.konekti.service.api.RoleService;
+import com.thingtrack.konekti.service.api.SequenceService;
 
 /**
  * @author Thingtrack S.L.
@@ -29,6 +32,9 @@ public class RoleServiceImpl implements RoleService {
 	@Autowired
 	private RoleDao roleDao;
 
+	@Autowired
+	private SequenceService sequenceService;
+	
 	@Override
 	public List<Role> getAll() throws Exception {
 		return this.roleDao.getAll();
@@ -59,4 +65,21 @@ public class RoleServiceImpl implements RoleService {
 		
 	}
 
+	@Override
+	public Role createNewEntity(Area area) throws Exception {
+		Role role = new Role();
+		
+		role.setCode(sequenceService.setNextSequence(Sequence.CODE.ROLE.name()));
+		role.setArea(area);
+		role.setActive(true);
+		
+		return role;
+	}
+	
+	@Override
+	public List<Role> getAll(Area area) throws Exception {
+		return this.roleDao.getAll(area);
+		
+	}
+		
 }

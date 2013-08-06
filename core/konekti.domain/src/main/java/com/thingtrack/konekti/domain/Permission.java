@@ -26,6 +26,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -56,6 +57,10 @@ public class Permission implements Serializable {
 	@ManyToMany(mappedBy="permissions", cascade=CascadeType.PERSIST)
 	private List<Role> roles = new ArrayList<Role>();
 
+	@ManyToOne
+	@JoinColumn(name="COMMAND_RESOURCE_ID", nullable=false)
+	private MenuCommandResource menuCommandResource;
+	
 	@Column(name="COMMENT", length=512)
 	private String comment;
 	
@@ -207,5 +212,19 @@ public class Permission implements Serializable {
 				+ ", description=" + description + ", actions=" + actions
 				+ ", roles=" + roles + ", comment=" + comment + ", active="
 				+ active + "]";
+	}
+
+	/**
+	 * @return the command
+	 */
+	public MenuCommandResource getMenuCommandResource() {
+		return menuCommandResource;
+	}
+
+	/**
+	 * @param command the command to set
+	 */
+	public void setMenuCommandResource(MenuCommandResource menuCommandResource) {		
+		this.menuCommandResource = menuCommandResource;
 	}	
 }

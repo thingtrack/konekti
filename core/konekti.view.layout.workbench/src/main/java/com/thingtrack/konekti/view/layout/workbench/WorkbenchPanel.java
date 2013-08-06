@@ -41,7 +41,7 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 	private IModuleCloseListener moduleCloselistener = null;
 	private IModuleChangeListener moduleChangelistener = null;
 	
-	private LOCATION locationLayout;
+	private LOCATION location;
 	
 	private Hashtable<String, IViewContainer> modules;
 	
@@ -57,12 +57,12 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 				
 	}
 
-	public WorkbenchPanel(LOCATION locationLayout) {
+	public WorkbenchPanel(LOCATION location) {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		this.locationLayout = locationLayout;
+		this.location = location;
 		
 		// default hide tabs
 		tabSheetModule.hideTabs(true);
@@ -123,14 +123,14 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 	}
 	
 	@Override
-	public void setLocationLayout(LOCATION locationLayout) {
-		this.locationLayout = locationLayout;
+	public void setLocationLayout(LOCATION location) {
+		this.location = location;
 		
 	}
 
 	@Override
 	public LOCATION getLocationLayout() {
-		return this.locationLayout;
+		return this.location;
 		
 	}
 
@@ -165,6 +165,12 @@ public class WorkbenchPanel extends CustomComponent implements IWorkbenchPanel {
 		
 		// remove module from the list
 		modules.remove(id);
+		
+	}
+	
+	@Override
+	public void removeModules(LOCATION location) {
+		tabSheetModule.removeAllComponents();
 		
 	}
 	

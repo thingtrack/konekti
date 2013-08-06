@@ -65,7 +65,8 @@
 	<bean id="invoiceStatusService" class="com.thingtrack.konekti.service.impl.internal.InvoiceStatusServiceImpl"/>
 	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>	
 	<bean id="jobService" class="com.thingtrack.konekti.service.impl.internal.JobServiceImpl"/>
-	<bean id="jobTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.JobTriggerTypeServiceImpl"/>					
+	<bean id="jobTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.JobTriggerTypeServiceImpl"/>
+	<bean id="knowledgeService" class="com.thingtrack.konekti.service.impl.internal.KnowledgeServiceImpl"/>					
 	<bean id="locationService" class="com.thingtrack.konekti.service.impl.internal.LocationServiceImpl"/>					 					
 	<bean id="locationTypeService" class="com.thingtrack.konekti.service.impl.internal.LocationTypeServiceImpl"/>
 	<bean id="menuFolderResourceService" class="com.thingtrack.konekti.service.impl.internal.MenuFolderResourceServiceImpl"/>
@@ -87,7 +88,6 @@
 	<bean id="productService" class="com.thingtrack.konekti.service.impl.internal.ProductServiceImpl"/>
 	<bean id="productTypeService" class="com.thingtrack.konekti.service.impl.internal.ProductTypeServiceImpl"/>
 	<bean id="productUnitService" class="com.thingtrack.konekti.service.impl.internal.ProductUnitServiceImpl"/>	
-	<bean id="resourceService" class="com.thingtrack.konekti.service.impl.internal.ResourceServiceImpl"/>
 	<bean id="reportService" class="com.thingtrack.konekti.service.impl.internal.ReportServiceImpl"/>
 	<bean id="roleService" class="com.thingtrack.konekti.service.impl.internal.RoleServiceImpl"/>
 	<bean id="sequenceService" class="com.thingtrack.konekti.service.impl.internal.SequenceServiceImpl"/>

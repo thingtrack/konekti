@@ -32,7 +32,10 @@ public class ReportModule extends AbstractModule implements BeanFactoryAware {
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("reportViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(ReportModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("reportViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

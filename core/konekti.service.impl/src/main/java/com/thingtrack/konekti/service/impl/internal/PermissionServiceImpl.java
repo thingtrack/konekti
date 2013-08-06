@@ -18,8 +18,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Permission;
+import com.thingtrack.konekti.domain.Role;
+import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.dao.api.PermissionDao;
 import com.thingtrack.konekti.service.api.PermissionService;
+import com.thingtrack.konekti.service.api.SequenceService;
 
 /**
  * @author Thingtrack S.L.
@@ -29,6 +32,9 @@ public class PermissionServiceImpl implements PermissionService {
 	@Autowired
 	private PermissionDao permissionDao;
 
+	@Autowired
+	private SequenceService sequenceService;
+	
 	@Override
 	public List<Permission> getAll() throws Exception {
 		return this.permissionDao.getAll();
@@ -59,4 +65,19 @@ public class PermissionServiceImpl implements PermissionService {
 		
 	}
 
+	@Override
+	public Permission createNewEntity() throws Exception {
+		Permission permission = new Permission();
+		
+		permission.setCode(sequenceService.setNextSequence(Sequence.CODE.PERMISSION.name()));
+		permission.setActive(true);
+		
+		return permission;
+	}
+	
+	@Override
+	public List<Permission> getAllByRole(Role role) throws Exception {
+		return this.permissionDao.getAllByRole(role);
+		
+	}
 }

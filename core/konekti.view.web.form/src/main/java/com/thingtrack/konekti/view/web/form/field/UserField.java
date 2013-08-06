@@ -46,10 +46,14 @@ public class UserField extends CustomField {
 	private TextField usernameField;
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
+
+	
+
+	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 	
 	private static final int TAB_USER_ORGANIZATION = 3;
 	private static final int TAB_USER_APPLICATION = 4;
-	private static final int TAB_USER_ROL = 5;	
+	private static final int TAB_USER_ROLE = 5;	
 	
 	private TabSheet tabSheet;
 	
@@ -61,6 +65,7 @@ public class UserField extends CustomField {
 	
 	private UserOrganizationCollectionField userOrganizationCollectionField;
 	private UserApplicationCollectionField userApplicationCollectionField;
+	private UserRoleCollectionField userRoleCollectionField;
 	
 	public UserField() {		
 		buildMainLayout();
@@ -128,10 +133,11 @@ public class UserField extends CustomField {
 												
 				userOrganizationCollectionField.setValue(user);
 				userApplicationCollectionField.setValue(user);
+				userRoleCollectionField.setValue(user);
 				
 				tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(true);
 				tabSheet.getTab(TAB_USER_APPLICATION).setVisible(true);
-				tabSheet.getTab(TAB_USER_ROL).setVisible(true);
+				tabSheet.getTab(TAB_USER_ROLE).setVisible(true);
 			}
 		});
 	
@@ -175,7 +181,7 @@ public class UserField extends CustomField {
 				
 				tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(false);
 				tabSheet.getTab(TAB_USER_APPLICATION).setVisible(false);
-				tabSheet.getTab(TAB_USER_ROL).setVisible(false);
+				tabSheet.getTab(TAB_USER_ROLE).setVisible(false);
 				
 			}
 		});
@@ -191,7 +197,11 @@ public class UserField extends CustomField {
 
 		Tab userApplication = tabSheet.getTab(TAB_USER_APPLICATION);
 		VerticalLayout userApplicationLayout = (VerticalLayout)userApplication.getComponent();
-		userApplicationCollectionField = (UserApplicationCollectionField) userApplicationLayout.getComponent(0);		
+		userApplicationCollectionField = (UserApplicationCollectionField) userApplicationLayout.getComponent(0);
+		
+		Tab userRole = tabSheet.getTab(TAB_USER_ROLE);
+		VerticalLayout userRoleLayout = (VerticalLayout)userRole.getComponent();
+		userRoleCollectionField = (UserRoleCollectionField) userRoleLayout.getComponent(0);	
 	}
 	
 	public void setAgent(Agent agent) {
@@ -215,16 +225,17 @@ public class UserField extends CustomField {
 			
 			userOrganizationCollectionField.setValue(user);
 			userApplicationCollectionField.setValue(user);
+			userRoleCollectionField.setValue(user);
 			
 			tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(true);
 			tabSheet.getTab(TAB_USER_APPLICATION).setVisible(true);
-			tabSheet.getTab(TAB_USER_ROL).setVisible(true);
+			tabSheet.getTab(TAB_USER_ROLE).setVisible(true);
 			
 		}
 		else {
 			tabSheet.getTab(TAB_USER_ORGANIZATION).setVisible(false);
 			tabSheet.getTab(TAB_USER_APPLICATION).setVisible(false);
-			tabSheet.getTab(TAB_USER_ROL).setVisible(false);
+			tabSheet.getTab(TAB_USER_ROLE).setVisible(false);
 		}
 		
 		super.setPropertyDataSource(newDataSource);

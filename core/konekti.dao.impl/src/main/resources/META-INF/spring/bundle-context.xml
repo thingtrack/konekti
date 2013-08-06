@@ -67,7 +67,8 @@
 	<bean id="invoiceStatusDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceStatusDaoImpl" />		
 	<bean id="invoiceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceTypeDaoImpl" />
 	<bean id="jobDao" class="com.thingtrack.konekti.dao.impl.internal.JobDaoImpl" />
-	<bean id="jobTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobTriggerTypeDaoImpl" />		
+	<bean id="jobTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobTriggerTypeDaoImpl" />
+	<bean id="knowledgeDao" class="com.thingtrack.konekti.dao.impl.internal.KnowledgeDaoImpl" />
 	<bean id="locationDao" class="com.thingtrack.konekti.dao.impl.internal.LocationDaoImpl" />
 	<bean id="locationTypeDao" class="com.thingtrack.konekti.dao.impl.internal.LocationTypeDaoImpl" />	
 	<bean id="offerDao" class="com.thingtrack.konekti.dao.impl.internal.OfferDaoImpl" />
@@ -89,7 +90,6 @@
 	<bean id="productDao" class="com.thingtrack.konekti.dao.impl.internal.ProductDaoImpl" />	
 	<bean id="productTypeDao" class="com.thingtrack.konekti.dao.impl.internal.ProductTypeDaoImpl" />	
 	<bean id="productUnitDao" class="com.thingtrack.konekti.dao.impl.internal.ProductUnitDaoImpl" />
-	<bean id="resourceDao" class="com.thingtrack.konekti.dao.impl.internal.ResourceDaoImpl" />
 	<bean id="reportDao" class="com.thingtrack.konekti.dao.impl.internal.ReportDaoImpl" />
 	<bean id="roleDao" class="com.thingtrack.konekti.dao.impl.internal.RoleDaoImpl" />
 	<bean id="sequenceDao" class="com.thingtrack.konekti.dao.impl.internal.SequenceDaoImpl"/>

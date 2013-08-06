@@ -32,7 +32,10 @@ public class OrganizationModule extends AbstractModule implements BeanFactoryAwa
 	@Override
 	public IViewContainer createViewComponent(IWorkbenchContext context) {
 		try {
-			return (IViewContainer) beanFactory.getBean("organizationViewContainer", new Object[] { context });
+			// recover symbolic and version bundle
+			getBundleIdentity(OrganizationModule.class);
+			
+			return (IViewContainer) beanFactory.getBean("organizationViewContainer", new Object[] { context, this });
 		} catch (Exception ex) {
 			ex.getMessage();
 		}

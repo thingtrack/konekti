@@ -15,4 +15,5 @@ public class MenuCommandResourceDaoImpl extends JpaDao<MenuCommandResource, Inte
 		return menuCommandResource;
 		
 	}
+	
 }

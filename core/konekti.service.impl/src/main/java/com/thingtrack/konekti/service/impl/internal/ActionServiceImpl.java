@@ -18,8 +18,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.Action;
+import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.dao.api.ActionDao;
 import com.thingtrack.konekti.service.api.ActionService;
+import com.thingtrack.konekti.service.api.SequenceService;
 
 /**
  * @author Thingtrack S.L.
@@ -29,6 +31,9 @@ public class ActionServiceImpl implements ActionService {
 	@Autowired
 	private ActionDao actionDao;
 
+	@Autowired
+	private SequenceService sequenceService;
+	
 	@Override
 	public List<Action> getAll() throws Exception {
 		return this.actionDao.getAll();
@@ -57,6 +62,16 @@ public class ActionServiceImpl implements ActionService {
 	public void delete(Action action) throws Exception {
 		this.actionDao.delete(action);
 		
+	}
+
+	@Override
+	public Action createNewEntity() throws Exception {
+		Action action = new Action();
+		
+		action.setCode(sequenceService.setNextSequence(Sequence.CODE.ROLE.name()));
+		action.setActive(true);
+		
+		return action;
 	}
 	
 }

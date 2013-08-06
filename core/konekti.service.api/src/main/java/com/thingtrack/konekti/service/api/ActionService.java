@@ -27,4 +27,5 @@ public interface ActionService {
 	public Action getByCode( String code ) throws Exception;
 	public Action save(Action action) throws Exception;
 	public void delete(Action action) throws Exception;
+	public Action createNewEntity() throws Exception;
 }

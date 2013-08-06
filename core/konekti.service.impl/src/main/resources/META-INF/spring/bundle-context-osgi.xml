@@ -43,7 +43,8 @@
        <osgi:reference id="invoiceStatusDao" interface="com.thingtrack.konekti.dao.api.InvoiceStatusDao" />
        <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />       
        <osgi:reference id="jobDao" interface="com.thingtrack.konekti.dao.api.JobDao" />
-       <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />       
+       <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />
+       <osgi:reference id="knowledgeDao" interface="com.thingtrack.konekti.dao.api.KnowledgeDao" />       
        <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
        <osgi:reference id="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao" />
        <osgi:reference id="menuFolderResourceDao" interface="com.thingtrack.konekti.dao.api.MenuFolderResourceDao" />
@@ -65,7 +66,6 @@
        <osgi:reference id="productDao" interface="com.thingtrack.konekti.dao.api.ProductDao" />
        <osgi:reference id="productTypeDao" interface="com.thingtrack.konekti.dao.api.ProductTypeDao" />       
        <osgi:reference id="productUnitDao" interface="com.thingtrack.konekti.dao.api.ProductUnitDao" />
-       <osgi:reference id="resourceDao" interface="com.thingtrack.konekti.dao.api.ResourceDao" />
        <osgi:reference id="reportDao" interface="com.thingtrack.konekti.dao.api.ReportDao" />
        <osgi:reference id="roleDao" interface="com.thingtrack.konekti.dao.api.RoleDao" />
        <osgi:reference id="sequenceDao" interface="com.thingtrack.konekti.dao.api.SequenceDao" />       
@@ -117,7 +117,8 @@
        <osgi:service ref="invoiceStatusService" interface="com.thingtrack.konekti.service.api.InvoiceStatusService" />
        <osgi:service ref="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
        <osgi:service ref="jobService" interface="com.thingtrack.konekti.service.api.JobService" />
-       <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />       
+       <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />
+       <osgi:service ref="knowledgeService" interface="com.thingtrack.konekti.service.api.KnowledgeService" />       
        <osgi:service ref="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
        <osgi:service ref="locationTypeService" interface="com.thingtrack.konekti.service.api.LocationTypeService" />
        <osgi:service ref="menuFolderResourceService" interface="com.thingtrack.konekti.service.api.MenuFolderResourceService" />
@@ -139,7 +140,6 @@
        <osgi:service ref="productService" interface="com.thingtrack.konekti.service.api.ProductService" />
        <osgi:service ref="productTypeService" interface="com.thingtrack.konekti.service.api.ProductTypeService" />       
        <osgi:service ref="productUnitService" interface="com.thingtrack.konekti.service.api.ProductUnitService" />
-       <osgi:service ref="resourceService" interface="com.thingtrack.konekti.service.api.ResourceService" />
        <osgi:service ref="reportService" interface="com.thingtrack.konekti.service.api.ReportService" />
        <osgi:service ref="roleService" interface="com.thingtrack.konekti.service.api.RoleService" />
        <osgi:service ref="sequenceService" interface="com.thingtrack.konekti.service.api.SequenceService" />       
