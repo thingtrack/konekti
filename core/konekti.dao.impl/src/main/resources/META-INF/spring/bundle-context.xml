@@ -17,16 +17,16 @@
        for integration testing outside of an OSGi environment -->
        		 
     <!-- Activate EHCache Spring annotations in Dao Layer -->       		    	
-	<ehcache:annotation-driven cache-manager="cacheManager"/>
+<!-- 	<ehcache:annotation-driven cache-manager="cacheManager"/> -->
 		
 	<!-- Define Cache Manager -->
-    <ehcache:config cache-manager="cacheManager">
-        <ehcache:evict-expired-elements interval="60" />
-    </ehcache:config>
+<!--     <ehcache:config cache-manager="cacheManager"> -->
+<!--         <ehcache:evict-expired-elements interval="60" /> -->
+<!--     </ehcache:config> -->
         
-    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
-    	<property name="configLocation"  value="META-INF/ehcache.xml"/>
- 	</bean> 
+<!--     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"> -->
+<!--     	<property name="configLocation"  value="META-INF/ehcache.xml"/> -->
+<!--  	</bean>  -->
  
  	<!-- Activate JPA annotations in Dao Layer -->
 	<context:annotation-config/>
