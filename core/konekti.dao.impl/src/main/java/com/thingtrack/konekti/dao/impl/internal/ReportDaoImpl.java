@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.api.ReportDao;
 import com.thingtrack.konekti.dao.template.JpaDao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Report;
 import com.thingtrack.konekti.domain.User;
 
@@ -19,12 +20,20 @@ import com.thingtrack.konekti.domain.User;
 @Repository
 public class ReportDaoImpl extends JpaDao<Report, Integer> implements ReportDao {
 	@Override
-	public Report getByCode(String code) throws Exception {
-		Report report = (Report)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
-				.setParameter("code", code).getSingleResult();
+	public Report getByCode(Organization organization, String code) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code");
+				
+		if (organization != null)
+			queryString.append(" AND p.organization = :organization");
+		
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("code", code);
+				
+		if (organization != null)
+			query.setParameter("organization", organization);
 
-		return report;
+		return (Report)query.getSingleResult();
 	}
 		
 	@SuppressWarnings("unchecked")

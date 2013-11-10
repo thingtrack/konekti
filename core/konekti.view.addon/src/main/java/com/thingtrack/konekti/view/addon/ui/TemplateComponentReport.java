@@ -41,6 +41,8 @@ import ar.com.fdvs.dj.domain.builders.DynamicReportBuilder;
 import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
 
+import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.report.ReportManagerService;
 
 import com.vaadin.Application;
@@ -232,8 +234,8 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 		return Math.round(f / 25.4f * 72); // 1in = 25.4mm = 72pt
 	}
 	
-	public void executeReport(String templateCode, Map<String,Object> parameters) throws Exception {
-		this.jasperPrint = reportManagerService.executeReport(templateCode, parameters);		
+	public void executeReport(Organization organization, String templateCode, Map<String,Object> parameters) throws Exception {
+		this.jasperPrint = reportManagerService.executeReport(organization, templateCode, parameters);		
 		
 	}
 	
