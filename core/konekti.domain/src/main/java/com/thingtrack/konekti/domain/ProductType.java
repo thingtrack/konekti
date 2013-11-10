@@ -21,12 +21,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * @author Thingtrack S.L.
  *
  */
 @SuppressWarnings("serial")
+@XmlRootElement
 @Entity
 @Table(name="PRODUCT_TYPE")
 public class ProductType implements Serializable {
@@ -44,6 +48,7 @@ public class ProductType implements Serializable {
 	/**
 	 * @param productTypeId the productTypeId to set
 	 */
+	@XmlAttribute
 	public void setProductTypeId(Integer productTypeId) {
 		this.productTypeId = productTypeId;
 	}
@@ -58,6 +63,7 @@ public class ProductType implements Serializable {
 	/**
 	 * @param code the code to set
 	 */
+	@XmlElement
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -72,6 +78,7 @@ public class ProductType implements Serializable {
 	/**
 	 * @param description the description to set
 	 */
+	@XmlElement
 	public void setDescription(String description) {
 		this.description = description;
 	}

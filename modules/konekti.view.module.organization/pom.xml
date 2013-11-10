@@ -9,7 +9,7 @@
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
 	<artifactId>konekti.view.module.organization</artifactId>
-	<name>konekti.view.web.organization</name>
+	<name>konekti.view.module.organization</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
 
 	<dependencies>
 		<dependency>
-		   <groupId>com.lexaden.components</groupId>
+		   <groupId>com.lexaden.components.local</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
 		</dependency>
@@ -77,4 +77,13 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 	</build>
 
 	<description>Konekti View Module Organization</description>
+	
+	<repositories>
+		<!-- In-Project Repository -->
+		<repository>
+			<id>project.local</id>
+			<name>project</name>
+			<url>file://${project.basedir}/repo</url>
+		</repository>
+	</repositories>
 </project>

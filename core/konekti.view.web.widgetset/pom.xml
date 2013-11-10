@@ -118,8 +118,8 @@ Export-Package: VAADIN.themes.konekti,
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.googlecode.gwtquery.plugins</groupId>
-			<artifactId>easingext</artifactId>
+			<groupId>com.googlecode.gwtquery</groupId>
+			<artifactId>gwtquery-easingext</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
@@ -306,8 +306,8 @@ Export-Package: VAADIN.themes.konekti,
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.google.gwt.google-apis</groupId>
-			<artifactId>gwt-visualization</artifactId>
+			<groupId>com.googlecode.gwt-google-apis</groupId>
+			<artifactId>gwt-visualizations</artifactId>
 			<version>1.1.2</version>
 			<scope>provided</scope>
 		</dependency>            		
@@ -318,7 +318,7 @@ Export-Package: VAADIN.themes.konekti,
 		   <scope>provided</scope>
 		</dependency>		
 		<dependency>
-		   <groupId>com.lexaden.components</groupId>
+		   <groupId>com.lexaden.components.local</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
 		   <scope>provided</scope>

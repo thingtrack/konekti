@@ -70,7 +70,7 @@ Excluded-Imports:
  com.thingtrack.konekti.service.impl.internal,
  com.thingtrack.bustrack.domain
 Import-Library: 
- org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+ org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE]"
 ]]>
 					</manifestTemplate>
 				</configuration>
