@@ -11,6 +11,8 @@ import ar.com.fdvs.dj.domain.builders.StyleBuilder;
 import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 
+import com.thingtrack.konekti.domain.Organization;
+import com.thingtrack.konekti.domain.User;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -91,9 +93,9 @@ public class PrintViewForm extends Window {
 		
 	}
 	
-	public void generateTemplateReport(String code, Map<String,Object> parameters) throws Exception {
+	public void generateTemplateReport(Organization organization, String code, Map<String,Object> parameters) throws Exception {
 		TemplateComponentReport templateComponentReport = new TemplateComponentReport();  	
-    	templateComponentReport.executeReport(code, parameters);
+    	templateComponentReport.executeReport(organization, code, parameters);
     	
     	mainLayout.addComponent(templateComponentReport);
 	}

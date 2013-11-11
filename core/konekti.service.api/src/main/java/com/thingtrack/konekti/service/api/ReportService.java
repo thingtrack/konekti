@@ -10,7 +10,7 @@ import com.thingtrack.konekti.domain.User;
 public interface ReportService {
 	public List<Report> getAll() throws Exception;
 	public Report get( Integer reportId ) throws Exception;
-	public Report getByCode( String code ) throws Exception;
+	public Report getByCode(Organization organization, String code ) throws Exception;
 	public Report save(Report report) throws Exception;
 	public void delete(Report report) throws Exception;
 	public List<Report> getAll(User user) throws Exception;

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Report;
 import com.thingtrack.konekti.domain.User;
 
@@ -12,7 +13,7 @@ import com.thingtrack.konekti.domain.User;
  *
  */
 public interface ReportDao extends Dao<Report, Integer> {
-	public Report getByCode (String code ) throws Exception;
+	public Report getByCode (Organization organization, String code ) throws Exception;
 	public List<Report> getAll(User user) throws Exception;
 	public Connection getConnection() throws Exception;
 }
