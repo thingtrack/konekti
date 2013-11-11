@@ -20,6 +20,7 @@
 		<gwt.plugin.version>2.2.0</gwt.plugin.version>
 		<slf4j.version>1.5.0</slf4j.version>
 		<spring.maven.artifact.version>3.0.5.RELEASE</spring.maven.artifact.version>
+		<apache.batik.version>1.6</apache.batik.version>
 	</properties>
 
 	<!-- ================================================ -->
@@ -151,7 +152,87 @@
 			<artifactId>konekti.view.web.form</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
+		
+		<!-- Apache Batik SVG Toolkit dependencies -->
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-transcoder</artifactId>
+			<version>1.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-dom</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-bridge</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-gvt</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-svg-dom</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-util</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-css</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-ext</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-script</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-xml</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-awt-util</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>batik</groupId>
+			<artifactId>batik-parser</artifactId>
+			<version>${apache.batik.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.bluestemsoftware.open.maven.tparty</groupId>
+			<artifactId>xerces-impl</artifactId>
+			<version>2.9.0</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 	<!-- ================================================ -->
@@ -202,6 +283,9 @@ Import-Package: org.eclipse.virgo.web.dm,
  javax.persistence.metamodel,
  net.sf.jasperreports.j2ee.servlets,
  net.sf.jasperreports.extensions, 
+ org.apache.batik.transcoder,
+ org.apache.xerces.parsers,
+ org.apache.xerces.jaxp,
  VAADIN.themes.konekti;version="[0.0,1)",
  VAADIN.widgetsets.com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet;version="[0.0,1)"
 Web-ContextPath: konekti.view.web.workbench
