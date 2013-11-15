@@ -27,6 +27,9 @@ public class AlarmPortlet extends KonektiPortlet {
 		
 		// initialize datasource views
 		initView();
+		
+		setCollapsible(dgAlarm, false);
+		setClosable(dgAlarm, false);
 	}
 	
 	private void initView() {
@@ -38,10 +41,8 @@ public class AlarmPortlet extends KonektiPortlet {
 		// STEP 01: create grid view for slide Organization View
 		try {
 			dgAlarm.setBindingSource(bsAlarm);
-			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmType.description", 
-					                                 "message",	"alarmDate", "alarmStatus.description" });
-			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo",  "Tipo", "Mensaje",
-													"Fecha Alarma", "Estado" });
+			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmType.description", "message",	"alarmDate", "alarmStatus.description" });
+			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo",  "Tipo", "Mensaje", "Fecha Alarma", "Estado" });
 
 		} catch (Exception ex) {
 			ex.getMessage();

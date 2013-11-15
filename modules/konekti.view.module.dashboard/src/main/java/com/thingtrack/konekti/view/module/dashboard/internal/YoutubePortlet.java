@@ -13,6 +13,7 @@ public class YoutubePortlet extends KonektiPortlet {
 	private Table tableTest;
 	private Embedded thkYoutube;
 	private IWorkbenchContext context;
+	private Panel pnYoutube;
 	
 	public YoutubePortlet(IWorkbenchContext context, KonektiPortal konektiPortal) {
 		konektiPortal.super();
@@ -20,6 +21,9 @@ public class YoutubePortlet extends KonektiPortlet {
 		this.context = context;
 		
 		buildMainLayout();
+		
+		setCollapsible(pnYoutube, false);
+		setClosable(pnYoutube, false);
 	}
 	
 	@Override
@@ -29,15 +33,8 @@ public class YoutubePortlet extends KonektiPortlet {
     };
     
     private void buildMainLayout() {
-		// common part: create layout
-    	/*tableTest = new Table();
-    	tableTest.setImmediate(false);
-    	tableTest.setWidth("100%");
-    	tableTest.setHeight("100%");
-		
-    	tableTest.setCaption("Portlet Statistical");*/
-    		
-    	Panel pnYoutube = new Panel();
+		// common part: create layout    		
+    	pnYoutube = new Panel();
     	pnYoutube.setWidth("100%");
     	pnYoutube.setHeight("100%");
     	
