@@ -22,6 +22,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
 public class ProductSelectorField extends CustomField {
@@ -138,9 +139,22 @@ public class ProductSelectorField extends CustomField {
 		
 		productField.addListener(new ValueChangeListener() {	
 			@Override
-			public void valueChange(Property.ValueChangeEvent event) {
-				fireValueChange(false);
-				
+			public void valueChange(Property.ValueChangeEvent event) {				
+				String productCode = event.getProperty().getValue().toString();
+		    	
+		    	if (productCode != null && !productCode.isEmpty()) {
+					try {
+						product = productService.getByCode(productCode);
+					} catch (Exception e) {						
+						getWindow().showNotification("El producto no existe", "", Window.Notification.TYPE_WARNING_MESSAGE);
+						
+						productField.setValue("");
+						productField.focus();
+
+					}
+		    	}
+		    	
+				fireValueChange(true);
 			}
 		});
 		
@@ -240,7 +254,7 @@ public class ProductSelectorField extends CustomField {
 		
 		// holeField
 		productField = new TextField();
-		productField.setImmediate(false);
+		productField.setImmediate(true);
 		productField.setWidth("150px");
 		productField.setHeight("-1px");
 		mainLayout.addComponent(productField);
