@@ -29,7 +29,7 @@ public class Report implements Serializable {
 	@JoinColumn(name="ORGANIZATION_ID")	
 	private Organization organization;
 	
-	@Column(name="CODE", unique=true, nullable=false, length=64)
+	@Column(name="CODE", nullable=false, length=64)
 	private String code;
 	
 	@Column(name="DESCRIPTION", length=512)

@@ -27,6 +27,9 @@ public class CalculatorPortlet extends KonektiPortlet implements ClickListener {
 		konektiPortal.super();
 		
 		buildMainLayout();
+		
+		setCollapsible(layout, false);
+		setClosable(layout, false);
 	}
 	
 	@Override

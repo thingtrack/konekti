@@ -31,8 +31,8 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
-	public Report getByCode(String code) throws Exception {
-		return this.reportDao.getByCode(code);
+	public Report getByCode(Organization organization, String code) throws Exception {
+		return this.reportDao.getByCode(organization, code);
 	}
 
 	@Override

@@ -145,7 +145,7 @@ public class ReportView extends AbstractView implements
 		addToolbar(navigationToolbar);
 		addToolbar(editionToolbar);
 		addToolbar(boxToolbar);
-		addToolbar(reportToolbar);
+		//addToolbar(reportToolbar);
 		
 	}
 
@@ -326,7 +326,7 @@ public class ReportView extends AbstractView implements
 			//reportManagerService.exportReportToPdfFile(editingReport.getCode(), null, "/home/thk01/temp/" + editingReport.getCode() + ".pdf");
 			
 			PrintViewForm printViewForm = new PrintViewForm();
-			printViewForm.generateTemplateReport(editingReport.getCode(), null);
+			printViewForm.generateTemplateReport(context.getUser().getActiveOrganization(), editingReport.getCode(), null);
 			
 			getWindow().addWindow(printViewForm);
 			

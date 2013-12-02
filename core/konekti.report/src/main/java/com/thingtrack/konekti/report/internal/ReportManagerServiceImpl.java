@@ -18,6 +18,7 @@ import net.sf.jasperreports.j2ee.servlets.ImageServlet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Report;
 import com.thingtrack.konekti.report.ReportManagerService;
 import com.thingtrack.konekti.service.api.ReportService;
@@ -31,9 +32,9 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	private ReportService reportService;
 	
 	@Override
-	public JasperPrint executeReport(String code, Map<String,Object> parameters) throws Exception {
+	public JasperPrint executeReport(Organization organization, String code, Map<String,Object> parameters) throws Exception {
 		// get  report to execute
-		Report report = reportService.getByCode(code);
+		Report report = reportService.getByCode(organization, code);
 		
 		if (report == null)
 			throw new Exception("The Report with code " + code + " not exist!");
@@ -51,9 +52,9 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	}
 	
 	@Override
-	public void exportReportToPdfFile(String code, Map<String,Object> parameters, String destinationFile) throws Exception {
+	public void exportReportToPdfFile(Organization organization, String code, Map<String,Object> parameters, String destinationFile) throws Exception {
 		// get  report to execute
-		Report report = reportService.getByCode(code);
+		Report report = reportService.getByCode(organization, code);
 		
 		if (report == null)
 			throw new Exception("The Report with code " + code + " not exist!");
@@ -70,9 +71,9 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	}
 	
 	@Override
-	public void exportReportToXmlFile(String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception {
+	public void exportReportToXmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception {
 		// get  report to execute
-		Report report = reportService.getByCode(code);
+		Report report = reportService.getByCode(organization, code);
 		
 		if (report == null)
 			throw new Exception("The Report with code " + code + " not exist!");
@@ -89,9 +90,9 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	}
 	
 	@Override
-	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, String code, Map<String,Object> parameters, String destFileName) throws Exception {		
+	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {		
 		// get  report to execute
-		Report report = reportService.getByCode(code);
+		Report report = reportService.getByCode(organization, code);
 		
 		if (report == null)
 			throw new Exception("The Report with code " + code + " not exist!");
@@ -130,9 +131,9 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	}
 	
 	@Override
-	public void exportReportToHtmlFile(String code, Map<String,Object> parameters, String destFileName) throws Exception {
+	public void exportReportToHtmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {
 		// get  report to execute
-		Report report = reportService.getByCode(code);
+		Report report = reportService.getByCode(organization, code);
 		
 		if (report == null)
 			throw new Exception("The Report with code " + code + " not exist!");
