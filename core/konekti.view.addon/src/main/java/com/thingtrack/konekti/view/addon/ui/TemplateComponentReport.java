@@ -42,7 +42,6 @@ import ar.com.fdvs.dj.domain.entities.columns.AbstractColumn;
 import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
 
 import com.thingtrack.konekti.report.ReportManagerService;
-
 import com.vaadin.Application;
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.UserError;
@@ -233,7 +232,7 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 	}
 	
 	public void executeReport(String templateCode, Map<String,Object> parameters) throws Exception {
-		this.jasperPrint = reportManagerService.executeReport(templateCode, parameters);		
+		this.jasperPrint = reportManagerService.executeReport(user templateCode, parameters);		
 		
 	}
 	
