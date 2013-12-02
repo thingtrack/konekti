@@ -232,7 +232,7 @@ public class TemplateComponentReport extends CustomComponent implements ClickLis
 	}
 	
 	public void executeReport(String templateCode, Map<String,Object> parameters) throws Exception {
-		this.jasperPrint = reportManagerService.executeReport(user templateCode, parameters);		
+		this.jasperPrint = reportManagerService.executeReport(templateCode, parameters);		
 		
 	}
 	
