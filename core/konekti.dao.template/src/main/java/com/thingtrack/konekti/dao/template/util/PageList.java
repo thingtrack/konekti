@@ -13,6 +13,7 @@ public class PageList<X> {
 		super();
 		
 		this.pageSize = pageSize;
+		this.pageIndex = pageIndex;
 		this.pages = pages;
 		this.entities = entities;
 	}

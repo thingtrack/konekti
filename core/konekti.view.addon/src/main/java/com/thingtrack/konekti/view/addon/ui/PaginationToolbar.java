@@ -2,6 +2,7 @@ package com.thingtrack.konekti.view.addon.ui;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.ext.TreeLogger.Type;
 import com.thingtrack.konekti.dao.template.util.PageList;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.data.BindingSource.IndexChangeEvent;
@@ -43,16 +44,15 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 	public static final String PAGE_SIZE_50 = "50";
 	public static final String PAGE_SIZE_100 = "100";
 	
-	private int position;
-	private int pageIndex;
-	private int previousIndex;
-	private int pageTotal;
+	
+	
 	private List<PaginationChangeListener> listeners = new ArrayList<PaginationChangeListener>();
 	private PageList<T> pageList;
 	
 	public void setPageList(PageList<T> pageList){
-		this.pageList = pageList;
 		
+		this.pageList = pageList;
+		pageInputTextField.setValue(pageList.getPageIndex()+1);
 		totalPageLabel.setValue("de " + pageList.getPages());
 		
 		getBindingSource().removeAllItems();
@@ -93,12 +93,10 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			
 			@Override
 			public void valueChange(ValueChangeEvent event) {
-				
+				int pageSize = Integer.parseInt((String) event.getProperty().getValue());
 				for(PaginationChangeListener listener : listeners){
-					int pageSize = (Integer) event.getProperty().getValue();
-					listener.onPageChange(new PaginationChangeEvent(pageSize, previousIndex, pageIndex));
-				}
-				
+					listener.onPageChange(new PaginationChangeEvent(pageSize, 0, 0));
+				}				
 			}
 		});
 		
@@ -107,9 +105,19 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				
+				if(pageList == null)
+					return;
+				
+				int newPageIndex;
+				if(String.class.isInstance(event.getProperty().getValue()))
+					 newPageIndex = Integer.parseInt((String)event.getProperty().getValue());
+				else newPageIndex = (Integer) event.getProperty().getValue();
+				
+				if(!(newPageIndex > 0 &&  newPageIndex <= pageList.getPages()))
+					return;
+				
 				for(PaginationChangeListener listener : listeners){
-					int newPageIndex = (Integer) event.getProperty().getValue();
-					listener.onPageChange(new PaginationChangeEvent(pageList.getPages(), pageList.getPageIndex(), newPageIndex));
+					listener.onPageChange(new PaginationChangeEvent(pageList.getPageSize(), pageList.getPageIndex(), newPageIndex-1));
 				}
 				
 			}
@@ -119,8 +127,12 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
+				
+				if(pageList == null)
+					return;
+				
 				for(PaginationChangeListener listener : listeners){
-					listener.onPageChange(new PaginationChangeEvent(pageList.getPages(), pageList.getPageIndex(), 0));
+					listener.onPageChange(new PaginationChangeEvent(pageList.getPageSize(), pageList.getPageIndex(), 0));
 				}
 			}
 		});
@@ -129,8 +141,14 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
+				
+				if(pageList == null)
+					return;
+				
+				int pageIndex = pageList.getPageIndex() == 0 ? 0 : pageList.getPageIndex() - 1 ;
+				
 				for(PaginationChangeListener listener : listeners){
-					listener.onPageChange(new PaginationChangeEvent(pageList.getPages(), pageList.getPageIndex(), pageList.getPageIndex()-1));
+					listener.onPageChange(new PaginationChangeEvent(pageList.getPageSize(), pageList.getPageIndex(), pageIndex));
 				}
 			}
 		});
@@ -139,8 +157,14 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
+				
+				if(pageList == null)
+					return;
+				
+				int pageIndex = pageList.getPageIndex() == pageList.getPages() - 1 ? pageList.getPages() - 1 : pageList.getPageIndex() + 1;
+				
 				for(PaginationChangeListener listener : listeners){
-					listener.onPageChange(new PaginationChangeEvent(pageList.getPages(), pageList.getPageIndex(), pageList.getPageIndex()+1));
+					listener.onPageChange(new PaginationChangeEvent(pageList.getPageSize(), pageList.getPageIndex(), pageIndex));
 				}
 			}
 		});
@@ -150,8 +174,12 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
+				
+				if(pageList == null)
+					return;
+				
 				for(PaginationChangeListener listener : listeners){
-					listener.onPageChange(new PaginationChangeEvent(pageList.getPages(), pageList.getPageIndex(), pageList.getPages()-1));
+					listener.onPageChange(new PaginationChangeEvent(pageList.getPageSize(), pageList.getPageIndex(), pageList.getPages()-1));
 				}
 			}
 		});		
@@ -162,13 +190,7 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 		// common part: create layout
 		mainLayout = new HorizontalLayout();
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("100%");
-		mainLayout.setHeight("-1px");
-		mainLayout.setMargin(false);
-		
-		// top-level component properties
-		setWidth("100.0%");
-		setHeight("-1px");
+		mainLayout.setSpacing(true);
 		
 		// pagesizeCombox
 		pageSizeCombox = new ComboBox();
