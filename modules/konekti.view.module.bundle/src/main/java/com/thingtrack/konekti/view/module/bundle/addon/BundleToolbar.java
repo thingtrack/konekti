@@ -300,4 +300,10 @@ public class BundleToolbar extends AbstractToolbar {
 		
 		return toolbarLayout;
 	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
 }

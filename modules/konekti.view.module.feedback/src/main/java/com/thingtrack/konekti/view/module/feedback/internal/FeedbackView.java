@@ -229,4 +229,10 @@ public class FeedbackView extends AbstractView implements
 		
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

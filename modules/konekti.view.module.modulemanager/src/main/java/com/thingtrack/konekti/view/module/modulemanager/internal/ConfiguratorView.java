@@ -223,4 +223,10 @@ public class ConfiguratorView extends AbstractView implements MenuResourceListen
 
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

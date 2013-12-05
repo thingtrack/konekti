@@ -22,5 +22,6 @@ import com.thingtrack.konekti.domain.ProductType;
  */
 public interface ProductTypeDao extends Dao<ProductType, Integer> {
 	public ProductType getByCode(String code) throws Exception;
+	public ProductType getByDescription(String description) throws Exception;
 
 }

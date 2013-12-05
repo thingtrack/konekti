@@ -360,4 +360,10 @@ public class ReportView extends AbstractView implements
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

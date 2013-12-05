@@ -30,7 +30,7 @@ public class LocaleField  extends CustomField {
 		// construct custom datasource for combobox
 		// id: language + LOCALE_SEPARATOR + country: es_ES
 		// display: fraindly locale string
-		for (int i = 0; i< locales.length; i++) {
+		/*for (int i = 0; i< locales.length; i++) {
 			if (locales[i].getCountry() != "" && locales[i].getLanguage() != "") {
 				String localeCode =  locales[i].getLanguage() + LOCALE_SEPARATOR + locales[i].getCountry();
 				
@@ -38,8 +38,16 @@ public class LocaleField  extends CustomField {
 				defaultLocaleField.addItem(localeCode);
 				defaultLocaleField.setItemCaption(localeCode, locales[i].getDisplayName());
 			}
-		}
+		}*/
 		
+   		// construct custom datasource for combobox
+		defaultLocaleField.addItem("es-ES");
+		defaultLocaleField.setItemCaption("es-ES", "Español");
+		defaultLocaleField.addItem("en-US");
+		defaultLocaleField.setItemCaption("en-US", "English");
+		//defaultLocaleField.addItem("zh-CN");
+		//defaultLocaleField.setItemCaption("zh-CN", "简体中文");
+    	
 		defaultLocaleField.addListener(new Property.ValueChangeListener() {
 			public void valueChange(Property.ValueChangeEvent event) {
 	            // Get the selected item

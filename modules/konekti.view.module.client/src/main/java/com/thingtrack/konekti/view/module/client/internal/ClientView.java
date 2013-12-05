@@ -121,8 +121,8 @@ public class ClientView extends AbstractView implements
 		try {
 			dgClient.setBindingSource(bsClient);
 			dgClient.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
-			dgClient.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "clientType.description", "clientGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
-			dgClient.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });				
+			dgClient.setVisibleColumns(new String[] { "agentId", "code", "name", "description", "vat", "comment", "clientType.description", "clientGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
+			dgClient.setColumnHeaders(new String[] { "Id", "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });				
 			dgClient.setEditable(true);
 			dgClient.setTableFieldFactory(new TableFieldFactory() {
 				@Override
@@ -138,7 +138,7 @@ public class ClientView extends AbstractView implements
 				}
 			});
 
-			dgClient.setColumnCollapsed("code", true);
+			dgClient.setColumnCollapsed("agentId", true);
 			dgClient.setColumnCollapsed(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, true);
 		} catch (Exception ex) {
 			ex.getMessage();
@@ -444,6 +444,12 @@ public class ClientView extends AbstractView implements
 		} catch (IOException e) {
 			throw new RuntimeException("¡No se pudo importar el fichero!", e);
 		}
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

@@ -757,4 +757,10 @@ public class OrganizationView extends AbstractView
 		return horizontalSplitPanelOrganization;
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

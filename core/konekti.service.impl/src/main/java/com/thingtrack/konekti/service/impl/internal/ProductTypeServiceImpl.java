@@ -48,6 +48,11 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 	}
 
 	@Override
+	public ProductType getByDescription(String description) throws Exception {
+		return this.productTypeDao.getByDescription(description);
+	}
+	
+	@Override
 	public ProductType save(ProductType productType) throws Exception {
 		return this.productTypeDao.save(productType);
 		

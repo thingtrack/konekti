@@ -1,8 +1,10 @@
 package com.thingtrack.konekti.view.module.product.internal;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +15,15 @@ import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Row;
 import org.vaadin.dialogs.ConfirmDialog;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Product;
+import com.thingtrack.konekti.domain.ProductType;
+import com.thingtrack.konekti.domain.ProductUnit;
+import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService;
 import com.thingtrack.konekti.service.api.ProductService;
 import com.thingtrack.konekti.service.api.ProductTypeService;
+import com.thingtrack.konekti.service.api.ProductUnitService;
 import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
@@ -64,6 +71,7 @@ public class ProductView extends AbstractView
 
 	private ProductService productService;
 	private ProductTypeService productTypeService;
+	private ProductUnitService productUnitService;
 	private SupplierService supplierService;
 	private ProductKnowledgeService productKnowledgeService;
 	
@@ -96,6 +104,7 @@ public class ProductView extends AbstractView
 		
 		this.productService = ProductViewContainer.getProductService();
 		this.productTypeService = ProductViewContainer.getProductTypeService();
+		this.productUnitService = ProductViewContainer.getProductUnitService();
 	    this.supplierService = ProductViewContainer.getSupplierService();
 	    this.productKnowledgeService = ProductViewContainer.getProductKnowledgeService();
 	    
@@ -370,7 +379,7 @@ public class ProductView extends AbstractView
 		}
 		
 	}
-
+	
 	@Override
 	public void importButtonClick(BoxToolbar.ClickNavigationEvent event) {
 		List<Product> products = new ArrayList<Product>();
@@ -379,7 +388,7 @@ public class ProductView extends AbstractView
 			return;
 		
 		InputStream file = new ByteArrayInputStream(event.getFile());
-		
+				
 		// Load XLS file
 		POIFSFileSystem fs;
 		try {
@@ -417,6 +426,12 @@ public class ProductView extends AbstractView
 		} catch (IOException e) {
 			throw new RuntimeException("¡No se pudo importar el fichero!", e);
 		}
+		
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
 		
 	} 
 }

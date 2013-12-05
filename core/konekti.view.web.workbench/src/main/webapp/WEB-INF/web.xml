@@ -88,13 +88,13 @@
 	</servlet-mapping>
 	
 	<!-- This servlet will generate dynamic map markers by configurating parameters passed to it -->
-	<servlet>
-		<servlet-name>marker-generator</servlet-name>
-		<servlet-class>com.thingtrack.konekti.view.web.workbench.servlet.MarkerGeneratorServlet</servlet-class>		
-	</servlet>
+<!-- 	<servlet> -->
+<!-- 		<servlet-name>marker-generator</servlet-name> -->
+<!-- 		<servlet-class>com.thingtrack.konekti.view.web.workbench.servlet.MarkerGeneratorServlet</servlet-class>		 -->
+<!-- 	</servlet> -->
 	
-	<servlet-mapping>
-		<servlet-name>marker-generator</servlet-name>
-		<url-pattern>/marker</url-pattern>
-	</servlet-mapping>  	
+<!-- 	<servlet-mapping> -->
+<!-- 		<servlet-name>marker-generator</servlet-name> -->
+<!-- 		<url-pattern>/marker</url-pattern> -->
+<!-- 	</servlet-mapping>  	 -->
 </web-app>

@@ -123,8 +123,8 @@ public class SupplierView extends AbstractView implements
 			dgSupplier.setBindingSource(bsSupplier);
 			dgSupplier.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
 			
-			dgSupplier.setVisibleColumns(new String[] { "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
-			dgSupplier.setColumnHeaders(new String[] { "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });		
+			dgSupplier.setVisibleColumns(new String[] { "agentId", "code", "name", "description", "vat", "comment", "supplierType.description", "supplierGroup.description", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, "active" });
+			dgSupplier.setColumnHeaders(new String[] { "Id", "Código", "Nombre", "Descripción", "VAT", "Comentarios", "Tipo", "Grupo", "Dirección", "Activo" });		
 			dgSupplier.setEditable(true);
 			dgSupplier.setTableFieldFactory(new TableFieldFactory() {
 				@Override
@@ -140,7 +140,7 @@ public class SupplierView extends AbstractView implements
 				}
 			});
 
-			dgSupplier.setColumnCollapsed("code", true);
+			dgSupplier.setColumnCollapsed("agentId", true);
 			dgSupplier.setColumnCollapsed(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, true);
 		} catch (Exception ex) {
 			ex.getMessage();
@@ -440,6 +440,12 @@ public class SupplierView extends AbstractView implements
 		} catch (IOException e) {
 			throw new RuntimeException("¡No se pudo importar el fichero!", e);
 		}
+		
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
 		
 	}
 

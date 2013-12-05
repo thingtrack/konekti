@@ -195,4 +195,10 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

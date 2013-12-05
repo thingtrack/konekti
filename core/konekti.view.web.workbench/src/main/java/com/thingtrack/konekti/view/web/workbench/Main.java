@@ -28,9 +28,15 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 import org.dellroad.stuff.vaadin.SpringContextApplication;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.wiring.BundleWiring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 
+import com.github.peholmst.i18n4vaadin.I18N;
+import com.github.peholmst.i18n4vaadin.ResourceBundleI18N;
 import com.thingtrack.konekti.domain.Action;
 import com.thingtrack.konekti.domain.Configuration;
 import com.thingtrack.konekti.domain.MenuCommandResource;
@@ -75,7 +81,6 @@ import com.vaadin.ui.Window;
  * The Application's "main" class
  */
 @SuppressWarnings("serial")
-
 public class Main extends SpringContextApplication implements IMetadataModuleServiceListener, IViewChangeListener, IUserChangeListener {
 	private final static Logger logger = Logger.getLogger(SpringContextApplication.class.getName());
     
@@ -106,7 +111,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	@Autowired
 	private KonektiLayout konektiLayout;
 
-	private Window window;
+	private MainWindow window;
 	
 	private SliderView sliderView;
 
@@ -121,15 +126,18 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private static int DEFAULT_MENU_ID = 0;
 	private MenuItem headMenuItem;
 	
+	private I18N i18n;
+	
 	@Override
-	protected void initSpringApplication(ConfigurableWebApplicationContext arg0) {
+	protected void initSpringApplication(ConfigurableWebApplicationContext context) {
 		// set konekti theme
 		setTheme("konekti");
-
+						
 		// get global konekti configuration
 		getConfiguration();
 		
-		window = new Window(name);
+		// set main Window
+		window = new MainWindow(name, configureI18n());
 		
 		window.setStyleName("background");
 		setMainWindow(window);
@@ -151,7 +159,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		// add user change listener
 		konektiLayout.getMenuLayout().addListenerUserChange(this);
 		
-		// jira issue collector button
+		// set jira issue collector button
 		if (jira) {
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("jQuery.ajax({");
@@ -164,7 +172,29 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		}
 					
 	}
+	
+	private I18N configureI18n() {				
+		// default locales
+		Locale esLocale = new Locale("es");
+		Locale enLocale = new Locale("en");
+		Locale zhLocale = new Locale("zh");
+		
+		i18n = new ResourceBundleI18N("com/thingtrack/konekti/view/web/i18n/messages", getBundleClassLoader(), esLocale, enLocale, zhLocale);
+		i18n.setCurrentLocale(esLocale);
+				
+		return i18n;
+	}
 
+	private ClassLoader getBundleClassLoader() {
+		BundleContext bundleContext = FrameworkUtil.getBundle(Main.class).getBundleContext();
+		
+		Bundle bundle = bundleContext.getBundle();
+		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+		ClassLoader classLoader = bundleWiring.getClassLoader();
+		
+		return classLoader;
+	}
+	
 	private void getConfiguration() {
 		Configuration configuration = null;
 		try {
@@ -506,13 +536,17 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		String language = localeParams[0];
 		String country = localeParams[1];
 		
-		defaultLocale = new Locale(language, country);
+		//defaultLocale = new Locale(language, country);
+		defaultLocale = new Locale(language);
 		
 		// initialize active Organization tree
 		user.setActiveOrganization(user.getDefaultOrganization());
 		user.setActiveLocation(user.getDefaultLocation());
 		user.setActiveArea(user.getDefaultArea());
 		user.setActiveLocale(defaultLocale);
+		
+		// set user Locale		
+		i18n.setCurrentLocale(defaultLocale);		
 		
 		workbenchContext = new WorkbenchContext(
 				user,	
@@ -562,6 +596,16 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		
 		// regenerate all items
 		initMenuManager(user);
+				
+		// create locale for employee agent
+		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
+					
+		String language = localeParams[0];
+		String country = localeParams[1];
+				
+		Locale defaultLocale = new Locale(language);
+		
+		i18n.setCurrentLocale(defaultLocale);
 		
 	}
 }

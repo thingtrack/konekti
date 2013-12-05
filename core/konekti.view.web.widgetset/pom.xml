@@ -40,7 +40,8 @@ Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Fragment-Host: com.vaadin
-Export-Package: VAADIN.themes.konekti,
+Export-Package: com.thingtrack.konekti.view.web.i18n,
+ VAADIN.themes.konekti,
  VAADIN.widgetsets.com.thingtrack.konekti.view.web.widgetset.gwt.KonektiWidgetSet
 ]]>
 					</manifestTemplate>
@@ -318,10 +319,9 @@ Export-Package: VAADIN.themes.konekti,
 		   <scope>provided</scope>
 		</dependency>		
 		<dependency>
-		   <groupId>com.lexaden.components.local</groupId>
+		   <groupId>com.lexaden.components</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
-		   <scope>provided</scope>
 		</dependency>
 		<dependency>
 		   <groupId>org.vaadin.addons</groupId>

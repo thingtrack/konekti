@@ -528,4 +528,10 @@ public class CaptureView extends AbstractView  implements ClickDownButtonListene
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

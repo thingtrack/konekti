@@ -900,5 +900,11 @@ public class CalendarCardView extends AbstractView implements ClickRefreshButton
 		});
 				
 		return addServiceGroupLayout;
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
 	}	
 }

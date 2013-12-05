@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService;
 import com.thingtrack.konekti.service.api.ProductService;
 import com.thingtrack.konekti.service.api.ProductTypeService;
+import com.thingtrack.konekti.service.api.ProductUnitService;
 import com.thingtrack.konekti.service.api.SupplierService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -36,6 +37,8 @@ public class ProductViewContainer extends AbstractViewContainer {
 	@Autowired
 	private ProductTypeService productTypeService;
 	@Autowired
+	private ProductUnitService productUnitService;
+	@Autowired
 	private SupplierService supplierService;
 	@Autowired
 	private ProductKnowledgeService productKnowledgeService;
@@ -45,6 +48,7 @@ public class ProductViewContainer extends AbstractViewContainer {
 	// Thread Local Bundle Business Services
 	private static ThreadLocal<ProductService> threadProductService= new ThreadLocal<ProductService>();
 	private static ThreadLocal<ProductTypeService> threadProductTypeService = new ThreadLocal<ProductTypeService>();
+	private static ThreadLocal<ProductUnitService> threadProductUnitService = new ThreadLocal<ProductUnitService>();
 	private static ThreadLocal<SupplierService> threadSupplierService = new ThreadLocal<SupplierService>();
 	private static ThreadLocal<ProductKnowledgeService> threadProductKnowledgeService = new ThreadLocal<ProductKnowledgeService>();
 	
@@ -74,6 +78,7 @@ public class ProductViewContainer extends AbstractViewContainer {
 		threadProductTypeService.set(productTypeService);
 		threadSupplierService.set(supplierService);
 		threadProductKnowledgeService.set(productKnowledgeService);
+		threadProductUnitService.set(productUnitService);
 		
 		// add all views controlled by SliderView Component
 		productView = new ProductView(context, this);
@@ -89,6 +94,7 @@ public class ProductViewContainer extends AbstractViewContainer {
 		threadProductTypeService.set(null);
 		threadSupplierService.set(null);
 		threadProductKnowledgeService.set(null);
+		threadProductUnitService.set(null);
 	}
 	
     public static ProductService getProductService() {
@@ -98,6 +104,11 @@ public class ProductViewContainer extends AbstractViewContainer {
     
     public static ProductTypeService getProductTypeService() {
         return threadProductTypeService.get();
+        
+    }
+    
+    public static ProductUnitService getProductUnitService() {
+        return threadProductUnitService.get();
         
     }
     

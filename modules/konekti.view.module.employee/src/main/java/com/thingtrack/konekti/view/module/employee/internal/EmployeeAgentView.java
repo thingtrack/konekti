@@ -115,9 +115,10 @@ public class EmployeeAgentView extends AbstractView
 			dgEmployeeAgent.addGeneratedColumn(UserNameColumn.USER_NAME_COLUMN_ID, new UserNameColumn());
 			dgEmployeeAgent.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
 			
-			dgEmployeeAgent.setVisibleColumns(new String[] { "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
-			dgEmployeeAgent.setColumnHeaders(new String[] { "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
-						
+			dgEmployeeAgent.setVisibleColumns(new String[] { "agentId", "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
+			dgEmployeeAgent.setColumnHeaders(new String[] { "Id", "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
+			
+			dgEmployeeAgent.setColumnCollapsed("agentId", true);
 			dgEmployeeAgent.setColumnCollapsed("tittle", true);
 			dgEmployeeAgent.setColumnCollapsed("shortname", true);
 			dgEmployeeAgent.setColumnCollapsed("fax", true);
@@ -481,6 +482,12 @@ public class EmployeeAgentView extends AbstractView
 		} catch (IOException e) {
 			throw new RuntimeException("¡No se pudo importar el fichero!", e);
 		}
+		
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
 		
 	}
 	
