@@ -344,10 +344,10 @@ public class BoxToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		btnPrint.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnPrint"));
-		btnFilter.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnFilter"));
-		btnAttach.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnAttach"));
-		btnImport.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnImport"));
+		btnPrint.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnPrint.description"));
+		btnFilter.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnFilter.description"));
+		btnAttach.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnAttach.description"));
+		btnImport.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.BoxToolbar.btnImport.description"));
 		
 	}
 

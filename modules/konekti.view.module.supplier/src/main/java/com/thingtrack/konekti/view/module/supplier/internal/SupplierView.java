@@ -445,7 +445,16 @@ public class SupplierView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgSupplier.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.supplierId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.code"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.name"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.vat"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.comment"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.clientType"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.clientGroup"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.address"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.active")});
 		
 	}
 

@@ -487,7 +487,25 @@ public class EmployeeAgentView extends AbstractView
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgEmployeeAgent.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.employeeAgentId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.workNumber"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.tittle"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.type"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.shortName"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.name"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.surname"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.email"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.phone"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.mobile"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.workMobile"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.fax"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.vat"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.facebook"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.comment"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.seniority"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.address"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.user"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.EmployeeAgentView.dgEmployeeAgent.column.status")});
 		
 	}
 	

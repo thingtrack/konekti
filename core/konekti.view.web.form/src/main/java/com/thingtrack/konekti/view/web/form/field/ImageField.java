@@ -13,8 +13,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-import org.vaadin.addon.customfield.CustomField;
-
+import com.thingtrack.konekti.view.addon.ui.AbstractField;
 import com.vaadin.Application;
 import com.vaadin.data.Property;
 import com.vaadin.terminal.FileResource;
@@ -35,7 +34,7 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window.Notification;
 
 @SuppressWarnings("serial")
-public class ImageField extends CustomField {
+public class ImageField extends AbstractField {
 	private VerticalLayout mainLayout;
 	private Upload uploadImage;
 	private HorizontalLayout hlImage;
@@ -252,5 +251,12 @@ public class ImageField extends CustomField {
 		super.attach();
 		
 		application = getApplication();
+	}
+
+	@Override
+	protected void updateLabels() {
+		uploadImage.setButtonCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.ImageField.uploadImage.caption"));
+		btnClearImage.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.ImageField.btnClearImage.description"));
+		
 	}
 }

@@ -447,8 +447,17 @@ public class ClientView extends AbstractView implements
 	}
 
 	@Override
-	protected void updateLabels() {
-		// TODO Auto-generated method stub
+	protected void updateLabels() {		
+		dgClient.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.clientId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.code"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.name"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.vat"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.comment"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.clientType"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.clientGroup"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.address"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.dgClient.column.active")});
 		
 	}
 	

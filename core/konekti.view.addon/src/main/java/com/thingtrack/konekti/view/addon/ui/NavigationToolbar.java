@@ -551,13 +551,13 @@ public class NavigationToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		btnFirstRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnFirstRegister"));
-		btnNextRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnFirstRegister"));
-		btnPreviousRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnPreviousRegister"));
-		btnLastRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnLastRegister"));
-		btnRefreshRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnRefreshRegister"));
-		btnDownRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnDownRegister"));
-		btnUpRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnUpRegister"));
+		btnFirstRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnFirstRegister.description"));
+		btnNextRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnFirstRegister.description"));
+		btnPreviousRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnPreviousRegister.description"));
+		btnLastRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnLastRegister.description"));
+		btnRefreshRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnRefreshRegister.description"));
+		btnDownRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnDownRegister.description"));
+		btnUpRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.NavigationToolbar.btnUpRegister.description"));
 		
 	}
 

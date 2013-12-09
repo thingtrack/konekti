@@ -287,9 +287,9 @@ public class EditionToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		btnAddRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolba.btnAddRegister"));
-		btnEditRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolba.btnEditRegister"));
-		btnRemoveRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolba.btnRemoveRegister"));
+		btnAddRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolbar.btnAddRegister.description"));
+		btnEditRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolbar.btnEditRegister.description"));
+		btnRemoveRegister.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.addon.ui.EditionToolbar.btnRemoveRegister.description"));
 		
 	}
 

@@ -3,15 +3,14 @@ package com.thingtrack.konekti.view.web.form.field;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.vaadin.addon.customfield.CustomField;
-
+import com.thingtrack.konekti.view.addon.ui.AbstractField;
 import com.vaadin.data.Property;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class LocaleField  extends CustomField {
+public class LocaleField  extends AbstractField {
 	private VerticalLayout mainLayout;
 	private ComboBox defaultLocaleField;
 	
@@ -104,5 +103,11 @@ public class LocaleField  extends CustomField {
 		mainLayout.addComponent(defaultLocaleField);
 		
 		return mainLayout;
+	}
+
+	@Override
+	protected void updateLabels() {
+		defaultLocaleField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.LocaleField.defaultLocaleField.caption"));
+		
 	}
 }
