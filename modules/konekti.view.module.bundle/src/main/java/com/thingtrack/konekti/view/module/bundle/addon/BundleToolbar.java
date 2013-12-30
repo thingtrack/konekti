@@ -303,7 +303,11 @@ public class BundleToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
-		
+		btnStartBundle.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnStartBundle.caption"));
+		btnStartBundle.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnStartBundle.description"));
+		btnStopBundle.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnStopBundle.caption"));
+		btnStopBundle.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnStopBundle.description"));
+		btnOpenBundle.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnOpenBundle.caption"));
+		btnOpenBundle.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.addon.BundleToolbar.btnOpenBundle.description"));
 	}
 }

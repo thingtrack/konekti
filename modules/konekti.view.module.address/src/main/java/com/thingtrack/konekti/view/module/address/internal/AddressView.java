@@ -328,7 +328,17 @@ public class AddressView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgAddress.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.street"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.number"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.letter"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.city"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.zipCode"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.province"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.country"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.fax"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.email"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.web"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.address.internal.AddressView.dgAddress.column.organizatin.code")});
 		
 	}
 

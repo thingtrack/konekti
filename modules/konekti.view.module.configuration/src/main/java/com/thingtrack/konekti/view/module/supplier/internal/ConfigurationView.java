@@ -358,7 +358,13 @@ public class ConfigurationView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgConfiguration.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.configurationId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.organization.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.tag"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.type"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.value"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.resourceName")});
 		
 	}
 }

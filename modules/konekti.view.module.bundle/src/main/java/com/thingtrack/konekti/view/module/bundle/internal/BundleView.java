@@ -282,7 +282,18 @@ public class BundleView extends AbstractView
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgBundle.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.bundleId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.id"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.symbolicName"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.version"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.url"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.licenseUrl"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.documentation"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.copyright"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.sourceUrl"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.size"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.bundle.internal.BundleView.dgBundle.column.bundleStatus")});
 		
 	}
 

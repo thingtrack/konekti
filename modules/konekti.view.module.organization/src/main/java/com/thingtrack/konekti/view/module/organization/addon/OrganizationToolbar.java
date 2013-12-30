@@ -196,7 +196,10 @@ public class OrganizationToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		btnRefreshOrganization.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.addon.OrganizationToolbar.btnRefreshOrganization.caption"));
+		btnRefreshOrganization.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.addon.OrganizationToolbar.btnRefreshOrganization.description"));
+		btnAddOrganization.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.addon.OrganizationToolbar.btnAddOrganization.caption"));
+		btnAddOrganization.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.addon.OrganizationToolbar.btnAddOrganization.description"));
 		
 	}
 }

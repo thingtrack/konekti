@@ -440,7 +440,23 @@ public class JobView extends AbstractView
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgJob.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.area.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobName"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobGroup"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobTriggerTypeName"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobTriggerPriority"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.startTime"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.endTime"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobInterval"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.repeatCount"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobCalendar"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.future"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.future_time"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.cronExpression"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.lastExecution"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.error"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.active")});
 		
 	}
 

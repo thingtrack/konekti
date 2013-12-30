@@ -253,7 +253,10 @@ public class JobToolbar extends AbstractToolbar {
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		btnStartJob.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.addon.JobToolbar.btnStartJob.caption"));
+		btnStartJob.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.addon.JobToolbar.btnStartJob.description"));
+		btnStopJob.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.addon.JobToolbar.btnStopJob.caption"));
+		btnStopJob.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.addon.JobToolbar.btnStopJob.description"));
 		
 	}
 }

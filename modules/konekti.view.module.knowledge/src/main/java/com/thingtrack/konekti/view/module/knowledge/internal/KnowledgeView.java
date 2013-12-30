@@ -375,7 +375,15 @@ public class KnowledgeView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
+		dgKnowledge.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.knowledgeId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.organization.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.name"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.version"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.packageName"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.error"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.errorMessage"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.dgKnowledge.column.active")});
 		
 	}
 
