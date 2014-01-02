@@ -226,8 +226,8 @@ public class SupplierView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
-					getWindow(), "Nuevo Proveedor", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.add.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.button.right"), DialogResult.CANCEL,
 					new SupplierViewForm(context), supplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
@@ -264,8 +264,8 @@ public class SupplierView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Supplier> windowDialog = new WindowDialog<Supplier>(
-					getWindow(), "Editor Proveedor", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.edit.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.button.right"), DialogResult.CANCEL,
 					new SupplierViewForm(context), editingSupplier,
 					new WindowDialog.CloseWindowDialogListener<Supplier>() {
 						public void windowDialogClose(
@@ -302,8 +302,8 @@ public class SupplierView extends AbstractView implements
 		if (editingSupplier == null)
 			return;
 
-		ConfirmDialog.show(getWindow(), "Borrar Proveedor", "¿Estás seguro?",
-				"Si", "No", new ConfirmDialog.Listener() {
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.remove.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.remove.confirmation"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.windowDialog.remove.confirmation.no"), new ConfirmDialog.Listener() {
 
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
@@ -445,16 +445,16 @@ public class SupplierView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		dgSupplier.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.supplierId"), 
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.code"), 
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.name"), 
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.description"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.vat"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.comment"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.clientType"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.clientGroup"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.address"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.SupplierView.dgSupplier.column.active")});
+		dgSupplier.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.supplierId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.code"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.name"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.vat"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.comment"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.clientType"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.clientGroup"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.address"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.SupplierView.dgSupplier.column.active")});
 		
 	}
 

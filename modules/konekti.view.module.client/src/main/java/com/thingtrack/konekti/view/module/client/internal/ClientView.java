@@ -223,8 +223,8 @@ public class ClientView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
-					getWindow(), "Nuevo Cliente", "Guardar", DialogResult.SAVE,
-					"Cancelar", DialogResult.CANCEL, new ClientViewForm(context), client,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.add.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.button.left"), DialogResult.SAVE,
+							getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.button.right"), DialogResult.CANCEL, new ClientViewForm(context), client,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
 								WindowDialog<Client>.CloseWindowDialogEvent<Client> event) {
@@ -264,8 +264,8 @@ public class ClientView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Client> windowDialog = new WindowDialog<Client>(
-					getWindow(), "Editor Cliente", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.edit.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.button.right"), DialogResult.CANCEL,
 					new ClientViewForm(context), editingClient,
 					new WindowDialog.CloseWindowDialogListener<Client>() {
 						public void windowDialogClose(
@@ -276,8 +276,7 @@ public class ClientView extends AbstractView implements
 							try {
 								Client savingClient = event.getDomainEntity();
 
-								Client savedClient = clientService
-										.save(savingClient);
+								Client savedClient = clientService.save(savingClient);
 
 								refreshDataGridView(savedClient);
 
@@ -306,8 +305,8 @@ public class ClientView extends AbstractView implements
 		if (editingClient == null)
 			return;
 
-		ConfirmDialog.show(getWindow(), "Borrar Cliente", "¿Estás seguro?",
-				"Si", "No", new ConfirmDialog.Listener() {
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.remove.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.remove.confirmation"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.client.internal.ClientView.windowDialog.remove.confirmation.no"), new ConfirmDialog.Listener() {
 
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {

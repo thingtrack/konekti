@@ -13,12 +13,12 @@
 
 	<!-- View Container Manager -->
 	<bean id="configurationViewContainer"
-		class="com.thingtrack.konekti.view.module.supplier.internal.ConfigurationViewContainer"
+		class="com.thingtrack.konekti.view.module.configuration.internal.ConfigurationViewContainer"
 		scope="prototype" />
 
 	<!-- Module Manager -->
 	<bean id="configurationModule"
-		class="com.thingtrack.konekti.view.module.supplier.ConfigurationModule"
+		class="com.thingtrack.konekti.view.module.configuration.ConfigurationModule"
 		scope="bundle" />
 
 </beans>

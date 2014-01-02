@@ -1,4 +1,4 @@
-package com.thingtrack.konekti.view.module.supplier.internal;
+package com.thingtrack.konekti.view.module.configuration.internal;
 
 import org.vaadin.dialogs.ConfirmDialog;
 
@@ -181,8 +181,8 @@ public class ConfigurationView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Configuration> windowDialog = new WindowDialog<Configuration>(
-					getWindow(), "Nuevo Configuración", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.add.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.button.right"), DialogResult.CANCEL,
 					new ConfigurationViewForm(), configuration,
 					new WindowDialog.CloseWindowDialogListener<Configuration>() {
 						public void windowDialogClose(
@@ -220,8 +220,8 @@ public class ConfigurationView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Configuration> windowDialog = new WindowDialog<Configuration>(
-					getWindow(), "Editor Configuración", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.edit.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.button.right"), DialogResult.CANCEL,
 					new ConfigurationViewForm(), editingConfiguration,
 					new WindowDialog.CloseWindowDialogListener<Configuration>() {
 						public void windowDialogClose(
@@ -258,8 +258,8 @@ public class ConfigurationView extends AbstractView implements
 		if (editingConfiguration == null)
 			return;
 
-		ConfirmDialog.show(getWindow(), "Borrar Configuración", "¿Estás seguro?",
-				"Si", "No", new ConfirmDialog.Listener() {
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.remove.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.remove.confirmation"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.windowDialog.remove.confirmation.no"), new ConfirmDialog.Listener() {
 
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
@@ -358,13 +358,13 @@ public class ConfigurationView extends AbstractView implements
 
 	@Override
 	protected void updateLabels() {
-		dgConfiguration.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.configurationId"), 
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.organization.description"), 
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.tag"), 
+		dgConfiguration.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.configurationId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.organization.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.tag"), 
 				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.description"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.type"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.value"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.supplier.internal.ConfigurationView.dgConfiguration.column.resourceName")});
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.type"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.value"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.configuration.internal.ConfigurationView.dgConfiguration.column.resourceName")});
 		
 	}
 }

@@ -207,8 +207,8 @@ public class KnowledgeView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Knowledge> windowDialog = new WindowDialog<Knowledge>(
-					getWindow(), "Nuevo Cliente", "Guardar", DialogResult.SAVE,
-					"Cancelar", DialogResult.CANCEL, new KnowledgeViewForm(), knowledge,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.add.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.button.left"), DialogResult.SAVE,
+					getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.button.right"), DialogResult.CANCEL, new KnowledgeViewForm(), knowledge,
 					new WindowDialog.CloseWindowDialogListener<Knowledge>() {
 						public void windowDialogClose(
 								WindowDialog<Knowledge>.CloseWindowDialogEvent<Knowledge> event) {
@@ -248,8 +248,8 @@ public class KnowledgeView extends AbstractView implements
 		try {
 			@SuppressWarnings("unused")
 			WindowDialog<Knowledge> windowDialog = new WindowDialog<Knowledge>(
-					getWindow(), "Editor Conocimiento", "Guardar",
-					DialogResult.SAVE, "Cancelar", DialogResult.CANCEL,
+					getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.edit.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.button.left"),
+					DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.button.right"), DialogResult.CANCEL,
 					new KnowledgeViewForm(), editingKnowledge,
 					new WindowDialog.CloseWindowDialogListener<Knowledge>() {
 						public void windowDialogClose(
@@ -288,8 +288,8 @@ public class KnowledgeView extends AbstractView implements
 		if (editingKnowledge == null)
 			return;
 
-		ConfirmDialog.show(getWindow(), "Borrar Conocimiento", "¿Estás seguro?",
-				"Si", "No", new ConfirmDialog.Listener() {
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.remove.tittle"), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.remove.confirmation"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.internal.KnowledgeView.windowDialog.remove.confirmation.no"), new ConfirmDialog.Listener() {
 
 					public void onClose(ConfirmDialog dialog) {
 						if (dialog.isConfirmed()) {
