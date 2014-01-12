@@ -35,6 +35,9 @@ public class KnowledgeToolbar extends AbstractToolbar {
 	
 	// navigator button listeners
 	private ClickActiveWorkflowButtonListener listenerActiveWorkflowButton = null;
+	
+	private Knowledge knowledgeSelected;
+	
 	/**
 	 * The constructor should first build the main layout, set the
 	 * composition root and then do any custom initialization.
@@ -142,19 +145,25 @@ public class KnowledgeToolbar extends AbstractToolbar {
 	@Override
 	public void bindingSourceIndexChange(IndexChangeEvent event) {
 		if (bindingSource != null) {
-			Knowledge knowledgeSelected = (Knowledge)event.getRegister();
+			knowledgeSelected = (Knowledge)event.getRegister();
 			
 			if(knowledgeSelected == null)
 				return;
-						
-			if (knowledgeSelected.getActive()) {
-				btnActiveKnowledge.setCaption("Desactivar Workflow");
+					
+			if (getI18N() == null)
+				return;
+			
+			if (knowledgeSelected != null && knowledgeSelected.getActive()) {
+				btnActiveKnowledge.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.unActivateStatus.caption"));
+				btnActiveKnowledge.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.unActivateStatus.description"));
 				btnActiveKnowledge.setIcon(new ThemeResource("../konekti/images/icons/knowledge-toolbar/node-delete-previous.png"));
 			}
 			else { 
-				btnActiveKnowledge.setCaption("Activar Workflow");
+				btnActiveKnowledge.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.activateStatus.caption"));
+				btnActiveKnowledge.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.activateStatus.description"));
 				btnActiveKnowledge.setIcon(new ThemeResource("../konekti/images/icons/knowledge-toolbar/node-insert-previous.png"));
 			}
+			
 		}
 		
 	}
@@ -177,7 +186,7 @@ public class KnowledgeToolbar extends AbstractToolbar {
 		
 		// btnActiveKnowledge
 		btnActiveKnowledge = new Button();
-		btnActiveKnowledge.setCaption("Desactivar Worksflow");
+		btnActiveKnowledge.setCaption("Desactivar Workflow");
 		btnActiveKnowledge.setImmediate(true);
 		btnActiveKnowledge.setWidth("-1px");
 		btnActiveKnowledge.setHeight("-1px");
@@ -186,5 +195,18 @@ public class KnowledgeToolbar extends AbstractToolbar {
 		editionButtonGroup.addButton(btnActiveKnowledge);
 				
 		return toolbarLayout;
+	}
+
+	@Override
+	protected void updateLabels() {
+		if (knowledgeSelected != null && knowledgeSelected.getActive()) {
+			btnActiveKnowledge.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.unActivateStatus.caption"));
+			btnActiveKnowledge.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.unActivateStatus.description"));
+		}
+		else { 
+			btnActiveKnowledge.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.activateStatus.caption"));
+			btnActiveKnowledge.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.module.knowledge.addon.KnowledgeToolbar.btnActiveKnowledge.activateStatus.description"));
+		}
+		
 	}
 }

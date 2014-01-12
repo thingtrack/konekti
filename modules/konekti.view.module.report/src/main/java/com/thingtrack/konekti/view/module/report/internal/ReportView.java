@@ -360,4 +360,14 @@ public class ReportView extends AbstractView implements
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		dgReport.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.report.internal.ReportView.dgReport.column.reportId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.report.internal.ReportView.dgReport.column.organization.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.report.internal.ReportView.dgReport.column.code"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.report.internal.ReportView.dgReport.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.report.internal.ReportView.dgReport.column.active")});
+		
+	}
+
 }

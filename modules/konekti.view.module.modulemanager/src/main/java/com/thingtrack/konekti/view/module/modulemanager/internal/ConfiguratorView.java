@@ -1,20 +1,14 @@
 package com.thingtrack.konekti.view.module.modulemanager.internal;
 
-import javax.annotation.PostConstruct;
-
 import org.vaadin.peter.buttongroup.ButtonGroup;
 
 import com.thingtrack.konekti.service.api.MenuCommandResourceService;
 import com.thingtrack.konekti.service.api.MenuFolderResourceService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
-import com.thingtrack.konekti.view.kernel.IModule;
 import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
-import com.thingtrack.konekti.view.kernel.ui.layout.ISliderView;
 import com.thingtrack.konekti.view.kernel.ui.layout.IToolbar;
-import com.thingtrack.konekti.view.kernel.ui.layout.IView;
-import com.thingtrack.konekti.view.kernel.ui.layout.IViewChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
 import com.thingtrack.konekti.view.module.modulemanager.ConfiguratorModule;
 import com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.MenuResourceListener;
@@ -221,6 +215,11 @@ public class ConfiguratorView extends AbstractView implements MenuResourceListen
 
 		}
 
+	}
+
+	@Override
+	protected void updateLabels() {
+		
 	}
 
 }

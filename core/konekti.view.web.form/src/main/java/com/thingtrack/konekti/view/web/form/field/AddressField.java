@@ -3,7 +3,6 @@ package com.thingtrack.konekti.view.web.form.field;
 import java.io.Serializable;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.vaadin.addon.customfield.CustomField;
 import org.vaadin.addons.locationtextfield.GeocodedLocation;
 import org.vaadin.addons.locationtextfield.GoogleGeocoder;
 import org.vaadin.addons.locationtextfield.LocationTextField;
@@ -17,6 +16,7 @@ import org.vaadin.vol.Popup.PopupStyle;
 
 import com.thingtrack.konekti.domain.Address;
 import com.thingtrack.konekti.service.api.AddressService;
+import com.thingtrack.konekti.view.addon.ui.AbstractField;
 import com.vaadin.data.Property;
 import com.vaadin.event.MouseEvents.ClickEvent;
 import com.vaadin.event.MouseEvents.ClickListener;
@@ -25,7 +25,7 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class AddressField extends CustomField {
+public class AddressField extends AbstractField {
 
 	static final String CLASSNAME = "v-addressfield";
 
@@ -293,5 +293,11 @@ public class AddressField extends CustomField {
 
 		}
 
+	}
+
+	@Override
+	protected void updateLabels() {
+		addressTextField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.AddressField.addressTextField.caption"));
+		
 	}
 }

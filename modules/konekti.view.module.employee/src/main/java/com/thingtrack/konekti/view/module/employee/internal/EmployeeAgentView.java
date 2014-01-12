@@ -115,9 +115,10 @@ public class EmployeeAgentView extends AbstractView
 			dgEmployeeAgent.addGeneratedColumn(UserNameColumn.USER_NAME_COLUMN_ID, new UserNameColumn());
 			dgEmployeeAgent.addGeneratedColumn(AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, new AddressStreetColumn());
 			
-			dgEmployeeAgent.setVisibleColumns(new String[] { "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
-			dgEmployeeAgent.setColumnHeaders(new String[] { "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
-						
+			dgEmployeeAgent.setVisibleColumns(new String[] { "agentId", "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", AddressStreetColumn.ADDRESS_STREET_COLUMN_ID, UserNameColumn.USER_NAME_COLUMN_ID, "employeeAgentStatus.description" } );       
+			dgEmployeeAgent.setColumnHeaders(new String[] { "Id", "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
+			
+			dgEmployeeAgent.setColumnCollapsed("agentId", true);
 			dgEmployeeAgent.setColumnCollapsed("tittle", true);
 			dgEmployeeAgent.setColumnCollapsed("shortname", true);
 			dgEmployeeAgent.setColumnCollapsed("fax", true);
@@ -211,8 +212,8 @@ public class EmployeeAgentView extends AbstractView
 
 		try {
 			@SuppressWarnings("unused")
-			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Nuevo Empleado", 
-					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
+			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.add.tittle"), 
+					getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.button.left"), DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.button.right"), DialogResult.CANCEL, 
 					new EmployeeAgentViewForm(context), employeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
@@ -250,8 +251,8 @@ public class EmployeeAgentView extends AbstractView
 
 		try {
 			@SuppressWarnings("unused")
-			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), "Editor Empleado", 
-					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
+			WindowDialog<EmployeeAgent> windowDialog = new WindowDialog<EmployeeAgent>(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.edit.tittle"), 
+					getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.button.left"), DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.button.right"), DialogResult.CANCEL, 
 					new EmployeeAgentViewForm(context), editingEmployeeAgent, 
 					new WindowDialog.CloseWindowDialogListener<EmployeeAgent>() {
 			    public void windowDialogClose(WindowDialog<EmployeeAgent>.CloseWindowDialogEvent<EmployeeAgent> event) {
@@ -289,8 +290,8 @@ public class EmployeeAgentView extends AbstractView
 		if (editingEmployeeAgent == null)
 			return;
 		
-		ConfirmDialog.show(getWindow(), "Borrar Empleado",
-		        "¿Estás seguro?", "Si", "No",
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.remove.tittle"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.remove.confirmation"), getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.windowDialog.remove.confirmation.no"),
 		        new ConfirmDialog.Listener() {
 
 		            public void onClose(ConfirmDialog dialog) {
@@ -367,24 +368,6 @@ public class EmployeeAgentView extends AbstractView
 		}
 				
 	} 
-	
-//	private class LocationNameColumn implements ColumnGenerator {
-//		static final String LOCATION_NAME_COLUMN_ID = "location_name_column-id";
-//		
-//		@Override
-//		public Object generateCell(CustomTable source, Object itemId, Object columnId) {
-//			
-//			Label locationNameLabel = new Label();
-//			
-//			EmployeeAgent employeeAgent = (EmployeeAgent) itemId;
-//			
-//			if(employeeAgent.getLocation() != null)						
-//				locationNameLabel.setValue(employeeAgent.getLocation().getName());			
-//			
-//			return locationNameLabel;
-//		}
-//				
-//	} 
 	
 	private class AddressStreetColumn implements ColumnGenerator {
 		static final String ADDRESS_STREET_COLUMN_ID = "address_street_column-id";
@@ -481,6 +464,30 @@ public class EmployeeAgentView extends AbstractView
 		} catch (IOException e) {
 			throw new RuntimeException("¡No se pudo importar el fichero!", e);
 		}
+		
+	}
+
+	@Override
+	protected void updateLabels() {
+		dgEmployeeAgent.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.employeeAgentId"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.workNumber"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.tittle"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.type"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.shortName"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.name"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.surname"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.email"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.phone"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.mobile"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.workMobile"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.fax"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.vat"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.facebook"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.comment"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.seniority"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.address"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.user"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.status")});
 		
 	}
 	

@@ -251,4 +251,10 @@ public class SecurityAccessView extends AbstractView {
 
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.thingtrack.konekti.view.module.supplier.internal;
+package com.thingtrack.konekti.view.module.configuration.internal;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

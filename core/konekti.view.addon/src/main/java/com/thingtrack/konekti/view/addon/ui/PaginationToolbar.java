@@ -2,7 +2,6 @@ package com.thingtrack.konekti.view.addon.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.gwt.core.ext.TreeLogger.Type;
 import com.thingtrack.konekti.dao.template.util.PageList;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.data.BindingSource.IndexChangeEvent;
@@ -301,6 +300,12 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 		public int getPage(){
 			return pageIndex;
 		}
+	}
+
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

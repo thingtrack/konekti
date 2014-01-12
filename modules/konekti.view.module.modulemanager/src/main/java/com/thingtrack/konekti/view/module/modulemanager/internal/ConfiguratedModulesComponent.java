@@ -17,6 +17,7 @@ import com.thingtrack.konekti.domain.MenuWorkbench;
 import com.thingtrack.konekti.service.api.MenuCommandResourceService;
 import com.thingtrack.konekti.service.api.MenuFolderResourceService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
+import com.thingtrack.konekti.view.addon.ui.AbstractViewForm;
 import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.MetadataModule;
 import com.thingtrack.konekti.view.module.modulemanager.ConfiguratorModule;
@@ -57,7 +58,7 @@ import com.vaadin.ui.TreeTable;
 import com.vaadin.ui.Window;
 
 @SuppressWarnings("serial")
-public class ConfiguratedModulesComponent extends CustomComponent {
+public class ConfiguratedModulesComponent extends AbstractViewForm {
 
 	// Platform services
 	private IModuleService moduleService;
@@ -176,7 +177,7 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 							metadataModule);
 
 					final Window createMenuCommandPopupWindow = new Window(
-							"A–adir comando");
+							"Aï¿½adir comando");
 					createMenuCommandPopupWindow.center();
 					createMenuCommandPopupWindow.setModal(true);
 					createMenuCommandPopupWindow.setResizable(false);
@@ -481,9 +482,9 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 									menuCommandResource.getModuleId(),
 									menuCommandResource.getModuleVersion()) == null) {
 
-								return "No existe en el servidor un m—dulo con id <b>"
+								return "No existe en el servidor un mï¿½dulo con id <b>"
 										+ menuCommandResource.getModuleId()
-										+ "</b> y versi—n <b>"
+										+ "</b> y versiï¿½n <b>"
 										+ menuCommandResource
 												.getModuleVersion() + "</b>";
 							}
@@ -549,8 +550,8 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 				"hint", "type", "location", "shortCut", BooleanColumnGenerator.AUTOSTART_COLUMN_ID,
 				"moduleId", "moduleVersion", BooleanColumnGenerator.VISIBLE_COLUMN_ID });
 		configuredModuleTreeTable.setColumnHeaders(new String[] { "Nombre",
-				"Descripci—n", "Tipo", "Ubicaci—n", "Atajo", "Auto arranque",
-				"Identificador de m—dulo", "Versi—n modulo", "Visible" });
+				"DescripciÃ³n", "Tipo", "UbicaciÃ³n", "Atajo", "Auto arranque",
+				"Identificador de mÃ³dulo", "VersiÃ³n modulo", "Visible" });
 
 		// Expand all nodes
 		recursiveExpandMenuResources(configuredModuleTreeTable.getItemIds());
@@ -807,7 +808,7 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 					}
 					if ("hint".equals(propertyId)) {
 
-						TextField field = new TextField("Descripci—n");
+						TextField field = new TextField("Descripciï¿½n");
 						field.setNullRepresentation("");
 						field.setWidth("100%");
 						return field;
@@ -833,7 +834,7 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 					}
 					if ("location".equals(propertyId)) {
 
-						final ComboBox combox = new ComboBox("Ubicaci—n");
+						final ComboBox combox = new ComboBox("Ubicaciï¿½n");
 						combox.setNullSelectionAllowed(false);
 						combox.setSizeFull();
 						combox.setImmediate(true);
@@ -983,7 +984,7 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 		@Override
 		public void buttonClick(ClickEvent event) {
 
-			final Window createMenuFolderPopupWindow = new Window("A–adir menu");
+			final Window createMenuFolderPopupWindow = new Window("Aï¿½adir menu");
 			createMenuFolderPopupWindow.center();
 			createMenuFolderPopupWindow.setModal(true);
 			createMenuFolderPopupWindow.setResizable(false);
@@ -1285,24 +1286,19 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 		@Override
 		public Object generateCell(Table source, Object itemId, Object columnId) {
 
-			if (VISIBLE_COLUMN_ID.equals(columnId)
-					&& itemId instanceof MenuResource) {
-
+			if (VISIBLE_COLUMN_ID.equals(columnId)&& itemId instanceof MenuResource) {
 				MenuResource menuResource = (MenuResource) itemId;
 
-				Label label = menuResource.isVisible() ? new Label("S’") : new Label("No");
+				Label label = menuResource.isVisible() ? new Label("Si") : new Label("No");
 
 				return label;
 
 			}
 
-			if (AUTOSTART_COLUMN_ID.equals(columnId)
-					&& itemId instanceof MenuCommandResource) {
-
+			if (AUTOSTART_COLUMN_ID.equals(columnId)&& itemId instanceof MenuCommandResource) {
 				MenuCommandResource menuCommandResource = (MenuCommandResource) itemId;
 
-				Label label = menuCommandResource.isAutostart() ? new Label(
-						"S’") : new Label("No");
+				Label label = menuCommandResource.isAutostart() ? new Label("Si") : new Label("No");
 
 				return label;
 
@@ -1311,5 +1307,19 @@ public class ConfiguratedModulesComponent extends CustomComponent {
 
 		}
 
+	}
+
+	@Override
+	protected void updateLabels() {
+		configuredModuleTreeTable.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.caption"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.organization.hint"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.type"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.location"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.shortCut"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.autostart"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.moduleId"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.moduleVersion"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.ConfiguratedModulesComponent.configuredModuleTreeTable.column.visible")});
+		
 	}
 }

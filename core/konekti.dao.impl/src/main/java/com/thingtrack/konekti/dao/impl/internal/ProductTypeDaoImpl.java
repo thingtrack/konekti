@@ -34,4 +34,12 @@ public class ProductTypeDaoImpl extends JpaDao<ProductType, Integer> implements 
 		return productType;
 	}
 
+	@Override
+	public ProductType getByDescription(String description) throws Exception {
+		ProductType productType = (ProductType)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.description = :description")
+				.setParameter("description", description).getSingleResult();
+
+		return productType;
+	}
 }

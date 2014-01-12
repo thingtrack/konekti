@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thingtrack.konekti.service.api.MenuCommandResourceService;
+import com.thingtrack.konekti.view.addon.ui.AbstractViewForm;
 import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.MetadataModule;
+
 import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.Table.TableDragMode;
 
 @SuppressWarnings("serial")
-public class AvailableModulesComponent extends CustomComponent {
+public class AvailableModulesComponent extends AbstractViewForm {
 
 	// Konekti Platform Services
 	private MenuCommandResourceService menuCommandResourceService;
@@ -42,21 +43,16 @@ public class AvailableModulesComponent extends CustomComponent {
 		availableModuleTable.setDragMode(TableDragMode.ROW);
 	}
 
-	@SuppressWarnings("unused")
-	public void loadData(MenuCommandResourceService menuCommandResourceService,
-			IModuleService moduleService) throws Exception {
-
+	public void loadData(MenuCommandResourceService menuCommandResourceService, IModuleService moduleService) throws Exception {
 		List<MetadataModule> unconfiguredModules = new ArrayList<MetadataModule>();
 
-		List<MetadataModule> availableModules = moduleService
-				.getMetadataModules();
+		List<MetadataModule> availableModules = moduleService.getMetadataModules();
 
 		// Remove all modules are already configured
 		for (MetadataModule metadataModule : availableModules) {
 
 			try {
-				menuCommandResourceService.getById(metadataModule.getId(),
-						metadataModule.getVersion());
+				menuCommandResourceService.getById(metadataModule.getId(), metadataModule.getVersion());
 				continue;
 				
 			} catch (Exception e) {
@@ -65,15 +61,18 @@ public class AvailableModulesComponent extends CustomComponent {
 		}
 
 		// Set the unconfigured modules to the data container and component
-		availableModuleTableContainer = new BeanItemContainer<MetadataModule>(
-				MetadataModule.class, unconfiguredModules);
-		availableModuleTable
-				.setContainerDataSource(availableModuleTableContainer);
+		availableModuleTableContainer = new BeanItemContainer<MetadataModule>(MetadataModule.class, unconfiguredModules);
+		availableModuleTable.setContainerDataSource(availableModuleTableContainer);
 
-		availableModuleTable
-				.setVisibleColumns(new String[] { "id", "version" });
-		availableModuleTable.setColumnHeaders(new String[] { "Identificador",
-				"Versión" });
+		availableModuleTable.setVisibleColumns(new String[] { "id", "version" });
+		availableModuleTable.setColumnHeaders(new String[] { "Identificador", "Versi√≥n" });
+	}
+
+	@Override
+	protected void updateLabels() {
+		availableModuleTable.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.AvailableModulesComponent.availableModuleTable.column.id"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.modulemanager.internal.AvailableModulesComponent.availableModuleTable.column.organization.version")});
+		
 	}
 
 }

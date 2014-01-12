@@ -53,6 +53,13 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>customfield</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.dellroad</groupId>
 			<artifactId>dellroad-stuff-vaadin</artifactId>
 			<version>1.0.284</version>
@@ -86,6 +93,13 @@
 <!-- 			<version>0.9.0</version> -->
 <!-- 		</dependency> -->
 
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>i18n4vaadin</artifactId>
+		   <version>0.9.1</version>
+		   <scope>provided</scope>
+		</dependency>			
+		
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.view.kernel</artifactId>
@@ -155,7 +169,8 @@ Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.aspectj.lang,
  org.aspectj.lang.annotation,
- org.aspectj.runtime.reflect
+ org.aspectj.runtime.reflect,
+ org.vaadin.addon.customfield
 Import-Library: 
  org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
 ]]>

@@ -300,5 +300,20 @@ public class StockView extends AbstractView
 		
 	}
 
+	@Override
+	protected void updateLabels() {
+		dgStock.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.area.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.product.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.quantity"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.productUnit.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.price"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.stockStatus.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.serialNumber"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.lote"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.expeditionDate"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.stock.internal.StockView.dgStock.column.stockDate")});
+		
+	}
+
 
 }

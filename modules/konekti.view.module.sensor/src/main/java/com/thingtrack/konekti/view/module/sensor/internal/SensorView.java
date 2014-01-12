@@ -75,4 +75,10 @@ public class SensorView extends AbstractView {
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

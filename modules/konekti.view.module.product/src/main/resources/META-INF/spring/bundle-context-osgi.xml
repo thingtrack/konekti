@@ -11,7 +11,8 @@
 
 	<osgi:reference id="productService" interface="com.thingtrack.konekti.service.api.ProductService" />
 	<osgi:reference id="productTypeService" interface="com.thingtrack.konekti.service.api.ProductTypeService" />
-	<osgi:reference id="SupplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
+	<osgi:reference id="supplierService" interface="com.thingtrack.konekti.service.api.SupplierService" />
+	<osgi:reference id="productUnitService" interface="com.thingtrack.konekti.service.api.ProductUnitService" />
 	
 	<osgi:reference id="productKnowledgeService" interface="com.thingtrack.konekti.knowledge.service.api.ProductKnowledgeService" />
 	

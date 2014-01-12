@@ -218,8 +218,8 @@ public class JobView extends AbstractView
 		
 		try {
 			@SuppressWarnings("unused")
-			WindowDialog<Job> windowDialog = new WindowDialog<Job>(getWindow(), "Nuevo Job", 
-					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
+			WindowDialog<Job> windowDialog = new WindowDialog<Job>(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.add.tittle"), 
+					getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.button.left"), DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.button.right"), DialogResult.CANCEL, 
 					new JobViewForm(), job, 
 					new WindowDialog.CloseWindowDialogListener<Job>() {
 			    public void windowDialogClose(WindowDialog<Job>.CloseWindowDialogEvent<Job> event) {
@@ -254,8 +254,8 @@ public class JobView extends AbstractView
 		
 		try {
 			@SuppressWarnings("unused")
-			WindowDialog<Job> windowDialog = new WindowDialog<Job>(getWindow(), "Editor Job", 
-					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
+			WindowDialog<Job> windowDialog = new WindowDialog<Job>(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.edit.tittle"), 
+					getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.button.left"), DialogResult.SAVE, getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.button.right"), DialogResult.CANCEL, 
 					new JobViewForm(), editingJob, 
 					new WindowDialog.CloseWindowDialogListener<Job>() {
 			    public void windowDialogClose(WindowDialog<Job>.CloseWindowDialogEvent<Job> event) {
@@ -289,8 +289,8 @@ public class JobView extends AbstractView
 		if (editingJob == null)
 			return;
 		
-		ConfirmDialog.show(getWindow(), "Borrar Job",
-		        "¿Estás seguro?", "Si", "No",
+		ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.remove.tittle"),
+				getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.remove.confirmation"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.windowDialog.remove.confirmation.no"),
 		        new ConfirmDialog.Listener() {
 
 		            public void onClose(ConfirmDialog dialog) {
@@ -436,6 +436,28 @@ public class JobView extends AbstractView
 		mainLayout.setExpandRatio(dgJob, 1.0f);
 		
 		return mainLayout;
+	}
+
+	@Override
+	protected void updateLabels() {
+		dgJob.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.area.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobName"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobGroup"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobTriggerTypeName"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobTriggerPriority"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.startTime"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.endTime"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobInterval"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.repeatCount"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.jobCalendar"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.future"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.future_time"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.cronExpression"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.lastExecution"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.error"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.JobView.dgJob.column.active")});
+		
 	}
 
 }

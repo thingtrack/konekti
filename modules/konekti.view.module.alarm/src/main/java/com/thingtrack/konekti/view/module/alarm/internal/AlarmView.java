@@ -195,4 +195,16 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 		return mainLayout;
 	}
 
+	@Override
+	protected void updateLabels() {
+		dgAlarm.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.area.description"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.alarmGroup"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.alarmName"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.alarmType.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.message"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.alarmStatus.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.dgAlarm.column.alarmDate")});
+		
+	}
+
 }

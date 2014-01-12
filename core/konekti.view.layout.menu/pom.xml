@@ -35,12 +35,26 @@
 		</dependency>
 
 		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>i18n4vaadin</artifactId>
+		   <version>0.9.1</version>
+		   <scope>provided</scope>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.domain</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>	
-		
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+							
 	</dependencies>
 
 

@@ -229,4 +229,15 @@ public class FeedbackView extends AbstractView implements
 		
 	}
 
+	@Override
+	protected void updateLabels() {
+		dgFeedback.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.comment"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.invoice.code"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.client.name"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.feedbackType.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.feedbackStatus.description"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.feedback.internal.FeedbackView.dgFeedback.column.feedbackDate")});
+		
+	}
+
 }

@@ -757,4 +757,19 @@ public class OrganizationView extends AbstractView
 		return horizontalSplitPanelOrganization;
 	}
 
+	@Override
+	protected void updateLabels() {
+		ACTION_EDIT_ORGANIZATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.edit.organization.caption"));
+		ACTION_DELETE_ORGANIZATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.remove.organization.caption"));
+		
+		ACTION_ADD_LOCATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.add.location.caption"));
+		ACTION_EDIT_LOCATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.edit.location.caption"));
+		ACTION_DELETE_LOCATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.remove.location.caption"));
+		
+		ACTION_ADD_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.add.area.caption"));
+		ACTION_EDIT_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.edit.location.caption"));
+		ACTION_DELETE_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.remove.area.caption"));
+		
+	}
+
 }

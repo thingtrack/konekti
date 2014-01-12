@@ -173,6 +173,7 @@ public class MenuLayout extends CustomComponent implements IMenuLayout {
 	@Override
 	public boolean getCollapse() {
 		return menuBarLayout.getCollapse();
+		
 	}
 	
 	@Override

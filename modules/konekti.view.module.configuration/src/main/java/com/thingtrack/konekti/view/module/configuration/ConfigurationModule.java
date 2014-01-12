@@ -1,4 +1,4 @@
-package com.thingtrack.konekti.view.module.supplier;
+package com.thingtrack.konekti.view.module.configuration;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;

@@ -55,8 +55,16 @@
 			<groupId>com.thingtrack</groupId>
 			<artifactId>org.tepi.filtertable</artifactId>
 			<version>0.7.3</version>
+			<scope>provided</scope>
 		</dependency>
 		
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>i18n4vaadin</artifactId>
+		   <version>0.9.1</version>
+		   <scope>provided</scope>
+		</dependency>
+				
 		<!-- Konekti Domain Layer -->
 		<dependency>
 			<groupId>com.thingtrack</groupId>

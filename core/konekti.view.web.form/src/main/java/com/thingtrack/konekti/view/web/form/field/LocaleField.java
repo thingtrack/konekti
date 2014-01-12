@@ -3,15 +3,14 @@ package com.thingtrack.konekti.view.web.form.field;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import org.vaadin.addon.customfield.CustomField;
-
+import com.thingtrack.konekti.view.addon.ui.AbstractField;
 import com.vaadin.data.Property;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-public class LocaleField  extends CustomField {
+public class LocaleField  extends AbstractField {
 	private VerticalLayout mainLayout;
 	private ComboBox defaultLocaleField;
 	
@@ -30,7 +29,7 @@ public class LocaleField  extends CustomField {
 		// construct custom datasource for combobox
 		// id: language + LOCALE_SEPARATOR + country: es_ES
 		// display: fraindly locale string
-		for (int i = 0; i< locales.length; i++) {
+		/*for (int i = 0; i< locales.length; i++) {
 			if (locales[i].getCountry() != "" && locales[i].getLanguage() != "") {
 				String localeCode =  locales[i].getLanguage() + LOCALE_SEPARATOR + locales[i].getCountry();
 				
@@ -38,8 +37,16 @@ public class LocaleField  extends CustomField {
 				defaultLocaleField.addItem(localeCode);
 				defaultLocaleField.setItemCaption(localeCode, locales[i].getDisplayName());
 			}
-		}
+		}*/
 		
+   		// construct custom datasource for combobox
+		defaultLocaleField.addItem("es-ES");
+		defaultLocaleField.setItemCaption("es-ES", "Español");
+		defaultLocaleField.addItem("en-US");
+		defaultLocaleField.setItemCaption("en-US", "English");
+		//defaultLocaleField.addItem("zh-CN");
+		//defaultLocaleField.setItemCaption("zh-CN", "简体中文");
+    	
 		defaultLocaleField.addListener(new Property.ValueChangeListener() {
 			public void valueChange(Property.ValueChangeEvent event) {
 	            // Get the selected item
@@ -96,5 +103,11 @@ public class LocaleField  extends CustomField {
 		mainLayout.addComponent(defaultLocaleField);
 		
 		return mainLayout;
+	}
+
+	@Override
+	protected void updateLabels() {
+		defaultLocaleField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.LocaleField.defaultLocaleField.caption"));
+		
 	}
 }

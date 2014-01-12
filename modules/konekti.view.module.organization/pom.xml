@@ -17,9 +17,10 @@
 
 	<dependencies>
 		<dependency>
-		   <groupId>com.lexaden.components.local</groupId>
+		   <groupId>com.lexaden.components</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
+		   <scope>provided</scope>
 		</dependency>
 		
 		<dependency>
@@ -47,7 +48,7 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.vaadin.ui, org.tepi.filtertable
+Import-Package: com.vaadin.ui, org.tepi.filtertable, com.lexaden.business.chart
 ]]>
 					</manifestTemplate>
 				</configuration>
