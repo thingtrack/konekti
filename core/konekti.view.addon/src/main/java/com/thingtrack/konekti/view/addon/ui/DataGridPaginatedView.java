@@ -99,5 +99,22 @@ public class DataGridPaginatedView<T> extends CustomComponent {
 		
 		return horizontalLayout_1;
 	}
+	
+	
+	public void setImmediate(boolean value){
+		dataGridView_1.setImmediate(value);
+	}
+	
+	public void setSelectable(boolean value){
+		dataGridView_1.setSelectable(value);
+	}
+	
+	public void setMultiSelect(boolean value){
+		dataGridView_1.setMultiSelect(value);
+	}
+	
+	public Object getValue(){
+		return dataGridView_1.getValue();
+	}
 
 }
