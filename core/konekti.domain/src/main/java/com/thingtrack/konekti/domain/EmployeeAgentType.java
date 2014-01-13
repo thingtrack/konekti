@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -25,6 +47,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class,
+ * <p>
+ * Represents employe agent types
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -32,16 +58,24 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="EMPLOYEE_AGENT_TYPE")
 public class EmployeeAgentType implements Serializable {
+	/**
+	 * unique identifier
+	 */
 	@Id
 	@Column(name="EMPLOYEE_AGENT_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer employeeAgentTypeId;
 	
+	/**
+	 * Unique name, not null	 */
 	@Column(name="NAME", nullable=false, unique=true, length=64)
 	@Size(min=1, max=64)
 	@NotNull
 	private String name;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	@Size(min=1, max=512)
 	private String description;

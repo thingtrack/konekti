@@ -319,7 +319,7 @@ Export-Package: com.thingtrack.konekti.view.web.i18n,
 		   <scope>provided</scope>
 		</dependency>		
 		<dependency>
-		   <groupId>com.lexaden.components</groupId>
+		   <groupId>com.lexaden.components.local</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
 		</dependency>

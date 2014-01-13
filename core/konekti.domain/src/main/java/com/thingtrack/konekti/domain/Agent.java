@@ -1,5 +1,27 @@
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
@@ -14,45 +36,86 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
+/**
+ * Entity class
+ * <p>
+ * Represents the minimal information across the clients, employees and suppliers
+ * <h4>Implementation notes</h4>
+ * This abstract class must be extended by {@link Client}, {@link EmployeeAgent} and {@link Supplier}
+ * @author carlos
+ *
+ */
 @SuppressWarnings("serial")
 @Entity
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public abstract class Agent implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name = "AGENT_ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer agentId;
 	
+	/**
+	 * Name
+	 */
 	@Column(name = "NAME", length = 256)
 	private String name;
 
+	/**
+	 * Phone number
+	 */
 	@Column(name="PHONE", length=32)	
 	private String phone;
 	
+	/**
+	 * Fax number
+	 */
 	@Column(name="FAX", length=32)
 	private String fax;
 	
+	/**
+	 * Mobile number
+	 */
 	@Column(name="MOBILE", length=32)
 	private String mobile;
 	
+	/**
+	 * Email address
+	 */
 	@Column(name="EMAIL", length=64)
 	private String email;
 	
+	/**
+	 * Picture
+	 */
 	@Column(name="PHOTO")
 	@Lob
 	private byte[] photo;
 	
+	/**
+	 * Facebook username
+	 */
 	@Column(name="FACEBOOK_ID", length=32)
 	private String facebookId;
 	
+	/**
+	 * Address
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ADDRESS_ID")
 	private Address address;
 	
+	/**
+	 * Comment
+	 */
 	@Column(name = "COMMENT", length = 512)
 	private String comment;
 
+	/**
+	 * {@link User} account associated
+	 */
 	@OneToOne(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(name="USER_ID")		
 	private User user;
