@@ -51,6 +51,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents a group of {@link Permission permisions} 
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -58,33 +62,57 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ROLE")
 public class Role implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="ROLE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer roleId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * {@link Area}, not null
+	 */
 	@ManyToOne
 	@JoinColumn(name="AREA_ID", nullable=false)
 	private Area area;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
 	
+	/**
+	 * {@link Permission permissions} contained
+	 */ 
 	@ManyToMany
 	@JoinTable(name="ROLE_PERMISSION",
 			   joinColumns=@JoinColumn(name="ROLE_ID"),
 			   inverseJoinColumns=@JoinColumn(name="PERMISSION_ID"))
 	private List<Permission> permissions = new ArrayList<Permission>();
 	
+	/**
+	 * {@link User users} assigned with this 
+	 */
 	@ManyToMany(mappedBy="roles")
 	private List<User> users;
 
+	/**
+	 * Comment
+	 */
 	@Column(name="COMMENT", length=512)
 	private String comment;
 	
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
 	

@@ -29,6 +29,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 /**
+ * Entity class
+ * <p>
+ * Represents 
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -36,26 +40,60 @@ import javax.persistence.Enumerated;
 @Entity
 @DiscriminatorValue("COMMAND")
 public class MenuCommandResource extends MenuResource {
+	
+	/**
+	 * Hint or Tooltip
+	 */
 	@Column(name = "HINT")
 	private String hint;
 		
+	/**
+	 * Module identifier
+	 */
 	@Column(name = "MODULE_ID")
 	private String moduleId;
 	
+	/**
+	 * Module version
+	 */
 	@Column(name = "MODULE_VERSION")
 	private String moduleVersion;
 	
+	/**
+	 * Module type
+	 * <p><ul>
+	 * <li>VIEW
+	 * <li>	SEPARATOR
+	 * <li>REPORT
+	 * <ul><p>
+	 */
 	@Column(name = "TYPE_MODULE")
 	@Enumerated(EnumType.STRING)
 	private TYPE type = TYPE.VIEW;
 	
+	/**
+	 * Module location when it is openend
+	 * <p><ul>
+	 * <li>TOP
+	 * <li>LEFT
+	 * <li>CENTER
+	 * <li>RIGHT
+	 * <li>BOTTON
+	 * <ul><p>
+	 */
 	@Column(name = "LOCATION")
 	@Enumerated(EnumType.STRING)
 	private LOCATION location = LOCATION.CENTER;
 	
+	/**
+	 * Autostart
+	 */
 	@Column(name = "AUTOSTART")
 	private boolean autostart = false;
 
+	/**
+	 * Closeable
+	 */
 	@Column(name = "CLOSABLE")
 	private boolean closable = true;
 	

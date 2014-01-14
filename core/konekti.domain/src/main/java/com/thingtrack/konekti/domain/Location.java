@@ -52,6 +52,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the second level in the @see <a href="http://www.isa-95.com">ISA 95</a> organisational distribution
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -59,40 +63,74 @@ import javax.persistence.Table;
 @Entity
 @Table(name="LOCATION")
 public class Location implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="LOCATION_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer locationId;
 
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 
+	/**
+	 * Unique name, not null
+	 */
 	@Column(name="NAME", nullable=false, unique=true, length=64)
 	private String name;	
 
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	/**
+	 * CIF
+	 */
 	@Column(name="CIF", length=32)
 	private String cif;
 	
+	/**
+	 *  {@link Address}
+	 */
 	@ManyToOne
 	@JoinColumn(name="LOCATION_ADDRESS_ID")	
 	private Address locationAddress = new Address();
 
+	/**
+	 * {@link Organization organizations} owner
+	 */
 	@ManyToMany(mappedBy="locations")
 	private List<Organization> organizations = new ArrayList<Organization>();
 
+	/**
+	 * {@link LocationType}
+	 */
 	@ManyToOne
 	@JoinColumn(name="LOCATION_TYPE_ID", nullable=false)	
 	private LocationType locationType;
 
+	/**
+	 * {@link Area areas}
+	 */
 	@OneToMany(mappedBy="location")			
 	private List<Area> areas = new ArrayList<Area>();		
 
+	/**
+	 * Comment
+	 */
 	@Column(name="COMMENT", length=512)
 	private String comment;
 
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active=true;
 

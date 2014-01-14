@@ -33,6 +33,10 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 /**
+ * Entity class
+ * <p>
+ * Represents any sequence value to assign to a unique field in any entity's identifier
+ * <p> 
  * @author Thingtrack S.L.
  *
  */
@@ -40,23 +44,38 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="SEQUENCE")
 public class Sequence implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SEQUENCE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer sequenceId;
 
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=30)
 	@NotNull
 	private String code;
 	
+	/**
+	 * Unique name, not null
+	 */
 	@Column(name="NAME", nullable=false, unique=true, length=30)
 	@NotNull
 	private String name;
 	
+	/**
+	 * Value, not null
+	 */
 	@Column(name="VALUE", nullable=false, length=10)
 	@NotNull
 	private int value;
 	
+	/**
+	 * Unique description, not null
+	 */
 	@Column(name="DESCRIPTION", nullable=false, unique=true, length=255)
 	@NotNull
 	private String description;

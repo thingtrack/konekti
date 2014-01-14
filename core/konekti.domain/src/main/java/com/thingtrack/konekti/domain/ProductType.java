@@ -48,6 +48,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
+ * entity class
+ * <p>
+ * Represents types of product
  * @author Thingtrack S.L.
  *
  */
@@ -56,14 +59,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="PRODUCT_TYPE")
 public class ProductType implements Serializable {
+	
+	/**
+	 * Unique identifier 
+	 */
 	@Id
 	@Column(name="PRODUCT_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer productTypeId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 

@@ -47,6 +47,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class
+ * <p>
+ * Represents groups of suppliers
  * @author Thingtrack S.L.
  *
  */
@@ -54,16 +57,26 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="SUPPLIER_GROUP")
 public class SupplierGroup implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SUPPLIER_GROUP_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer supplierGroupId;
 	
+	/**
+	 * Unique name, not null 
+	 */
 	@Column(name="NAME", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
 	@NotNull
 	private String name;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=1024)
 	@Size(min=1, max=1024)
 	private String description;

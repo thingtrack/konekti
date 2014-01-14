@@ -56,6 +56,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * @deprecated
  * @author Thingtrack S.L.
  *
  */

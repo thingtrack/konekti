@@ -46,6 +46,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents and encapsulates any supplier info
  * @author Thingtrack S.L.
  *
  */
@@ -56,27 +59,49 @@ import javax.persistence.Table;
 	@AttributeOverride(name="agentId", column=@Column(name="SUPPLIER_ID"))
 })
 public class Supplier extends Agent implements Serializable {
+	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name = "CODE", nullable = false, unique = true, length = 64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name = "DESCRIPTION", length = 256)
 	private String description;
 	
+	/**
+	 * VAT
+	 */
 	@Column(name = "VAT", length = 64)
 	private String vat;
 	
+	/**
+	 * {@link SupplierType}, not null
+	 */
 	@ManyToOne
 	@JoinColumn(name="SUPPLIER_TYPE_ID", nullable=false)	
 	private SupplierType supplierType;
 
+	/**
+	 * {@link SupplierGroup}
+	 */
 	@ManyToOne
 	@JoinColumn(name="SUPPLIER_GROUP_ID")	
 	private SupplierGroup supplierGroup;
 		
+	/**
+	 * {@link Organization} owner, not null
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
 	private Organization organization;
 	
+	/**
+	 * Active, not null
+	 */
 	@Column(name = "ACTIVE", nullable = false)
 	private Boolean active = true;
 	

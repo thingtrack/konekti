@@ -35,6 +35,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents any report produced by Konekti
  * @author Thingtrack S.L.
  *
  */
@@ -42,25 +45,44 @@ import javax.persistence.Table;
 @Entity
 @Table(name="REPORT")
 public class Report implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="REPORT_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer reportId;
 
+	/**
+	 * {@link Organization} owner
+	 */
 	@ManyToOne
 	@JoinColumn(name="ORGANIZATION_ID")	
 	private Organization organization;
 	
+	/**
+	 * Code, not null
+	 */
 	@Column(name="CODE", nullable=false, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 	
+	/**
+	 * The report content in bytes
+	 */
 	@Column(name="TEMPLATE")	
 	@Lob
 	private byte[] template;
 	
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
 

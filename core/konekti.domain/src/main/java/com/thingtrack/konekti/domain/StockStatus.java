@@ -47,6 +47,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the statuses of a {@link Stock}
  * @author Thingtrack S.L.
  *
  */
@@ -54,16 +57,26 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="STOCK_STATUS")
 public class StockStatus implements Serializable {
+	
+	/**
+	 * SUnique identifier
+	 */
 	@Id
 	@Column(name="STOCK_STATUS_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer stockStatusId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	@Size(min=1, max=64)
 	@NotNull
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	@Size(min=1, max=512)
 	private String description;

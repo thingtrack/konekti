@@ -49,22 +49,40 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class
+ * <p>
+ * Represents types of services
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 @Entity
 @Table(name="SERVICE_TYPE")
 public class ServiceType {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SERVICE_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer serviceTypeId;
 	
+	/**
+	 * Unique code, not null
+	 * <p><ul>
+	 * <li>PLANNED
+	 * <li>UNPLANNED
+	 * <ul><p>
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
 	@NotNull
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=1024)
 	@Size(min=1, max=1024)
 	private String description;

@@ -38,6 +38,10 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Menu Resource
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -48,24 +52,43 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("RESOURCE")
 public class MenuResource implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MENU_RESOURCE_ID")
 	private Integer menuResourceId;
 		
+	/**
+	 * Position
+	 */
 	@Column(name = "POSITION")
 	private int position;
 	
+	/**
+	 * Caption 
+	 */
 	@Column(name = "CAPTION")
 	private String caption;
 	
+	/**
+	 * Shortcut
+	 */
 	@Column(name = "SHORTCUT")
 	private String shortCut;
 	
+	/**
+	 * Icon picture in bytes
+	 */
 	@Column(name = "ICON")
 	@Lob
 	private byte[] icon;
 	
+	/**
+	 * Visible
+	 */
 	@Column(name = "VISIBLE")
 	private boolean visible;
 

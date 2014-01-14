@@ -58,16 +58,26 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="FEEDBACK_TYPE")
 public class FeedbackType implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="FEEDBACK_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer feedbackTypeId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
 	@NotNull
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=1024)
 	@Size(min=1, max=1024)
 	private String description;

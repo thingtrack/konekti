@@ -32,6 +32,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents tax duties 
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -39,17 +43,29 @@ import javax.persistence.Table;
 @Entity
 @Table(name="TAX")
 public class Tax implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="TAX_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer taxId;
 	
+	/**
+	 * unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 	
+	/**
+	 * Percent
+	 */
 	@Column(name="PERCENT", length = 5, precision = 2)
 	private double percent;
 

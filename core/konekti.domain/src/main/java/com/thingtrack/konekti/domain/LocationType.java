@@ -45,6 +45,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the types of location
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -52,14 +56,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name="LOCATION_TYPE")
 public class LocationType implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="LOCATION_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer locationTypeId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 

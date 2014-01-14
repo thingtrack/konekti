@@ -51,6 +51,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Entity class
+ * <p>
+ * Represents any general service offered by the {@link Organization }
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -58,25 +62,44 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="SERVICE")
 public class Service implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SERVICE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer serviceId;
 	
+	/**
+	 * {@link Organization} owner
+	 */
 	@ManyToOne
 	@JoinColumn(name="ORGANIZATION_ID", nullable=false)
 	private Organization organization;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 	
+	/**
+	 * {@link ServiceType}
+	 */
 	@ManyToOne
 	@JoinColumn(name="SERVICE_TYPE_ID", nullable=false)
 	private ServiceType serviceType;
 		
+	/**
+	 * {@link Client}
+	 */
 	@ManyToOne
 	@JoinColumn(name="CLIENT_ID")
 	private Client client;
@@ -89,71 +112,156 @@ public class Service implements Serializable {
 	@JoinColumn(name="INVOICE_LINE_ID")
 	private InvoiceLine invoiceLine;
 	
+	/**
+	 * Intermediate stops 
+	*/
 	@Column(name="INTERMEDIATE_STOPS")
 	private String intermediateStops;
 	
+	/**
+	 * Stop number
+	 */
 	@Column(name="STOP_NUMBER")
 	private Integer stopNumber;
 	
+	/**
+	 * Passengers
+	 */
 	@Column(name="PASSENGERS")
 	private Integer passengers;
 	
+	/**
+	 * Driver RPM Quality
+	 */
 	@Column(name="DRIVER_RPM_QUALITY", length = 10, precision = 2)
 	private double driverRPMQuality;
 	
+	/**
+	 * Kilometers offered
+	 */
 	@Column(name="KM_OFFER", length = 10, precision = 2)
 	private double kmOffer;
 	
+	/**
+	 * real kilometers 
+	 */
 	@Column(name="KM_REAL", length = 10, precision = 2)
 	private double kmReal;
 	
+	/***
+	 * Gas offered
+	 */
 	@Column(name="GAS_OFFER", length = 10, precision = 2)
 	private double gasOffer;
 	
+	/**
+	 * Real gas consumed
+	 */
 	@Column(name="GAS_REAL", length = 10, precision = 2)
 	private double gasReal;
 	
+	/**
+	 * Service initialization
+	 */
 	@Column(name="START_SERVICE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startService;
 	
+	/**
+	 * Service finish
+	 */
 	@Column(name="STOP_SERVICE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date stopService;
 	
+	/**
+	 * Has lunch included
+	 */
 	@Column(name="LUNCH", nullable=false)
 	private boolean lunch=false;
 	
+	/**
+	 * Has dinner included
+	 */
 	@Column(name="DINNER", nullable=false)
 	private boolean dinner=false;
 	
+	/**
+	 *  Has breakfast included
+	 */
 	@Column(name="BREACKFAST", nullable=false)
 	private boolean breackfast=false;
 	
+	/**
+	 * Has accomodation included
+	 */
 	@Column(name="ACCOMODATION", nullable=false)
 	private boolean accomodation=false;
 	
+	/**
+	 * Observation
+	 */
 	@Column(name="OBSERVATION", length=512)
 	private String observation;
 	
+	/**
+	 * Reservation date, not null
+	 */
 	@Column(name="RESERVATION_DATE", nullable=false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date reservationDate=new Date();
 	
+	/**
+	 * Scheduled date
+	 */
 	@Column(name="SCHEDULE_DATE")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date scheduleDate;
 		
+	/**
+	 * {@link ServiceStatus}, not null
+	 * <p><ul>
+	 * <li>OPENED
+	 * <li>DESIGNED
+	 * <li>PLANNED
+	 * <li>RUNNING
+	 * <li>PAUSED
+	 * <li>REJECTED
+	 * <li>CLOSED
+	 * <ul><p>
+	 */
 	@ManyToOne(optional=false)
 	@JoinColumn(name="SERVICE_STATUS_ID", nullable=false)
 	private ServiceStatus serviceStatus;
 	
+	/**
+	 * {@link RouteType}
+	 * <p><ul>
+	 * <li>FASTEST
+	 * <li>SHORTEST
+	 * <ul><p>
+	 */
 	@Column(name="ROUTE_TYPE")
 	private String routeType;
 
+	/**
+	 * Route avoids
+	 * <p><ul>
+	 * <li>AVOID_HIGHWAYS
+	 * <li>AVOID_TOLLS
+	 * <li>AVOID_UNPAVED
+	 * <li>AVOID_FERRIES
+	 * <li>AVOID_COUNTRY_BORDERS
+	 * <li>AVOID_SEASONAL_ROADS
+	 * <li>AVOID_TIMED_RESTRICTIONS
+	 * <ul><p>
+	 */
 	@Column(name="ROUTE_AVOIDS")
 	private String routeAvoids;
 	
+	/**
+	 * Is template
+	 */
 	@Column(name="TEMPLATE")
 	private boolean template;
 	

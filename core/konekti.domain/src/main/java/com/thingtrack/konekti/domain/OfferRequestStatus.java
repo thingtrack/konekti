@@ -45,6 +45,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * @deprecated
  * @author Thingtrack S.L.
  *
  */

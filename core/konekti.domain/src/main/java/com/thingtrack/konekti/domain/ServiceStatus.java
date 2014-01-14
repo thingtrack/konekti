@@ -45,22 +45,44 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the statuses of a {@link Service}
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 @Entity
 @Table(name="SERVICE_STATUS")
 public class ServiceStatus {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SERVICE_STATUS_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer serviceStatusId;
 	
+	/**
+	 * Unique code, not null
+	 * <p><ul>
+	 * <li>OPENED
+	 * <li>EXECUTING
+	 * <li>COMPLETED
+	 * <li>ASSIGNED
+	 * <li>CANCELLED
+	 * <li>STOPPED
+	 * <ul><p>
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
 	@NotNull
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=1024)
 	@Size(min=1, max=1024)
 	private String description;

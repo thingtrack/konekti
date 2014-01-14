@@ -54,6 +54,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the highest level in the @see <a href="http://www.isa-95.com">ISA 95</a> organisational distribution
  * @author Thingtrack S.L.
  *
  */
@@ -61,40 +64,71 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ORGANIZATION")
 public class Organization implements Serializable {
+	
+	/**
+	 * Unique identifier 
+	 */
 	@Id
 	@Column(name="ORGANIZATION_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer organizationId;
 
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 
+	/**
+	 * Name, not null
+	 */
 	@Column(name="NAME", nullable=false, length=64)
 	private String name;
 
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	/**
+	 * CIF
+	 */
 	@Column(name="CIF", length=32)
 	private String cif;
 
+	/**
+	 * {@link OrganizationType}
+	 */
 	@ManyToOne(optional=false)
 	@JoinColumn(name="ORGANIZATION_TYPE_ID", nullable=false)	
 	private OrganizationType organizationType;
 
+	/**
+	 * {@link Address}
+	 */
 	@OneToOne(optional=false)
 	@JoinColumn(name="SOCIAL_ADDRESS_ID", nullable=false)
 	private Address socialAddress = new Address();
 
+	/**
+	 * {@link Location locations} contained
+	 */
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
 	@JoinTable(name="ORGANIZATION_LOCATION",
 			   joinColumns=@JoinColumn(name="ORGANIZATION_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))	
 	private List<Location> locations = new ArrayList<Location>();
 
+	/**
+	 * Comment 
+	 */
 	@Column(name="COMMENT", length=512)
 	private String comment;
 
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active=true;
 

@@ -35,6 +35,10 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Menu Workbench
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -42,17 +46,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name="MENU_WORKBENCH")
 public class MenuWorkbench implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="MENU_WORKBENCH_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer menuWorkbenchId;
 
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	/**
+	 * Active
+	 */
 	@Column(name="ACTIVE")
 	private boolean active;
 	
+	/**
+	 * {@link MenuFolderResource}
+	 */
 	@OneToMany(mappedBy="menuWorkbench")
 	@OrderBy("position")
 	private List<MenuFolderResource> menuFolderResources;

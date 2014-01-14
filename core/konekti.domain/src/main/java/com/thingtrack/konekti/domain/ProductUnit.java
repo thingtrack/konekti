@@ -45,6 +45,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents units of product
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -52,14 +56,24 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PRODUCT_UNIT")
 public class ProductUnit implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="PRODUCT_UNIT_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer productUnitId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 

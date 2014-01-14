@@ -47,6 +47,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
+ * Entity class
+ * <p>
+ * Represents types of supplier
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -54,16 +58,25 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="SUPPLIER_TYPE")
 public class SupplierType implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="SUPPLIER_TYPE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer supplierTypeId;
 	
+	/**
+	 * Unique name, not null
+	 */
 	@Column(name="NAME", nullable=false, unique=true, length=256)
 	@Size(min=1, max=256)
 	@NotNull
 	private String name;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=1024)
 	@Size(min=1, max=1024)
 	private String description;
