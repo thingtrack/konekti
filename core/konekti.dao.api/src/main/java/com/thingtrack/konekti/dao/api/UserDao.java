@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.User;
 
 /**
+ * User Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface UserDao extends Dao<User, Integer> {
+	
+	/**
+	 * Obtains {@link User} object by its {@code username}
+	 * @param username  the unique username, not null
+	 * @return {@link User}
+	 * @throws Exception if ther {@code username} is null
+	 */
 	public User getByUsername(String username) throws Exception;
 
 }

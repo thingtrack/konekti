@@ -16,16 +16,48 @@ package com.thingtrack.konekti.dao.api;
 import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Service;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
 
 /**
+ * Supplier Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface SupplierDao extends Dao<Supplier, Integer> {
+	
+	/**
+	 * The {@link Supplier} by its code
+	 * @param code the unique code, not null
+	 * @return {@link Supplier}
+	 * @throws Exception
+	 */
 	public Supplier getByCode(String code) throws Exception;
+	
+	/**
+	 * The {@link Supplier} by its user account
+	 * @param user the user account, not null
+	 * @return {@link Supplier}
+	 * @throws Exception if the user is null
+	 */
 	public Supplier getByUser(User user) throws Exception;
+	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Supplier> getAll(User user) throws Exception;
+	
+	/**
+	 * 
+	 * @param user
+	 * @param active
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Supplier> getAll(User user, boolean active) throws Exception;
 }

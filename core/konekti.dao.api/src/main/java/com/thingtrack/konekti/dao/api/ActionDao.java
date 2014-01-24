@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Action;
 
 /**
+ * Action Data Access Object
+ * <p> 
  * @author Thingtrack S.L.
  *
  */
 public interface ActionDao extends Dao<Action, Integer> {
+	/**
+	 * Obtains an {@code Action} object having the code property equal the parameter
+	 *   
+	 * @param code  the code property, not null  
+	 * @return the searched {@code Action} object, not null
+	 * @throws Exception if there is no Action associated to that code
+	 */
 	public Action getByCode(String code) throws Exception;
 	
 }

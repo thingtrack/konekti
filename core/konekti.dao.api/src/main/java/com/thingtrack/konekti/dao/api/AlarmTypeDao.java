@@ -17,10 +17,20 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.AlarmType;
 
 /**
+ * Alarm type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface AlarmTypeDao extends Dao<AlarmType, Integer> {
+	
+	/**
+	 * Obtains an {@link AlarmType} object found by its {@code code}
+	 * 
+	 * @param code  the code of the {@code AlarmType}, not null
+	 * @return an {@code AlarmType} object, not null
+	 * @throws Exception if there is no {@code AlarmType} associated to the give {@code code}
+	 */
 	public AlarmType getByCode(String code) throws Exception;
 	
 }

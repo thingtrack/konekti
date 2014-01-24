@@ -17,6 +17,8 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Stock;
 
 /**
+ * Stock Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */

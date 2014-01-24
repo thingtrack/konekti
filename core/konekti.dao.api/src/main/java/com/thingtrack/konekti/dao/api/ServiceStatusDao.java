@@ -14,13 +14,23 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Service;
 import com.thingtrack.konekti.domain.ServiceStatus;
 
 /**
+ * Service Status Dao Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface ServiceStatusDao extends Dao<ServiceStatus, Integer> {
+	
+	/**
+	 * The {@link ServiceStatus} by its code
+	 * @param name the unique code, not null
+	 * @return @ {@link ServiceStatus}
+	 * @throws Exception
+	 */
 	public ServiceStatus getByCode(String code) throws Exception;
 
 }

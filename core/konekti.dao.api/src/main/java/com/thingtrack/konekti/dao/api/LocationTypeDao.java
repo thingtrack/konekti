@@ -17,10 +17,20 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.LocationType;
 
 /**
+ * Location Type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface LocationTypeDao extends Dao<LocationType, Integer> {
+	
+
+	/**
+	 * Obtains {@link LocationType} by its code
+	 * @param code, unique and not null
+	 * @return @JobTriggerType by its code
+	 * @throws Exception if there is no result found
+	 */
 	public LocationType getByCode(String code) throws Exception;
 	
 }

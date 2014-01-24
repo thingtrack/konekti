@@ -4,6 +4,8 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.CalendarDetail;
 
 /**
+ * Calendar Detail Data Access Layer
+ * 
  * @author Thingtrack S.L
 *
 */

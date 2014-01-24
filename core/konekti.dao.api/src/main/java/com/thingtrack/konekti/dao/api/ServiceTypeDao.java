@@ -17,10 +17,18 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.ServiceType;
 
 /**
+ * Service Type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface ServiceTypeDao extends Dao<ServiceType, Integer> {
+	/**
+	 * The {@link ServiceType} by its code
+	 * @param name the unique code, not null
+	 * @return @ {@link ServiceType}
+	 * @throws Exception
+	 */
 	public ServiceType getByCode(String code) throws Exception;
 	
 }

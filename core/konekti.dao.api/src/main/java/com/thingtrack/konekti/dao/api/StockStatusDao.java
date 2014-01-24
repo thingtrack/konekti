@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.StockStatus;
 
 /**
+ * Stock Status Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface StockStatusDao extends Dao<StockStatus, Integer> {
+	
+	/**
+	 * {@link StockStatus} obtained by its code
+	 * @param code the unique code, not null
+	 * @return {@link StockStatus} searched
+	 * @throws Exception if the code supplied is null
+	 */
 	public StockStatus getByCode(String code) throws Exception;
 		
 }

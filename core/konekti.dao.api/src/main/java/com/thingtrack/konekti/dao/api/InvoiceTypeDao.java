@@ -17,6 +17,7 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.InvoiceType;
 
 /**
+ * @deprecated
  * @author Thingtrack S.L.
  *
  */
