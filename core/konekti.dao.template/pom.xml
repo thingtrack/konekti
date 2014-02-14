@@ -15,7 +15,15 @@
     <packaging>jar</packaging>
     <name>Konekti Dao Layer Templates</name>
 
-
+	<dependencies>
+		<dependency>
+		   <groupId>org.eclipse.persistence</groupId>
+		   <artifactId>eclipselink</artifactId>
+		   <version>${org.eclipse.eclipselink}</version>
+		   <scope>provided</scope>
+		</dependency>
+	</dependencies>
+    
     <build>
     <plugins>
           <plugin>

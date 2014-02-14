@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.AlarmStatus;
 
 /**
- * @author Thingtrack S.L.
+ * Alarm Status Data Access Object 
+ * <p>
+ * @author Thingtrack S.L
  *
  */
 public interface AlarmStatusDao extends Dao<AlarmStatus, Integer> {
+	/**
+	 * Obtains an {@link AlarmStatus} object found by its {@code code}
+	 * 
+	 * @param code   the code of the {@code AlarmStatus}, not null
+	 * @return an {@code AlarmStatus} object, not null
+	 * @throws Exception if there is no {@code AlarmStatus} associated to the give {@code code}
+	 */
 	public AlarmStatus getByCode( String code ) throws Exception;
 
 }

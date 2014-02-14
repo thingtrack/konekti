@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +51,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents a group of {@link Permission permisions} 
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -36,33 +62,57 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ROLE")
 public class Role implements Serializable {
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="ROLE_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer roleId;
 	
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 	
+	/**
+	 * {@link Area}, not null
+	 */
 	@ManyToOne
 	@JoinColumn(name="AREA_ID", nullable=false)
 	private Area area;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
 	
+	/**
+	 * {@link Permission permissions} contained
+	 */ 
 	@ManyToMany
 	@JoinTable(name="ROLE_PERMISSION",
 			   joinColumns=@JoinColumn(name="ROLE_ID"),
 			   inverseJoinColumns=@JoinColumn(name="PERMISSION_ID"))
 	private List<Permission> permissions = new ArrayList<Permission>();
 	
+	/**
+	 * {@link User users} assigned with this 
+	 */
 	@ManyToMany(mappedBy="roles")
 	private List<User> users;
 
+	/**
+	 * Comment
+	 */
 	@Column(name="COMMENT", length=512)
 	private String comment;
 	
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private boolean active=true;
 	

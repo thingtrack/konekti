@@ -20,11 +20,27 @@ import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
 
 /**
+ * Location Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
-public interface LocationDao extends Dao<Location, Integer> {;
+public interface LocationDao extends Dao<Location, Integer> {
+	/**
+	 * Obtains {@link Location} by its name
+	 * 
+	 * @param name  the name to be queryied
+	 * @return @ {@link Location} searched
+	 * @throws Exception if there is no location found
+	 */
 	public Location getByName(String name) throws Exception;
+	
+	/**
+	 * Obtains the collection of {@link Location} which belongs to {@code Organization}
+	 * @param organization the filter to be queryied, not null
+	 * @return a collection of {@link Location} belongs to the given organization
+	 * @throws Exception if the given organization is null
+	 */
 	public List<Location> getAllByOrganization(Organization organization) throws Exception;
 	
 }

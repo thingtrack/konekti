@@ -44,7 +44,6 @@ import ar.com.fdvs.dj.domain.entities.conditionalStyle.ConditionalStyle;
 import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.report.ReportManagerService;
-
 import com.vaadin.Application;
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.UserError;

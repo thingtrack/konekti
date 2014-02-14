@@ -20,10 +20,28 @@ import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.User;
 
 /**
+ * Area Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface AreaDao extends Dao<Area, Integer> {
+	
+	/**
+	 * Obtains an {@link Area} object found by its {@code code}
+	 * 
+	 * @param code   the code of the {@code Area}, not null
+	 * @return an {@code Area} object, not null
+	 * @throws Exception if there is no {@code Area} associated to the give {@code code}
+	 */
 	public Area getByCode(String code) throws Exception;
+	
+	/**
+	 * Obtains an {@link List<Area>} collections associated to the {@link User}
+	 * 
+	 * @param user the user to obtain the {@code Areas} associated, not null
+	 * @return
+	 * @throws Exception
+	 */
 	public List<Area> getAll(User user) throws Exception;
 }

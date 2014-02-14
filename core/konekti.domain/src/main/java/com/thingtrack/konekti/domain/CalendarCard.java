@@ -1,5 +1,27 @@
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,6 +39,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
+ * Entity class,
+ * <p>
+ * Represents any moth defined in a {@link Calendar}
  * @author Thingtrack S.L.
  *
  */
@@ -24,26 +49,48 @@ import javax.persistence.Table;
 @Entity
 @Table(name="CALENDAR_CARD")
 public class CalendarCard implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="CALENDAR_CARD_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer calendarCardId;
 	
+	/**
+	 * Code, not null
+	 */
 	@Column(name="CODE", nullable=false)
 	private String code;
 	
+	/**
+	 * Year
+	 */
 	@Column(name="YEAR", nullable=false)
 	private int year;
 
+	/**
+	 * month
+	 */
 	@Column(name="MONTH", nullable=false)
 	private int month;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=256)
 	private String description;
 
+	/**
+	 * {@link CalendarDetail calendarDetails} contained
+	 */
 	@OneToMany(mappedBy="calendarCard", cascade=CascadeType.ALL)
 	private List<CalendarDetail> calendarDetails = new ArrayList<CalendarDetail>();
 	
+	/**
+	 * {@link Calendar} owner
+	 */
 	@ManyToOne
 	@JoinColumn(name="CALENDAR_ID")
 	private Calendar calendar;

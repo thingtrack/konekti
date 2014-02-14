@@ -8,6 +8,7 @@ import com.thingtrack.konekti.domain.OfferRequestLineStatus;
 
 
 /**
+ * @deprecated
  * @author Thingtrack S.L.
  *
  */

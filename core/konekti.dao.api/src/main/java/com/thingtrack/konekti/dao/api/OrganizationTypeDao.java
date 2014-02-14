@@ -14,13 +14,23 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.OrganizationType;
 
 /**
+ * Organization Type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface OrganizationTypeDao extends Dao<OrganizationType, Integer> {
+	
+	/**
+	 * Obtains {@link OrganizationType} by its code
+	 * @param code the unique code, not null
+	 * @return the queryied organization
+	 * @throws Exception if the supplied code is null
+	 */
 	public OrganizationType getByCode(String code) throws Exception;
 	
 }

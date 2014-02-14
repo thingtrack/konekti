@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.util.List;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +51,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the any employee in the organization
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -39,43 +65,90 @@ import javax.persistence.TemporalType;
 	@AttributeOverride(name="agentId", column=@Column(name="EMPLOYEE_AGENT_ID"))
 })
 public class EmployeeAgent extends Agent implements Serializable {
+	/**
+	 * Surname
+	 */
 	@Column(name="SURNAME", length=64)
 	private String surname;
 	
+	/**
+	 * Shortname
+	 */
 	@Column(name="SHORTNAME", length=64)
 	private String shortname;
 	
+	/**
+	 * Unique worknumber
+	 */
 	@Column(name="WORKNUMBER", unique=true, length=64)
 	private String workNumber;
 		
+	/**
+	 * National 
+	 */
 	@Column(name="NIF", length=64)
 	private String nif;
 	
+	/**
+	 * Title
+	 */
 	@Column(name="TITTLE", length=32)
 	private String tittle;
 	
+	/**
+	 * Working phone number
+	 */
 	@Column(name="WORK_MOBILE", length=32)
 	private String workMobile;
 	
+	/**
+	 * Seniority
+	 * 
+	 */
 	@Column(name="SENIORITY")
 	@Temporal(TemporalType.DATE)
 	private Date seniority;
 	
+	/**
+	 * Birthday
+	 */
 	@Column(name="BIRTHDAY")
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 	
+	/**
+	 * {@link EmployeeAgentType}
+	 * <p><ul>
+	 * <li>MANAGER
+	 * <li>OFFICER
+	 * <li>WORKER
+	 * <li>DRIVER
+	 * <ul><p>
+	 */
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_TYPE_ID", nullable=false)		
 	private EmployeeAgentType employeeAgentType;
 	
+	/**
+	 * @deprecated
+	 */
 	@OneToMany(mappedBy="driver")
 	private List<OfferRequestLine> offerRequestLines;
 	
+	/**
+	 * {@link Organization} owner
+	 */
 	@ManyToOne
 	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
 	private Organization organization;
 	
+	/**
+	 * {@link EmployeeAgentStatus}
+	 * <p><ul>
+	 * <li>ACTIVE
+	 * <li>DECLINE
+	 * <ul><p>
+	 */
 	@ManyToOne
 	@JoinColumn(name="EMPLOYEE_AGENT_STATUS_ID", nullable=false)
 	private EmployeeAgentStatus employeeAgentStatus;

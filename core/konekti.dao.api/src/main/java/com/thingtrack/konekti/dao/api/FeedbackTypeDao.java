@@ -14,13 +14,24 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.FeedbackStatus;
 import com.thingtrack.konekti.domain.FeedbackType;
 
 /**
+ * Feedback Type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface FeedbackTypeDao extends Dao<FeedbackType, Integer> {
+	
+	/**
+	 * Obtains the {@link FeedbackType} associated to the {@code code}
+	 *  
+	 * @param code  the code of the type, not null
+  	 * @return The FeedbackType which corresponds the given code
+	 * @throws Exception if the FeedbackType associated to that name or it is null
+	 */
 	public FeedbackType getByCode(String code) throws Exception;
 	
 }

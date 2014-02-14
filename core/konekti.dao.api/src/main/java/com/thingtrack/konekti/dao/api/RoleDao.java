@@ -20,10 +20,28 @@ import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Role;
 
 /**
+ * {@link Role} Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface RoleDao extends Dao<Role, Integer> {
+	
+	/**
+	 * Obtains the {@link Role} by its unique code
+	 * 
+	 * @param code the unique code, not null
+	 * @return {@link Role}
+	 * @throws Exception if the given parameter is null
+	 */
 	public Role getByCode(String code) throws Exception;
+	
+	/**
+	 * Obtains the collection of {@link Role roles} belongs to a {@code area}
+	 * 
+	 * @param area  the area to look for, not null
+	 * @return {@link Role}
+	 * @throws Exception if the supplied parameter is null
+	 */
 	public List<Role> getAll(Area area) throws Exception;
 }

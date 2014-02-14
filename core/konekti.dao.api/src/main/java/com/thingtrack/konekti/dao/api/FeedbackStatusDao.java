@@ -17,10 +17,20 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.FeedbackStatus;
 
 /**
+ * Feedback Status Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface FeedbackStatusDao extends Dao<FeedbackStatus, Integer> {
+	
+	/**
+	 * Obtains the {@link FeedbackStatus} associated to the {@code code}
+	 *  
+	 * @param code  the code of the status, not null
+  	 * @return The FeedbackStatus which corresponds the given code
+	 * @throws Exception if the FeedbackStatus associated to that name or it is null
+	 */
 	public FeedbackStatus getByCode(String code) throws Exception;
 	
 }

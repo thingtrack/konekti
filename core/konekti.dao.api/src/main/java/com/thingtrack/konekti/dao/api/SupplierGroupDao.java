@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.SupplierGroup;
 
 /**
+ * Supplier Group Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface SupplierGroupDao extends Dao<SupplierGroup, Integer> {
+	
+	/**
+	 * Supplier Group by its name
+	 * @param name the unique name, not null
+	 * @return {@link SupplierGroup}
+	 * @throws Exception if the name is null
+	 */
 	public SupplierGroup getByName(String name) throws Exception;
 
 }

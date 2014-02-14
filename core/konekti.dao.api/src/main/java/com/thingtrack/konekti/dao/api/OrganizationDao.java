@@ -17,10 +17,19 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.Organization;
 
 /**
+ * Organization Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface OrganizationDao extends Dao<Organization, Integer> {
+	
+	/**
+	 * Obtains {@link Organization} by its code
+	 * @param code the unique code, not null
+	 * @return the queryied organization
+	 * @throws Exception if the supplied code is null
+	 */
 	public Organization getByCode(String code) throws Exception;
 	
 }

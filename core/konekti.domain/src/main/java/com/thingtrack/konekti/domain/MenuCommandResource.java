@@ -1,5 +1,27 @@
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -7,6 +29,10 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 /**
+ * Entity class
+ * <p>
+ * Represents 
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -14,26 +40,60 @@ import javax.persistence.Enumerated;
 @Entity
 @DiscriminatorValue("COMMAND")
 public class MenuCommandResource extends MenuResource {
+	
+	/**
+	 * Hint or Tooltip
+	 */
 	@Column(name = "HINT")
 	private String hint;
 		
+	/**
+	 * Module identifier
+	 */
 	@Column(name = "MODULE_ID")
 	private String moduleId;
 	
+	/**
+	 * Module version
+	 */
 	@Column(name = "MODULE_VERSION")
 	private String moduleVersion;
 	
+	/**
+	 * Module type
+	 * <p><ul>
+	 * <li>VIEW
+	 * <li>	SEPARATOR
+	 * <li>REPORT
+	 * <ul><p>
+	 */
 	@Column(name = "TYPE_MODULE")
 	@Enumerated(EnumType.STRING)
 	private TYPE type = TYPE.VIEW;
 	
+	/**
+	 * Module location when it is openend
+	 * <p><ul>
+	 * <li>TOP
+	 * <li>LEFT
+	 * <li>CENTER
+	 * <li>RIGHT
+	 * <li>BOTTON
+	 * <ul><p>
+	 */
 	@Column(name = "LOCATION")
 	@Enumerated(EnumType.STRING)
 	private LOCATION location = LOCATION.CENTER;
 	
+	/**
+	 * Autostart
+	 */
 	@Column(name = "AUTOSTART")
 	private boolean autostart = false;
 
+	/**
+	 * Closeable
+	 */
 	@Column(name = "CLOSABLE")
 	private boolean closable = true;
 	

@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +54,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents the highest level in the @see <a href="http://www.isa-95.com">ISA 95</a> organisational distribution
  * @author Thingtrack S.L.
  *
  */
@@ -39,40 +64,71 @@ import javax.persistence.Table;
 @Entity
 @Table(name="ORGANIZATION")
 public class Organization implements Serializable {
+	
+	/**
+	 * Unique identifier 
+	 */
 	@Id
 	@Column(name="ORGANIZATION_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer organizationId;
 
+	/**
+	 * Unique code, not null
+	 */
 	@Column(name="CODE", nullable=false, unique=true, length=64)
 	private String code;
 
+	/**
+	 * Name, not null
+	 */
 	@Column(name="NAME", nullable=false, length=64)
 	private String name;
 
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	/**
+	 * CIF
+	 */
 	@Column(name="CIF", length=32)
 	private String cif;
 
+	/**
+	 * {@link OrganizationType}
+	 */
 	@ManyToOne(optional=false)
 	@JoinColumn(name="ORGANIZATION_TYPE_ID", nullable=false)	
 	private OrganizationType organizationType;
 
+	/**
+	 * {@link Address}
+	 */
 	@OneToOne(optional=false)
 	@JoinColumn(name="SOCIAL_ADDRESS_ID", nullable=false)
 	private Address socialAddress = new Address();
 
+	/**
+	 * {@link Location locations} contained
+	 */
 	@ManyToMany(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH })
 	@JoinTable(name="ORGANIZATION_LOCATION",
 			   joinColumns=@JoinColumn(name="ORGANIZATION_ID"),
 			   inverseJoinColumns=@JoinColumn(name="LOCATION_ID"))	
 	private List<Location> locations = new ArrayList<Location>();
 
+	/**
+	 * Comment 
+	 */
 	@Column(name="COMMENT", length=512)
 	private String comment;
 
+	/**
+	 * Active, not null
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active=true;
 

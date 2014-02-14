@@ -17,10 +17,20 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.EmployeeAgentStatus;
 
 /**
+ * Employee Agent Status Data Accesso Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface EmployeeAgentStatusDao extends Dao<EmployeeAgentStatus, Integer> {
+	
+	/**
+	 * Obtains the {@link EmployeeAgentStatus} associated to the {@code name}
+	 *  
+	 * @param name  the name of the status, not null
+  	 * @return The EmployeeAgentStatus which corresponds the given name
+	 * @throws Exception if the EmployeeAgentStatus associated to that name or it is null
+	 */
 	public EmployeeAgentStatus getByName(String name) throws Exception;
 	
 }

@@ -21,13 +21,58 @@ import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
 
 /**
- * @author Thingtrack S.L.
- *
+ * Client Data Access Layer
+ * 
+ * @param code  the unique code, not null
+ * @return the {@code Client}
+ * @throws Exception if there is no {@code CalendarType} associated t the passed code or code is null
  */
 public interface ClientDao extends Dao<Client, Integer> {
+	
+	/**
+	 * Obtains an {@link Client} by its code
+	 * 
+	 * @param code  the unique code to filter the Client, not null
+	 * @return {@code Client} which the passed {@code code} belongs to
+	 * @throws Exception if the the {@code code} no belongs to any {@code Client} or is null
+	 */
 	public Client getByCode(String code) throws Exception;
+	
+	/**
+	 * Obtains an {@link List<Client>} which belogns to the passed {@link Organization} and its {@code code}
+	 * 
+	 * @param organization the {@code Orgnization} 
+	 * @param code  the unique {@code code}
+	 * @return Collection of {@link Client clients}
+	 * @throws Exception if tje parameters passed not belongs to an {@code CLient}
+	 */
 	public List<Client> getByCode(Organization organization, String code) throws Exception;
+	
+	/**
+	 * Obtains an {@link Client} associated to its {@link User}
+	 *
+	 * @param user account associated to a particular Client, not null
+	 * @return the {@code Client}
+	 * @throws Exception if the user passed is null
+	 */
 	public Client getByUser(User user) throws Exception;
+	
+	/**
+	 * Obtains a {@code List<Client>} associated the particular {@code User}
+	 * 
+	 * @param user  the user account, not null
+	 * @return the collection of clients
+	 * @throws Exception if there is no client associated
+	 */
 	public List<Client> getAll(User user) throws Exception;
+	
+	/**
+	 * Obtains {@link List<Client>} associated to the {@link User} an also being active or not
+	 * 
+	 * @param user the user account associated, not null
+	 * @param active  the flag to identify is active or not, not null
+	 * @return collecttion of clients
+	 * @throws Exception if there no result from the query
+	 */
 	public List<Client> getAll(User user, boolean active) throws Exception;
 }

@@ -14,13 +14,24 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.CalendarGroup;
 import com.thingtrack.konekti.domain.ClientType;
 
 /**
+ * {@link CalendarGroup} Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface ClientTypeDao extends Dao<ClientType, Integer> {
+	
+	/**
+	 * Obtains an {@link ClientType} by its code
+	 * 
+	 * @param code  the unique code to filter the ClientType, not null
+	 * @return {@code ClientType} which the passed {@code code} belongs to
+	 * @throws Exception if the the {@code code} no belongs to any {@code ClientType} or it is null
+	 */
 	public ClientType getByCode(String code) throws Exception;
 	
 }

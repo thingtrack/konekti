@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,6 +48,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
+ * An address entity
+ * <p>
+ * Represents all information about administractive and geographical information
  * @author Thingtrack S.L.
  *
  */
@@ -36,56 +61,114 @@ public class Address implements Serializable {
 	@Id
 	@Column(name="ADDRESS_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	/**
+	 * Unique indetifier
+	 */
 	private Integer addressId;
 	
+	/**
+	 * Country name
+	 */
 	@Column(name="COUNTRY", length=64)
 	private String country;
 	
+	/**
+	 * Country name, 
+	 */
 	@Column(name="COUNTY", length=64)
 	private String county;
 
+	/**
+	 * Province name
+	 */
 	@Column(name="PROVINCE", length=64)
 	private String province;
 
+	
+	/**
+	 * City name
+	 */
 	@Column(name="CITY", length=256)
 	private String city;
 
+	/**
+	 * Street name, not null
+	 */
 	@Column(name="STREET", length=256, nullable=false)
 	private String street;
 
+	
+	/**
+	 * Number's gate
+	 */
 	@Column(name="NUMBER", length=32)
 	private String number;
 
+	/**
+	 * Gate's leter
+	 */
 	@Column(name="LETTER", length=32)	
 	private String letter;
 	
+	/**
+	 * Zipcode
+	 */
 	@Column(name="ZIPCODE", length=32)
 	private String zipCode;
 	
+	
+	/**
+	 * Number associated to the address 
+	 */
 	@Column(name="PHONE", length=32)
 	private String phone;
 		
+	
+	/**
+	 * Fax number
+	 */
 	@Column(name="FAX", length=30)	
 	private String fax;
 	
+	/**
+	 * Contact's mobile number associated to the address
+	 */
 	@Column(name="MOBILE", length=32)
 	private String mobile;
 	
+	/**
+	 * Mail associated to the address
+	 */
 	@Column(name="EMAIL", length=64)	
 	private String email;
 	
+	/**
+	 * Url associated to the address
+	 */
 	@Column(name="WEB", length=64)
 	private String web;
 	
+	/**
+	 * Longitude coordenate
+	 */
 	@Column(name="LONGITUDE")
 	private double longitude;
 	
+	/**
+	 * Latitude coordenate
+	 */
 	@Column(name="LATITUDE")
 	private double latitude;
 	
+	/**
+	 *The {@link Organization} owns the address
+	 */
 	@OneToOne(mappedBy="socialAddress")
 	private Organization organization;
 	
+	/**
+	 *The {@link Location} owns the address
+	 */
 	@OneToMany(mappedBy="locationAddress")
 	private List<Location> locations;
 	

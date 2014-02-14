@@ -1,5 +1,27 @@
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -16,6 +38,10 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Menu Resource
+ * <p>
  * @author Thingtrack S.L.
  *
  */
@@ -26,24 +52,43 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "TYPE", discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue("RESOURCE")
 public class MenuResource implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MENU_RESOURCE_ID")
 	private Integer menuResourceId;
 		
+	/**
+	 * Position
+	 */
 	@Column(name = "POSITION")
 	private int position;
 	
+	/**
+	 * Caption 
+	 */
 	@Column(name = "CAPTION")
 	private String caption;
 	
+	/**
+	 * Shortcut
+	 */
 	@Column(name = "SHORTCUT")
 	private String shortCut;
 	
+	/**
+	 * Icon picture in bytes
+	 */
 	@Column(name = "ICON")
 	@Lob
 	private byte[] icon;
 	
+	/**
+	 * Visible
+	 */
 	@Column(name = "VISIBLE")
 	private boolean visible;
 

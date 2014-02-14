@@ -13,6 +13,28 @@
  */
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +51,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
+ * Entity class
+ * <p>
+ * Represents any product and encapsulates its data 
  * @author Thingtrack S.L.
  *
  */
@@ -36,55 +61,98 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PRODUCT")
 public class Product implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="PRODUCT_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer productId;
-	
+
+	/**
+	 * Code, not null
+	 */
 	@Column(name="CODE", nullable=false)
 	private String code;
 	
+	/**
+	 * name, not null
+	 */
 	@Column(name="NAME", nullable=false)
 	private String name;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	/**
+	 * {@link ProductType}, not null
+	 */
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_TYPE_ID", nullable=false)
 	private ProductType productType;
 	
+	/**
+	 * hasLote, not null
+	 */
 	@Column(name="HAS_LOTE", nullable=false)
 	private Boolean hasLote = false;
 	
+	/**
+	 * Has serial number, not null
+	 */
 	@Column(name="HAS_SERIAL_NUMBER", nullable=false)
 	private Boolean hasSerialNumber = false;
 	
+	/**
+	 * Has experidion date, not null
+	 */
 	@Column(name="HAS_EXPEDITION_DATE", nullable=false)
 	private Boolean hasExpeditionDate = false;
 	
+	/**
+	 *  Averge price, not null
+	 */
 	@Column(name="AVERAGE_PRICE",nullable=false)
 	private float averagePrice;
 	
+	/**
+	 * {@link Area areas} manage this
+	 */
 	@ManyToMany
 	@JoinTable(name="PRODUCT_AREA",
 			   joinColumns=@JoinColumn(name="PRODUCT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="AREA_ID"))	
 	private List<Area> areas = new ArrayList<Area>();
 	
+	/**
+	 * {@link Supplier} 
+	 */
 	@ManyToOne
 	@JoinColumn(name="PRODUCT_SUPPLIER_ID")	
 	private Supplier productSupplier;
 
+	/**
+	 * {@link ProductUnit units} this is measure
+	 */
 	@ManyToMany
 	@JoinTable(name="PRODUCT_PRODUCT_UNIT",
 			   joinColumns=@JoinColumn(name="PRODUCT_ID"),
 			   inverseJoinColumns=@JoinColumn(name="PRODUCT_UNIT_ID"))	
 	private List<ProductUnit> productUnits = new ArrayList<ProductUnit>();
 	
+	/**
+	 * Version
+	 */
 	@Column(name="VERSION")
 	private String version;
-	
+
+	/**
+	 *  Product active, not null
+	 */
 	@Column(name="PRODUCT_ACTIVE", nullable=false)
 	private Boolean productActive = true;
 

@@ -17,10 +17,20 @@ import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
 
 /**
+ * Employee Agent Type Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface EmployeeAgentTypeDao extends Dao<EmployeeAgentType, Integer> {
+	
+	/**
+	 * Obtains the {@link EmployeeAgentType} associated to the {@code name}
+	 *  
+	 * @param name  the name of the type, not null
+  	 * @return The EmployeeAgentType which corresponds the given name
+	 * @throws Exception if the EmployeeAgentType associated to that name or it is null
+	 */
 	public EmployeeAgentType getByName(String name) throws Exception;
 
 }

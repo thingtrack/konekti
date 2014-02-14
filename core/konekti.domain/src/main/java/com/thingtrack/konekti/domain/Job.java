@@ -1,5 +1,27 @@
 package com.thingtrack.konekti.domain;
 
+/*
+ * #%L
+ * Konekti Domain Layer
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2010 - 2014 Thingtrack s.l.
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Calendar;
@@ -16,6 +38,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
+ * Entity class
+ * <p>
+ * Represents an scheduled task repeated iteratively
+ * <p> 
  * @author Thingtrack S.L.
  *
  */
@@ -23,65 +49,124 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name="JOB")
 public class Job implements Serializable {
+	
+	/**
+	 * Unique identifier
+	 */
 	@Id
 	@Column(name="JOB_ID")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer jobId;
 
+	/**
+	 * Name
+	 */
 	@Column(name="JOB_NAME", nullable=false)
 	private String jobName;
 
+	/**
+	 * Group
+	 */
 	@Column(name="JOB_GROUP", nullable=false)
 	private String jobGroup;
-		
+	
+	/**
+	 * {@link Area}
+	 */
 	@ManyToOne
 	@JoinColumn(name = "AREA_ID")
 	private Area area;
 	
+	/**
+	 * Description
+	 */
 	@Column(name="DESCRIPTION")
 	private String description;
 	
+	/**
+	 * Start date
+	 */
 	@Column(name="START_TIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date startTime;
 	
+	/**
+	 * End date
+	 */
 	@Column(name="END_TIME")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date endTime;
 	
+	/**
+	 * Trigger priority
+	 */
 	@Column(name="JOB_TRIGGER_PRIORITY", nullable=false)
 	private Integer jobTriggerPriority = 5;
 		
+	/**
+	 * Repeat interval
+	 */
 	@Column(name="JOB_INTERVAL")
 	private Integer jobInterval = 1;
 	
+	/**
+	 * {@link JobTriggerType}
+	 * <p><ul>
+	 * <li>Simple
+	 * <li>CRON
+	 * <ul><p>
+	 */
 	@ManyToOne
 	@JoinColumn(name = "JOB_TRIGGER_TYPE_ID", nullable = false)
 	private JobTriggerType jobTriggerType;
 	
+	/**
+	 * repeatcount
+	 */
 	@Column(name="REPEAT_COUNT")
 	private Integer repeatCount;
 	
+	/**
+	 * {@link Calendar}
+	 */
 	@Column(name="JOB_CALENDAR")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar jobCalendar;
 	
+	/**
+	 * Future 
+	 */
 	@Column(name="FUTURE", nullable=false)
 	private Boolean future = false;
 	
+	/**
+	 *  Future time
+	 */
 	@Column(name="FUTURE_TIME")	
 	private Integer future_time;
 	
+	/**
+	 * Cron expression
+	 */
 	@Column(name="CRON_EXPRESSION")
 	private String cronExpression;
 
+	/**
+	 * Last execution
+	 */
 	@Column(name="LAST_EXECUTION")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastExecution;
 	
+	/**
+	 * Error
+	 */
 	@Column(name="ERROR", nullable=false)
 	private Boolean error = false;
 	
+	/**
+	 * Active
+	 */
 	@Column(name="ACTIVE", nullable=false)
 	private Boolean active = false;
 

@@ -14,13 +14,24 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.CalendarGroup;
 import com.thingtrack.konekti.domain.ClientGroup;
 
 /**
+ * {@link CalendarGroup} Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface ClientGroupDao extends Dao<ClientGroup, Integer> {
+	
+	/**
+	 * Obtains an {@link ClientGroup} by its {@code name}
+	 * 
+	 * @param name  the unique code, not null
+	 * @return the {@code ClientGroup}
+	 * @throws Exception if there is no {@code ClientGroup} associated to the passed name or it is null
+	 */
 	public ClientGroup getByName( String name ) throws Exception;
 	
 }

@@ -14,13 +14,23 @@
 package com.thingtrack.konekti.dao.api;
 
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.SupplierGroup;
 import com.thingtrack.konekti.domain.SupplierType;
 
 /**
+ * Supplier Group Data Access Layer
+ * <p>
  * @author Thingtrack S.L.
  *
  */
 public interface SupplierTypeDao extends Dao<SupplierType, Integer> {
+	
+	/**
+	 * Supplier Group by its name
+	 * @param name the unique name, not null
+	 * @return {@link SupplierType}
+	 * @throws Exception if the name is null
+	 */
 	public SupplierType getByName(String name) throws Exception;
 
 }
