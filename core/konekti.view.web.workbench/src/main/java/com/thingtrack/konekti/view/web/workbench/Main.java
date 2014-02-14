@@ -21,11 +21,22 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageConsumer;
+import javax.jms.MessageListener;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
 
 import org.dellroad.stuff.vaadin.SpringContextApplication;
 import org.osgi.framework.Bundle;
@@ -38,16 +49,22 @@ import org.springframework.web.context.ConfigurableWebApplicationContext;
 import com.github.peholmst.i18n4vaadin.I18N;
 import com.github.peholmst.i18n4vaadin.ResourceBundleI18N;
 import com.thingtrack.konekti.domain.Action;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Configuration;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.MenuCommandResource;
 import com.thingtrack.konekti.domain.MenuFolderResource;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.MenuWorkbench;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Permission;
 import com.thingtrack.konekti.domain.Role;
 import com.thingtrack.konekti.domain.User;
+import com.thingtrack.konekti.service.api.AreaService;
 import com.thingtrack.konekti.service.api.ConfigurationService;
+import com.thingtrack.konekti.service.api.LocationService;
 import com.thingtrack.konekti.service.api.MenuWorkbenchService;
+import com.thingtrack.konekti.service.api.OrganizationService;
 import com.thingtrack.konekti.service.api.UserService;
 import com.thingtrack.konekti.service.security.SecurityService;
 import com.thingtrack.konekti.view.addon.ui.SliderView;
@@ -55,6 +72,8 @@ import com.thingtrack.konekti.view.kernel.IMetadataModuleServiceListener;
 import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 import com.thingtrack.konekti.view.kernel.MetadataModule;
+import com.thingtrack.konekti.view.kernel.ui.layout.IApplicationCloseEventListener;
+import com.thingtrack.konekti.view.kernel.ui.layout.IMessageEventListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IUserChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
@@ -72,6 +91,7 @@ import com.thingtrack.konekti.view.addon.ui.ErrorViewForm;
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.terminal.Terminal;
+import com.vaadin.terminal.gwt.server.WebApplicationContext;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.VerticalLayout;
@@ -92,6 +112,15 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	
 	@Autowired
 	private SecurityService securityService;
+
+	@Autowired
+	private OrganizationService organizationService;
+
+	@Autowired
+	private LocationService locationService;
+
+	@Autowired
+	private AreaService areaService;
 	
 	@Autowired
 	private UserService userService;
@@ -111,6 +140,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	@Autowired
 	private KonektiLayout konektiLayout;
 
+	@Autowired
+	private ConnectionFactory connectionFactory;
+	
 	private MainWindow window;
 	
 	private SliderView sliderView;
@@ -127,6 +159,13 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private MenuItem headMenuItem;
 	
 	private I18N i18n;
+	
+	private Connection connection;
+	private Session session;
+	
+	private final static String PRODUCER_QUEUE_NAME = "IN_QUEUE"			;
+	//private MessageConsumer consumer;
+	private MessageProducer producer;
 	
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext context) {
@@ -170,16 +209,114 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			buffer.append(",dataType: \"script\"});");
 			getMainWindow().executeJavaScript(buffer.toString()); 
 		}
+				
+		// define MenuLayout Message listeners
+		konektiLayout.getMenuLayout().addListenerApplicationClose(new IApplicationCloseEventListener() {			
+			@Override
+			public void close() {
+				moduleService.removeListener(Main.this);
+				
+				try {
+					/*if (producer != null)
+						producer.close();
+					if (consumer != null)
+						consumer.close();
+					if (session != null)
+						session.close();*/
+					session.setMessageListener(null);
+					session.close();
+					if (connection != null)
+						connection.close();
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}							
+										
+				WebApplicationContext webApplicationContext = (WebApplicationContext) getMainWindow().getApplication().getContext();
+				webApplicationContext.getHttpSession().invalidate();
+				
+				getMainWindow().getApplication().close();
+				
+			}
+		});
+		
+		konektiLayout.getMenuLayout().addListenerMessageEvent(new IMessageEventListener() {			
+			@Override
+			public void getMessage(Organization organizationFrom,
+								   Location locationFrom, 
+								   Area areaFrom, 
+								   User userFrom,
+								   Organization organizationTo,
+								   Location locationTo,
+								   Area areaTo,
+								   User userTo,
+								   String payload,
+								   Date messageDate) {
+				TextMessage txtMessage;
+				try {
+					txtMessage = session.createTextMessage();
+										
+					// set origin headers message
+					if (organizationFrom != null)
+						txtMessage.setObjectProperty("ORGANIZATION_ID_FROM", organizationFrom.getOrganizationId());
+					else
+						txtMessage.setObjectProperty("ORGANIZATION_ID_FROM", null);
+					if (locationFrom != null)
+						txtMessage.setObjectProperty("LOCATION_ID_FROM", locationFrom.getLocationId());
+					else
+						txtMessage.setObjectProperty("LOCATION_ID_FROM", null);
+					if (areaFrom != null)
+						txtMessage.setObjectProperty("AREA_ID_FROM", areaFrom.getAreaId());
+					else
+						txtMessage.setObjectProperty("AREA_ID_FROM", null);
+					if (userFrom != null)
+						txtMessage.setObjectProperty("USER_ID_FROM", userFrom.getUserId());
+					else
+						txtMessage.setObjectProperty("USER_ID_FROM", null);
 					
+					// set destination headers message
+					if (organizationTo != null)
+						txtMessage.setObjectProperty("ORGANIZATION_ID_TO", organizationTo.getOrganizationId());
+					else
+						txtMessage.setObjectProperty("ORGANIZATION_ID_TO", null);
+					if (locationTo != null)
+						txtMessage.setObjectProperty("LOCATION_ID_TO", locationTo.getLocationId());
+					else
+						txtMessage.setObjectProperty("LOCATION_ID_TO", null);
+					if (areaTo != null)
+						txtMessage.setObjectProperty("AREA_ID_TO", areaTo.getAreaId());
+					else
+						txtMessage.setObjectProperty("AREA_ID_TO", null);
+					if (userTo != null)
+						txtMessage.setObjectProperty("USER_ID_TO", userTo.getUserId());
+					else
+						txtMessage.setObjectProperty("USER_ID_TO", null);
+								
+					// set date headers message
+					txtMessage.setStringProperty("MESSAGE_DATE", messageDate.toString());
+					
+					// set payload headers message
+					txtMessage.setText(payload);
+					
+					producer.send(txtMessage);
+				} catch (JMSException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+
 	}
 	
 	private I18N configureI18n() {				
 		// default locales
 		Locale esLocale = new Locale("es");
 		Locale enLocale = new Locale("en");
+		Locale frLocale = new Locale("fr");
 		Locale zhLocale = new Locale("zh");
 		
-		i18n = new ResourceBundleI18N("com/thingtrack/konekti/view/web/i18n/messages", getBundleClassLoader(), esLocale, enLocale, zhLocale);
+		i18n = new ResourceBundleI18N("com/thingtrack/konekti/view/web/i18n/messages", getBundleClassLoader(), esLocale, enLocale, frLocale, zhLocale);
 		i18n.setCurrentLocale(esLocale);
 				
 		return i18n;
@@ -493,12 +630,27 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	}
 
-	@Override
+	/*@Override
 	public void close() {
 		moduleService.removeListener(this);
+		
+//		try {
+//			if (producer != null)
+//				producer.close();
+//			if (consumer != null)
+//				consumer.close();
+//			if (session != null)
+//				session.close();
+//			if (connection != null)
+//				connection.stop();
+//		} catch (JMSException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
 		super.close();
 
-	}
+	}*/
 
 	@Override
 	public void viewChanged(ViewEvent viewEvent) {
@@ -512,13 +664,18 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				WorkbenchView workbenchView =  (WorkbenchView) viewEvent.getViewTo();
 				workbenchView.setLoggedUser(loggedUser);
 								
-				menuManager.setUser(loggedUser);
+				menuManager.setUser(loggedUser);				
+				menuManager.setContext(workbenchContext);
 				
 				// construct the menu from scratch
 				initMenuManager(loggedUser);
 				
+				//// TODO we must correct the queues conenction problem
+				// initialize Message queues 
+				//initMessageQueues(loggedUser);
 			} catch (Exception e) {
 				throw new RuntimeException(e);
+				
 			}
 		}
 
@@ -527,6 +684,92 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		}
 	}
 
+	private void initMessageQueues(User user) throws JMSException {
+		// create message IN queue for all users
+		connection = connectionFactory.createConnection();
+		connection.start();
+
+		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+		String consumerQueueName = user.getUserId().toString();
+		Destination consumerDestination = session.createQueue(consumerQueueName);
+
+		MessageConsumer consumer = session.createConsumer(consumerDestination);
+		
+		consumer.setMessageListener(new MessageListener() {			
+			@Override
+			public void onMessage(Message message) {
+				try {
+					Integer organizationIdFrom = message.getIntProperty("ORGANIZATION_ID_FROM");
+					Integer locationIdFrom = message.getIntProperty("LOCATION_ID_FROM");
+					Integer areaIdFrom = message.getIntProperty("AREA_ID_FROM");
+					Integer userIdFrom = message.getIntProperty("USER_ID_FROM");			
+					
+					Date messageDate = new Date(); ///TODO
+								
+					if (message instanceof TextMessage) {
+						TextMessage txtMessage = (TextMessage) message;
+						String payload = txtMessage.getText();
+							
+						Organization organizationFrom = null;
+						if (organizationIdFrom != null) {
+							try {
+								organizationFrom = organizationService.get(organizationIdFrom);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						Location locationFrom = null;
+						if (locationIdFrom != null) {
+							try {
+								locationFrom = locationService.get(locationIdFrom);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						Area areaFrom = null;
+						if (areaIdFrom != null) {
+							try {
+								areaFrom = areaService.get(areaIdFrom);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						User userFrom = null;
+						if (userIdFrom != null) {
+							try {
+								userFrom = userService.get(userIdFrom);
+							} catch (Exception e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						
+						menuManager.addMessage(organizationFrom, locationFrom, areaFrom, userFrom, payload, messageDate);
+						
+					}
+
+				} catch (JMSException e) {
+					logger.log(Level.SEVERE, "message error:", e);
+
+				}
+				
+			}
+		});
+		
+		/*if (consumer.getMessageListener() == null)
+			consumer.setMessageListener(this);*/
+		
+		// create message unique request queue for all users
+		Destination producerDestination = session.createQueue(PRODUCER_QUEUE_NAME);
+		producer = session.createProducer(producerDestination);
+	}
+	
 	private void loadWorkbenchContext(User user) throws Exception {
 		Locale defaultLocale = null;
 	
@@ -608,4 +851,5 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		i18n.setCurrentLocale(defaultLocale);
 		
 	}
+
 }

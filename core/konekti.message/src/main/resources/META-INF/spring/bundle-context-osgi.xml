@@ -12,5 +12,5 @@
        testing of the bundle outside of an OSGi container -->
        
   <osgi:service ref="cachedConnectionFactory" interface="javax.jms.ConnectionFactory"/>
-       
+  
 </beans>

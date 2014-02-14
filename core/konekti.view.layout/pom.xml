@@ -39,12 +39,25 @@
 			<scope>provided</scope>			
 		</dependency>
 		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>i18n4vaadin</artifactId>
+		   <version>0.9.1</version>
+		   <scope>provided</scope>
+		</dependency>		
+		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.view.kernel</artifactId>
 			<version>${org.konekti.version}</version>
 			<type>jar</type>
 			<scope>provided</scope>
-		</dependency>				
+		</dependency>	
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>${org.konekti.version}</version>
+			<type>jar</type>
+			<scope>provided</scope>
+		</dependency>							
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.view.layout.header</artifactId>

@@ -158,6 +158,13 @@
 			<scope>provided</scope>
 		</dependency>
 		
+		<dependency>
+	        <groupId>javax.jms</groupId>
+	        <artifactId>jms-api</artifactId>
+	        <version>1.1-rev-1</version>
+	        <scope>provided</scope>
+     	</dependency>
+     	
 		<!-- Apache Batik SVG Toolkit dependencies -->
 <!-- 		<dependency> -->
 <!-- 			<groupId>batik</groupId> -->
@@ -285,6 +292,7 @@ Import-Package: org.eclipse.virgo.web.dm,
  org.slf4j.impl;version="[1.6.1,2)",
  org.apache.log4j,
  javax.persistence.metamodel,
+ javax.jms,
  net.sf.jasperreports.j2ee.servlets,
  net.sf.jasperreports.extensions,
  com.thingtrack.konekti.view.web.i18n,

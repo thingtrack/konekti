@@ -17,6 +17,10 @@
        <osgi:reference id="menuWorkbench" interface="com.thingtrack.konekti.service.api.MenuWorkbenchService"/>
        
        <osgi:reference id="configurationService" interface="com.thingtrack.konekti.service.api.ConfigurationService"/>
+       <osgi:reference id="organizationService" interface="com.thingtrack.konekti.service.api.OrganizationService" />
+       <osgi:reference id="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
+       <osgi:reference id="areaService" interface="com.thingtrack.konekti.service.api.AreaService" />
        <osgi:reference id="userService" interface="com.thingtrack.konekti.service.api.UserService" />       
        
+       <osgi:reference id="connectionFactory" interface="javax.jms.ConnectionFactory" />
 </beans>

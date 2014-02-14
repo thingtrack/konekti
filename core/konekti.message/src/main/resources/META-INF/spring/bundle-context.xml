@@ -10,7 +10,9 @@
 					       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 					       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
 					       http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd">
-		
+    <!-- Active @Autowired spring annotation -->
+    <context:annotation-config/>
+    		
 <!-- 	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config"/> -->
 	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config">
 	    <prop key="transportconnector.uri">tcp://0.0.0.0:61616</prop>
@@ -20,7 +22,7 @@
 	
 	<context:property-placeholder properties-ref="jmsConfigProperties"/>
 			
-	<amq:broker brokerName="brokerB1" shutdownOnMasterFailure="true">
+	<amq:broker brokerName="konekti.message" shutdownOnMasterFailure="true">
 		<amq:destinationPolicy>
 			<amq:policyMap>
 				<amq:policyEntries>
@@ -69,7 +71,11 @@
 	<amq:connectionFactory id="jmsFactory" brokerURL="${connectionfactory.uri}" />
 
 	<bean id="cachedConnectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
-               <property name="targetConnectionFactory" ref="jmsFactory" />
-               <property name="sessionCacheSize" value="3" />
+	    <property name="targetConnectionFactory" ref="jmsFactory" />
+	    <property name="sessionCacheSize" value="3" />
     </bean>	
+    
+	<bean id="messageDispatcher" class="com.thingtrack.konekti.message.internal.MessageDispatcher">
+	    <property name="connectionFactory" ref="cachedConnectionFactory" />
+    </bean>
 </beans>

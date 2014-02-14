@@ -33,6 +33,7 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Activator: com.thingtrack.konekti.message.internal.MessageActivator
 Import-Package: org.apache.activemq.xbean,
  org.apache.activemq.broker.region.policy,
  org.apache.activemq.util,
@@ -42,6 +43,10 @@ Import-Package: org.apache.activemq.xbean,
  org.apache.activemq.broker.util,
  org.apache.activemq.usage,
  org.apache.activemq.spring
+Excluded-Exports: 
+ *.internal*
+Unversioned-Imports: 
+ *
 ]]>
 					</manifestTemplate>
 				</configuration>
@@ -71,6 +76,30 @@ Import-Package: org.apache.activemq.xbean,
 	</build>
 
 	<dependencies>
+		<dependency>
+	        <groupId>javax.jms</groupId>
+	        <artifactId>jms-api</artifactId>
+	        <version>1.1-rev-1</version>
+	        <scope>provided</scope>
+     	</dependency>
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.domain</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.osgi</groupId>
+			<artifactId>org.springframework.osgi.core</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>	
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

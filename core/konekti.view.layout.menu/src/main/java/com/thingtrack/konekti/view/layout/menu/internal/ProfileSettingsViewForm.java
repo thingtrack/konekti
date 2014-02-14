@@ -87,6 +87,8 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 					user.setDefaultLocale("es-ES");
 				else if (event.getProperty().getValue().toString().equals("English"))
 					user.setDefaultLocale("en-US");
+				else if (event.getProperty().getValue().toString().equals("Frances"))
+					user.setDefaultLocale("fr-FR");
 				else if (event.getProperty().getValue().toString().equals("简体中文"))
 					user.setDefaultLocale("zh-CN");
 				else
@@ -140,6 +142,7 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
     		// set language selected
         	languageField.addItem("Español");
         	languageField.addItem("English");
+        	languageField.addItem("Francés");
         	//languageField.addItem("简体中文");
     		    		
 		} catch (Exception e) {
@@ -169,6 +172,8 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 			languageField.setValue("Español");
 		else if (language.equals("en"))
 			languageField.setValue("English");
+		else if (language.equals("fr"))
+			languageField.setValue("Francés");
 		else if (language.equals("zh"))
 			languageField.setValue("简体中文");
 		else
@@ -374,7 +379,14 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 
 	@Override
 	protected void updateLabels() {
-		
+		organizationField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.organizationField.caption"));
+		locationField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.locationField.caption"));
+		areaField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.areaField.caption"));
+		defaultSettings.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.cancelSettingsButton.defaultSettings.caption"));
+		applySettingsButton.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.applySettingsButton.caption"));
+		applySettingsButton.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.applySettingsButton.description"));
+		cancelSettingsButton.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.cancelSettingsButton.caption"));
+		cancelSettingsButton.setDescription(getI18N().getMessage("com.thingtrack.konekti.view.layout.menu.internal.ProfileSettingsViewForm.cancelSettingsButton.description"));		
 		
 	}
 

@@ -13,9 +13,15 @@
  */
 package com.thingtrack.konekti.view.kernel.ui.layout;
 
+import java.util.Date;
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.Location;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.User;
+import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
+
 import com.vaadin.terminal.Resource;
 import com.vaadin.ui.MenuBar.Command;
 import com.vaadin.ui.MenuBar.MenuItem;
@@ -40,5 +46,9 @@ public interface IMenuLayout {
 	public int getSize();
 	public User getUser();
 	public void setUser(User user);
+	public void setContext(IWorkbenchContext context);
+	public void addMessage(Organization organization, Location location, Area area, User user, String payload, Date messageDate);
 	public void addListenerUserChange(IUserChangeListener listener);
+	public void addListenerMessageEvent(IMessageEventListener listener);
+	public void addListenerApplicationClose(IApplicationCloseEventListener listener);
 }

@@ -15,7 +15,6 @@
 	<name>Konekti View Layout Menu</name>
 	<description>Konekti View Layout Menu</description>
 
-
 	<dependencies>
 
 		<!-- Vaadin Dependency -->
@@ -27,6 +26,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.service.api</artifactId>
+			<version>${org.konekti.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
 			<artifactId>popupbutton</artifactId>
@@ -43,6 +49,13 @@
 		
 		<dependency>
 			<groupId>com.thingtrack</groupId>
+			<artifactId>org.tepi.filtertable</artifactId>
+			<version>0.7.3</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.domain</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
@@ -54,12 +67,16 @@
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-							
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.view.addon</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>								
 	</dependencies>
 
-
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.virgo.bundlor</groupId>
