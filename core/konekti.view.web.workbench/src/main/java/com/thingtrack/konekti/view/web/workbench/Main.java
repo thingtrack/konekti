@@ -223,8 +223,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 						consumer.close();
 					if (session != null)
 						session.close();*/
-					session.setMessageListener(null);
-					session.close();
+					//session.setMessageListener(null);
+					//session.close();
 					if (connection != null)
 						connection.close();
 				} catch (JMSException e) {

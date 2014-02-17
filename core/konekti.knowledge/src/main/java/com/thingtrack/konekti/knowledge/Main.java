@@ -112,7 +112,7 @@ public class Main implements BundleActivator {
 			System.out.println("registering knowledge ...");
 			    
 			try {			
-				// get all knowledge from DB
+				// get all knowledge from DB				;
 				List<Knowledge> knowledges = knowledgeService.getAll();
 					
 				// build all knowledge and check errors				

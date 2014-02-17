@@ -17,7 +17,7 @@
 
 	<dependencies>
 		<dependency>
-		   <groupId>com.lexaden.components.local</groupId>
+		   <groupId>com.lexaden.components</groupId>
 		   <artifactId>organisationchart</artifactId>
 		   <version>1.6.0</version>
 		   <scope>provided</scope>
@@ -84,7 +84,7 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable, com.lexaden.business.chart
 		<repository>
 			<id>project.local</id>
 			<name>project</name>
-			<url>file://${project.basedir}/repo</url>
+			<url>file://${basedir}/repo</url>
 		</repository>
 	</repositories>
 </project>
