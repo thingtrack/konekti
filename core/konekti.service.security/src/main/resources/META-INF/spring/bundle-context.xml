@@ -19,24 +19,25 @@
 		
 	<bean id="konektiUserDetailsService" class="com.thingtrack.konekti.service.security.internal.KonektiUserDetailsService" />
 	
+<!-- 	<bean id="securityContextHolder" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean"> -->
+<!-- 		<property name="targetClass" value="org.springframework.security.core.context.SecurityContextHolder" /> -->
+<!-- 		<property name="targetMethod" value="setStrategyName" /> -->
+<!-- 		<property name="arguments"> -->
+<!-- 			<list> -->
+<!-- 				<value>MODE_GLOBAL</value> -->
+<!-- 			</list> -->
+<!-- 		</property>	 -->
+<!-- 	</bean> -->
+
 	<!-- Spring Security Authentication Manager-->
-	<security:authentication-manager alias="authenticationManager">
-		<security:authentication-provider user-service-ref="konektiUserDetailsService" />			
-			<!-- <security:password-encoder ref="encoder"/> -->
-<!-- 			<security:user-service> -->
-<!-- 				<security:user name="manrique" password="canteli" -->
-<!-- 					authorities="supervisor, user, teller" /> -->
-<!-- 				<security:user name="curro" password="salinas" -->
-<!-- 					authorities="user,teller" /> -->
-<!-- 				<security:user name="carlos" password="salinas" -->
-<!-- 					authorities="user" /> -->
-<!-- 			</security:user-service> -->
+	<security:authentication-manager alias="authenticationManager">	    
+		<security:authentication-provider user-service-ref="konektiUserDetailsService" />
 	</security:authentication-manager>
 	
 	<!-- Authentication bean service -->
 	<bean id="securityService" class="com.thingtrack.konekti.service.security.internal.SecurityServiceImpl" autowire="byName"/>
 
-	<!-- Authorization bean configuration -->
+	<!-- Authorization bean service -->
 	<bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="securityMetadataSource">

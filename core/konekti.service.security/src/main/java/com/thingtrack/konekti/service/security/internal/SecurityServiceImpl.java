@@ -21,12 +21,12 @@ public class SecurityServiceImpl implements SecurityService {
 	private AuthenticationManager authenticationManager;
 	
 	public User authenticate(String username, String password) throws Exception {
-
-		Authentication authRequest = new UsernamePasswordAuthenticationToken(
-				username, password);
+		Authentication authRequest = new UsernamePasswordAuthenticationToken(username, password);
+		
 		try {
 			authRequest = authenticationManager.authenticate(authRequest);
 			SecurityContextHolder.getContext().setAuthentication(authRequest);
+			
 		}
 
 		catch (AuthenticationException e) {
@@ -35,20 +35,20 @@ public class SecurityServiceImpl implements SecurityService {
 
 		// Build the user value object
 		User authenticatedUser = new User();
-		org.springframework.security.core.userdetails.User userInfo = (org.springframework.security.core.userdetails.User) authRequest
-				.getPrincipal();
+		org.springframework.security.core.userdetails.User userInfo = (org.springframework.security.core.userdetails.User) authRequest.getPrincipal();
 
 		authenticatedUser.setUsername(userInfo.getUsername());
 		authenticatedUser.setPassword(userInfo.getPassword());
 
 		List<Role> roles = new ArrayList<Role>();
 		for (GrantedAuthority authority : userInfo.getAuthorities()) {
-
 			Role role = new Role();
 			role.setDescription(authority.getAuthority());
+			
 		}
 		
 		authenticatedUser.setRoles(roles);
+		
 		return authenticatedUser;
 	}
 

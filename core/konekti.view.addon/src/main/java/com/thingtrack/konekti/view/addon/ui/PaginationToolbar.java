@@ -115,6 +115,7 @@ public class PaginationToolbar<T> extends AbstractToolbar {
 		pageSizeCombox.setImmediate(true);
 		pageSizeCombox.setInputPrompt("todos");
 		pageSizeCombox.setTextInputAllowed(false);
+		pageSizeCombox.setNullSelectionAllowed(false);
 		pageInputTextField.setImmediate(true);
 		
 		pageSizeCombox.addItem(PAGE_SIZE_10);

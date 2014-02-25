@@ -26,6 +26,8 @@ public class UploadViewForm extends Window {
 	private Upload uploadFile;
 	private Button downloadFile;
 	private Button removeFile;
+	private Button closeFile;
+	
 	private byte[] groupDateFile;
 	private String fileName;
 	
@@ -74,20 +76,25 @@ public class UploadViewForm extends Window {
 		removeFile.addListener(new ClickListener() {		
 			@Override
 			public void buttonClick(ClickEvent event) {
-				if (groupDateFile == null)
-					return;
-				
 				groupDateFile = null;
+				
+				getParent().removeWindow(UploadViewForm.this);
 			}
 
 		});
 		
+		closeFile.addListener(new ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) { 
+				 getParent().removeWindow(UploadViewForm.this);				 
+				
+			}
+		});
 	}
 	
-	@Override
-	public void attach() {
-		setWidth("525px");
-		setHeight("-1px");
+	public String getFileName() {
+		return this.fileName;
+		
 	}
 	
 	public byte[] getFile() {
@@ -99,12 +106,14 @@ public class UploadViewForm extends Window {
 		// common part: create layout
 		mainLayout = new HorizontalLayout();
 		mainLayout.setImmediate(false);
-		mainLayout.setWidth("100%");
+		//mainLayout.setWidth("100%");
+		mainLayout.setWidth("-1px");
 		mainLayout.setHeight("-1px");
 		mainLayout.setMargin(false);
 		
 		// top-level component properties
-		setWidth("100%");
+		//setWidth("100%");
+		setWidth("-1px");
 		setHeight("-1px");
 		
 		// upload_1
@@ -131,31 +140,39 @@ public class UploadViewForm extends Window {
 		downloadFile.setHeight("-1px");		
 		mainLayout.addComponent(downloadFile);
 		mainLayout.setComponentAlignment(downloadFile, Alignment.BOTTOM_LEFT);
+		
+		// btnDownload
+		closeFile = new Button();
+		closeFile.setCaption("Cerrar");
+		closeFile.setImmediate(false);
+		closeFile.setWidth("-1px");
+		closeFile.setHeight("-1px");		
+		mainLayout.addComponent(closeFile);
+		mainLayout.setComponentAlignment(closeFile, Alignment.BOTTOM_LEFT);
 		mainLayout.setExpandRatio(downloadFile, 1.0f);
 		
 		return mainLayout;
 	}
 	
-	private byte[] getFileArray(File file) {
-		byte[] bFile = new byte[(int) file.length()];
-		 
-        try {
-            //convert file into array of bytes
-	        FileInputStream fileInputStream = new FileInputStream(file);
-		    fileInputStream.read(bFile);
-		    fileInputStream.close();
-	 		   
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-        
-        return bFile;
-	}
-	
 	// Implement both receiver that saves upload in a file and listener for successful upload
-	@SuppressWarnings("unused")
 	private class FileUploader implements Receiver, SucceededListener {
 		private File file;
+		
+		private byte[] getFileArray(File file) {
+			byte[] bFile = new byte[(int) file.length()];
+			 
+	        try {
+	            //convert file into array of bytes
+		        FileInputStream fileInputStream = new FileInputStream(file);
+			    fileInputStream.read(bFile);
+			    fileInputStream.close();
+		 		   
+	        }catch(Exception e){
+	            e.printStackTrace();
+	        }
+	        
+	        return bFile;
+		}
 		
 	    public OutputStream receiveUpload(String filename, String mimeType) {
 	        // Create upload stream
@@ -172,6 +189,7 @@ public class UploadViewForm extends Window {
 	            getWindow().showNotification("Could not open file<br/>", e.getMessage(), Notification.TYPE_ERROR_MESSAGE);
 	            return null;
 	        }
+	        
 	        return fos; // Return the output stream to write to
 	    }
 
@@ -179,6 +197,7 @@ public class UploadViewForm extends Window {
 	    	// transform file to byte array
 	    	groupDateFile = getFileArray(file);
 
+	    	getParent().removeWindow(UploadViewForm.this);
 	    }
 	}
 }

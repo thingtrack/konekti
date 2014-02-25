@@ -1,5 +1,7 @@
 package com.thingtrack.konekti.view.web.form.field;
 
+import java.io.Serializable;
+
 import org.vaadin.addon.customfield.CustomField;
 
 import com.thingtrack.konekti.view.addon.ui.UploadViewForm;
@@ -8,6 +10,7 @@ import com.vaadin.data.Property;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Window.CloseEvent;
@@ -20,7 +23,11 @@ public class FileField extends CustomField {
 	private Button btnAttach;
 	
 	private byte[] file;
+	private String fileName;
 	
+	// navigator button listeners
+	private AttachmentChangeListener listenerChangeAttachment = null;
+		
 	public FileField() {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
@@ -32,15 +39,25 @@ public class FileField extends CustomField {
 			public void buttonClick(ClickEvent event) {
 				final UploadViewForm uploadViewForm = new UploadViewForm(file);
 				
-				uploadViewForm.setWidth("300px");
+				//uploadViewForm.setWidth("300px");
+				uploadViewForm.setWidth("-1px");
 				uploadViewForm.setHeight("-1px");
+				uploadViewForm.setClosable(false);
 				uploadViewForm.addListener(new CloseListener() {				
 					@Override
-					public void windowClose(CloseEvent e) {
+					public void windowClose(CloseEvent event) {						
 						file = uploadViewForm.getFile();
+						fileName = uploadViewForm.getFileName();
+							
+						if (uploadViewForm.getFile() != null) 
+							btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));						
+						else 							
+							btnAttach.setIcon(null);																				
 						
-						btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));
+						if (listenerChangeAttachment != null)
+							listenerChangeAttachment.attachmentChange(new AttachmentChangeEvent(event.getComponent(), file , fileName));
 						
+						//setValue(file);
 					}
 				});
 				
@@ -66,10 +83,12 @@ public class FileField extends CustomField {
 		super.setPropertyDataSource(newDataSource);
 	}
 	
-	public void setData(byte[] file) {
+	@Override
+	public void setValue(Object file) {		
 		if (file != null)
 			btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));
 		
+		super.setValue(file);
 	}
 	
 	@Override
@@ -82,6 +101,21 @@ public class FileField extends CustomField {
 		return file;
 		
 	}
+	
+	public String getFileName() {
+		return this.fileName;
+		
+	}		
+	
+	public void addListener(AttachmentChangeListener listener) {
+		this.listenerChangeAttachment = listener;
+		
+	}
+	
+	public interface AttachmentChangeListener extends Serializable {
+        public void attachmentChange(AttachmentChangeEvent event);
+
+    }
 	
 	private VerticalLayout buildMainLayout() {
 		// common part: create layout
@@ -105,4 +139,34 @@ public class FileField extends CustomField {
 		
 		return mainLayout;
 	}
+	
+	public class AttachmentChangeEvent extends Event {
+		private byte[] attachment;
+		private String attachmentName;
+
+		 public AttachmentChangeEvent(Component source) {
+	            super(source);
+	            
+	            this.attachment = null;
+	            this.attachmentName = null;
+	     }
+		 
+		public AttachmentChangeEvent(Component source, byte[] attachment, String attachmentName) {
+			super(source);
+			
+			this.attachmentName = attachmentName;
+			this.attachment = attachment;
+		}
+
+		public String getAttachmentName() {
+			return this.attachmentName;
+			
+		}
+		
+		public byte[] getAttachment() {
+			return this.attachment;
+			
+		}
+		
+	  }
 }
