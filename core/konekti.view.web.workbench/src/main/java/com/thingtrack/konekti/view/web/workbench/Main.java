@@ -791,11 +791,14 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		// set user Locale		
 		i18n.setCurrentLocale(defaultLocale);		
 		
-		workbenchContext = new WorkbenchContext(
-				user,	
-				menuManager,
-				toolbarManager,
-				resourceManager);
+		// get all configuratios
+		List<Configuration> configuration = configurationService.getAll(user);
+				
+			workbenchContext = new WorkbenchContext(user,
+													configuration,
+													menuManager,
+													toolbarManager,
+													resourceManager);
 	}
 	
 	@Override

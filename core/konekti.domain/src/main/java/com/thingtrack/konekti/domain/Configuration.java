@@ -75,7 +75,12 @@ public class Configuration implements Serializable {
         FAVICON,
         LOGO_INIT,
         LOGO_WORKBENCH,
-        DEMO
+        DEMO,
+        SMTP_HOST,
+        SMTP_PORT,
+        SMTP_USERNAME,
+        SMTP_PASSEWORD,
+        SMTP_TLS
     }
 	public enum TYPE {
 		STRING("String"),
