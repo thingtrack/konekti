@@ -199,6 +199,12 @@ public class AddressField extends AbstractField {
 		return false;
 	}
 
+	@Override
+	public void setCaption(String caption) {
+		addressTextField.setCaption(caption);
+		
+	}
+	
 	private Marker createStopMarker(GeocodedLocation geocodedLocation) {
 		Marker marker = new Marker(geocodedLocation.getLon(), geocodedLocation.getLat());
 		marker.setIcon(new ThemeResource("images/icons/scheduler-module/marker.png"));

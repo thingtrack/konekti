@@ -16,34 +16,23 @@
     <packaging>jar</packaging>
     <name>Konekti Knowledge</name>
 
-
     <dependencies>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
 			<artifactId>org.osgi.compendium</artifactId>
 			<version>1.4.0</version>
 			<scope>provided</scope>
-		</dependency>
-		
+		</dependency>	
         <dependency>
         	<groupId>org.jbpm</groupId>
         	<artifactId>jbpm-bpmn2</artifactId>
         	<version>5.2.0.Final</version>
-        	<type>jar</type>
-        	<scope>provided</scope>
-        </dependency>
-        <dependency>
-        	<groupId>com.thingtrack</groupId>
-        	<artifactId>konekti.service.api</artifactId>
-        	<version>${org.konekti.version}</version>
-        	<type>jar</type>
         	<scope>provided</scope>
         </dependency>
         <dependency>
         	<groupId>com.thingtrack</groupId>
         	<artifactId>konekti.domain</artifactId>
         	<version>${org.konekti.version}</version>
-        	<type>jar</type>
         	<scope>provided</scope>
         </dependency>
         <dependency>
@@ -52,10 +41,14 @@
         	<version>${org.konekti.version}</version>
         	<scope>provided</scope>
         </dependency>
-        
+         <dependency>
+        	<groupId>com.thingtrack</groupId>
+        	<artifactId>konekti.service.api</artifactId>
+        	<version>${org.konekti.version}</version>
+        	<scope>provided</scope>
+        </dependency>      
       </dependencies>
 
-    
     <build>
         <finalName>${project.groupId}.${project.artifactId}-${project.version}</finalName>
         

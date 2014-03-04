@@ -15,7 +15,6 @@ import org.drools.io.ResourceFactory;
 import org.drools.io.ResourceFactoryService;
 import org.drools.runtime.StatefulKnowledgeSession;
 import org.drools.util.ServiceRegistry;
-
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
@@ -96,7 +95,7 @@ public class Main implements BundleActivator {
 		try {
 			BundleContext bundleContext = FrameworkUtil.getBundle(Main.class).getBundleContext();
 			
-			ServiceReference knowledgeServiceReference = bundleContext.getServiceReference(KnowledgeService.class.getName());
+			ServiceReference knowledgeServiceReference = bundleContext.getServiceReference(KnowledgeService.class.getName());	
 			knowledgeService = KnowledgeService.class.cast(bundleContext.getService(knowledgeServiceReference));			
 		
 		}
@@ -112,7 +111,7 @@ public class Main implements BundleActivator {
 			System.out.println("registering knowledge ...");
 			    
 			try {			
-				// get all knowledge from DB				;
+				// get all knowledge from DB
 				List<Knowledge> knowledges = knowledgeService.getAll();
 					
 				// build all knowledge and check errors				

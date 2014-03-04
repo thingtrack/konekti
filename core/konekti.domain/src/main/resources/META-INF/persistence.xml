@@ -108,7 +108,7 @@
             <property name="eclipselink.weaving" value="false"/>	
             
             <!-- Data Seed -->
-			<property name="eclipselink.session.customizer" value="com.thingtrack.konekti.domain.data.ImportSQL"/>
+<!-- 			<property name="eclipselink.session.customizer" value="com.thingtrack.konekti.domain.data.ImportSQL"/> -->
 			<property name="import.sql.file" value="/scripts/import-data-seed.sql"/>
 			<property name="import.xml.file" value="/scripts/default-product-type.xml"/>
 			
