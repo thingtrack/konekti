@@ -210,6 +210,7 @@ public class JobViewForm extends AbstractViewForm {
 		jobGroupField = new TextField();
 		jobGroupField.setCaption("Grupo");
 		jobGroupField.setImmediate(false);
+		jobGroupField.setRequired(true);
 		jobGroupField.setWidth("140px");
 		jobGroupField.setHeight("-1px");
 		mainLayout.addComponent(jobGroupField, "top:20.0px;left:180.0px;");
@@ -244,6 +245,7 @@ public class JobViewForm extends AbstractViewForm {
 		jobTriggerTypeField = new ComboBox();
 		jobTriggerTypeField.setCaption("Tipo Disparador");
 		jobTriggerTypeField.setImmediate(true);
+		jobTriggerTypeField.setRequired(true);
 		jobTriggerTypeField.setWidth("160px");
 		jobTriggerTypeField.setHeight("-1px");
 		mainLayout.addComponent(jobTriggerTypeField,

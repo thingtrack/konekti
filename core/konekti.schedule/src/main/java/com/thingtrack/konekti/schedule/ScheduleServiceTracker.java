@@ -3,7 +3,6 @@ package com.thingtrack.konekti.schedule;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
-
 import org.quartz.CronScheduleBuilder;
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
@@ -12,11 +11,14 @@ import org.quartz.SchedulerException;
 import org.quartz.SimpleScheduleBuilder;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.util.ObjectUtils;
 
 import com.thingtrack.konekti.domain.Job;
 
 public class ScheduleServiceTracker extends ServiceTracker {
-	private JobThread thread;
+	private TaskExecutor executor;
 	
 	public ScheduleServiceTracker(BundleContext context) {
 		super(context, JobApi.class.getName(), null);
@@ -26,60 +28,9 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	@Override
 	public Object addingService(ServiceReference reference) {
 		JobApi jobImpl = (JobApi) super.addingService(reference);
-			 	    	      
-	    thread = new JobThread(jobImpl);
-	    thread.start();
-	    
-	    /*if (jobImpl == null)
-	      	return null;
-	     
-	     System.out.println("schedulling job ...");
-	    
-	    // get job configuration from konekti
-		Job job = null;
-		
-	    try {
-	    	job = ScheduleActivator.getJob(jobImpl.getGroup(), jobImpl.getName());
-	    }
-	    catch(Exception ex) {
-	    	ex.getMessage();
-	    	  
-	    	return null;
-	    }
-	      
-	    Integer areaId = null;
-	    JobDetail jobDetail = null;
-	    Trigger trigger = null;
-	    
-	    if (job.getArea() != null)
-	    	areaId = job.getArea().getAreaId();	    
-	    	
-	    try {
-	    	// create job from konekti configuration
-	    	jobDetail = JobBuilder.newJob(jobImpl.getClass()).withIdentity(job.getJobName(), job.getJobGroup())
-	    				.usingJobData("areaId", areaId)
-	    				.build();
-	      
-	    	// create job trigger
-	    	trigger = configureTriggerJob(job);
-	    		      
-	    	// schedule the job associated to the trigger
-	    	ScheduleActivator.getScheduler().scheduleJob(jobDetail, trigger);
-	     
-	    	// add job to scheduler collection
-	    	ScheduleActivator.getJobDetails().put(jobImpl, jobDetail);	
-	    	
-	    	// initial job active status management
-			if (!job.getActive())
-				ScheduleActivator.getScheduler().pauseJob(new JobKey(job.getJobName(), job.getJobGroup()));
-			 
-	    } catch (Exception ex) {
-	    	ex.printStackTrace();
-	    	
-	    	return null;
-	    }
-	 	    
-    	System.out.println("job scheduled ...");*/
+			 	
+		executor = createDefaultTaskExecutor();
+		executor.execute(new JobThread(jobImpl));
     	
 	    return jobImpl;
 	 }
@@ -104,7 +55,7 @@ public class ScheduleServiceTracker extends ServiceTracker {
 	    super.removedService(reference, service);
 	  }
 	 	
-	 private static Trigger configureTriggerJob(Job job) {
+	 private Trigger configureTriggerJob(Job job) {
 		 TriggerBuilder<Trigger> triggerBuilder = TriggerBuilder.newTrigger();
 		 
 		 // base trigger configuration 
@@ -146,7 +97,20 @@ public class ScheduleServiceTracker extends ServiceTracker {
 		 return triggerBuilder.build();
 	 }
 	 
-	 public static class JobThread extends Thread {
+	 private TaskExecutor createDefaultTaskExecutor() {
+		// create thread-pool for starting contexts
+		ThreadGroup threadGroup = new ThreadGroup("spring-osgi-extender[" + ObjectUtils.getIdentityHexString(this) + "]-threads");
+		threadGroup.setDaemon(false);
+
+		SimpleAsyncTaskExecutor taskExecutor = new SimpleAsyncTaskExecutor();
+		taskExecutor.setThreadGroup(threadGroup);
+		taskExecutor.setThreadNamePrefix("SpringOsgiExtenderThread-");
+
+		return taskExecutor;
+	 }
+	 
+	 //public static class JobThread extends Thread {
+	 private class JobThread implements Runnable {
 		    private final JobApi service;
 
 		    public JobThread(JobApi service) {
@@ -202,7 +166,7 @@ public class ScheduleServiceTracker extends ServiceTracker {
 		    	System.out.println("job scheduled ...");
 		    
 		    }
-
 		 
 	 }
+	 
 }
