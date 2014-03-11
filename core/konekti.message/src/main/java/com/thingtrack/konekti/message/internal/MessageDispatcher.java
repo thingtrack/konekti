@@ -26,7 +26,6 @@ public class MessageDispatcher implements MessageListener {
         
     }
     
-	@SuppressWarnings("unused")
 	@PostConstruct
 	private void createUsersQueues() throws Exception {
 		// create message unique request queue for all users
