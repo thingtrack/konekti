@@ -43,6 +43,7 @@ public class SupplierSelectorField extends AbstractField {
 	
 	private SupplierService supplierService;
 	
+	private boolean searchEntityVisible = true;
 	private boolean clearEntityVisible = true;
 	private boolean addEntityVisible = true;
 	
@@ -193,6 +194,16 @@ public class SupplierSelectorField extends AbstractField {
 		
 	}
 	
+	public boolean isSearchEntityVisible() {
+		return searchEntityVisible;
+	}
+	
+	public void setSearchEntityVisible(boolean searchEntityVisible) {
+		this.searchEntityVisible = searchEntityVisible;
+		btnSearchEntity.setVisible(searchEntityVisible);
+		
+	}
+	
 	/**
 	 * @return the clearEntityVisible
 	 */
@@ -214,7 +225,7 @@ public class SupplierSelectorField extends AbstractField {
 	public boolean isAddEntityVisible() {
 		return addEntityVisible;
 	}
-
+	
 	/**
 	 * @param addEntityVisible the addEntityVisible to set
 	 */
