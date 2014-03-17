@@ -29,15 +29,22 @@ public class FileField extends CustomField {
 	private AttachmentChangeListener listenerChangeAttachment = null;
 		
 	public FileField() {
+		this(null);
+		
+	}
+	
+	public FileField(byte[] file) {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
 		
 		// TODO add user code here
+		this.file = file;
+		
 		btnAttach.addListener(new ClickListener() {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				final UploadViewForm uploadViewForm = new UploadViewForm(file);
+				final UploadViewForm uploadViewForm = new UploadViewForm(FileField.this.file);
 				
 				//uploadViewForm.setWidth("300px");
 				uploadViewForm.setWidth("-1px");
@@ -46,16 +53,16 @@ public class FileField extends CustomField {
 				uploadViewForm.addListener(new CloseListener() {				
 					@Override
 					public void windowClose(CloseEvent event) {						
-						file = uploadViewForm.getFile();
+						FileField.this.file = uploadViewForm.getFile();
 						fileName = uploadViewForm.getFileName();
 							
 						if (uploadViewForm.getFile() != null) 
 							btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));						
 						else 							
 							btnAttach.setIcon(null);																				
-						
+												
 						if (listenerChangeAttachment != null)
-							listenerChangeAttachment.attachmentChange(new AttachmentChangeEvent(event.getComponent(), file , fileName));
+							listenerChangeAttachment.attachmentChange(new AttachmentChangeEvent(event.getComponent(), FileField.this.file , fileName));
 						
 						//setValue(file);
 					}
@@ -84,7 +91,9 @@ public class FileField extends CustomField {
 	}
 	
 	@Override
-	public void setValue(Object file) {		
+	public void setValue(Object file) {	
+		file = (byte[])file;
+		
 		if (file != null)
 			btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));
 		
