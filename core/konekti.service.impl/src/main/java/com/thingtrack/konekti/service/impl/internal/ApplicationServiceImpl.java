@@ -30,6 +30,11 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
+	public Application getByType(Application.TYPE applicationType) throws Exception {
+		return this.applicationDao.getByType(applicationType);
+	}
+	
+	@Override
 	public Application save(Application application) throws Exception {
 		return this.applicationDao.save(application);
 	}

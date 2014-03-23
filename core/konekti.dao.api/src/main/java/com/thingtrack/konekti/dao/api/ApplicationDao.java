@@ -23,6 +23,8 @@ public interface ApplicationDao extends Dao<Application, Integer> {
 	 */
 	public Application getByName(String name) throws Exception;
 	
+	public Application getByType(Application.TYPE applicationType) throws Exception;
+	
 	/**
 	 * 
 	 * Obtains an {@link List<Application>} collections associated to the {@link User}

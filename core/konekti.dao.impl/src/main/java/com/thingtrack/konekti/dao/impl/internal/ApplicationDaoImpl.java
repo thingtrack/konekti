@@ -12,14 +12,23 @@ import com.thingtrack.konekti.domain.User;
 public class ApplicationDaoImpl extends JpaDao<Application, Integer> implements ApplicationDao {
 
 	@Override
-	public Application getByName(String name) throws Exception {
+	public Application getByName(String applicationType) throws Exception {
 		Application application = (Application)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.name = :name")
-				.setParameter("name", name).getSingleResult();
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.applicationType = :applicationType")
+				.setParameter("applicationType", Application.TYPE.Web).getSingleResult();
 
 		return application;
 	}
 
+	@Override
+	public Application getByType(Application.TYPE applicationType) throws Exception {
+		Application application = (Application)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.applicationType = :applicationType")
+				.setParameter("applicationType", applicationType).getSingleResult();
+
+		return application;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Application> getAll(User user) throws Exception {
