@@ -317,7 +317,7 @@ Excluded-Exports:
 Unversioned-Imports: 
  *
 Import-Library: 
- org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]"
+ org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE]"
 Excluded-Imports: 
  org.vaadin.dontpush.server
 ]]>
