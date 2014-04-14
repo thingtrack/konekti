@@ -44,6 +44,8 @@ public class LocaleField  extends AbstractField {
 		defaultLocaleField.setItemCaption("es-ES", "Español");
 		defaultLocaleField.addItem("en-US");
 		defaultLocaleField.setItemCaption("en-US", "English");
+		defaultLocaleField.addItem("fr-FR");
+		defaultLocaleField.setItemCaption("fr-FR", "Français");
 		//defaultLocaleField.addItem("zh-CN");
 		//defaultLocaleField.setItemCaption("zh-CN", "简体中文");
     	
