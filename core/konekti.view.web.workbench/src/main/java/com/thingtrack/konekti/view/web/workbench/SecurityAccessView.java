@@ -1,5 +1,6 @@
 package com.thingtrack.konekti.view.web.workbench;
 
+import java.util.Date;
 import java.util.List;
 
 import org.vaadin.addon.formbinder.ViewBoundForm;
@@ -184,6 +185,13 @@ public class SecurityAccessView extends AbstractView {
 				return;
 			}
 			
+			// check if the user have expiration user account
+			if (!expiration(user)) {
+				viewBoundForm.setComponentError(new UserError("Cuenta de usuario ha expirado"));
+				
+				return;
+			}
+						
 			getWindow().removeWindow(loginWindow);
 						
 			sliderView.rollNext();
@@ -201,6 +209,14 @@ public class SecurityAccessView extends AbstractView {
 		}
 			
 		return false;
+	}
+	
+	private boolean expiration(User user) {
+		if (user.getExpirationDate() != null && 
+			user.getExpirationDate().compareTo(new Date()) < 0)
+			return false;
+			
+		return true;
 	}
 	
 	@Override

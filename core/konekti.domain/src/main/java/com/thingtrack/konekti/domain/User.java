@@ -37,6 +37,7 @@ package com.thingtrack.konekti.domain;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -51,6 +52,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -143,6 +146,10 @@ public class User implements Serializable {
 
 	@OneToOne(mappedBy="user")
 	private Supplier supplier;
+	
+	@Column(name="EXPIRATION_DATE")
+	@Temporal(TemporalType.DATE)
+	private Date expirationDate;
 	
 	public User() {
 		
@@ -497,6 +504,14 @@ public class User implements Serializable {
 	 */
 	public void setApplications(List<Application> applications) {
 		this.applications = applications;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 
 }
