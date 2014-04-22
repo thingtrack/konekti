@@ -111,6 +111,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.mail</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.view.kernel</artifactId>
 			<version>${project.version}</version>
 		</dependency>
