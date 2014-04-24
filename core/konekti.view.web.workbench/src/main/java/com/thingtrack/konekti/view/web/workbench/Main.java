@@ -310,15 +310,27 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	}
 	
 	private I18N configureI18n() {				
-		// default locales
+		// set locales supported by Konekti
 		Locale esLocale = new Locale("es");
 		Locale enLocale = new Locale("en");
 		Locale frLocale = new Locale("fr");
 		Locale zhLocale = new Locale("zh");
 		
+		// configure locale sources
 		i18n = new ResourceBundleI18N("com/thingtrack/konekti/view/web/i18n/messages", getBundleClassLoader(), esLocale, enLocale, frLocale, zhLocale);
-		i18n.setCurrentLocale(esLocale);
-				
+		
+		// set default locale from browser configuration
+		if (getLocale().toString().contains("es"))
+			i18n.setCurrentLocale(esLocale);
+		else if (getLocale().toString().contains("en"))
+			i18n.setCurrentLocale(enLocale);
+		else if (getLocale().toString().contains("fr"))
+			i18n.setCurrentLocale(frLocale);
+		else if (getLocale().toString().contains("zh"))
+			i18n.setCurrentLocale(zhLocale);
+		else
+			i18n.setCurrentLocale(esLocale);
+		
 		return i18n;
 	}
 
@@ -392,7 +404,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				// add new header menu item
 				headMenuItem = konektiLayout.getMenuLayout()
 						.addMenuItem(
-								menuFolderResource.getCaption(),
+								i18n.getMessage(menuFolderResource.getKeyCaption()),
 								getIcon(menuFolderResource.getIcon(),
 										menuFolderResource.getCaption()), null);
 
@@ -410,7 +422,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			if (menuResource instanceof MenuFolderResource) {
 				// add new header menu item
 				MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(
-								menuResource.getCaption(),
+								i18n.getMessage(menuFolderResource.getKeyCaption()),
 								getIcon(menuResource.getIcon(),menuResource.getCaption()),
 								itemParentId, null);
 
@@ -444,9 +456,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 						String symbolicName = ((MenuCommandResource) menuResource).getModuleId();
 						String version = ((MenuCommandResource) menuResource).getModuleVersion();
 	
-						String id = symbolicName + "#" + version;
-						String caption = ((MenuCommandResource) menuResource).getCaption();
-						String hint = ((MenuCommandResource) menuResource).getHint();
+						String id = symbolicName + "#" + version;						
+						String caption = i18n.getMessage(((MenuCommandResource) menuResource).getKeyCaption());
+						String hint = i18n.getMessage(((MenuCommandResource) menuResource).getKeyHint());
 						
 						boolean autoStart = ((MenuCommandResource) menuResource).isAutostart();
 						boolean closeable = ((MenuCommandResource) menuResource).isClosable();

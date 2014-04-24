@@ -72,6 +72,18 @@ public class MenuResource implements Serializable {
 	 */
 	@Column(name = "CAPTION")
 	private String caption;
+
+	/**
+	 * Key Caption 
+	 */
+	@Column(name = "KEY_CAPTION", unique=true)
+	private String keyCaption;
+	
+	/**
+	 * Key Hint 
+	 */
+	@Column(name = "KEY_HINT", unique=true)
+	private String keyHint;
 	
 	/**
 	 * Shortcut
@@ -183,6 +195,22 @@ public class MenuResource implements Serializable {
 	public String toString() {
 		return this.caption;
 		
+	}
+
+	public String getKeyCaption() {
+		return keyCaption;
+	}
+
+	public void setKeyCaption(String keyCaption) {
+		this.keyCaption = keyCaption;
+	}
+
+	public String getKeyHint() {
+		return keyHint;
+	}
+
+	public void setKeyHint(String keyHint) {
+		this.keyHint = keyHint;
 	}
 
 }

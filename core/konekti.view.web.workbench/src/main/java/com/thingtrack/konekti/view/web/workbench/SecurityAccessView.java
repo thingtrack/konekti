@@ -38,6 +38,9 @@ public class SecurityAccessView extends AbstractView {
 	
 	private User grantedUser; 
 
+	private Button loginBtn;
+	private VerticalLayout content;
+	
 	private String version;
 	private String logo;
 	private boolean demo;
@@ -63,6 +66,7 @@ public class SecurityAccessView extends AbstractView {
 		
 		mainLayout = new VerticalLayout();
 		setCompositionRoot(mainLayout);
+		
 	}
 
 	@Override
@@ -77,7 +81,7 @@ public class SecurityAccessView extends AbstractView {
 		content.setMargin(false);
 		loginWindow.setContent(content);
 		loginWindow.center();
-		loginWindow.setCaption("Entrar al sistema");
+		loginWindow.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.workbench.SecurityAccessView.loginWindow.caption"));		
 		loginWindow.setModal(true);
 		loginWindow.setResizable(false);
 		loginWindow.setClosable(false);
@@ -133,7 +137,9 @@ public class SecurityAccessView extends AbstractView {
 		footerWindow.setMargin(true);
 		footerWindow.setSpacing(true);
 
-		Button loginBtn = new Button("Entrar", this, "loginBtn_Click");
+		loginBtn = new Button("Entrar", this, "loginBtn_Click");
+		loginBtn.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.workbench.SecurityAccessView.loginBtn.caption"));
+		
 		loginBtn.setImmediate(true);
 		loginBtn.setWidth("-1px");
 		loginBtn.setHeight("-1px");
@@ -172,7 +178,7 @@ public class SecurityAccessView extends AbstractView {
 			User user = userService.getByUsername(grantedUser.getUsername());
 			
 			if (!user.isActive()) {
-				viewBoundForm.setComponentError(new UserError("Cuenta de Usuario desactivada"));
+				viewBoundForm.setComponentError(new UserError(getI18N().getMessage("com.thingtrack.konekti.view.security.LoginViewForm.warning.isActive")));
 				
 				return;
 				
@@ -180,14 +186,14 @@ public class SecurityAccessView extends AbstractView {
 				
 			// check if the user have access to this application
 			if (!access(user)) {
-				viewBoundForm.setComponentError(new UserError("No tiene acceso a usar esta aplicación"));
+				viewBoundForm.setComponentError(new UserError(getI18N().getMessage("com.thingtrack.konekti.view.security.LoginViewForm.warning.notAccess")));
 				
 				return;
 			}
 			
 			// check if the user have expiration user account
 			if (!expiration(user)) {
-				viewBoundForm.setComponentError(new UserError("Cuenta de usuario ha expirado"));
+				viewBoundForm.setComponentError(new UserError(getI18N().getMessage("com.thingtrack.konekti.view.security.LoginViewForm.warning.expirationDate")));
 				
 				return;
 			}
@@ -196,8 +202,9 @@ public class SecurityAccessView extends AbstractView {
 						
 			sliderView.rollNext();
 			
-		}catch(Exception e){			
-			viewBoundForm.setComponentError(new UserError("credenciales erróneos"));
+		} catch(Exception e){			
+			viewBoundForm.setComponentError(new UserError(getI18N().getMessage("com.thingtrack.konekti.view.security.LoginViewForm.warning.errorCredentials")));
+			
 		}
 
 	}
@@ -269,7 +276,6 @@ public class SecurityAccessView extends AbstractView {
 
 	@Override
 	protected void updateLabels() {
-		// TODO Auto-generated method stub
 		
 	}
 
