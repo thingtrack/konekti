@@ -410,4 +410,13 @@ Export-Package: com.thingtrack.konekti.view.web.i18n,
 			</build>
 		</profile>
 	</profiles>
+	
+	<repositories>
+	    <!--other repositories if any-->
+	    <repository>
+	        <id>project.local</id>
+	        <name>project</name>
+	        <url>file:${project.basedir}/repo</url>
+	    </repository>
+	</repositories>
 </project>

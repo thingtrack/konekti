@@ -316,7 +316,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		Locale frLocale = new Locale("fr");
 		Locale zhLocale = new Locale("zh");
 		
-		i18n = new ResourceBundleI18N("com/thingtrack/konekti/view/web/i18n/messages", getBundleClassLoader(), esLocale, enLocale, frLocale, zhLocale);
+		i18n = new ResourceBundleI18N("com/thingtrack/konekti/i18n/messages", getBundleClassLoader(), esLocale, enLocale, frLocale, zhLocale);
 		i18n.setCurrentLocale(esLocale);
 				
 		return i18n;

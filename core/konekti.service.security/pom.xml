@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>com.thingtrack</groupId>
 		<version>0.0.1.SNAPSHOT</version>
 		<artifactId>core</artifactId>
 	</parent>
-	
+
 	<name>Konekti Service Securiy Layer</name>
 	<description>Konekti Service Securiy Layer</description>
 
@@ -19,18 +19,16 @@
 		<!-- Spring Security Dependecies -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>org.springframework.security.core</artifactId>
-			<version>3.0.4.RELEASE</version>
-			<scope>provided</scope>
+			<artifactId>spring-security-web</artifactId>
+			<version>3.1.6.RELEASE</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
-			<artifactId>org.springframework.security.config</artifactId>
-			<version>3.0.4.RELEASE</version>
-			<scope>provided</scope>
+			<artifactId>spring-security-config</artifactId>
+			<version>3.1.6.RELEASE</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.domain</artifactId>
@@ -39,7 +37,7 @@
 			<scope>provided</scope>
 		</dependency>
 
-		   
+
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.dao.api</artifactId>
@@ -47,7 +45,7 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.dao.template</artifactId>
@@ -76,10 +74,9 @@ Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.aspectj.lang,
  org.aspectj.lang.annotation,
- org.aspectj.runtime.reflect,
- org.springframework.security.core.userdetails.memory
-Import-Bundle: org.springframework.security.config
-Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE]" 
+ org.aspectj.runtime.reflect 
+Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE]",
+ org.springframework.security;version="[3.1.6.RELEASE,3.1.6.RELEASE]"
 ]]>
 					</manifestTemplate>
 				</configuration>
@@ -108,7 +105,8 @@ Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>

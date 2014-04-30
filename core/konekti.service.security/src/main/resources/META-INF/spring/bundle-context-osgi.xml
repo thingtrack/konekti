@@ -13,11 +13,11 @@
 
 	<osgi:service ref="securityService" interface="com.thingtrack.konekti.service.security.SecurityService" />
 
-	<osgi:service ref="securityInterceptor">
-		<osgi:interfaces>
-			<value>org.aopalliance.intercept.MethodInterceptor</value>
-			<value>org.aopalliance.aop.Advice</value>
-		</osgi:interfaces>
-	</osgi:service>
+<!-- 	<osgi:service ref="securityInterceptor"> -->
+<!-- 		<osgi:interfaces> -->
+<!-- 			<value>org.aopalliance.intercept.MethodInterceptor</value> -->
+<!-- 			<value>org.aopalliance.aop.Advice</value> -->
+<!-- 		</osgi:interfaces> -->
+<!-- 	</osgi:service> -->
 
 </beans>

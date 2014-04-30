@@ -3,7 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/security
+	    http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
@@ -38,39 +39,39 @@
 	<bean id="securityService" class="com.thingtrack.konekti.service.security.internal.SecurityServiceImpl" autowire="byName"/>
 
 	<!-- Authorization bean service -->
-	<bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="securityMetadataSource">
-			<bean class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
-				<property name="methodSecurityMetadataSources">
-					<list>
-						<bean class="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource">
-							<constructor-arg>
-								<bean class="org.springframework.security.access.expression.method.ExpressionBasedAnnotationAttributeFactory">
-									<constructor-arg>
-										<bean class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />
-									</constructor-arg>
-								</bean>
-							</constructor-arg>
-						</bean>
-					</list>
-				</property>
-			</bean>
-		</property>
-		<property name="validateConfigAttributes" value="false" />
-		<property name="rejectPublicInvocations" value="false" />
-		<property name="accessDecisionManager">
-			<bean id="accessDecisionManager"
-				class="org.springframework.security.access.vote.AffirmativeBased">
-				<property name="decisionVoters">
-					<list>
-						<bean class="org.springframework.security.access.vote.RoleVoter" />
-						<bean
-							class="org.springframework.security.access.vote.AuthenticatedVoter" />
-					</list>
-				</property>
-			</bean>
-		</property>
-	</bean>
+<!-- 	<bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor"> -->
+<!-- 		<property name="authenticationManager" ref="authenticationManager" /> -->
+<!-- 		<property name="securityMetadataSource"> -->
+<!-- 			<bean class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource"> -->
+<!-- 				<property name="methodSecurityMetadataSources"> -->
+<!-- 					<list> -->
+<!-- 						<bean class="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource"> -->
+<!-- 							<constructor-arg> -->
+<!-- 								<bean class="org.springframework.security.access.expression.method.ExpressionBasedAnnotationAttributeFactory"> -->
+<!-- 									<constructor-arg> -->
+<!-- 										<bean class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" /> -->
+<!-- 									</constructor-arg> -->
+<!-- 								</bean> -->
+<!-- 							</constructor-arg> -->
+<!-- 						</bean> -->
+<!-- 					</list> -->
+<!-- 				</property> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 		<property name="validateConfigAttributes" value="false" /> -->
+<!-- 		<property name="rejectPublicInvocations" value="false" /> -->
+<!-- 		<property name="accessDecisionManager"> -->
+<!-- 			<bean id="accessDecisionManager" -->
+<!-- 				class="org.springframework.security.access.vote.AffirmativeBased"> -->
+<!-- 				<property name="decisionVoters"> -->
+<!-- 					<list> -->
+<!-- 						<bean class="org.springframework.security.access.vote.RoleVoter" /> -->
+<!-- 						<bean -->
+<!-- 							class="org.springframework.security.access.vote.AuthenticatedVoter" /> -->
+<!-- 					</list> -->
+<!-- 				</property> -->
+<!-- 			</bean> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 
 </beans>

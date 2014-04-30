@@ -15,8 +15,8 @@
     		
 <!-- 	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config"/> -->
 	<osgi-compendium:cm-properties id="jmsConfigProperties" persistent-id="jms-config">
-	    <prop key="transportconnector.uri">tcp://0.0.0.0:61616</prop>
-	    <prop key="transportconnector.mqtt.uri">mqtt://0.0.0.0:1883</prop>
+	    <prop key="transportconnector.uri">tcp://0.0.0.0:61617</prop>
+	    <prop key="transportconnector.mqtt.uri">mqtt://0.0.0.0:1884</prop>
 	    <prop key="connectionfactory.uri">vm://localhost</prop>
 	</osgi-compendium:cm-properties>
 	
