@@ -782,9 +782,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		producer = session.createProducer(producerDestination);
 	}
 	
-	private void loadWorkbenchContext(User user) throws Exception {
-		Locale defaultLocale = null;
-	
+	private void loadWorkbenchContext(User user) throws Exception {	
 		// create locale for employee agent
 		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
 			
@@ -792,7 +790,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		String country = localeParams[1];
 		
 		//defaultLocale = new Locale(language, country);
-		defaultLocale = new Locale(language);
+		Locale defaultLocale = new Locale(language);
 		
 		// initialize active Organization tree
 		user.setActiveOrganization(user.getDefaultOrganization());
@@ -804,8 +802,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		i18n.setCurrentLocale(defaultLocale);		
 		
 		// get all configuratios
-		List<Configuration> configuration = configurationService.getAll(user);
-				
+		List<Configuration> configuration = configurationService.getAll(user);				
 			workbenchContext = new WorkbenchContext(user,
 													configuration,
 													menuManager,
@@ -815,14 +812,11 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	
 	@Override
 	public void terminalError(Terminal.ErrorEvent event) {
-	    // Call the default implementation.
-	    //super.terminalError(event);
-	    
-        final Throwable t = event.getThrowable();
+	    final Throwable t = event.getThrowable();
         if (t instanceof SocketException) {
             // Most likely client browser closed socket
-            logger.info("SocketException in CommunicationManager."
-                    + " Most likely client (browser) closed socket.");
+            logger.info("SocketException in CommunicationManager." + " Most likely client (browser) closed socket.");
+            
             return;
         }
         
@@ -842,6 +836,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	@Override
 	public void userChangedButtonClick(User user) {
+		// set konekti locale
+		i18n.setCurrentLocale(user.getActiveLocale());
+		
 		// remove all module tabs from workbech an all panels
 		konektiLayout.removeModules(LOCATION.TOP);
 		konektiLayout.removeModules(LOCATION.CENTER);
@@ -853,17 +850,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		konektiLayout.getMenuLayout().removeItems();
 		
 		// regenerate all items
-		initMenuManager(user);
-				
-		// create locale for employee agent
-		String[] localeParams = user.getDefaultLocale().split(LocaleField.LOCALE_SEPARATOR);
-					
-		String language = localeParams[0];
-		String country = localeParams[1];
-				
-		Locale defaultLocale = new Locale(language);
-		
-		i18n.setCurrentLocale(defaultLocale);
+		initMenuManager(user);	
 		
 	}
 

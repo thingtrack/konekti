@@ -2,6 +2,7 @@ package com.thingtrack.konekti.view.layout.menu.internal;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import org.vaadin.hene.popupbutton.PopupButton;
 
@@ -20,7 +21,6 @@ import com.vaadin.ui.Select;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Window.Notification;
-
 import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.Organization;
@@ -80,22 +80,22 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		languageField.addListener(new ValueChangeListener() {			
+		/*languageField.addListener(new ValueChangeListener() {			
 			@Override
 			public void valueChange(ValueChangeEvent event) {
 				if (event.getProperty().getValue().toString().equals("Español"))
 					user.setDefaultLocale("es-ES");
 				else if (event.getProperty().getValue().toString().equals("English"))
 					user.setDefaultLocale("en-US");
-				else if (event.getProperty().getValue().toString().equals("Frances"))
+				else if (event.getProperty().getValue().toString().equals("Française"))
 					user.setDefaultLocale("fr-FR");
 				else if (event.getProperty().getValue().toString().equals("简体中文"))
 					user.setDefaultLocale("zh-CN");
 				else
-					user.setDefaultLocale("en-US");
+					user.setDefaultLocale("es-ES");
 				
 			}
-		});
+		});*/
 		
 		applySettingsButton.addListener(new ClickListener() {			
 			@Override
@@ -105,7 +105,19 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 				user.setActiveLocation((Location)locationField.getValue());
 				user.setActiveArea((Area)areaField.getValue());
 				
-				//user.setActiveLocale(activeLocale);
+				Locale activeLocale;
+				if (languageField.getValue().toString().equals("Español"))
+					activeLocale = new Locale("es");
+				else if (languageField.getValue().toString().equals("English"))
+					activeLocale = new Locale("en");
+				else if (languageField.getValue().toString().equals("Française"))
+					activeLocale = new Locale("fr");					
+				else if (languageField.getValue().toString().equals("简体中文"))
+					activeLocale = new Locale("zh");
+				else
+					activeLocale = new Locale("es");
+												
+				user.setActiveLocale(activeLocale);
 				
 				// close popup panel
 				ProfileSettingsViewForm.this.parent.setPopupVisible(false);
@@ -142,7 +154,7 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
     		// set language selected
         	languageField.addItem("Español");
         	languageField.addItem("English");
-        	languageField.addItem("Francés");
+        	languageField.addItem("Française");
         	//languageField.addItem("简体中文");
     		    		
 		} catch (Exception e) {
@@ -173,11 +185,11 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 		else if (language.equals("en"))
 			languageField.setValue("English");
 		else if (language.equals("fr"))
-			languageField.setValue("Francés");
+			languageField.setValue("Française");
 		else if (language.equals("zh"))
 			languageField.setValue("简体中文");
 		else
-			languageField.setValue("English");
+			languageField.setValue("Español");
     }
 	    
 
