@@ -126,9 +126,15 @@ public class MenuLayout extends AbstractCustomComponent implements IMenuLayout, 
 		aboutViewForm = new AboutViewForm();
 		helpPopupButton.addComponent(aboutViewForm);
 		
+		// TODO: analize konekti message architecture
+		helpPopupButton.setVisible(false);
+		
 		messageViewForm = new MessageViewForm();
 		messageViewForm.addListenerMessageEvent(this);
 		messagePopupButton.addComponent(messageViewForm);
+		
+		// TODO: analize konekti message architecture
+		messagePopupButton.setVisible(false);
 	}
 		
 	@Override

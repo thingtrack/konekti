@@ -80,22 +80,6 @@ public class ProfileSettingsViewForm extends AbstractViewForm {
 		setCompositionRoot(mainLayout);
 
 		// TODO add user code here
-		/*languageField.addListener(new ValueChangeListener() {			
-			@Override
-			public void valueChange(ValueChangeEvent event) {
-				if (event.getProperty().getValue().toString().equals("Español"))
-					user.setDefaultLocale("es-ES");
-				else if (event.getProperty().getValue().toString().equals("English"))
-					user.setDefaultLocale("en-US");
-				else if (event.getProperty().getValue().toString().equals("Française"))
-					user.setDefaultLocale("fr-FR");
-				else if (event.getProperty().getValue().toString().equals("简体中文"))
-					user.setDefaultLocale("zh-CN");
-				else
-					user.setDefaultLocale("es-ES");
-				
-			}
-		});*/
 		
 		applySettingsButton.addListener(new ClickListener() {			
 			@Override
