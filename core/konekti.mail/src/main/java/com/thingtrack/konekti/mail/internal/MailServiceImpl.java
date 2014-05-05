@@ -37,7 +37,8 @@ public class MailServiceImpl implements MailService {
 	private int port;
 	private String username;
 	private String password;
-	private boolean sslFlag;
+	private 
+	boolean sslFlag;
 	private boolean tlsFlag;
 	
 	private JavaMailSenderImpl javaMailSender;
@@ -77,8 +78,8 @@ public class MailServiceImpl implements MailService {
 	private void configureMailSender() {
 		javaMailSender = new JavaMailSenderImpl();
 		Properties javaMailProperties = new Properties();
-		//javaMailProperties.put("mail.smtp.ssl.enable", sslFlag);
 		javaMailProperties.put("mail.smtp.starttls.enable", tlsFlag);
+		javaMailProperties.put("mail.smtp.ssl.enable", sslFlag);
 		
 		javaMailSender.setHost(host);
 		javaMailSender.setPort(port);
@@ -95,6 +96,7 @@ public class MailServiceImpl implements MailService {
         // configure mail helper
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true); // configure multipart email configuration: css and images inside
+		helper.setFrom(username);
 		helper.setTo(emailTo);
 		helper.setSubject(subject);
 		helper.setText(text, true); // configure html email

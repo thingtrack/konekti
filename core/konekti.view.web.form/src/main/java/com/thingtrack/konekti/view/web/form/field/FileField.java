@@ -5,8 +5,8 @@ import java.io.Serializable;
 import org.vaadin.addon.customfield.CustomField;
 
 import com.thingtrack.konekti.view.addon.ui.UploadViewForm;
-
 import com.vaadin.data.Property;
+import com.vaadin.terminal.Resource;
 import com.vaadin.terminal.ThemeResource;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickListener;
@@ -33,6 +33,13 @@ public class FileField extends CustomField {
 		
 	}
 	
+	@Override
+    public void setIcon(Resource icon) {
+		btnAttach.setIcon(new ThemeResource("../konekti/images/icons/paper-clip.png"));
+		
+        requestRepaint();
+    }
+    
 	public FileField(byte[] file) {
 		buildMainLayout();
 		setCompositionRoot(mainLayout);
