@@ -55,7 +55,7 @@
 			<artifactId>org.apache.servicemix.bundles.velocity</artifactId>
 			<version>1.7_6</version>
 			<scope>provided</scope>
-		</dependency>		
+		</dependency>
 	</dependencies>
 
 	<!-- ================================================ -->

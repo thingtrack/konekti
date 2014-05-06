@@ -4,5 +4,5 @@ import java.util.HashMap;
 
 public interface MailService {
 	public void sendMessage(String emailTo, String subject, String template, HashMap<String, Object> staticResources, HashMap<String, Object> dynamicResources) throws Exception;
-	
+	public void sendMessage(String emailFrom, String emailTo, String subject, String template, HashMap<String, Object> staticResources, HashMap<String, Object> dynamicResources) throws Exception;
 }
