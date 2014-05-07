@@ -130,6 +130,7 @@ public class ScheduleServiceTracker extends ServiceTracker {
 			    catch(Exception ex) {
 			    	ex.getMessage();
 			    	
+			    	return;
 			    }
 			      
 			    Integer areaId = null;

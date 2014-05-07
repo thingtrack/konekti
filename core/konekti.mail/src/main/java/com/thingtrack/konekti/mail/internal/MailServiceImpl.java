@@ -97,7 +97,7 @@ public class MailServiceImpl implements MailService {
 	
 	@Override
 	public void sendMessage(String emailFrom, String emailTo, String subject, String template, HashMap<String, Object> staticResources, HashMap<String, Object> dynamicResources) throws Exception {		
-		String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, template, dynamicResources);
+		String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, template, "UTF-8", dynamicResources);
 		
         // configure mail helper
 		MimeMessage message = javaMailSender.createMimeMessage();
