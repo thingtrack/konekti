@@ -60,6 +60,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>portallayout</artifactId>
+			<version>1.3.1</version>
+			<scope>provided</scope>
+		</dependency>
+				
+		<dependency>
 			<groupId>org.dellroad</groupId>
 			<artifactId>dellroad-stuff-vaadin</artifactId>
 			<version>1.0.284</version>

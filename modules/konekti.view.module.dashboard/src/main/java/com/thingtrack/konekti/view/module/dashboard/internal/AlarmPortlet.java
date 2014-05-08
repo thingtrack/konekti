@@ -41,7 +41,7 @@ public class AlarmPortlet extends KonektiPortlet {
 		// STEP 01: create grid view for slide Organization View
 		try {
 			dgAlarm.setBindingSource(bsAlarm);
-			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmType.description", "message",	"alarmDate", "alarmStatus.description" });
+			dgAlarm.setVisibleColumns(new String[] { "area.description", "alarmType.description", "message", "alarmDate", "alarmStatus.description" });
 			dgAlarm.setColumnHeaders(new String[] { "Area Trabajo",  "Tipo", "Mensaje", "Fecha Alarma", "Estado" });
 
 		} catch (Exception ex) {
@@ -84,6 +84,18 @@ public class AlarmPortlet extends KonektiPortlet {
     		
 		// top-level component properties
 		addComponent(dgAlarm);
+		
+	}
+    
+	@Override
+	protected void updateLabels() {
+		dgAlarm.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.caption"));
+		
+		dgAlarm.setColumnHeaders(new String[] { getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.column.area"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.column.type"), 
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.column.message"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.column.date"),
+				  getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.AlarmPortlet.dgAlarm.column.status")});
 		
 	}
 }

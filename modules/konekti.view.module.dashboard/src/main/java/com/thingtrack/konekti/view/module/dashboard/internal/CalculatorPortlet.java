@@ -124,4 +124,11 @@ public class CalculatorPortlet extends KonektiPortlet implements ClickListener {
 		addComponent(layout);
 		
 	}
+    
+	@Override
+	protected void updateLabels() {
+	    layout.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.CalculatorPortlet.layout.caption"));
+	    
+	}
+	
 }

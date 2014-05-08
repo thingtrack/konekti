@@ -7,6 +7,7 @@ import org.vaadin.sasha.portallayout.PortalLayout.PortletCollapseEvent;
 import org.vaadin.sasha.portallayout.PortalLayout.PortletCollapseListener;
 import org.vaadin.sasha.portallayout.event.Context;
 
+import com.thingtrack.konekti.view.addon.ui.AbstractPortalLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 
@@ -46,7 +47,8 @@ public class KonektiPortal extends Panel implements PortletCloseListener, Portle
 		
 	}
 
-	public class KonektiPortlet extends PortalLayout {	        
+	//public class KonektiPortlet extends PortalLayout {	        
+	public class KonektiPortlet extends AbstractPortalLayout {
 		public KonektiPortlet() {
 			setWidth("100%");
 			setHeight("100%");
@@ -60,6 +62,11 @@ public class KonektiPortal extends Panel implements PortletCloseListener, Portle
 		public KonektiPortal getKonektiPortal() {
 			return KonektiPortal.this;
 			
+		}
+
+		@Override
+		protected void updateLabels() {
+
 		}
 	}
 }
