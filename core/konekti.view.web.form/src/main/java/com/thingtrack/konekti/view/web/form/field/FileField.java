@@ -66,7 +66,8 @@ public class FileField extends CustomField {
 						if (uploadViewForm.getFile() != null) 
 							btnAttach.setIcon(new ThemeResource("../konekti/images/icons/servicedesigner-module/tick.png"));						
 						else 							
-							btnAttach.setIcon(null);																				
+							//btnAttach.setIcon(null);
+							btnAttach.setIcon(new ThemeResource("../konekti/images/icons/paper-clip.png"));
 												
 						if (listenerChangeAttachment != null)
 							listenerChangeAttachment.attachmentChange(new AttachmentChangeEvent(event.getComponent(), FileField.this.file , fileName));
