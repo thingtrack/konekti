@@ -187,12 +187,12 @@ public class SupplierViewForm extends AbstractViewForm {
 	
 	private void loadData() throws IllegalArgumentException, Exception {		
 		bcSupplierType.removeAllItems();
-		bcSupplierType.addAll(supplierTypeService.getAll());
+		bcSupplierType.addAll(supplierTypeService.getAll(context.getUser().getActiveOrganization()));
 		
 		supplierTypeField.setContainerDataSource(bcSupplierType);
 		
 		bcSupplierGroup.removeAllItems();
-		bcSupplierGroup.addAll(supplierGroupService.getAll());
+		bcSupplierGroup.addAll(supplierGroupService.getAll(context.getUser().getActiveOrganization()));
 		
 		supplierGroupField.setContainerDataSource(bcSupplierGroup);
 		

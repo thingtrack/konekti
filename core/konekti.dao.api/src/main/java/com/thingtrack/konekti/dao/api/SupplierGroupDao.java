@@ -13,7 +13,10 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.SupplierGroup;
 
 /**
@@ -23,6 +26,7 @@ import com.thingtrack.konekti.domain.SupplierGroup;
  *
  */
 public interface SupplierGroupDao extends Dao<SupplierGroup, Integer> {
+	public List<SupplierGroup> getAll(Organization organization) throws Exception;
 	
 	/**
 	 * Supplier Group by its name

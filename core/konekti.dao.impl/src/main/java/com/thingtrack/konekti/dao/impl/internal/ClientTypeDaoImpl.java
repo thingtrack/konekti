@@ -13,11 +13,14 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ClientTypeDao;
 import com.thingtrack.konekti.domain.ClientType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
@@ -25,6 +28,15 @@ import com.thingtrack.konekti.domain.ClientType;
  */
 @Repository
 public class ClientTypeDaoImpl extends JpaDao<ClientType, Integer> implements ClientTypeDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ClientType> getAll(Organization organization) throws Exception {
+		return (List<ClientType>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
+				.setParameter("organization", organization).getResultList();
+		
+	}
+	
 	@Override
 	public ClientType getByCode(String code) throws Exception {
 		ClientType clientType = (ClientType)getEntityManager()

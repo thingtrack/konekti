@@ -16,13 +16,14 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.ClientType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
  *
  */
 public interface ClientTypeService {
-	public List<ClientType> getAll() throws Exception;
+	public List<ClientType> getAll(Organization organization) throws Exception;
 	public ClientType get( Integer clientGroupId ) throws Exception;
 	public ClientType getByCode( String code ) throws Exception;
 	public ClientType save(ClientType clientType) throws Exception;

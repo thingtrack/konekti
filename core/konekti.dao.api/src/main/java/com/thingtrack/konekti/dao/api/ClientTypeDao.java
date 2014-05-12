@@ -13,9 +13,12 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.CalendarGroup;
 import com.thingtrack.konekti.domain.ClientType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * {@link CalendarGroup} Data Access Layer
@@ -24,6 +27,8 @@ import com.thingtrack.konekti.domain.ClientType;
  *
  */
 public interface ClientTypeDao extends Dao<ClientType, Integer> {
+	
+	public List<ClientType> getAll(Organization organization) throws Exception;
 	
 	/**
 	 * Obtains an {@link ClientType} by its code

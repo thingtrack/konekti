@@ -15,6 +15,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.SupplierType;
 
 /**
@@ -22,7 +23,7 @@ import com.thingtrack.konekti.domain.SupplierType;
  *
  */
 public interface SupplierTypeService {
-	public List<SupplierType> getAll() throws Exception;
+	public List<SupplierType> getAll(Organization organization) throws Exception;
 	public SupplierType get( Integer supplierId ) throws Exception;
 	public SupplierType getByName( String name ) throws Exception;
 	public SupplierType save(SupplierType supplierType) throws Exception;

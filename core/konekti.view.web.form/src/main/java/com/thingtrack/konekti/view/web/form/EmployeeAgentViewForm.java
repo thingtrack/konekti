@@ -209,7 +209,7 @@ public class EmployeeAgentViewForm extends AbstractViewForm {
 
 	private void loadData() throws IllegalArgumentException, Exception {		
 		bcEmployeeAgentType.removeAllItems();
-		bcEmployeeAgentType.addAll(employeeAgentTypeService.getAll());		
+		bcEmployeeAgentType.addAll(employeeAgentTypeService.getAll(context.getUser().getActiveOrganization()));		
 
 		employeeAgentTypeField.setContainerDataSource(bcEmployeeAgentType);
 

@@ -13,11 +13,14 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.EmployeeAgentTypeDao;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
@@ -25,6 +28,15 @@ import com.thingtrack.konekti.domain.EmployeeAgentType;
  */
 @Repository
 public class EmployeeAgentTypeDaoImpl extends JpaDao<EmployeeAgentType, Integer> implements EmployeeAgentTypeDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<EmployeeAgentType> getAll(Organization organization) throws Exception {
+		return (List<EmployeeAgentType>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
+				.setParameter("organization", organization).getResultList();
+		
+	}
+	
 	@Override
 	public EmployeeAgentType getByName(String name) throws Exception {
 		EmployeeAgentType employeeAgentType = (EmployeeAgentType)getEntityManager()

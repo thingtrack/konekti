@@ -205,12 +205,12 @@ public class ClientViewForm extends AbstractViewForm {
 	
 	private void loadData() throws IllegalArgumentException, Exception {		
 		bcClientType.removeAllItems();
-		bcClientType.addAll(clientTypeService.getAll());
+		bcClientType.addAll(clientTypeService.getAll(context.getUser().getActiveOrganization()));
 		
 		clientTypeField.setContainerDataSource(bcClientType);
 		
 		bcClientGroup.removeAllItems();
-		bcClientGroup.addAll(clientGroupService.getAll());
+		bcClientGroup.addAll(clientGroupService.getAll(context.getUser().getActiveOrganization()));
 		
 		clientGroupField.setContainerDataSource(bcClientGroup);
 		

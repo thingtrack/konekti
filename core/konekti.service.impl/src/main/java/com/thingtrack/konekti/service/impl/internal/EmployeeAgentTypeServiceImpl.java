@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.dao.api.EmployeeAgentTypeDao;
 import com.thingtrack.konekti.service.api.EmployeeAgentTypeService;
 
@@ -30,8 +31,8 @@ public class EmployeeAgentTypeServiceImpl implements EmployeeAgentTypeService {
 	private EmployeeAgentTypeDao employeeAgentTypeDao;
 
 	@Override
-	public List<EmployeeAgentType> getAll() throws Exception {
-		return this.employeeAgentTypeDao.getAll();
+	public List<EmployeeAgentType> getAll(Organization organization) throws Exception {
+		return this.employeeAgentTypeDao.getAll(organization);
 		
 	}
 

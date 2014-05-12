@@ -13,11 +13,14 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.api.ClientGroupDao;
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.domain.ClientGroup;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
@@ -25,6 +28,15 @@ import com.thingtrack.konekti.domain.ClientGroup;
  */
 @Repository
 public class ClientGroupDaoImpl extends JpaDao<ClientGroup, Integer> implements ClientGroupDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ClientGroup> getAll(Organization organization) throws Exception {
+		return (List<ClientGroup>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
+				.setParameter("organization", organization).getResultList();
+		
+	}
+	
 	@Override
 	public ClientGroup getByName(String name) throws Exception {
 		ClientGroup clientGroup = (ClientGroup)getEntityManager()

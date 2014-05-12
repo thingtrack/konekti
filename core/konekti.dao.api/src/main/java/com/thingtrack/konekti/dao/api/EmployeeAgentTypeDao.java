@@ -13,8 +13,11 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * Employee Agent Type Data Access Layer
@@ -23,6 +26,7 @@ import com.thingtrack.konekti.domain.EmployeeAgentType;
  *
  */
 public interface EmployeeAgentTypeDao extends Dao<EmployeeAgentType, Integer> {
+	public List<EmployeeAgentType> getAll(Organization organization) throws Exception;
 	
 	/**
 	 * Obtains the {@link EmployeeAgentType} associated to the {@code name}
