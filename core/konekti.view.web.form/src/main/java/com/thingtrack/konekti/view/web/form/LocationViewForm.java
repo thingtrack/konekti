@@ -66,7 +66,7 @@ public class LocationViewForm extends CustomComponent {
 		// configure Location Type data
 		locationTypeField.setNullSelectionAllowed(false);
 		locationTypeField.setItemCaptionMode(Select.ITEM_CAPTION_MODE_PROPERTY);
-		locationTypeField.setItemCaptionPropertyId("code");
+		locationTypeField.setItemCaptionPropertyId("description");
 								
 		// get form services from OSGi Service Registry
 		getServices();

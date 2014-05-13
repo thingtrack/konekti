@@ -138,7 +138,7 @@ public class ProductViewForm extends AbstractViewForm {
 		productSupplierField.setContainerDataSource(bcSupplier);
 		
 		bcProductType.removeAllItems();
-		bcProductType.addAll(productTypeService.getAll());		
+		bcProductType.addAll(productTypeService.getAll(context.getUser().getActiveArea()));		
 		
 		productTypeField.setContainerDataSource(bcProductType);
 	}

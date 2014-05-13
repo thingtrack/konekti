@@ -767,7 +767,7 @@ public class OrganizationView extends AbstractView
 		ACTION_DELETE_LOCATION.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.remove.location.caption"));
 		
 		ACTION_ADD_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.add.area.caption"));
-		ACTION_EDIT_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.edit.location.caption"));
+		ACTION_EDIT_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.edit.area.caption"));
 		ACTION_DELETE_AREA.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.organization.internal.OrganizationView.action.remove.area.caption"));
 		
 	}
