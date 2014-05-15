@@ -272,7 +272,7 @@ public class BoxToolbar extends AbstractToolbar {
 	}
 	
 	private void importFile() throws IllegalArgumentException, IllegalAccessException {
-		final UploadViewForm uploadViewForm = new UploadViewForm(null);
+		final UploadViewForm uploadViewForm = new UploadViewForm(null, null);
 		
 		uploadViewForm.setWidth("300px");
 		uploadViewForm.setHeight("-1px");
