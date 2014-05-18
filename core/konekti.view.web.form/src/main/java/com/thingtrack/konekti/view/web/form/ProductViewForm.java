@@ -265,7 +265,7 @@ public class ProductViewForm extends AbstractViewForm {
 		mainLayout.addComponent(areasField, "top:100.0px;left:365.0px;");
 		
 		// productUnitsField
-		productUnitsField = new ProductUnitCollectionField();
+		productUnitsField = new ProductUnitCollectionField(context);
 		productUnitsField.setImmediate(false);
 		productUnitsField.setWidth("325px");
 		productUnitsField.setHeight("103px");
