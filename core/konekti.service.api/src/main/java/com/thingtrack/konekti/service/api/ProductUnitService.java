@@ -15,6 +15,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.ProductUnit;
 
 /**
@@ -22,7 +23,7 @@ import com.thingtrack.konekti.domain.ProductUnit;
  *
  */
 public interface ProductUnitService {
-	public List<ProductUnit> getAll() throws Exception;
+	public List<ProductUnit> getAll(Area area) throws Exception;
 	public ProductUnit get( Integer productUnitId ) throws Exception;
 	public ProductUnit getByCode( String code ) throws Exception;
 	public ProductUnit save(ProductUnit productUnit) throws Exception;

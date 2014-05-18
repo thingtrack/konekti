@@ -13,7 +13,10 @@
  */
 package com.thingtrack.konekti.dao.api;
 
+import java.util.List;
+
 import com.thingtrack.konekti.dao.template.Dao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.ProductUnit;
 
 /**
@@ -21,6 +24,7 @@ import com.thingtrack.konekti.domain.ProductUnit;
  *
  */
 public interface ProductUnitDao extends Dao<ProductUnit, Integer> {
+	public List<ProductUnit> getAll(Area area) throws Exception;
 	public ProductUnit getByCode(String code) throws Exception;
 	
 }
