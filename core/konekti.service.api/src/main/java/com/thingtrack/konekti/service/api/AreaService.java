@@ -31,4 +31,5 @@ public interface AreaService {
 	public void delete(Area area) throws Exception;
 	public Area createEntity(Location location) throws Exception;
 	public List<Area> getAll(User user) throws Exception;
+	public List<Area> getAllByOrganization(User user) throws Exception;
 }

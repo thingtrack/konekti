@@ -29,5 +29,7 @@ public interface JobDao extends Dao<Job, Integer> {
 	 * @return {@link Job} by its name and group
 	 * @throws Exception if there is no group associated
 	 */
-	public Job getByGroupName(String group, String name) throws Exception;
+	public List<Job> getByGroupName(String group, String name) throws Exception;
+	
+	public Job getByGroupNameAndArea(Integer AreaId, String group, String name) throws Exception;
 }

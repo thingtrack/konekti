@@ -42,10 +42,15 @@ public class JobServiceImpl implements JobService {
 	}
 	
 	@Override
-	public Job getByGroupName(String group, String name) throws Exception {
+	public List<Job> getByGroupName(String group, String name) throws Exception {
 		return jobDao.getByGroupName(group, name);
 	}
 
+	@Override
+	public Job getByGroupNameAndArea(Integer areaId, String group, String name) throws Exception {
+		return jobDao.getByGroupNameAndArea(areaId, group, name);
+	}
+	
 	@Override
 	public void setLastExecution(Job job) throws Exception {
 		job.setLastExecution(new Date());

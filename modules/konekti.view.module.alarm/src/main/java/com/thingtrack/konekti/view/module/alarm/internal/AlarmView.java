@@ -95,15 +95,7 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 			// select the first item if exist
 			if (bsAlarm.size() > 0)
 				bsAlarm.setItemId(bsAlarm.getIdByIndex(0));
-			
-//			// TEST: open Vehicle module version 0.0.1.SNAPSHOT
-//			try {
-//				context.openBundle("com.thingtrack.bustrack.view.module.vehicle", "0.0.1.SNAPSHOT");
-//			}
-//			catch (Exception ex) {
-//				throw new  RuntimeException(ex.getMessage());
-//			}
-			
+						
 		} catch (IllegalArgumentException e) {
 			throw new RuntimeException("¡No se pudo refrescar las Alarmas!", e);
 		} catch (Exception e) {
