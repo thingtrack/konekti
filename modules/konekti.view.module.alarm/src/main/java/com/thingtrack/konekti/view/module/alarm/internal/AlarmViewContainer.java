@@ -3,9 +3,9 @@ package com.thingtrack.konekti.view.module.alarm.internal;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.schedule.JobManagerService;
 import com.thingtrack.konekti.service.api.JobService;
 import com.thingtrack.konekti.service.api.AlarmService;
 import com.thingtrack.konekti.view.addon.ui.AbstractViewContainer;
@@ -36,12 +36,12 @@ public class AlarmViewContainer extends AbstractViewContainer {
 	@Autowired
 	private JobService jobService;
 	@Autowired	
-	private Scheduler scheduler;
+	private JobManagerService jobManagerService;
 	
 	// Thread Local Bundle Business Services
 	private static ThreadLocal<AlarmService> threadAlarmService = new ThreadLocal<AlarmService>();
 	private static ThreadLocal<JobService> threadJobService = new ThreadLocal<JobService>();
-	private static ThreadLocal<Scheduler> threadScheduler = new ThreadLocal<Scheduler>();
+	private static ThreadLocal<JobManagerService> threadJobManagerService = new ThreadLocal<JobManagerService>();
 	
 	private IWorkbenchContext context; 
 	
@@ -69,7 +69,7 @@ public class AlarmViewContainer extends AbstractViewContainer {
 		// initialize thread local bundle services
 		threadAlarmService.set(alarmService);
 		threadJobService.set(jobService);
-		threadScheduler.set(scheduler);
+		threadJobManagerService.set(jobManagerService);
 		
 		// add all views controlled by SliderView Component
 		alarmView = new AlarmView(context, this);
@@ -87,7 +87,7 @@ public class AlarmViewContainer extends AbstractViewContainer {
 		// destroy thread local bundle services
 		threadAlarmService.set(null);
 		threadJobService.set(null);
-		threadScheduler.set(null);
+		threadJobManagerService.set(null);
 	}
 	
     public static AlarmService getAlarmService() {
@@ -100,8 +100,8 @@ public class AlarmViewContainer extends AbstractViewContainer {
         
     }
     
-    public static Scheduler getScheduler() {
-        return threadScheduler.get();
+    public static JobManagerService getJobManagerService() {
+        return threadJobManagerService.get();
         
     }
     

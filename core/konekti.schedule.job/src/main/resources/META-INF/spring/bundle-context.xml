@@ -11,13 +11,8 @@
 	<!-- regular spring configuration file defining the beans for this bundle. 
 		The configuration of OSGi definitions is kept in a separate configuration 
 		file so that this file can easily be used for integration testing outside 
-		of an OSGi environment -->
-	<context:annotation-config/>
- 	<context:spring-configured />		
-    <context:load-time-weaver aspectj-weaving="on"/>
-
-    <context:component-scan base-package="com.thingtrack.konekti.schedule.job" />
-        	
+		of an OSGi environment -->        	
 	<!-- Job bean test-->
-	<bean id="jobTest" class="com.thingtrack.konekti.schedule.job.JobTest" />		
+	<bean id="jobTest" class="com.thingtrack.konekti.schedule.job.JobTest" />
+		
 </beans>

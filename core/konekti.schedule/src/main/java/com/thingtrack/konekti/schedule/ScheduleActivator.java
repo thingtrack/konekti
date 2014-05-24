@@ -15,21 +15,24 @@ import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 
 import com.thingtrack.konekti.domain.Job;
+import com.thingtrack.konekti.schedule.internal.JobManagerServiceImpl;
 import com.thingtrack.konekti.service.api.JobService;
 
 public class ScheduleActivator implements BundleActivator {
 	private BundleContext bundleContext;	
-	private ServiceRegistration schedulerService;
+	private ServiceRegistration schedulerServiceRegistration;
+	private ServiceRegistration jobManagerServiceRegistration;
 	private JobServiceTracker jobServiceTracker;
 	
 	private static JobService jobService;	
 	private static Scheduler scheduler;
-		
-	private static String JOB_LISTENER_NAME = "thingtrack_listener";
-	public static String JOB_SEPARATOR = "@";
+	private static JobManagerService jobManagerService;
 	
-	private static boolean OK = false;
-	private static boolean ERROR = true;
+	private static final String JOB_LISTENER_NAME = "thingtrack_listener";
+	public static final String JOB_SEPARATOR = "@";
+	
+	private static final boolean OK = false;
+	private static final boolean ERROR = true;
 	
 	public void start(BundleContext context) throws Exception {
 		this.bundleContext = context;
@@ -104,18 +107,25 @@ public class ScheduleActivator implements BundleActivator {
 			
 		}
 		
-		// create Job Service Tracker
-		jobServiceTracker = new JobServiceTracker(context);
+		// create Job manager service and register
+		jobManagerService = new JobManagerServiceImpl(context);
+		
+		context.registerService("com.thingtrack.konekti.schedule.JobManagerService", jobManagerService, null);
+		
+		// create Job Service Tracker and register
+		jobServiceTracker = new JobServiceTracker(context, jobManagerService);
 		jobServiceTracker.open();
 		
-		// register scheduler on osgi service registry
-		schedulerService = context.registerService("org.quartz.Scheduler", scheduler, null);
-				
+		schedulerServiceRegistration = context.registerService("org.quartz.Scheduler", scheduler, null);
+		
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		if (schedulerService != null) 
-			schedulerService.unregister();		
+		if (jobManagerServiceRegistration != null) 
+			jobManagerServiceRegistration.unregister();	
+		
+		if (schedulerServiceRegistration != null) 
+			schedulerServiceRegistration.unregister();		
 
 		if (scheduler != null)
 			scheduler.shutdown();
@@ -124,7 +134,8 @@ public class ScheduleActivator implements BundleActivator {
 			jobServiceTracker.close();
 
 
-		schedulerService = null;
+		jobManagerServiceRegistration = null;
+		schedulerServiceRegistration = null;
 		scheduler = null;
 		jobServiceTracker = null;
 	}

@@ -15,8 +15,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-
-
 	<build>
 		<plugins>
 			<plugin>
@@ -34,7 +32,7 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: com.vaadin.ui, org.tepi.filtertable, org.quartz
+Import-Package: com.vaadin.ui, org.tepi.filtertable
 ]]>
 					</manifestTemplate>
 				</configuration>
@@ -64,17 +62,19 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable, org.quartz
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>2.1.6</version>
-			<scope>provided</scope>
-		</dependency>
+
 
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
 			<artifactId>buttongroup</artifactId>
 			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.thingtrack</groupId>
+			<artifactId>konekti.schedule</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

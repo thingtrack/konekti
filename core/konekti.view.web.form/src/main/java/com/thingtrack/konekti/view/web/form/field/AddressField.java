@@ -2,7 +2,9 @@ package com.thingtrack.konekti.view.web.form.field;
 
 import java.io.Serializable;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 import org.vaadin.addons.locationtextfield.GeocodedLocation;
 import org.vaadin.addons.locationtextfield.GoogleGeocoder;
 import org.vaadin.addons.locationtextfield.LocationTextField;
@@ -43,7 +45,6 @@ public class AddressField extends AbstractField {
 	private Address address;
 
 	// Enterprise service
-	@Autowired
 	private AddressService addressService;
 
 	public AddressField() {
@@ -80,16 +81,21 @@ public class AddressField extends AbstractField {
 						//openLayersMap.zoomToExtent(bounds);
 						openLayersMap.setZoom(18);
 
-						// Check if the address already exists in the database
+						// Check if the address already exists in the database and reuse or create a new one
 						address = getAddressByLontideLatitude(geocodedLocation.getLon(), geocodedLocation.getLat());
 						
-						if(!(address instanceof Address))
+						if(address == null) {
+							address = new Address();
 							address = fulfillAddress(geocodedLocation);
+						}
 						
 						if(listenerAddressChange != null)
 							listenerAddressChange.addressChange(new AddressChangeEvent(address));
 					}
 				});
+		
+		// get form services from OSGi Service Registry
+		getServices();
 
 	}
 
@@ -159,7 +165,7 @@ public class AddressField extends AbstractField {
 			markerLayer.removeComponent(addressMarker);
 
 		// Create stops
-		if (address == null) {
+		/*if (address == null) {
 			address = new Address();
 
 			newDataSource.setValue(address);
@@ -168,11 +174,13 @@ public class AddressField extends AbstractField {
 			addressTextField.setValue(null);
 
 			return;
-		}
+		}*/
 
 		// Origin Stop
-		GeocodedLocation addressGeocoded = fulfillGeocodedAddress(address);
-		addressTextField.setLocation(addressGeocoded);
+		if (address != null) {
+			GeocodedLocation addressGeocoded = fulfillGeocodedAddress(address);
+			addressTextField.setLocation(addressGeocoded);
+		}
 
 		super.setPropertyDataSource(newDataSource);
 
@@ -301,6 +309,22 @@ public class AddressField extends AbstractField {
 
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private void getServices() {
+		try {
+			BundleContext bundleContext = FrameworkUtil.getBundle(AddressField.class).getBundleContext();
+
+			ServiceReference addressServiceReference = bundleContext.getServiceReference(AddressService.class.getName());
+			addressService = AddressService.class.cast(bundleContext.getService(addressServiceReference));
+			
+		}
+		catch (Exception e) {
+			e.getMessage();
+			
+		}
+		
+	}
+	
 	@Override
 	protected void updateLabels() {
 		addressTextField.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.web.form.field.AddressField.addressTextField.caption"));

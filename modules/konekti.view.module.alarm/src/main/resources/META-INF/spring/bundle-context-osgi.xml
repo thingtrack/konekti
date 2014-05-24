@@ -11,7 +11,7 @@
 
 	<osgi:reference id="alarmService" interface="com.thingtrack.konekti.service.api.AlarmService" />
 	<osgi:reference id="jobService" interface="com.thingtrack.konekti.service.api.JobService" />
-	<osgi:reference id="scheduler" interface="org.quartz.Scheduler" />
+	<osgi:reference id="jobManagerService" interface="com.thingtrack.konekti.schedule.JobManagerService" />
 
 	<osgi:service ref="alarmModule" interface="com.thingtrack.konekti.view.kernel.IModule"/>
 		

@@ -17,16 +17,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>2.1.6</version>
-			<scope>provided</scope>
-		</dependency>
-
-
-		<dependency>
 			<groupId>com.thingtrack</groupId>
-			<artifactId>konekti.domain</artifactId>
+			<artifactId>workshoptrack.domain</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
@@ -40,8 +32,22 @@
 
 		<dependency>
 			<groupId>com.thingtrack</groupId>
+			<artifactId>workshoptrack.service.api</artifactId>
+			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.thingtrack</groupId>
 			<artifactId>konekti.schedule</artifactId>
 			<version>0.0.1.SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.1.6</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

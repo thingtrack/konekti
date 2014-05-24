@@ -4,13 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
 import org.vaadin.dialogs.ConfirmDialog;
 
 import com.thingtrack.konekti.domain.Job;
+import com.thingtrack.konekti.schedule.JobManagerService;
 import com.thingtrack.konekti.service.api.JobService;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
@@ -71,9 +68,7 @@ public class JobView extends AbstractView
 	private IWorkbenchContext context;
 	private IViewContainer viewContainer;
 	
-	private Scheduler scheduler;
-	
-	private static String JOB_SEPARATOR = "@";
+	private JobManagerService jobManagerService;
 	
 	/**
 	 * The constructor should first build the main layout, set the
@@ -92,7 +87,7 @@ public class JobView extends AbstractView
 		this.viewContainer = viewContainer;
 		
 		this.jobService = AlarmViewContainer.getJobService();
-		this.scheduler = AlarmViewContainer.getScheduler();
+		this.jobManagerService = AlarmViewContainer.getJobManagerService();
 		
 		// initialize datasource views
 		initView();
@@ -107,9 +102,9 @@ public class JobView extends AbstractView
 		// STEP 01: create grid view for slide Organization View
 		try {
 			dgJob.setBindingSource(bsJob);
-			dgJob.addGeneratedColumn(AreaNameColumn.AREA_NAME_COLUMN_ID, new AreaNameColumn());
+			dgJob.addGeneratedColumn(JobNameColumn.JOB_NAME_COLUMN_ID, new JobNameColumn());
 			dgJob.addGeneratedColumn(JobTriggerTypeColumn.JOB_TRIGGER_TYPE_DESCRIPTION_COLUMN_ID, new JobTriggerTypeColumn());
-			dgJob.setVisibleColumns(new String[] {AreaNameColumn.AREA_NAME_COLUMN_ID, "jobName", "jobGroup", "description", JobTriggerTypeColumn.JOB_TRIGGER_TYPE_DESCRIPTION_COLUMN_ID, "jobTriggerPriority",
+			dgJob.setVisibleColumns(new String[] {JobNameColumn.JOB_NAME_COLUMN_ID, "jobName", "jobGroup", "description", JobTriggerTypeColumn.JOB_TRIGGER_TYPE_DESCRIPTION_COLUMN_ID, "jobTriggerPriority",
 					"startTime", "endTime", "jobInterval", "repeatCount", "jobCalendar", "future", "future_time", "cronExpression", "lastExecution", "error", "active" });
 			dgJob.setColumnHeaders(new String[] { "Ubicación", "Nombre", "Grupo", "Descripción", "Tipo Disparador", "Prioridad Disparador", "Fecha Comienzo", "Fecha Fin",
 					"Intervalo [s]", "Repetición", "Calendario", "Futuro", "Fecha Futuro", "Expresión Cron", "Ultima Ejecución", "Error", "Activa"});			
@@ -233,6 +228,14 @@ public class JobView extends AbstractView
 			    	try {		
 			    		Job savingjob= event.getDomainEntity();
 			    		
+			    		// STEP01: schedule new job	
+			    		try {
+			    			jobManagerService.scheduleJob(savingjob);
+			    		} catch (Exception e) {
+			    			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+			    		}
+			    		
+			    		// STEP02: save new job scheduled
 			    		Job savedJob = jobService.save(savingjob);
 						
 						refreshDataGridView(savedJob);
@@ -265,17 +268,48 @@ public class JobView extends AbstractView
 			    public void windowDialogClose(WindowDialog<Job>.CloseWindowDialogEvent<Job> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
 			    		return ;
-			    	
-			    	try {		
-			    		Job savingJob = event.getDomainEntity();			    		
+			    				    		
+			    		final Job savingJob = event.getDomainEntity();			    		
 			    		
-			    		Job savedJob = jobService.save(savingJob);			    		
-			    		
-						refreshDataGridView(savedJob);
-					} catch (Exception e) {
-						throw new RuntimeException("¡No se pudo modificar el job!", e);
-						
-					}
+				    	ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.edit.tittle"),
+								getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.edit.confirmation"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.edit.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.edit.confirmation.no"),
+						        new ConfirmDialog.Listener() {
+
+						            public void onClose(ConfirmDialog dialog) {
+						                if (!dialog.isConfirmed()) {
+						                	try {
+												Job job = jobService.get(savingJob.getJobId());
+												
+												refreshDataGridView(job);
+											} catch (Exception e) {
+												throw new RuntimeException("¡No se pudo recuperar el job seleccionado!", e);
+											}
+						                							            	
+						                }
+						                else {
+						                	// STEP01: reschedule job	
+								    		try {
+								    			jobManagerService.configure(savingJob);
+								    		} catch (Exception e) {
+								    			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+								    		}
+								    		
+								    		// STEP02: save job status rescheduled
+								    		Job savedJob;
+											try {
+												savedJob = jobService.save(savingJob);
+												
+												refreshDataGridView(savedJob);
+											} catch (Exception e) {
+												throw new RuntimeException("¡No se pudo modificar el job!", e);
+											}			    		
+								    		
+											
+						                }
+						                 
+						            }
+						        });
+				    	
 			    }
 
 			});
@@ -300,6 +334,14 @@ public class JobView extends AbstractView
 		            public void onClose(ConfirmDialog dialog) {
 		                if (dialog.isConfirmed()) {
 		            		try {
+					    		// STEP01: unschedule job	
+					    		try {
+					    			jobManagerService.deleteJob(editingJob);
+					    		} catch (Exception e) {
+					    			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+					    		}
+					    		
+					    		// STEP02: ssave job unscheduled
 		            			jobService.delete(editingJob);
 		            			
 		            			bsJob.removeItem(editingJob);
@@ -335,90 +377,66 @@ public class JobView extends AbstractView
 	
 	@Override
 	public void startJobButtonClick(JobToolbar.ClickNavigationEvent event) {
-		Job jobSelected = (Job) event.getRegister();		
-				
-		// STEP01: start job from scheduler
+		Job job = (Job) event.getRegister();		
+		
+		// STEP01: save job status started
 		try {
-			String quartzJobName = jobSelected.getArea().getAreaId() + JOB_SEPARATOR + jobSelected.getJobName();
-			String quartzJobGroup = jobSelected.getArea().getAreaId() + JOB_SEPARATOR + jobSelected.getJobGroup();
-						
-			// check if the job with this name, group is scheduled
-			JobKey jobKey = new JobKey(quartzJobName, quartzJobGroup);			
-			JobDetail jobDetail = scheduler.getJobDetail(jobKey);
+			job.setActive(true);			
+			jobService.save(job);
 			
-			if (jobDetail == null)
-				throw new RuntimeException("¡El job seleccionado no está planificado!");				
-			
-			scheduler.resumeJob(jobKey);
-			
-		} catch (SchedulerException e) {
-			throw new RuntimeException("¡No se pudo arrancar el job seleccionado!", e);
+			refreshDataGridView(job);
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo modificar el estado del job iniciado!", e);
 			
 		}
 		
-		// save job status
+		// STEP02: start job from scheduler		
 		try {
-			jobSelected.setActive(true);			
-			jobService.save(jobSelected);
-			
-			refreshDataGridView(jobSelected);
+			jobManagerService.resumeJob(job);
 		} catch (Exception e) {
-			throw new RuntimeException("¡No se pudo modificar el estado del job!", e);
-			
+			throw new RuntimeException("¡No se pudo iniciar el job seleccionado!", e);
 		}
-			
+					
 	}
 	
 	@Override
 	public void stopJobButtonClick(JobToolbar.ClickNavigationEvent event) {
-		Job jobSelected = (Job) event.getRegister();		
+		Job job = (Job) event.getRegister();		
 		
-		// STEP01: stop job from scheduler
+		// STEP01: save job status stopped
 		try {
-			String quartzJobName = jobSelected.getArea().getAreaId() + JOB_SEPARATOR + jobSelected.getJobName();
-			String quartzJobGroup = jobSelected.getArea().getAreaId() + JOB_SEPARATOR + jobSelected.getJobGroup();
+			job.setActive(false);
+			jobService.save(job);
 			
-			// check if the job with this name, group is scheduled
-			JobKey jobKey = new JobKey(quartzJobName, quartzJobGroup);			
-			JobDetail jobDetail = scheduler.getJobDetail(jobKey);
-			
-			if (jobDetail == null)
-				throw new RuntimeException("¡El job seleccionado no está planificado!");				
-			
-			
-			scheduler.pauseJob(jobKey);					
-			
-		} catch (SchedulerException e) {
-			throw new RuntimeException("¡No se pudo para el job seleccionado!", e);
-			
-		}
-		
-		// STEP02: save job status
-		try {
-			jobSelected.setActive(false);
-			jobService.save(jobSelected);
-			
-			refreshDataGridView(jobSelected);
+			refreshDataGridView(job);
 		} catch (Exception e) {
-			throw new RuntimeException("¡No se pudo modificar el estado del job!", e);
+			throw new RuntimeException("¡No se pudo modificar el estado del job parado!", e);
 		}
+		
+		// STEP02: stop job from scheduler		
+		try {
+			jobManagerService.pauseJob(job);
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+		}
+		
 	}
 	
-	private class AreaNameColumn implements ColumnGenerator {
+	private class JobNameColumn implements ColumnGenerator {
 
-		static final String AREA_NAME_COLUMN_ID = "area_name_column-id";
+		static final String JOB_NAME_COLUMN_ID = "job_name_column-id";
 		
 		@Override
 		public Object generateCell(CustomTable source, Object itemId, Object columnId) {
 			
-			Label areaNameLabel = new Label();
+			Label jobNameLabel = new Label();
 			
 			Job job = (Job) itemId;
 			
 			if(job.getArea() != null)
-				areaNameLabel.setValue(job.getArea().getName());
+				jobNameLabel.setValue(job.getArea().getName());
 			
-			return areaNameLabel;
+			return jobNameLabel;
 		}
 				
 	}

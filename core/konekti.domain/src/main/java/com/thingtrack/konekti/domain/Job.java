@@ -110,6 +110,13 @@ public class Job implements Serializable {
 	private Integer jobInterval = 1;
 	
 	/**
+	 * Repeat interval type
+	 */
+	@ManyToOne
+	@JoinColumn(name = "JOB_INTERVAL_TYPE_ID")	
+	private JobIntervalType jobIntervalType;
+	
+	/**
 	 * {@link JobTriggerType}
 	 * <p><ul>
 	 * <li>Simple
@@ -173,6 +180,14 @@ public class Job implements Serializable {
 	public enum JOB_TRIGGER_TYPE{		
 		SIMPLE,
 		CRON
+	} 
+	
+	public enum JOB_INTERVAL_TYPE{		
+		SECOND,
+		MINUTE,
+		HOUR,
+		DAY,
+		WEEK
 	} 
 	
 	/**
@@ -480,6 +495,14 @@ public class Job implements Serializable {
 	 */
 	public void setArea(Area area) {
 		this.area = area;
+	}
+
+	public JobIntervalType getJobIntervalType() {
+		return jobIntervalType;
+	}
+
+	public void setJobIntervalType(JobIntervalType jobIntervalType) {
+		this.jobIntervalType = jobIntervalType;
 	}
 
 

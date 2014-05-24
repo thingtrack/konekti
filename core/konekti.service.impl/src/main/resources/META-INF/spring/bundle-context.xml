@@ -66,6 +66,7 @@
 	<bean id="invoiceTypeService" class="com.thingtrack.konekti.service.impl.internal.InvoiceTypeServiceImpl"/>	
 	<bean id="jobService" class="com.thingtrack.konekti.service.impl.internal.JobServiceImpl"/>
 	<bean id="jobTriggerTypeService" class="com.thingtrack.konekti.service.impl.internal.JobTriggerTypeServiceImpl"/>
+	<bean id="jobIntervalTypeService" class="com.thingtrack.konekti.service.impl.internal.JobIntervalTypeServiceImpl"/>	
 	<bean id="knowledgeService" class="com.thingtrack.konekti.service.impl.internal.KnowledgeServiceImpl"/>					
 	<bean id="locationService" class="com.thingtrack.konekti.service.impl.internal.LocationServiceImpl"/>					 					
 	<bean id="locationTypeService" class="com.thingtrack.konekti.service.impl.internal.LocationTypeServiceImpl"/>

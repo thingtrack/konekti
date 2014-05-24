@@ -68,6 +68,7 @@
 	<bean id="invoiceTypeDao" class="com.thingtrack.konekti.dao.impl.internal.InvoiceTypeDaoImpl" />
 	<bean id="jobDao" class="com.thingtrack.konekti.dao.impl.internal.JobDaoImpl" />
 	<bean id="jobTriggerTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobTriggerTypeDaoImpl" />
+	<bean id="jobIntervalTypeDao" class="com.thingtrack.konekti.dao.impl.internal.JobIntervalTypeDaoImpl" />
 	<bean id="knowledgeDao" class="com.thingtrack.konekti.dao.impl.internal.KnowledgeDaoImpl" />
 	<bean id="locationDao" class="com.thingtrack.konekti.dao.impl.internal.LocationDaoImpl" />
 	<bean id="locationTypeDao" class="com.thingtrack.konekti.dao.impl.internal.LocationTypeDaoImpl" />	
