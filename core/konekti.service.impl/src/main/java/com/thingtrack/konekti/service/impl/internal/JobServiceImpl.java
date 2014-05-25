@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.JobDao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Job;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.JobService;
@@ -78,5 +79,15 @@ public class JobServiceImpl implements JobService {
 		job.setError(true);
 		
 		jobDao.save(job);
+	}
+	
+	@Override
+	public Job createNewEntity(Area area) throws Exception {
+		Job job = new Job();
+		
+		job.setActive(true);
+		job.setArea(area);
+		
+		return job;
 	}
 }

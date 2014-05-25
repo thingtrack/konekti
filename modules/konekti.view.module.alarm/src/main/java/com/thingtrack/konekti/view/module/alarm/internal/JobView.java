@@ -212,8 +212,13 @@ public class JobView extends AbstractView
 	
 	@Override
 	public void addButtonClick(EditionToolbar.ClickNavigationEvent event) {
-		Job job = new Job();
-		job.setActive(true);
+		Job job = null;
+		try {
+			job = jobService.createNewEntity(context.getUser().getActiveArea());
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo crear la entidad job!", e);
+			
+		}
 		
 		try {
 			@SuppressWarnings("unused")
@@ -225,30 +230,38 @@ public class JobView extends AbstractView
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
 			    		return ;
 			    	
-			    	try {		
-			    		Job savingjob= event.getDomainEntity();
+			    		final Job savingjob= event.getDomainEntity();
 			    		
 			    		// STEP01: schedule new job	
 			    		try {
 			    			jobManagerService.scheduleJob(savingjob);
+			    			
 			    		} catch (Exception e) {
-			    			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+			    			ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.add.tittle"),
+									getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.add.confirmation"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.add.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.add.confirmation.no"),
+							        new ConfirmDialog.Listener() {
+
+							            public void onClose(ConfirmDialog dialog) {
+							                if (dialog.isConfirmed()) {
+							                	// STEP02: save new job scheduled
+									    		Job savedJob;
+												try {
+													savedJob = jobService.save(savingjob);
+													refreshDataGridView(savedJob);
+												} catch (Exception e) {
+													throw new RuntimeException("¡No se pudo crear la nueva job!", e);
+													
+												}
+
+							                }
+							            }
+							        });
+			    			
 			    		}
-			    		
-			    		// STEP02: save new job scheduled
-			    		Job savedJob = jobService.save(savingjob);
-						
-						refreshDataGridView(savedJob);
-			    		
-					} catch (Exception e) {
-						throw new RuntimeException("¡No se pudo crear la nueva job!", e);
-						
-					}
+
 			    }
 
 			});
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("¡No se pudo abrir el formulario Nuevo Job!", e);
 		} catch (Exception e) {
 			throw new RuntimeException("¡No se pudo abrir el formulario Nuevo Job!", e);
 		}
@@ -338,18 +351,32 @@ public class JobView extends AbstractView
 					    		try {
 					    			jobManagerService.deleteJob(editingJob);
 					    		} catch (Exception e) {
-					    			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+					    			ConfirmDialog.show(getWindow(), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.remove.tittle"),
+											getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.remove.confirmation"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.remove.confirmation.yes"), getI18N().getMessage("com.thingtrack.konekti.view.module.alarm.internal.AlarmView.windowDialog.edit.confirmation.no"),
+									        new ConfirmDialog.Listener() {
+
+									            public void onClose(ConfirmDialog dialog) {
+									                if (dialog.isConfirmed()) {
+														try {
+															// STEP02: remove job unscheduled
+									            			jobService.delete(editingJob);
+									            			
+									            			bsJob.removeItem(editingJob);
+									            			
+														} catch (Exception e) {
+															throw new RuntimeException("¡No se pudo borrar el job!", e);
+														}
+
+									                }
+									            }
+									        });
+					    			
 					    		}
-					    		
-					    		// STEP02: ssave job unscheduled
-		            			jobService.delete(editingJob);
-		            			
-		            			bsJob.removeItem(editingJob);
-		            			
+					    		            			
 		            		} catch (IllegalArgumentException e) {
 		            			throw new RuntimeException("¡No se pudo borrar el job!", e);
 		            		} catch (Exception e) {
-		            			throw new RuntimeException("¡No se pudo borrar rl job!", e);
+		            			throw new RuntimeException("¡No se pudo borrar el job!", e);
 		            		}
 		                } 
 		            }
@@ -379,7 +406,14 @@ public class JobView extends AbstractView
 	public void startJobButtonClick(JobToolbar.ClickNavigationEvent event) {
 		Job job = (Job) event.getRegister();		
 		
-		// STEP01: save job status started
+		// STEP01: start job from scheduler		
+		try {
+			jobManagerService.resumeJob(job);
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo iniciar el job seleccionado!", e);
+		}
+		
+		// STEP02: save job status started
 		try {
 			job.setActive(true);			
 			jobService.save(job);
@@ -389,21 +423,21 @@ public class JobView extends AbstractView
 			throw new RuntimeException("¡No se pudo modificar el estado del job iniciado!", e);
 			
 		}
-		
-		// STEP02: start job from scheduler		
-		try {
-			jobManagerService.resumeJob(job);
-		} catch (Exception e) {
-			throw new RuntimeException("¡No se pudo iniciar el job seleccionado!", e);
-		}
-					
+							
 	}
 	
 	@Override
 	public void stopJobButtonClick(JobToolbar.ClickNavigationEvent event) {
 		Job job = (Job) event.getRegister();		
 		
-		// STEP01: save job status stopped
+		// STEP01: stop job from scheduler		
+		try {
+			jobManagerService.pauseJob(job);
+		} catch (Exception e) {
+			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
+		}
+		
+		// STEP02: save job status stopped
 		try {
 			job.setActive(false);
 			jobService.save(job);
@@ -412,14 +446,7 @@ public class JobView extends AbstractView
 		} catch (Exception e) {
 			throw new RuntimeException("¡No se pudo modificar el estado del job parado!", e);
 		}
-		
-		// STEP02: stop job from scheduler		
-		try {
-			jobManagerService.pauseJob(job);
-		} catch (Exception e) {
-			throw new RuntimeException("¡No se pudo parar el job seleccionado!", e);
-		}
-		
+				
 	}
 	
 	private class JobNameColumn implements ColumnGenerator {

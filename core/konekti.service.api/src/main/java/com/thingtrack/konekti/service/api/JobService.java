@@ -2,6 +2,7 @@ package com.thingtrack.konekti.service.api;
 
 import java.util.List;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Job;
 import com.thingtrack.konekti.domain.User;
 
@@ -17,4 +18,5 @@ public interface JobService {
 	public void setLastExecution(Job job, Boolean error) throws Exception;
 	public void setOkStatus(Job job) throws Exception;
 	public void setErrorStatus(Job job) throws Exception;
+	public Job createNewEntity(Area area) throws Exception;
 }

@@ -1,6 +1,6 @@
-package com.thingtrack.konekti.view.module.dashboard.internal;
+package com.thingtrack.konekti.view.module.dashboard.portlet;
 
-import com.thingtrack.konekti.view.module.dashboard.internal.KonektiPortal.KonektiPortlet;
+import com.thingtrack.konekti.view.module.dashboard.portlet.KonektiPortal.KonektiPortlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;

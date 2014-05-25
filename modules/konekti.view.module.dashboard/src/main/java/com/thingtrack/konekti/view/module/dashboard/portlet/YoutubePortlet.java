@@ -1,7 +1,7 @@
-package com.thingtrack.konekti.view.module.dashboard.internal;
+package com.thingtrack.konekti.view.module.dashboard.portlet;
 
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
-import com.thingtrack.konekti.view.module.dashboard.internal.KonektiPortal.KonektiPortlet;
+import com.thingtrack.konekti.view.module.dashboard.portlet.KonektiPortal.KonektiPortlet;
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;

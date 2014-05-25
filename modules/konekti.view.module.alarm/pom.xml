@@ -62,8 +62,6 @@ Import-Package: com.vaadin.ui, org.tepi.filtertable
 	</build>
 
 	<dependencies>
-
-
 		<dependency>
 			<groupId>org.vaadin.addons</groupId>
 			<artifactId>buttongroup</artifactId>

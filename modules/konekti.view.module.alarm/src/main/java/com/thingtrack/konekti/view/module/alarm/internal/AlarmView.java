@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.thingtrack.konekti.domain.Alarm;
-import com.thingtrack.konekti.domain.Job;
 import com.thingtrack.konekti.service.api.AlarmService;
 import com.thingtrack.konekti.view.addon.data.BindingSource;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
@@ -134,7 +133,7 @@ public class AlarmView extends AbstractView implements ClickDownButtonListener,
 	}
 
 	@Override
-	public void startJobButtonClick(AlarmToolbar.ClickNavigationEvent event) {
+	public void confirmAlarmButtonClick(AlarmToolbar.ClickNavigationEvent event) {
 		Alarm alarm = (Alarm) event.getRegister();		
 		
 		try {
