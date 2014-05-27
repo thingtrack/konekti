@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.imageio.ImageIO;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -87,7 +88,7 @@ import com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager;
 import com.thingtrack.konekti.view.web.workbench.ui.WorkbenchContext;
 import com.thingtrack.konekti.view.web.form.field.LocaleField;
 import com.thingtrack.konekti.view.addon.ui.ErrorViewForm;
-
+import com.vaadin.terminal.ExternalResource;
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.terminal.Terminal;
@@ -309,6 +310,30 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 	}
 	
+	// Overriding getWindow(String) is required to get multiple browser windows/tabs to work
+	/*@Override
+	public Window getWindow(String name) {
+
+		// If the window is identified by name, we are good to go
+		Window w = super.getWindow(name);
+
+		// If not, we must create a new window for this new browser window/tab
+		if (w == null) {			
+			//w = new CalcWindow();
+			w = new MainWindow(name, configureI18n());
+			
+			// Use the random name given by the framework to identify this
+			// window in future
+			w.setName(name);
+			addWindow(w);
+
+			// Move to the url to remember the name in the future
+			w.open(new ExternalResource(w.getURL()));
+		}
+
+		return w;
+	}*/
+		
 	private I18N configureI18n() {				
 		// set locales supported by Konekti
 		Locale esLocale = new Locale("es");
