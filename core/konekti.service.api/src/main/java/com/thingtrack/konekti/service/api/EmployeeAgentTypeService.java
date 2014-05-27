@@ -16,13 +16,14 @@ package com.thingtrack.konekti.service.api;
 import java.util.List;
 
 import com.thingtrack.konekti.domain.EmployeeAgentType;
+import com.thingtrack.konekti.domain.Organization;
 
 /**
  * @author Thingtrack S.L.
  *
  */
 public interface EmployeeAgentTypeService {
-	public List<EmployeeAgentType> getAll() throws Exception;
+	public List<EmployeeAgentType> getAll(Organization organization) throws Exception;
 	public EmployeeAgentType get( Integer clientGroupId ) throws Exception;
 	public EmployeeAgentType getByName( String name ) throws Exception;
 	public EmployeeAgentType save(EmployeeAgentType employeeAgentType) throws Exception;

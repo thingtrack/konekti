@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.velocity.app.VelocityEngine;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -37,7 +36,7 @@ public class MailServiceImpl implements MailService {
 	private int port;
 	private String username;
 	private String password;
-	private boolean sslFlag;
+	boolean sslFlag;
 	private boolean tlsFlag;
 	
 	private JavaMailSenderImpl javaMailSender;
@@ -45,6 +44,7 @@ public class MailServiceImpl implements MailService {
 			
 	@PostConstruct
 	public void Initialize() throws Exception {
+		// get all SMTP Server atributes 
 		configurations = configurationService.getAll();
 		
 		host = getConfigurationValue(SMTP_HOST);
@@ -54,6 +54,7 @@ public class MailServiceImpl implements MailService {
 		sslFlag = Boolean.parseBoolean(getConfigurationValue(SMTP_SSL));
 		tlsFlag = Boolean.parseBoolean(getConfigurationValue(SMTP_TLS));
 		
+		// configure mail sender
 		configureMailSender();
 		
 		// configure velocity engine
@@ -77,8 +78,8 @@ public class MailServiceImpl implements MailService {
 	private void configureMailSender() {
 		javaMailSender = new JavaMailSenderImpl();
 		Properties javaMailProperties = new Properties();
-		//javaMailProperties.put("mail.smtp.ssl.enable", sslFlag);
 		javaMailProperties.put("mail.smtp.starttls.enable", tlsFlag);
+		javaMailProperties.put("mail.smtp.ssl.enable", sslFlag);
 		
 		javaMailSender.setHost(host);
 		javaMailSender.setPort(port);
@@ -87,14 +88,21 @@ public class MailServiceImpl implements MailService {
 		javaMailSender.setJavaMailProperties(javaMailProperties);
 		
 	}
-	
+		
 	@Override
 	public void sendMessage(String emailTo, String subject, String template, HashMap<String, Object> staticResources, HashMap<String, Object> dynamicResources) throws Exception {
-		String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, template, dynamicResources);
+		sendMessage(username, emailTo, subject, template, staticResources, dynamicResources);
+				
+	}
+	
+	@Override
+	public void sendMessage(String emailFrom, String emailTo, String subject, String template, HashMap<String, Object> staticResources, HashMap<String, Object> dynamicResources) throws Exception {		
+		String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, template, "UTF-8", dynamicResources);
 		
         // configure mail helper
 		MimeMessage message = javaMailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true); // configure multipart email configuration: css and images inside
+		helper.setFrom(emailFrom);
 		helper.setTo(emailTo);
 		helper.setSubject(subject);
 		helper.setText(text, true); // configure html email
@@ -119,5 +127,4 @@ public class MailServiceImpl implements MailService {
 			Thread.currentThread().setContextClassLoader(oldClassLoader);
 		}
 	}
-	
 }

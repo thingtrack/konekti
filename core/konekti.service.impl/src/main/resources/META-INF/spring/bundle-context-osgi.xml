@@ -44,6 +44,7 @@
        <osgi:reference id="invoiceTypeDao" interface="com.thingtrack.konekti.dao.api.InvoiceTypeDao" />       
        <osgi:reference id="jobDao" interface="com.thingtrack.konekti.dao.api.JobDao" />
        <osgi:reference id="jobTriggerTypeDao" interface="com.thingtrack.konekti.dao.api.JobTriggerTypeDao" />
+       <osgi:reference id="jobIntervalTypeDao" interface="com.thingtrack.konekti.dao.api.JobIntervalTypeDao" />
        <osgi:reference id="knowledgeDao" interface="com.thingtrack.konekti.dao.api.KnowledgeDao" />       
        <osgi:reference id="locationDao" interface="com.thingtrack.konekti.dao.api.LocationDao" />
        <osgi:reference id="locationTypeDao" interface="com.thingtrack.konekti.dao.api.LocationTypeDao" />
@@ -118,6 +119,7 @@
        <osgi:service ref="invoiceTypeService" interface="com.thingtrack.konekti.service.api.InvoiceTypeService" />
        <osgi:service ref="jobService" interface="com.thingtrack.konekti.service.api.JobService" />
        <osgi:service ref="jobTriggerTypeService" interface="com.thingtrack.konekti.service.api.JobTriggerTypeService" />
+       <osgi:service ref="jobIntervalTypeService" interface="com.thingtrack.konekti.service.api.JobIntervalTypeService" />      
        <osgi:service ref="knowledgeService" interface="com.thingtrack.konekti.service.api.KnowledgeService" />       
        <osgi:service ref="locationService" interface="com.thingtrack.konekti.service.api.LocationService" />
        <osgi:service ref="locationTypeService" interface="com.thingtrack.konekti.service.api.LocationTypeService" />

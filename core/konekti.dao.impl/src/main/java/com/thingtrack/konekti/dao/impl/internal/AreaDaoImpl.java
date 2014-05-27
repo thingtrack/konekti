@@ -22,6 +22,7 @@ import org.springframework.stereotype.Repository;
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.AreaDao;
 import com.thingtrack.konekti.domain.Area;
+import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.User;
 
 /**
@@ -44,7 +45,7 @@ public class AreaDaoImpl extends JpaDao<Area, Integer> implements AreaDao {
 	@Override
 	public List<Area> getAll(User user) throws Exception {
 		String queryString =  "SELECT p FROM " + getEntityName() + " p";
-
+		
 		if (user.getActiveLocation() != null)
 			queryString += " WHERE p.location = :location";
 
@@ -56,4 +57,19 @@ public class AreaDaoImpl extends JpaDao<Area, Integer> implements AreaDao {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Area> getAllByOrganization(User user) throws Exception {
+		String queryString =  "SELECT p FROM " + getEntityName() + " p";
+
+		queryString += " WHERE p.location.locationId IN (" + user.getActiveLocation().getLocationId();
+		for (Location location : user.getLocations()) {
+			queryString += " , " + location.getLocationId();
+		}
+		queryString += ")";
+		
+		Query query = (Query) getEntityManager().createQuery(queryString);
+		
+		return query.getResultList();
+	}
 }

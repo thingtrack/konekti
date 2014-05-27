@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.SupplierGroup;
 import com.thingtrack.konekti.dao.api.SupplierGroupDao;
 import com.thingtrack.konekti.service.api.SupplierGroupService;
@@ -30,8 +31,8 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 	private SupplierGroupDao supplierGroupDao;
 
 	@Override
-	public List<SupplierGroup> getAll() throws Exception {
-		return this.supplierGroupDao.getAll();
+	public List<SupplierGroup> getAll(Organization organization) throws Exception {
+		return this.supplierGroupDao.getAll(organization);
 		
 	}
 

@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.ClientGroup;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.dao.api.ClientGroupDao;
 import com.thingtrack.konekti.service.api.ClientGroupService;
 
@@ -30,8 +31,8 @@ public class ClientGroupServiceImpl implements ClientGroupService {
 	private ClientGroupDao clientGroupDao;
 
 	@Override
-	public List<ClientGroup> getAll() throws Exception {
-		return this.clientGroupDao.getAll();
+	public List<ClientGroup> getAll(Organization organization) throws Exception {
+		return this.clientGroupDao.getAll(organization);
 		
 	}
 

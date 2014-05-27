@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.ProductUnit;
 import com.thingtrack.konekti.dao.api.ProductUnitDao;
 import com.thingtrack.konekti.service.api.ProductUnitService;
@@ -30,8 +31,8 @@ public class ProductUnitServiceImpl implements ProductUnitService {
 	private ProductUnitDao productUnitDao;
 
 	@Override
-	public List<ProductUnit> getAll() throws Exception {
-		return this.productUnitDao.getAll();
+	public List<ProductUnit> getAll(Area area) throws Exception {
+		return this.productUnitDao.getAll(area);
 		
 	}
 

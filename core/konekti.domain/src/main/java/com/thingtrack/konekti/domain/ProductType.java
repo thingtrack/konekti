@@ -42,7 +42,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -57,7 +60,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SuppressWarnings("serial")
 @XmlRootElement
 @Entity
-@Table(name="PRODUCT_TYPE")
+@Table(name="PRODUCT_TYPE", uniqueConstraints=@UniqueConstraint(columnNames={"CODE", "AREA_ID"}))
 public class ProductType implements Serializable {
 	
 	/**
@@ -71,7 +74,7 @@ public class ProductType implements Serializable {
 	/**
 	 * Unique code, not null
 	 */
-	@Column(name="CODE", nullable=false, unique=true, length=64)
+	@Column(name="CODE", nullable=false, length=64)
 	private String code;
 	
 	/**
@@ -80,6 +83,10 @@ public class ProductType implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name="AREA_ID", nullable=false)
+	private Area area;
+	
 	/**
 	 * @param productTypeId the productTypeId to set
 	 */
@@ -170,5 +177,13 @@ public class ProductType implements Serializable {
 	public String toString() {
 		return "ProductType [productTypeId=" + productTypeId + ", code=" + code
 				+ ", description=" + description + "]";
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }

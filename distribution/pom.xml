@@ -7,7 +7,8 @@
 		<groupId>com.thingtrack</groupId>
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
-  <artifactId>konekti.distribution</artifactId>
+	
+  	<artifactId>konekti.distribution</artifactId>
 	<packaging>pom</packaging>
 	<name>konekti.distribution</name>
 
@@ -20,6 +21,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.dao.template</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.dao.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -30,12 +36,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.dao.template</artifactId>
+			<artifactId>konekti.dao.sensor.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.dao.api</artifactId>
+			<artifactId>konekti.dao.sensor.impl</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -50,38 +56,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.service.security</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.dao.sensor.api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.dao.sensor.impl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.service.sensor.api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.service.sensor.impl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.dao.sensor.impl</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.kernel</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -101,7 +81,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.message</artifactId>
+			<artifactId>konekti.schedule</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.schedule.job</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -112,6 +97,21 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.mail</artifactId>
+			<version>${project.version}</version>
+		</dependency>				
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.message</artifactId>
+			<version>${project.version}</version>
+		</dependency>										
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.service.security</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.view.kernel</artifactId>
 			<version>${project.version}</version>
 		</dependency>		
 		<dependency>
@@ -126,12 +126,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.kernel</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.layout.footer</artifactId>
+			<artifactId>konekti.view.security</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -156,12 +151,12 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.layout</artifactId>
+			<artifactId>konekti.view.layout.footer</artifactId>
 			<version>${project.version}</version>
-		</dependency>
+		</dependency>		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.security</artifactId>
+			<artifactId>konekti.view.layout</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -209,6 +204,11 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.view.module.configuration</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.view.module.dashboard</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -224,6 +224,16 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.view.module.knowledge</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.view.module.map</artifactId>
+			<version>${project.version}</version>
+		</dependency>				
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.view.module.modulemanager</artifactId>
 			<version>${project.version}</version>
 		</dependency>
@@ -232,6 +242,11 @@
 			<artifactId>konekti.view.module.product</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>konekti.view.module.report</artifactId>
+			<version>${project.version}</version>
+		</dependency>		
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.view.module.sensor</artifactId>
@@ -246,12 +261,7 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>konekti.view.module.supplier</artifactId>
 			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>konekti.view.module.knowledge</artifactId>
-			<version>${project.version}</version>
-		</dependency>		
+		</dependency>	
 	</dependencies>
 	
 	<build>

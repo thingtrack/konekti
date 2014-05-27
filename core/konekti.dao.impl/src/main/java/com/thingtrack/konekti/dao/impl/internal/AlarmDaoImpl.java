@@ -53,6 +53,8 @@ public class AlarmDaoImpl extends JpaDao<Alarm, Integer> implements AlarmDao {
 		if (user.getActiveArea() != null)
 			query.setParameter("area", user.getActiveArea());
 		
+		queryString.append(" ORDER BY p.alarmDate ASC");
+		
 		return query.getResultList();
 	}
 	

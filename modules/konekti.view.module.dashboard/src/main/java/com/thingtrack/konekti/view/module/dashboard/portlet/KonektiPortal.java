@@ -1,12 +1,12 @@
-package com.thingtrack.konekti.view.module.dashboard.internal;
+package com.thingtrack.konekti.view.module.dashboard.portlet;
 
-import org.vaadin.sasha.portallayout.PortalLayout;
 import org.vaadin.sasha.portallayout.PortalLayout.PortletCloseListener;
 import org.vaadin.sasha.portallayout.PortalLayout.PortletClosedEvent;
 import org.vaadin.sasha.portallayout.PortalLayout.PortletCollapseEvent;
 import org.vaadin.sasha.portallayout.PortalLayout.PortletCollapseListener;
 import org.vaadin.sasha.portallayout.event.Context;
 
+import com.thingtrack.konekti.view.addon.ui.AbstractPortalLayout;
 import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Panel;
 
@@ -45,12 +45,11 @@ public class KonektiPortal extends Panel implements PortletCloseListener, Portle
 		getWindow().showNotification(event.getContext().getComponent().getCaption() + "closed");
 		
 	}
-
-	public class KonektiPortlet extends PortalLayout {	        
+        
+	public class KonektiPortlet extends AbstractPortalLayout {
 		public KonektiPortlet() {
 			setWidth("100%");
 			setHeight("100%");
-		    //setHeight("800px");
 		    addCloseListener(KonektiPortal.this);
 		    addCollapseListener(KonektiPortal.this);
 		    setMargin(true);
@@ -60,6 +59,11 @@ public class KonektiPortal extends Panel implements PortletCloseListener, Portle
 		public KonektiPortal getKonektiPortal() {
 			return KonektiPortal.this;
 			
+		}
+
+		@Override
+		protected void updateLabels() {
+
 		}
 	}
 }

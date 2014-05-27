@@ -1,7 +1,7 @@
-package com.thingtrack.konekti.view.module.dashboard.internal;
+package com.thingtrack.konekti.view.module.dashboard.portlet;
 
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
-import com.thingtrack.konekti.view.module.dashboard.internal.KonektiPortal.KonektiPortlet;
+import com.thingtrack.konekti.view.module.dashboard.portlet.KonektiPortal.KonektiPortlet;
 import com.vaadin.terminal.ExternalResource;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;
@@ -34,7 +34,7 @@ public class YoutubePortlet extends KonektiPortlet {
     
     private void buildMainLayout() {
 		// common part: create layout    		
-    	pnYoutube = new Panel();
+    	pnYoutube = new Panel();    	
     	pnYoutube.setWidth("100%");
     	pnYoutube.setHeight("100%");
     	
@@ -43,15 +43,18 @@ public class YoutubePortlet extends KonektiPortlet {
     	thkYoutube.setMimeType("application/x-shockwave-flash");
     	thkYoutube.setParameter("allowFullScreen", "true");
     	thkYoutube.setSizeFull();
-    	
-    	pnYoutube.addComponent(thkYoutube);
-    	
     	//thkYoutube.setWidth("320px");
     	//thkYoutube.setHeight("265px");
-    	        
+    	
+    	pnYoutube.addComponent(thkYoutube);
+    	    	        
 		// top-level component properties
         addComponent(pnYoutube);
-		//addComponent(tableTest);
 		
+	}
+    
+	@Override
+	protected void updateLabels() {
+			
 	}
 }

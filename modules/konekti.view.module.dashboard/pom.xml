@@ -10,7 +10,8 @@
 	</parent>
 	<artifactId>konekti.view.module.dashboard</artifactId>
 	<name>konekti.view.module.dashboard</name>
-
+	<description>Konekti View Module Dashboard</description>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -74,6 +75,20 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 			<version>1.3.1</version>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>buttongroup</artifactId>
+			<version>1.2</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+		   <groupId>org.vaadin.addons</groupId>
+		   <artifactId>invient-charts</artifactId>
+		   <version>0.8.6</version>
+		   <scope>provided</scope>
+		</dependency>					
 	</dependencies>
-	<description>Konekti View Module Dashboard</description>
+
 </project>

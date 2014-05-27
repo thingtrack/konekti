@@ -1,6 +1,6 @@
-package com.thingtrack.konekti.view.module.dashboard.internal;
+package com.thingtrack.konekti.view.module.dashboard.portlet;
 
-import com.thingtrack.konekti.view.module.dashboard.internal.KonektiPortal.KonektiPortlet;
+import com.thingtrack.konekti.view.module.dashboard.portlet.KonektiPortal.KonektiPortlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -124,4 +124,11 @@ public class CalculatorPortlet extends KonektiPortlet implements ClickListener {
 		addComponent(layout);
 		
 	}
+    
+	@Override
+	protected void updateLabels() {
+	    layout.setCaption(getI18N().getMessage("com.thingtrack.konekti.view.module.dashboard.internal.CalculatorPortlet.layout.caption"));
+	    
+	}
+	
 }

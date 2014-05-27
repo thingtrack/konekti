@@ -42,7 +42,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Entity class
@@ -53,7 +56,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="CLIENT_TYPE")
+@Table(name="CLIENT_TYPE", uniqueConstraints=@UniqueConstraint(columnNames={"CODE", "ORGANIZATION_ID"}))
 public class ClientType implements Serializable {
 	
 	/**
@@ -67,7 +70,7 @@ public class ClientType implements Serializable {
 	/**
 	 * Unique code, not null
 	 */
-	@Column(name="CODE", nullable=false, unique=true, length=64)
+	@Column(name="CODE", nullable=false, length=64)
 	private String code;
 	
 	/**
@@ -76,6 +79,10 @@ public class ClientType implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
+	
 	/**
 	 * @param clientTypeId the clientTypeId to set
 	 */
@@ -97,12 +104,9 @@ public class ClientType implements Serializable {
 		this.code = code;
 	}
 
-	/**
-	 * @return the code
-	 */
-	public String getcode() {
+	public String getCode() {
 		return code;
-	}
+	}	
 
 	/**
 	 * @param description the description to set
@@ -163,5 +167,14 @@ public class ClientType implements Serializable {
 	public String toString() {
 		return "ClientType [clientTypeId=" + clientTypeId + ", code=" + code
 				+ ", description=" + description + "]";
-	}	
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
+	}
+
 }

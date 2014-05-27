@@ -1,12 +1,11 @@
 package com.thingtrack.konekti.schedule;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
-import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.quartz.JobListener;
@@ -16,25 +15,24 @@ import org.quartz.SchedulerFactory;
 import org.quartz.impl.StdSchedulerFactory;
 
 import com.thingtrack.konekti.domain.Job;
+import com.thingtrack.konekti.schedule.internal.JobManagerServiceImpl;
 import com.thingtrack.konekti.service.api.JobService;
 
 public class ScheduleActivator implements BundleActivator {
-	private BundleContext bundleContext;
+	private BundleContext bundleContext;	
+	private ServiceRegistration schedulerServiceRegistration;
+	private ServiceRegistration jobManagerServiceRegistration;
+	private JobServiceTracker jobServiceTracker;
 	
 	private static JobService jobService;	
 	private static Scheduler scheduler;
+	private static JobManagerService jobManagerService;
 	
-	private ScheduleServiceTracker scheduleServiceTracker;
+	private static final String JOB_LISTENER_NAME = "thingtrack_listener";
+	public static final String JOB_SEPARATOR = "@";
 	
-	private ServiceRegistration schedulerService;
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private static HashMap<JobApi, JobDetail> jobdetails = new HashMap();
-	
-	private static boolean OK = false;
-	private static boolean ERROR = true;
-	
-	private static String JOB_LISTENER_NAME = "thingtrack_listener";
+	private static final boolean OK = false;
+	private static final boolean ERROR = true;
 	
 	public void start(BundleContext context) throws Exception {
 		this.bundleContext = context;
@@ -42,20 +40,28 @@ public class ScheduleActivator implements BundleActivator {
 		// get job service
 		jobService = getJobService();
 		
-		// create scheduler 
+		// create Factory Scheduler
 		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 		
 		try {
+			// create scheduler from factory
 			scheduler = schedulerFactory.getScheduler();
 			
 			// implements scheduler listener
 			scheduler.getListenerManager().addJobListener(new JobListener() {				
 				@Override
 				public void jobWasExecuted(JobExecutionContext context, JobExecutionException jobException) {
+					String jobAreaName = context.getJobDetail().getKey().getName();
+					String jobAreaGroup = context.getJobDetail().getKey().getGroup();
+					
+					Integer areaId = Integer.parseInt(jobAreaName.split(JOB_SEPARATOR)[0]);
+					String jobName = jobAreaName.split(JOB_SEPARATOR)[1].toString();
+					String jobGroup = jobAreaGroup.split(JOB_SEPARATOR)[1].toString();
+					
 					// get job executed from scheduler
 					Job job = null;
 					try {
-						job = getJob(context.getJobDetail().getKey().getGroup(), context.getJobDetail().getKey().getName());
+						job = getJob(areaId, jobGroup, jobName);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -78,12 +84,14 @@ public class ScheduleActivator implements BundleActivator {
 				@Override
 				public void jobToBeExecuted(JobExecutionContext context) {
 					// TODO Auto-generated method stub
+					JobExecutionContext value = context;
 					
 				}
 				
 				@Override
 				public void jobExecutionVetoed(JobExecutionContext context) {
 					// TODO Auto-generated method stub
+					JobExecutionContext value = context;
 					
 				}
 				
@@ -95,57 +103,63 @@ public class ScheduleActivator implements BundleActivator {
 			
 			scheduler.start();
 		} catch (SchedulerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
 		}
 		
-		scheduleServiceTracker = new ScheduleServiceTracker(context);
-		scheduleServiceTracker.open();
+		// create Job manager service and register
+		jobManagerService = new JobManagerServiceImpl(context);
 		
-		// register scheduler
-		schedulerService = context.registerService("org.quartz.Scheduler", scheduler, null);
-				
+		context.registerService("com.thingtrack.konekti.schedule.JobManagerService", jobManagerService, null);
+		
+		// create Job Service Tracker and register
+		jobServiceTracker = new JobServiceTracker(context, jobManagerService);
+		jobServiceTracker.open();
+		
+		schedulerServiceRegistration = context.registerService("org.quartz.Scheduler", scheduler, null);
+		
 	}
 
 	public void stop(BundleContext context) throws Exception {
-		if (schedulerService != null) {
-			schedulerService.unregister();
-			schedulerService = null;
-		}
+		if (jobManagerServiceRegistration != null) 
+			jobManagerServiceRegistration.unregister();	
 		
-		scheduler.shutdown();
+		if (schedulerServiceRegistration != null) 
+			schedulerServiceRegistration.unregister();		
+
+		if (scheduler != null)
+			scheduler.shutdown();
+		
+		if (jobServiceTracker != null)
+			jobServiceTracker.close();
+
+
+		jobManagerServiceRegistration = null;
+		schedulerServiceRegistration = null;
 		scheduler = null;
-		
-		scheduleServiceTracker.close();
-		scheduleServiceTracker = null;
-		
+		jobServiceTracker = null;
 	}
 	
 	public static Scheduler getScheduler() {
 		return scheduler;
 		
 	}
-
-	public static HashMap<JobApi, JobDetail> getJobDetails() {
-		return jobdetails;
-		
+		 
+	public static List<Job> getJobs(String group, String name) throws Exception {
+		return jobService.getByGroupName(group, name);
+		 		 
+	}
+	
+	public static Job getJob(Integer areaId, String group, String name) throws Exception {
+		return jobService.getByGroupNameAndArea(areaId, group, name);
+		 		 
 	}
 	
 	private JobService getJobService() {
 		ServiceReference jobServiceReference = bundleContext.getServiceReference(JobService.class.getName());
-		 
-		if(jobServiceReference != null) {
-			JobService jobService = (JobService)bundleContext.getService(jobServiceReference);
-				if(jobService != null)
-					return jobService;
+		JobService jobService = (JobService)bundleContext.getService(jobServiceReference);
+		
+		return jobService;
 				 
-		}
-		 
-		return null;
-	}
-	 
-	public static Job getJob(String group, String name) throws Exception {
-		return jobService.getByGroupName(group, name);
-		 		 
 	}
 }

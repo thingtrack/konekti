@@ -42,7 +42,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -56,7 +59,7 @@ import javax.validation.constraints.Size;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="EMPLOYEE_AGENT_TYPE")
+@Table(name="EMPLOYEE_AGENT_TYPE", uniqueConstraints=@UniqueConstraint(columnNames={"NAME", "ORGANIZATION_ID"}))
 public class EmployeeAgentType implements Serializable {
 	/**
 	 * unique identifier
@@ -68,7 +71,7 @@ public class EmployeeAgentType implements Serializable {
 	
 	/**
 	 * Unique name, not null	 */
-	@Column(name="NAME", nullable=false, unique=true, length=64)
+	@Column(name="NAME", nullable=false, length=64)
 	@Size(min=1, max=64)
 	@NotNull
 	private String name;
@@ -80,6 +83,10 @@ public class EmployeeAgentType implements Serializable {
 	@Size(min=1, max=512)
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name="ORGANIZATION_ID", nullable=false)
+	private Organization organization;
+	
 	/**
 	 * @param employeeAgentTypeId the employeeAgentTypeId to set
 	 */
@@ -169,5 +176,13 @@ public class EmployeeAgentType implements Serializable {
 	public String toString() {
 		return "EmployeeAgentType [employeeAgentTypeId=" + employeeAgentTypeId
 				+ ", name=" + name + ", description=" + description + "]";
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 }

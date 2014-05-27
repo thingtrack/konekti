@@ -42,7 +42,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Entity class
@@ -54,7 +57,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="CLIENT_GROUP")
+@Table(name="CLIENT_GROUP", uniqueConstraints=@UniqueConstraint(columnNames={"NAME", "ORGANIZATION_ID"}))
 public class ClientGroup implements Serializable {
 	
 	/**
@@ -68,7 +71,7 @@ public class ClientGroup implements Serializable {
 	/**
 	 * Unique name, not null
 	 */
-	@Column(name="NAME", nullable=false, unique=true, length=64)
+	@Column(name="NAME", nullable=false, length=64)
 	private String name;
 	
 	/**
@@ -77,6 +80,10 @@ public class ClientGroup implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name = "ORGANIZATION_ID", nullable = false)
+	private Organization organization;
+	
 	/**
 	 * @param clientGroupId the clientGroupId to set
 	 */
@@ -164,5 +171,13 @@ public class ClientGroup implements Serializable {
 	public String toString() {
 		return "ClientGroup [clientGroupId=" + clientGroupId + ", name=" + name
 				+ ", description=" + description + "]";
+	}
+
+	public Organization getOrganization() {
+		return organization;
+	}
+
+	public void setOrganization(Organization organization) {
+		this.organization = organization;
 	}
 }

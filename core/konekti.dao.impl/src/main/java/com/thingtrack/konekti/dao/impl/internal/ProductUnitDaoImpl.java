@@ -13,10 +13,13 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.ProductUnitDao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.ProductUnit;
 
 /**
@@ -25,6 +28,15 @@ import com.thingtrack.konekti.domain.ProductUnit;
  */
 @Repository
 public class ProductUnitDaoImpl extends JpaDao<ProductUnit, Integer> implements ProductUnitDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<ProductUnit> getAll(Area area) throws Exception {
+		return (List<ProductUnit>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.area = :area")
+				.setParameter("area", area).getResultList();
+		
+	}
+	
 	@Override
 	public ProductUnit getByCode(String code) throws Exception {
 		ProductUnit productUnit = (ProductUnit)getEntityManager()

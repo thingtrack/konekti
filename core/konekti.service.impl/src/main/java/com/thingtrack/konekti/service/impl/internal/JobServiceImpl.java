@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.dao.api.JobDao;
+import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Job;
 import com.thingtrack.konekti.domain.User;
 import com.thingtrack.konekti.service.api.JobService;
@@ -42,10 +43,15 @@ public class JobServiceImpl implements JobService {
 	}
 	
 	@Override
-	public Job getByGroupName(String group, String name) throws Exception {
+	public List<Job> getByGroupName(String group, String name) throws Exception {
 		return jobDao.getByGroupName(group, name);
 	}
 
+	@Override
+	public Job getByGroupNameAndArea(Integer areaId, String group, String name) throws Exception {
+		return jobDao.getByGroupNameAndArea(areaId, group, name);
+	}
+	
 	@Override
 	public void setLastExecution(Job job) throws Exception {
 		job.setLastExecution(new Date());
@@ -73,5 +79,15 @@ public class JobServiceImpl implements JobService {
 		job.setError(true);
 		
 		jobDao.save(job);
+	}
+	
+	@Override
+	public Job createNewEntity(Area area) throws Exception {
+		Job job = new Job();
+		
+		job.setActive(true);
+		job.setArea(area);
+		
+		return job;
 	}
 }

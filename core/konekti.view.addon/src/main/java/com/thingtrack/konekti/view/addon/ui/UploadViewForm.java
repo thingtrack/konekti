@@ -33,13 +33,17 @@ public class UploadViewForm extends Window {
 	
 	public static final String CALENDAR_BASE_FILENAME = "date-group-filename-";
 	
-	public UploadViewForm(final byte[] file) {		
+	public UploadViewForm(final byte[] file, String filename) {		
 		buildMainLayout();
 		setContent(mainLayout);
 
 		this.groupDateFile = file;
-		this.fileName = CALENDAR_BASE_FILENAME + Math.round(Math.random() * 100);
-				
+		
+		if (filename == null)
+			this.fileName = CALENDAR_BASE_FILENAME + Math.round(Math.random() * 100);
+		else
+			this.fileName = filename;
+		
 		// TODO add user code here
 		final FileUploader uploader = new FileUploader(); 
 		

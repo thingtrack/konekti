@@ -7,33 +7,34 @@
 		<groupId>com.thingtrack</groupId>
 		<version>0.0.1.SNAPSHOT</version>
 	</parent>
+	
 	<artifactId>modules</artifactId>
 	<packaging>pom</packaging>
 	<name>modules</name>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
 	<modules>	    
+		<module>konekti.view.module.address</module>
+		<module>konekti.view.module.alarm</module>
+		<module>konekti.view.module.bundle</module>
+		<module>konekti.view.module.calendar</module>
+		<module>konekti.view.module.client</module>
+		<module>konekti.view.module.configuration</module>
+		<module>konekti.view.module.dashboard</module>
+		<module>konekti.view.module.employee</module>
+		<module>konekti.view.module.feedback</module>
+		<module>konekti.view.module.knowledge</module>														
+		<module>konekti.view.module.map</module>
 		<module>konekti.view.module.modulemanager</module>
 		<module>konekti.view.module.organization</module>
 		<module>konekti.view.module.product</module>
-		<module>konekti.view.module.feedback</module>
-		<module>konekti.view.module.address</module>
-		<module>konekti.view.module.stock</module>
-		<module>konekti.view.module.bundle</module>
-		<module>konekti.view.module.alarm</module>
-		<module>konekti.view.module.client</module>
-		<module>konekti.view.module.supplier</module>
-		<module>konekti.view.module.employee</module>
-		<module>konekti.view.module.sensor</module>
-		<module>konekti.view.module.dashboard</module>
-		<module>konekti.view.module.calendar</module>
-		<module>konekti.view.module.configuration</module>
 		<module>konekti.view.module.report</module>
-		<module>konekti.view.module.knowledge</module>
+		<module>konekti.view.module.sensor</module>		
+		<module>konekti.view.module.stock</module>
+		<module>konekti.view.module.supplier</module>
 	</modules>
 
 	<dependencies>

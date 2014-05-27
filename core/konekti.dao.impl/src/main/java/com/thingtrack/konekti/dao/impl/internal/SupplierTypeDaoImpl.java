@@ -13,10 +13,13 @@
  */
 package com.thingtrack.konekti.dao.impl.internal;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.SupplierTypeDao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.SupplierType;
 
 /**
@@ -25,6 +28,15 @@ import com.thingtrack.konekti.domain.SupplierType;
  */
 @Repository
 public class SupplierTypeDaoImpl extends JpaDao<SupplierType, Integer> implements SupplierTypeDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<SupplierType> getAll(Organization organization) throws Exception {
+		return (List<SupplierType>)getEntityManager()
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization")
+				.setParameter("organization", organization).getResultList();
+		
+	}
+	
 	@Override
 	public SupplierType getByName(String name) throws Exception {
 		SupplierType supplierType = (SupplierType)getEntityManager()

@@ -18,6 +18,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.thingtrack.konekti.domain.ClientType;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.dao.api.ClientTypeDao;
 import com.thingtrack.konekti.service.api.ClientTypeService;
 
@@ -30,9 +31,9 @@ public class ClientTypeServiceImpl implements ClientTypeService {
 	private ClientTypeDao clientTypeDao;
 
 	@Override
-	public List<ClientType> getAll() throws Exception {
-		return this.clientTypeDao.getAll();
-		
+	public List<ClientType> getAll(Organization organization) throws Exception {
+		return this.clientTypeDao.getAll(organization);
+				
 	}
 
 	@Override

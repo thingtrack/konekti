@@ -44,4 +44,6 @@ public interface AreaDao extends Dao<Area, Integer> {
 	 * @throws Exception
 	 */
 	public List<Area> getAll(User user) throws Exception;
+	
+	public List<Area> getAllByOrganization(User user) throws Exception;
 }

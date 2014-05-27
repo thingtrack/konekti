@@ -27,14 +27,35 @@ public class JobDaoImpl extends JpaDao<Job, Integer> implements JobDao {
 		return query.getResultList();
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public Job getByGroupName(String group, String name) throws Exception {
-		Job job = (Job)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.jobGroup = :group AND p.jobName = :name")
-				.setParameter("group", group)
-				.setParameter("name", name).getSingleResult();
-
-		return job;
+	public List<Job> getByGroupName(String group, String name) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		queryString.append(" WHERE p.jobGroup = :group");
+		queryString.append(" AND p.jobName = :name");
+		
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("group", group);
+		query.setParameter("name", name);
+		
+		return query.getResultList();
+	
 	}
 
+	@Override
+	public Job getByGroupNameAndArea(Integer areaId, String group, String name) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		queryString.append(" WHERE p.jobGroup = :group");
+		queryString.append(" AND p.jobName = :name");
+		queryString.append(" AND p.area.areaId = :areaId");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("group", group);
+		query.setParameter("name", name);
+		query.setParameter("areaId", areaId);
+		
+		return (Job) query.getSingleResult();
+	}
 }

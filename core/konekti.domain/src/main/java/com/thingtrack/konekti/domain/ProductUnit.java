@@ -42,7 +42,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 /**
  * Entity class
@@ -54,7 +57,7 @@ import javax.persistence.Table;
  */
 @SuppressWarnings("serial")
 @Entity
-@Table(name="PRODUCT_UNIT")
+@Table(name="PRODUCT_UNIT", uniqueConstraints=@UniqueConstraint(columnNames={"CODE", "AREA_ID"}))
 public class ProductUnit implements Serializable {
 	
 	/**
@@ -77,6 +80,10 @@ public class ProductUnit implements Serializable {
 	@Column(name="DESCRIPTION", length=512)
 	private String description;
 
+	@ManyToOne
+	@JoinColumn(name="AREA_ID", nullable=false)
+	private Area area;
+	
 	/**
 	 * @param productUnitId the productUnitId to set
 	 */
@@ -164,5 +171,13 @@ public class ProductUnit implements Serializable {
 	public String toString() {
 		return "ProductUnit [productUnitId=" + productUnitId + ", code=" + code
 				+ ", description=" + description + "]";
+	}
+
+	public Area getArea() {
+		return area;
+	}
+
+	public void setArea(Area area) {
+		this.area = area;
 	}
 }
