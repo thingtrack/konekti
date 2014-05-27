@@ -28,7 +28,7 @@
 		<module>konekti.knowledge.service.api</module>
 		<module>konekti.knowledge.service.impl</module>
 		<module>konekti.schedule</module>
-		<module>konekti.schedule.log</module>
+		<module>konekti.schedule.job</module>
 		<module>konekti.report</module>
 		<module>konekti.mail</module>
 		<module>konekti.message</module>
