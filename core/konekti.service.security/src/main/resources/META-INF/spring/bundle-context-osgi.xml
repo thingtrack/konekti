@@ -12,12 +12,4 @@
 	<osgi:reference id="userDao" interface="com.thingtrack.konekti.dao.api.UserDao" />	
 
 	<osgi:service ref="securityService" interface="com.thingtrack.konekti.service.security.SecurityService" />
-
-	<osgi:service ref="securityInterceptor">
-		<osgi:interfaces>
-			<value>org.aopalliance.intercept.MethodInterceptor</value>
-			<value>org.aopalliance.aop.Advice</value>
-		</osgi:interfaces>
-	</osgi:service>
-
 </beans>

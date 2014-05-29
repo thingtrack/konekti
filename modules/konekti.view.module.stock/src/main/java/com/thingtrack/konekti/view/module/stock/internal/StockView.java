@@ -167,7 +167,7 @@ public class StockView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<Stock> windowDialog = new WindowDialog<Stock>(getWindow(), "Nuevo Stock", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new StockViewForm(),  stock, 
+					new StockViewForm(context),  stock, 
 					new WindowDialog.CloseWindowDialogListener<Stock>() {
 			    public void windowDialogClose(WindowDialog<Stock>.CloseWindowDialogEvent<Stock> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)
@@ -203,7 +203,7 @@ public class StockView extends AbstractView
 			@SuppressWarnings("unused")
 			WindowDialog<Stock> windowDialog = new WindowDialog<Stock>(getWindow(), "Editor Stock", 
 					"Guardar", DialogResult.SAVE, "Cancelar", DialogResult.CANCEL, 
-					new StockViewForm(), editingStock, 
+					new StockViewForm(context), editingStock, 
 					new WindowDialog.CloseWindowDialogListener<Stock>() {
 			    public void windowDialogClose(WindowDialog<Stock>.CloseWindowDialogEvent<Stock> event) {
 			    	if (event.getDialogResult() != WindowDialog.DialogResult.SAVE)

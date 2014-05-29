@@ -76,7 +76,7 @@ Import-Package: org.aspectj.runtime.reflect,
  org.aspectj.lang,
  com.thingtrack.konekti.dao.template,
  javax.persistence.metamodel
-Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.0.5.RELEASE]" 
+Import-Library: org.springframework.spring;version="[3.0.5.RELEASE,3.1.0.RELEASE]" 
 ]]>
 					</manifestTemplate>
 				</configuration>

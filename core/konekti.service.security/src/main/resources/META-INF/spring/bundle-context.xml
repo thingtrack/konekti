@@ -36,41 +36,4 @@
 	
 	<!-- Authentication bean service -->
 	<bean id="securityService" class="com.thingtrack.konekti.service.security.internal.SecurityServiceImpl" autowire="byName"/>
-
-	<!-- Authorization bean service -->
-	<bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
-		<property name="authenticationManager" ref="authenticationManager" />
-		<property name="securityMetadataSource">
-			<bean class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
-				<property name="methodSecurityMetadataSources">
-					<list>
-						<bean class="org.springframework.security.access.prepost.PrePostAnnotationSecurityMetadataSource">
-							<constructor-arg>
-								<bean class="org.springframework.security.access.expression.method.ExpressionBasedAnnotationAttributeFactory">
-									<constructor-arg>
-										<bean class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" />
-									</constructor-arg>
-								</bean>
-							</constructor-arg>
-						</bean>
-					</list>
-				</property>
-			</bean>
-		</property>
-		<property name="validateConfigAttributes" value="false" />
-		<property name="rejectPublicInvocations" value="false" />
-		<property name="accessDecisionManager">
-			<bean id="accessDecisionManager"
-				class="org.springframework.security.access.vote.AffirmativeBased">
-				<property name="decisionVoters">
-					<list>
-						<bean class="org.springframework.security.access.vote.RoleVoter" />
-						<bean
-							class="org.springframework.security.access.vote.AuthenticatedVoter" />
-					</list>
-				</property>
-			</bean>
-		</property>
-	</bean>
-
 </beans>
