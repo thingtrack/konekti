@@ -32,6 +32,7 @@ Bundle-SymbolicName: ${project.groupId}.${project.artifactId}
 Bundle-Version: ${project.version}
 Built-By: ${organization.name}
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.springframework.osgi.context
 ]]>
                     </manifestTemplate>
                 </configuration>

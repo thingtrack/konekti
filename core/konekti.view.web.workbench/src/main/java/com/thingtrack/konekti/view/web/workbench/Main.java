@@ -21,23 +21,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.SocketException;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageListener;
-import javax.jms.MessageProducer;
-import javax.jms.Session;
-import javax.jms.TextMessage;
 
 import org.dellroad.stuff.vaadin.SpringContextApplication;
 import org.osgi.framework.Bundle;
@@ -50,14 +39,11 @@ import org.springframework.web.context.ConfigurableWebApplicationContext;
 import com.github.peholmst.i18n4vaadin.I18N;
 import com.github.peholmst.i18n4vaadin.ResourceBundleI18N;
 import com.thingtrack.konekti.domain.Action;
-import com.thingtrack.konekti.domain.Area;
 import com.thingtrack.konekti.domain.Configuration;
-import com.thingtrack.konekti.domain.Location;
 import com.thingtrack.konekti.domain.MenuCommandResource;
 import com.thingtrack.konekti.domain.MenuFolderResource;
 import com.thingtrack.konekti.domain.MenuResource;
 import com.thingtrack.konekti.domain.MenuWorkbench;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Permission;
 import com.thingtrack.konekti.domain.Role;
 import com.thingtrack.konekti.domain.User;
@@ -74,7 +60,6 @@ import com.thingtrack.konekti.view.kernel.IModuleService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 import com.thingtrack.konekti.view.kernel.MetadataModule;
 import com.thingtrack.konekti.view.kernel.ui.layout.IApplicationCloseEventListener;
-import com.thingtrack.konekti.view.kernel.ui.layout.IMessageEventListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IUserChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewChangeListener;
 import com.thingtrack.konekti.view.kernel.ui.layout.IViewContainer;
@@ -88,7 +73,7 @@ import com.thingtrack.konekti.view.web.workbench.ui.ToolbarManager;
 import com.thingtrack.konekti.view.web.workbench.ui.WorkbenchContext;
 import com.thingtrack.konekti.view.web.form.field.LocaleField;
 import com.thingtrack.konekti.view.addon.ui.ErrorViewForm;
-import com.vaadin.terminal.ExternalResource;
+
 import com.vaadin.terminal.StreamResource;
 import com.vaadin.terminal.StreamResource.StreamSource;
 import com.vaadin.terminal.Terminal;
@@ -140,9 +125,6 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	
 	@Autowired
 	private KonektiLayout konektiLayout;
-
-	@Autowired
-	private ConnectionFactory connectionFactory;
 	
 	private MainWindow window;
 	
@@ -154,19 +136,20 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	private String version;
 	private String logoInit;
 	private boolean demo;
+	private String jiraURL;
 	private boolean jira;
+	
+	private static final String defaultName = "Konekti";
+	private static final String defaultVersion = "0.0.1.SNAPSHOT";
+	private static final String defaultLogoInit = "logo_konekti_init.png";
+	private static final boolean defaultDemo = false;
+	private static final String defaultJiraURL ="https://thingtrack.atlassian.net/s/aa712e3fa3da8196ebfcd88ad36f2a4c-T/es_ES-zbrews/6325/71/1.4.11/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?locale=es-ES?collectorId=5e180215";
+	private static final boolean defaultJira = false;
 	
 	private static int DEFAULT_MENU_ID = 0;
 	private MenuItem headMenuItem;
 	
 	private I18N i18n;
-	
-	private Connection connection;
-	private Session session;
-	
-	private final static String PRODUCER_QUEUE_NAME = "IN_QUEUE"			;
-	//private MessageConsumer consumer;
-	private MessageProducer producer;
 	
 	@Override
 	protected void initSpringApplication(ConfigurableWebApplicationContext context) {
@@ -204,7 +187,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("jQuery.ajax({");
 			//buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-yjzsxs-1988229788/6080/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector-embededjs.js?collectorId=ba205bee\"");
-			buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-45l6o4-1988229788/6096/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=ec9fb1c4\"");
+			//buffer.append(" url: \"https://thingtrack.atlassian.net/s/en_US-45l6o4-1988229788/6096/65/1.4.0-m2/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=ec9fb1c4\"");
+			buffer.append(" url: \"" + jiraURL + "\"");
 			buffer.append(",type: \"get\"");
 			buffer.append(",cache: true");
 			buffer.append(",dataType: \"script\"});");
@@ -216,23 +200,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			@Override
 			public void close() {
 				moduleService.removeListener(Main.this);
-				
-				try {
-					/*if (producer != null)
-						producer.close();
-					if (consumer != null)
-						consumer.close();
-					if (session != null)
-						session.close();*/
-					//session.setMessageListener(null);
-					//session.close();
-					if (connection != null)
-						connection.close();
-				} catch (JMSException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}							
-										
+									
 				WebApplicationContext webApplicationContext = (WebApplicationContext) getMainWindow().getApplication().getContext();
 				webApplicationContext.getHttpSession().invalidate();
 				
@@ -240,100 +208,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 				
 			}
 		});
-		
-		konektiLayout.getMenuLayout().addListenerMessageEvent(new IMessageEventListener() {			
-			@Override
-			public void getMessage(Organization organizationFrom,
-								   Location locationFrom, 
-								   Area areaFrom, 
-								   User userFrom,
-								   Organization organizationTo,
-								   Location locationTo,
-								   Area areaTo,
-								   User userTo,
-								   String payload,
-								   Date messageDate) {
-				TextMessage txtMessage;
-				try {
-					txtMessage = session.createTextMessage();
-										
-					// set origin headers message
-					if (organizationFrom != null)
-						txtMessage.setObjectProperty("ORGANIZATION_ID_FROM", organizationFrom.getOrganizationId());
-					else
-						txtMessage.setObjectProperty("ORGANIZATION_ID_FROM", null);
-					if (locationFrom != null)
-						txtMessage.setObjectProperty("LOCATION_ID_FROM", locationFrom.getLocationId());
-					else
-						txtMessage.setObjectProperty("LOCATION_ID_FROM", null);
-					if (areaFrom != null)
-						txtMessage.setObjectProperty("AREA_ID_FROM", areaFrom.getAreaId());
-					else
-						txtMessage.setObjectProperty("AREA_ID_FROM", null);
-					if (userFrom != null)
-						txtMessage.setObjectProperty("USER_ID_FROM", userFrom.getUserId());
-					else
-						txtMessage.setObjectProperty("USER_ID_FROM", null);
-					
-					// set destination headers message
-					if (organizationTo != null)
-						txtMessage.setObjectProperty("ORGANIZATION_ID_TO", organizationTo.getOrganizationId());
-					else
-						txtMessage.setObjectProperty("ORGANIZATION_ID_TO", null);
-					if (locationTo != null)
-						txtMessage.setObjectProperty("LOCATION_ID_TO", locationTo.getLocationId());
-					else
-						txtMessage.setObjectProperty("LOCATION_ID_TO", null);
-					if (areaTo != null)
-						txtMessage.setObjectProperty("AREA_ID_TO", areaTo.getAreaId());
-					else
-						txtMessage.setObjectProperty("AREA_ID_TO", null);
-					if (userTo != null)
-						txtMessage.setObjectProperty("USER_ID_TO", userTo.getUserId());
-					else
-						txtMessage.setObjectProperty("USER_ID_TO", null);
-								
-					// set date headers message
-					txtMessage.setStringProperty("MESSAGE_DATE", messageDate.toString());
-					
-					// set payload headers message
-					txtMessage.setText(payload);
-					
-					producer.send(txtMessage);
-				} catch (JMSException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
-		});
 
 	}
 	
-	// Overriding getWindow(String) is required to get multiple browser windows/tabs to work
-	/*@Override
-	public Window getWindow(String name) {
-
-		// If the window is identified by name, we are good to go
-		Window w = super.getWindow(name);
-
-		// If not, we must create a new window for this new browser window/tab
-		if (w == null) {			
-			//w = new CalcWindow();
-			w = new MainWindow(name, configureI18n());
-			
-			// Use the random name given by the framework to identify this
-			// window in future
-			w.setName(name);
-			addWindow(w);
-
-			// Move to the url to remember the name in the future
-			w.open(new ExternalResource(w.getURL()));
-		}
-
-		return w;
-	}*/
-		
 	private I18N configureI18n() {				
 		// set locales supported by Konekti
 		Locale esLocale = new Locale("es");
@@ -375,35 +252,42 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			configuration = configurationService.getByTag(Configuration.TAG.NAME.name());
 			name = configuration.getValue();
 		} catch (Exception e) {
-			name = "KONEKTI";
+			name = defaultName;
 		}	
 		
 		try {
 			configuration = configurationService.getByTag(Configuration.TAG.VERSION.name());
 			version = configuration.getValue();
 		} catch (Exception e) {
-			version = "0.0.1.SNAPSHOT";
+			version = defaultVersion;
 		}	
 		
 		try {
 			configuration = configurationService.getByTag(Configuration.TAG.LOGO_INIT.name());
 			logoInit = configuration.getValue();
 		} catch (Exception e) {
-			logoInit = "logo_konekti_init.png";
+			logoInit = defaultLogoInit;
 		}	
 		
 		try {
 			configuration = configurationService.getByTag(Configuration.TAG.DEMO.name());
 			demo = Boolean.parseBoolean(configuration.getValue());
 		} catch (Exception e) {
-			demo = false;
+			demo = defaultDemo;
+		}
+
+		try {
+			configuration = configurationService.getByTag(Configuration.TAG.JIRA_URL.name());
+			jiraURL = configuration.getValue();
+		} catch (Exception e) {
+			jiraURL = defaultJiraURL;
 		}
 		
 		try {
-			configuration = configurationService.getByTag("JIRA");
+			configuration = configurationService.getByTag(Configuration.TAG.JIRA.name());
 			jira = Boolean.parseBoolean(configuration.getValue());
 		} catch (Exception e) {
-			jira = false;
+			jira = defaultJira;
 		}
 			
 	}
@@ -719,92 +603,6 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 		if (viewEvent.getViewFrom() instanceof WorkbenchView) {
 
 		}
-	}
-
-	private void initMessageQueues(User user) throws JMSException {
-		// create message IN queue for all users
-		connection = connectionFactory.createConnection();
-		connection.start();
-
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		String consumerQueueName = user.getUserId().toString();
-		Destination consumerDestination = session.createQueue(consumerQueueName);
-
-		MessageConsumer consumer = session.createConsumer(consumerDestination);
-		
-		consumer.setMessageListener(new MessageListener() {			
-			@Override
-			public void onMessage(Message message) {
-				try {
-					Integer organizationIdFrom = message.getIntProperty("ORGANIZATION_ID_FROM");
-					Integer locationIdFrom = message.getIntProperty("LOCATION_ID_FROM");
-					Integer areaIdFrom = message.getIntProperty("AREA_ID_FROM");
-					Integer userIdFrom = message.getIntProperty("USER_ID_FROM");			
-					
-					Date messageDate = new Date(); ///TODO
-								
-					if (message instanceof TextMessage) {
-						TextMessage txtMessage = (TextMessage) message;
-						String payload = txtMessage.getText();
-							
-						Organization organizationFrom = null;
-						if (organizationIdFrom != null) {
-							try {
-								organizationFrom = organizationService.get(organizationIdFrom);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						
-						Location locationFrom = null;
-						if (locationIdFrom != null) {
-							try {
-								locationFrom = locationService.get(locationIdFrom);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						
-						Area areaFrom = null;
-						if (areaIdFrom != null) {
-							try {
-								areaFrom = areaService.get(areaIdFrom);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						
-						User userFrom = null;
-						if (userIdFrom != null) {
-							try {
-								userFrom = userService.get(userIdFrom);
-							} catch (Exception e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-						}
-						
-						menuManager.addMessage(organizationFrom, locationFrom, areaFrom, userFrom, payload, messageDate);
-						
-					}
-
-				} catch (JMSException e) {
-					logger.log(Level.SEVERE, "message error:", e);
-
-				}
-				
-			}
-		});
-		
-		/*if (consumer.getMessageListener() == null)
-			consumer.setMessageListener(this);*/
-		
-		// create message unique request queue for all users
-		Destination producerDestination = session.createQueue(PRODUCER_QUEUE_NAME);
-		producer = session.createProducer(producerDestination);
 	}
 	
 	private void loadWorkbenchContext(User user) throws Exception {	

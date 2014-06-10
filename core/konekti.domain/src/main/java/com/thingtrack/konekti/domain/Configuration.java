@@ -80,7 +80,10 @@ public class Configuration implements Serializable {
         SMTP_PORT,
         SMTP_USERNAME,
         SMTP_PASSEWORD,
-        SMTP_TLS
+        SMTP_TLS,
+        SMTP_SSL,
+        JIRA_URL,
+        JIRA,
     }
 	public enum TYPE {
 		STRING("String"),

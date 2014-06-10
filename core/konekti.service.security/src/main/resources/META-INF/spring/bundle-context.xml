@@ -3,9 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.4.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- regular spring configuration file defining the beans for this bundle. 
 		The configuration of OSGi definitions is kept in a separate configuration 
@@ -38,7 +38,7 @@
 	<bean id="securityService" class="com.thingtrack.konekti.service.security.internal.SecurityServiceImpl" autowire="byName"/>
 
 	<!-- Authorization bean service -->
-	<bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
+	<!-- <bean id="securityInterceptor" class="org.springframework.security.access.intercept.aopalliance.MethodSecurityInterceptor">
 		<property name="authenticationManager" ref="authenticationManager" />
 		<property name="securityMetadataSource">
 			<bean class="org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource">
@@ -71,6 +71,6 @@
 				</property>
 			</bean>
 		</property>
-	</bean>
+	</bean> -->
 
 </beans>

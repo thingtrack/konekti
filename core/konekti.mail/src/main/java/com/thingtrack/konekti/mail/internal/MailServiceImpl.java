@@ -44,8 +44,14 @@ public class MailServiceImpl implements MailService {
 			
 	@PostConstruct
 	public void Initialize() throws Exception {
-		// get all SMTP Server atributes 
-		configurations = configurationService.getAll();
+		try  {
+			// get all SMTP Server atributes
+			configurationService.get(1);
+			configurations = configurationService.getAll();
+		}
+		catch(Exception ex) {
+			ex.getMessage();
+		}
 		
 		host = getConfigurationValue(SMTP_HOST);
 		port = Integer.parseInt(getConfigurationValue(SMTP_PORT));
