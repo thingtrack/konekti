@@ -13,6 +13,7 @@
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<gemini.blueprint.version>1.0.2.RELEASE</gemini.blueprint.version>
 	</properties>
 	
 	<build>
@@ -83,10 +84,9 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.osgi</groupId>
-			<artifactId>org.springframework.osgi.core</artifactId>
-			<version>1.2.1</version>
-			<scope>provided</scope>
+			<groupId>org.eclipse.gemini</groupId>
+			<artifactId>org.eclipse.gemini.blueprint.extender</artifactId>
+			<version>${gemini.blueprint.version}</version>
 		</dependency>
 
 		<dependency>
