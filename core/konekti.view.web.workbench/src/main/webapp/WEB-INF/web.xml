@@ -63,10 +63,6 @@
 			<param-name>version</param-name>
 			<param-value>0.0.1.SNAPSHOT</param-value>
 		</init-param>
-<!-- 		<init-param> -->
-<!--       		<param-name>disable-xsrf-protection</param-name> -->
-<!--       		<param-value>true</param-value> -->
-<!--     	</init-param>		 jmeter-->
 <!-- 		<load-on-startup>2</load-on-startup> -->
 	</servlet>
 
