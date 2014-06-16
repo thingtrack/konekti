@@ -8,12 +8,12 @@ import java.util.Properties;
 import javax.annotation.PostConstruct;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.velocity.app.VelocityEngine;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamSource;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.ui.velocity.VelocityEngineUtils;
+import org.apache.velocity.app.VelocityEngine;
 
 import com.thingtrack.konekti.domain.Configuration;
 import com.thingtrack.konekti.mail.MailService;
