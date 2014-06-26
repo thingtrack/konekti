@@ -38,9 +38,10 @@ public class SupplierGroupDaoImpl extends JpaDao<SupplierGroup, Integer> impleme
 	}
 	
 	@Override
-	public SupplierGroup getByName(String name) throws Exception {
+	public SupplierGroup getByName(Organization organization, String name) throws Exception {
 		SupplierGroup supplierGroup = (SupplierGroup)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.name = :name")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.name = :name")
+				.setParameter("organization", organization)
 				.setParameter("name", name).getSingleResult();
 
 		return supplierGroup;

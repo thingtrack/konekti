@@ -43,8 +43,8 @@ public class SupplierTypeServiceImpl implements SupplierTypeService {
 	}
 
 	@Override
-	public SupplierType getByName(String name) throws Exception {
-		return this.supplierTypeDao.getByName(name);
+	public SupplierType getByName(Organization organization, String name) throws Exception {
+		return this.supplierTypeDao.getByName(organization, name);
 		
 	}
 

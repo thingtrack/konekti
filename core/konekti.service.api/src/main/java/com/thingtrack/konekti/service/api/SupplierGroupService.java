@@ -25,7 +25,7 @@ import com.thingtrack.konekti.domain.SupplierGroup;
 public interface SupplierGroupService {
 	public List<SupplierGroup> getAll(Organization organization) throws Exception;
 	public SupplierGroup get( Integer supplierAgentId ) throws Exception;
-	public SupplierGroup getByname( String name ) throws Exception;
+	public SupplierGroup getByname(Organization organization, String name ) throws Exception;
 	public SupplierGroup save(SupplierGroup supplierGroup) throws Exception;
 	public void delete(SupplierGroup supplierGroup) throws Exception;
 }

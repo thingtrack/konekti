@@ -25,7 +25,7 @@ import com.thingtrack.konekti.domain.Organization;
 public interface ClientTypeService {
 	public List<ClientType> getAll(Organization organization) throws Exception;
 	public ClientType get( Integer clientGroupId ) throws Exception;
-	public ClientType getByCode( String code ) throws Exception;
+	public ClientType getByCode(Organization organization, String code ) throws Exception;
 	public ClientType save(ClientType clientType) throws Exception;
 	public void delete(ClientType clientType) throws Exception;
 }

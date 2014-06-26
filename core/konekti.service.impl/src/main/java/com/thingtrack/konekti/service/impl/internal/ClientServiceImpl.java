@@ -37,8 +37,8 @@ public class ClientServiceImpl implements ClientService {
 	private SequenceService sequenceService;
 
 	@Override
-	public List<Client> getAll() throws Exception {
-		return this.clientDao.getAll();
+	public List<Client> getAll(Organization organization) throws Exception {
+		return this.clientDao.getAll(organization);
 	}
 
 	@Override
@@ -48,14 +48,7 @@ public class ClientServiceImpl implements ClientService {
 	}
 
 	@Override
-	public Client getByCode(String code) throws Exception {
-		return this.clientDao.getByCode(code);
-
-	}
-
-	@Override
-	public List<Client> getByCode(Organization organization, String code)
-			throws Exception {
+	public Client getByCode(Organization organization, String code) throws Exception {
 		return this.clientDao.getByCode(organization, code);
 
 	}

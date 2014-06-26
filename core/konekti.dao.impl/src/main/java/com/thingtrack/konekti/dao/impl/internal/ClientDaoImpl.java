@@ -31,25 +31,27 @@ import com.thingtrack.konekti.domain.User;
  */
 @Repository
 public class ClientDaoImpl extends JpaDao<Client, Integer> implements ClientDao {
+	@SuppressWarnings("unchecked")
 	@Override
-	public Client getByCode(String code) throws Exception {
+	public List<Client> getAll(Organization organization) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		queryString.append(" WHERE p.organization = :organization");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("organization", organization);
+		
+		return query.getResultList();
+	}
+	
+	@Override
+	public Client getByCode(Organization organization, String code) throws Exception {		
 		Client client = (Client)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
+		.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.code = :code")
+				.setParameter("organization", organization)
 				.setParameter("code", code).getSingleResult();
 
 		return client;
-		
-	}
-
-	@Override
-	public List<Client> getByCode(Organization organization, String code) throws Exception {		
-		@SuppressWarnings("unchecked")
-		List<Client> clients =  (List<Client>)getEntityManager()
-		.createQuery("SELECT p FROM " + getEntityName() + " p WHERE :organization MEMBER OF p.organizations AND p.code LIKE :code")
-				.setParameter("organization", (organization != null ? organization : "%"))
-				.setParameter("code", (code != null ? code : "%")).getResultList();
-
-		return clients;
 		
 	}
 	

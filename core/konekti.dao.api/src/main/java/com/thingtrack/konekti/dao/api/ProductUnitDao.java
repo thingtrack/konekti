@@ -25,6 +25,6 @@ import com.thingtrack.konekti.domain.ProductUnit;
  */
 public interface ProductUnitDao extends Dao<ProductUnit, Integer> {
 	public List<ProductUnit> getAll(Area area) throws Exception;
-	public ProductUnit getByCode(String code) throws Exception;
+	public ProductUnit getByCode(Area area, String code) throws Exception;
 	
 }

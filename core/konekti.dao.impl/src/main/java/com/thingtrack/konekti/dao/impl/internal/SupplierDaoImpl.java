@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thingtrack.konekti.dao.template.JpaDao;
 import com.thingtrack.konekti.dao.api.SupplierDao;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
 
@@ -30,10 +31,24 @@ import com.thingtrack.konekti.domain.User;
  */
 @Repository
 public class SupplierDaoImpl extends JpaDao<Supplier, Integer> implements SupplierDao {
+	@SuppressWarnings("unchecked")
 	@Override
-	public Supplier getByCode(String code) throws Exception {
+	public List<Supplier> getAll(Organization organization) throws Exception {
+		StringBuffer queryString = new StringBuffer("SELECT p FROM " + getEntityName() + " p");
+		queryString.append(" WHERE p.organization = :organization");
+
+		Query query = (Query) getEntityManager().createQuery(queryString.toString());
+		
+		query.setParameter("organization", organization);
+		
+		return query.getResultList();
+	}
+	
+	@Override
+	public Supplier getByCode(Organization organization, String code) throws Exception {
 		Supplier supplier = (Supplier)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.code = :code")
+				.setParameter("organization", organization)
 				.setParameter("code", code).getSingleResult();
 
 		return supplier;

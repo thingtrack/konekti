@@ -133,7 +133,7 @@ public class ProductViewForm extends AbstractViewForm {
 	
 	private void loadData() throws IllegalArgumentException, Exception {
 		bcSupplier.removeAllItems();
-		bcSupplier.addAll(supplierService.getAll());	
+		bcSupplier.addAll(supplierService.getAll(context.getUser().getActiveOrganization()));	
 		
 		productSupplierField.setContainerDataSource(bcSupplier);
 		

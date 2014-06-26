@@ -43,8 +43,8 @@ public class ClientGroupServiceImpl implements ClientGroupService {
 	}
 
 	@Override
-	public ClientGroup getByName(String name) throws Exception {
-		return this.clientGroupDao.getByName(name);
+	public ClientGroup getByName(Organization organization, String name) throws Exception {
+		return this.clientGroupDao.getByName(organization, name);
 		
 	}
 

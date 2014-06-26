@@ -1,8 +1,5 @@
 package com.thingtrack.konekti.view.module.client.internal;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.ss.usermodel.Cell;
 
@@ -10,12 +7,10 @@ import com.thingtrack.konekti.domain.Address;
 import com.thingtrack.konekti.domain.Client;
 import com.thingtrack.konekti.domain.ClientGroup;
 import com.thingtrack.konekti.domain.ClientType;
-import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Sequence;
 import com.thingtrack.konekti.service.api.AddressService;
 import com.thingtrack.konekti.service.api.ClientGroupService;
 import com.thingtrack.konekti.service.api.ClientTypeService;
-import com.thingtrack.konekti.service.api.OrganizationService;
 import com.thingtrack.konekti.service.api.SequenceService;
 import com.thingtrack.konekti.view.kernel.IWorkbenchContext;
 
@@ -43,7 +38,10 @@ public class Excel2Entity {
 	private ClientTypeService clientTypeService;
 	private ClientGroupService clientGroupService;
 	
-	public Excel2Entity(IWorkbenchContext context, SequenceService sequenceService, AddressService addressService, ClientGroupService clientGroupService, ClientTypeService clientTypeService, HSSFRow row) {	    
+	private IWorkbenchContext context;
+	
+	public Excel2Entity(IWorkbenchContext context, SequenceService sequenceService, AddressService addressService, ClientGroupService clientGroupService, ClientTypeService clientTypeService, HSSFRow row) {
+		this.context = context;
 		this.sequenceService = sequenceService;
 		this.addressService = addressService;
 		this.clientTypeService = clientTypeService;
@@ -112,7 +110,7 @@ public class Excel2Entity {
 		if(row.getCell(TYPE) != null) {
 			ClientType clientType = null;
 			try {
-				clientType = clientTypeService.getByCode(row.getCell(TYPE).getStringCellValue());
+				clientType = clientTypeService.getByCode(context.getUser().getActiveOrganization(), row.getCell(TYPE).getStringCellValue());
 			} catch (Exception e) {
 				clientType = new ClientType();
 				clientType.setCode(row.getCell(TYPE).getStringCellValue());
@@ -126,7 +124,7 @@ public class Excel2Entity {
 		if(row.getCell(GROUP) != null) {
 			ClientGroup clientGroup = null;
 			try {
-				clientGroup = clientGroupService.getByName(row.getCell(GROUP).getStringCellValue());
+				clientGroup = clientGroupService.getByName(context.getUser().getActiveOrganization(), row.getCell(GROUP).getStringCellValue());
 			} catch (Exception e) {
 				clientGroup = new ClientGroup();
 				clientGroup.setName(row.getCell(GROUP).getStringCellValue());

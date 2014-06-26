@@ -33,7 +33,10 @@ public class Excel2Entity {
 	private ProductTypeService productTypeService;
 	private SupplierService supplierService;
 	
+	private IWorkbenchContext context;
+	
 	public Excel2Entity(IWorkbenchContext context, ProductTypeService productTypeService, SupplierService supplierService, HSSFRow row) {	    
+		this.context = context;
 		this.productTypeService = productTypeService;
 	    this.supplierService = supplierService;
 	    
@@ -79,7 +82,7 @@ public class Excel2Entity {
 		if(row.getCell(SUPPLIER_CODE) != null) {
 			Supplier supplier = null;
 			try {
-				supplier = supplierService.getByCode(row.getCell(SUPPLIER_CODE).getStringCellValue());
+				supplier = supplierService.getByCode(context.getUser().getActiveOrganization(), row.getCell(SUPPLIER_CODE).getStringCellValue());
 			} catch (Exception e) {
 				throw e;								
 			}
@@ -90,7 +93,7 @@ public class Excel2Entity {
 		if(row.getCell(TYPE) != null) {
 			ProductType productType = null;
 			try {
-				productType = productTypeService.getByCode(row.getCell(TYPE).getStringCellValue());
+				productType = productTypeService.getByCode(context.getUser().getActiveArea(), row.getCell(TYPE).getStringCellValue());
 			} catch (Exception e) {
 				throw e;
 									

@@ -28,15 +28,7 @@ import com.thingtrack.konekti.domain.User;
  * @throws Exception if there is no {@code CalendarType} associated t the passed code or code is null
  */
 public interface ClientDao extends Dao<Client, Integer> {
-	
-	/**
-	 * Obtains an {@link Client} by its code
-	 * 
-	 * @param code  the unique code to filter the Client, not null
-	 * @return {@code Client} which the passed {@code code} belongs to
-	 * @throws Exception if the the {@code code} no belongs to any {@code Client} or is null
-	 */
-	public Client getByCode(String code) throws Exception;
+	public List<Client> getAll(Organization organization) throws Exception;
 	
 	/**
 	 * Obtains an {@link List<Client>} which belogns to the passed {@link Organization} and its {@code code}
@@ -46,7 +38,7 @@ public interface ClientDao extends Dao<Client, Integer> {
 	 * @return Collection of {@link Client clients}
 	 * @throws Exception if tje parameters passed not belongs to an {@code CLient}
 	 */
-	public List<Client> getByCode(Organization organization, String code) throws Exception;
+	public Client getByCode(Organization organization, String code) throws Exception;
 	
 	/**
 	 * Obtains an {@link Client} associated to its {@link User}

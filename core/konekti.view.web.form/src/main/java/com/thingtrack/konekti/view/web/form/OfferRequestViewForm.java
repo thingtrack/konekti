@@ -27,7 +27,6 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Select;
 import com.vaadin.ui.TextField;
 
-
 @SuppressWarnings("serial")
 public class OfferRequestViewForm extends CustomComponent {
 
@@ -158,7 +157,7 @@ public class OfferRequestViewForm extends CustomComponent {
 		offerRequestStatusField.setContainerDataSource(bcOfferRequestStatus);
 	
 		bcClient.removeAllItems();
-		bcClient.addAll(clientService.getAll());
+		bcClient.addAll(clientService.getAll(context.getUser().getActiveOrganization()));
 		
 		clientField.setContainerDataSource(bcClient);
 		
@@ -168,7 +167,7 @@ public class OfferRequestViewForm extends CustomComponent {
 		bcClient.removeAllItems();
 		try {
 			bcClient.removeAllItems();
-			bcClient.addAll(clientService.getAll());
+			bcClient.addAll(clientService.getAll(context.getUser().getActiveOrganization()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

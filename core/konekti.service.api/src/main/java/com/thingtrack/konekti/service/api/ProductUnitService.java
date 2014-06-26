@@ -25,7 +25,7 @@ import com.thingtrack.konekti.domain.ProductUnit;
 public interface ProductUnitService {
 	public List<ProductUnit> getAll(Area area) throws Exception;
 	public ProductUnit get( Integer productUnitId ) throws Exception;
-	public ProductUnit getByCode( String code ) throws Exception;
+	public ProductUnit getByCode(Area area, String code ) throws Exception;
 	public ProductUnit save(ProductUnit productUnit) throws Exception;
 	public void delete(ProductUnit productUnit) throws Exception;
 }

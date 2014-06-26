@@ -25,7 +25,7 @@ import com.thingtrack.konekti.domain.SupplierType;
 public interface SupplierTypeService {
 	public List<SupplierType> getAll(Organization organization) throws Exception;
 	public SupplierType get( Integer supplierId ) throws Exception;
-	public SupplierType getByName( String name ) throws Exception;
+	public SupplierType getByName(Organization organization, String name ) throws Exception;
 	public SupplierType save(SupplierType supplierType) throws Exception;
 	public void delete(SupplierType supplierType) throws Exception;
 }

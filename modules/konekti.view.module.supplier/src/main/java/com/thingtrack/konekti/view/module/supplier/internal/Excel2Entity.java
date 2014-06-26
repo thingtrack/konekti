@@ -42,7 +42,10 @@ public class Excel2Entity {
 	private SupplierTypeService supplierTypeService;
 	private SupplierGroupService supplierGroupService;
 	
+	private IWorkbenchContext context;
+	
 	public Excel2Entity(IWorkbenchContext context, SequenceService sequenceService, AddressService addressService, SupplierGroupService supplierGroupService, SupplierTypeService supplierTypeService, HSSFRow row) {	    
+		this.context = context;
 		this.sequenceService = sequenceService;
 		this.addressService = addressService;
 		this.supplierTypeService = supplierTypeService;
@@ -111,7 +114,7 @@ public class Excel2Entity {
 		if(row.getCell(TYPE) != null) {
 			SupplierType supplierType = null;
 			try {
-				supplierType = supplierTypeService.getByName(row.getCell(TYPE).getStringCellValue());
+				supplierType = supplierTypeService.getByName(context.getUser().getActiveOrganization(), row.getCell(TYPE).getStringCellValue());
 			} catch (Exception e) {
 				supplierType = new SupplierType();
 				supplierType.setName(row.getCell(TYPE).getStringCellValue());
@@ -125,7 +128,7 @@ public class Excel2Entity {
 		if(row.getCell(GROUP) != null) {
 			SupplierGroup supplierGroup = null;
 			try {
-				supplierGroup = supplierGroupService.getByname(row.getCell(GROUP).getStringCellValue());
+				supplierGroup = supplierGroupService.getByname(context.getUser().getActiveOrganization(), row.getCell(GROUP).getStringCellValue());
 			} catch (Exception e) {
 				supplierGroup = new SupplierGroup();
 				supplierGroup.setName(row.getCell(GROUP).getStringCellValue());

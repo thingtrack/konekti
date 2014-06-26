@@ -37,6 +37,6 @@ public interface ClientGroupDao extends Dao<ClientGroup, Integer> {
 	 * @return the {@code ClientGroup}
 	 * @throws Exception if there is no {@code ClientGroup} associated to the passed name or it is null
 	 */
-	public ClientGroup getByName( String name ) throws Exception;
+	public ClientGroup getByName(Organization organization, String name ) throws Exception;
 	
 }

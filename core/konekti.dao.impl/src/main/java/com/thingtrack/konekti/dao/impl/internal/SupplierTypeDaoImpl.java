@@ -38,9 +38,10 @@ public class SupplierTypeDaoImpl extends JpaDao<SupplierType, Integer> implement
 	}
 	
 	@Override
-	public SupplierType getByName(String name) throws Exception {
+	public SupplierType getByName(Organization organization, String name) throws Exception {
 		SupplierType supplierType = (SupplierType)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.name = :name")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.name = :name")
+				.setParameter("organization", organization)
 				.setParameter("name", name).getSingleResult();
 
 		return supplierType;

@@ -75,7 +75,8 @@ import com.vaadin.ui.themes.Reindeer;
  * @author Alejandro Duarte
  *
  */
-public class GridComponentReport extends CustomComponent implements ClickListener, SplitButtonClickListener {
+public class GridComponentReport extends CustomComponent 
+	implements ClickListener, SplitButtonClickListener {
 
 	private static final long serialVersionUID = 1L;
 	

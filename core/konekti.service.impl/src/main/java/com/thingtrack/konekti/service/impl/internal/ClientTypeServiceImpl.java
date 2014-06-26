@@ -43,8 +43,8 @@ public class ClientTypeServiceImpl implements ClientTypeService {
 	}
 
 	@Override
-	public ClientType getByCode(String code) throws Exception {
-		return this.clientTypeDao.getByCode(code);
+	public ClientType getByCode(Organization organization, String code) throws Exception {
+		return this.clientTypeDao.getByCode(organization, code);
 		
 	}
 

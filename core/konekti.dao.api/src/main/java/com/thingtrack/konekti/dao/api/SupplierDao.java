@@ -16,7 +16,7 @@ package com.thingtrack.konekti.dao.api;
 import java.util.List;
 
 import com.thingtrack.konekti.dao.template.Dao;
-import com.thingtrack.konekti.domain.Service;
+import com.thingtrack.konekti.domain.Organization;
 import com.thingtrack.konekti.domain.Supplier;
 import com.thingtrack.konekti.domain.User;
 
@@ -26,7 +26,8 @@ import com.thingtrack.konekti.domain.User;
  * @author Thingtrack S.L.
  *
  */
-public interface SupplierDao extends Dao<Supplier, Integer> {
+public interface SupplierDao extends Dao<Supplier, Integer> {	
+	public List<Supplier> getAll(Organization organization) throws Exception;
 	
 	/**
 	 * The {@link Supplier} by its code
@@ -34,7 +35,7 @@ public interface SupplierDao extends Dao<Supplier, Integer> {
 	 * @return {@link Supplier}
 	 * @throws Exception
 	 */
-	public Supplier getByCode(String code) throws Exception;
+	public Supplier getByCode(Organization organization, String code) throws Exception;
 	
 	/**
 	 * The {@link Supplier} by its user account

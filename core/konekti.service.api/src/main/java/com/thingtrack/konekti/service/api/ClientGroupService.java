@@ -25,7 +25,7 @@ import com.thingtrack.konekti.domain.Organization;
 public interface ClientGroupService {
 	public List<ClientGroup> getAll(Organization organization) throws Exception;
 	public ClientGroup get( Integer clientGroupId ) throws Exception;
-	public ClientGroup getByName( String name ) throws Exception;
+	public ClientGroup getByName(Organization organization, String name ) throws Exception;
 	public ClientGroup save(ClientGroup clientGroup) throws Exception;
 	public void delete(ClientGroup clientGroup) throws Exception;
 }

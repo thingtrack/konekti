@@ -38,9 +38,10 @@ public class ProductUnitDaoImpl extends JpaDao<ProductUnit, Integer> implements 
 	}
 	
 	@Override
-	public ProductUnit getByCode(String code) throws Exception {
+	public ProductUnit getByCode(Area area, String code) throws Exception {
 		ProductUnit productUnit = (ProductUnit)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.area = :area AND p.code = :code")
+				.setParameter("area", area)
 				.setParameter("code", code).getSingleResult();
 
 		return productUnit;

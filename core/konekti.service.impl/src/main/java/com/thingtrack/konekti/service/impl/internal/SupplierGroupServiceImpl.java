@@ -43,8 +43,8 @@ public class SupplierGroupServiceImpl implements SupplierGroupService {
 	}
 
 	@Override
-	public SupplierGroup getByname(String name) throws Exception {
-		return this.supplierGroupDao.getByName(name);
+	public SupplierGroup getByname(Organization organization, String name) throws Exception {
+		return this.supplierGroupDao.getByName(organization, name);
 		
 	}
 

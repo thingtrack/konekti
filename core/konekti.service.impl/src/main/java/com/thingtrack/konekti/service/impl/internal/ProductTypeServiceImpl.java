@@ -43,8 +43,8 @@ public class ProductTypeServiceImpl implements ProductTypeService {
 	}
 
 	@Override
-	public ProductType getByCode(String code) throws Exception {
-		return this.productTypeDao.getByCode(code);
+	public ProductType getByCode(Area area, String code) throws Exception {
+		return this.productTypeDao.getByCode(area, code);
 		
 	}
 

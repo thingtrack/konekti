@@ -38,9 +38,10 @@ public class ClientGroupDaoImpl extends JpaDao<ClientGroup, Integer> implements 
 	}
 	
 	@Override
-	public ClientGroup getByName(String name) throws Exception {
+	public ClientGroup getByName(Organization organization, String name) throws Exception {
 		ClientGroup clientGroup = (ClientGroup)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.name = :name")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.name = :name")
+				.setParameter("organization", organization)
 				.setParameter("name", name).getSingleResult();
 
 		return clientGroup;

@@ -12,7 +12,6 @@ import ar.com.fdvs.dj.domain.constants.Font;
 import ar.com.fdvs.dj.domain.constants.HorizontalAlign;
 
 import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.User;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
@@ -20,7 +19,7 @@ import com.vaadin.ui.Window;
 @SuppressWarnings("serial")
 public class PrintViewForm extends Window {
 	private VerticalLayout mainLayout;
-	private GridComponentReport componentReport;
+	private GridComponentReport gridComponentReport;
 	
 	private String reportTittle;
 	private String[] columnProperties;
@@ -97,11 +96,15 @@ public class PrintViewForm extends Window {
 		TemplateComponentReport templateComponentReport = new TemplateComponentReport();  	
     	templateComponentReport.executeReport(organization, code, parameters);
     	
+    	templateComponentReport.setImmediate(false);
+    	templateComponentReport.setWidth("100.0%");
+    	templateComponentReport.setHeight("100.0%");
+		
     	mainLayout.addComponent(templateComponentReport);
 	}
 	
 	public void generateReport() {
-		componentReport = new GridComponentReport() {
+		gridComponentReport = new GridComponentReport() {
 			@Override
 			public DynamicReportBuilder getReportBuilder() {
 				// let's override this method to add some elements to the report
@@ -126,16 +129,16 @@ public class PrintViewForm extends Window {
 	        }
 		};
 		
-		componentReport.setImmediate(false);
-		componentReport.setWidth("100.0%");
-		componentReport.setHeight("100.0%");
+		gridComponentReport.setImmediate(false);
+		gridComponentReport.setWidth("100.0%");
+		gridComponentReport.setHeight("100.0%");
 
-		componentReport.setColumnProperties(columnProperties);
-		componentReport.setColumnClasses(columnClasses);
-		componentReport.setColumnTitles(columnTitles);
-        componentReport.setData(data);
+		gridComponentReport.setColumnProperties(columnProperties);
+		gridComponentReport.setColumnClasses(columnClasses);
+		gridComponentReport.setColumnTitles(columnTitles);
+        gridComponentReport.setData(data);
 
-        mainLayout.addComponent(componentReport);
+        mainLayout.addComponent(gridComponentReport);
 	}
 	
 	private VerticalLayout buildMainLayout() {

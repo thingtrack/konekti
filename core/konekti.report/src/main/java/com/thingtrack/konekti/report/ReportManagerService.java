@@ -26,15 +26,14 @@ import java.io.ByteArrayOutputStream;
 import java.util.Map;
 
 import com.thingtrack.konekti.domain.Organization;
-import com.thingtrack.konekti.domain.User;
 import com.vaadin.terminal.gwt.server.WebApplicationContext;
 
 import net.sf.jasperreports.engine.JasperPrint;
 
 public interface ReportManagerService {
 	public JasperPrint executeReport(Organization organization, String code, Map<String,Object> parameters) throws Exception;
-	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception;
 	public void exportReportToPdfFile(Organization organization, String code, Map<String,Object> parameters, String destinationFile) throws Exception;
 	public void exportReportToXmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception;
 	public void exportReportToHtmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception;
+	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception;
 }

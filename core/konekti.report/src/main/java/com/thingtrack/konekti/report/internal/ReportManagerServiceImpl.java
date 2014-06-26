@@ -45,6 +45,7 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 		if (connection == null)
 			throw new Exception("We can not get the JPA connection!");
 		
+		// generate report result
 		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
 		
         return jasperPrint;
@@ -52,58 +53,26 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 	}
 	
 	@Override
-	public void exportReportToPdfFile(Organization organization, String code, Map<String,Object> parameters, String destinationFile) throws Exception {
-		// get  report to execute
-		Report report = reportService.getByCode(organization, code);
-		
-		if (report == null)
-			throw new Exception("The Report with code " + code + " not exist!");
-		
-		// get connection from jpa transaction manager to inject to jasper report template
-		Connection connection = entityManager.unwrap(java.sql.Connection.class);
-				
-		if (connection == null)
-			throw new Exception("We can not get the JPA connection!");
-		
-		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
-		JasperExportManager.exportReportToPdfFile(jasperPrint, destinationFile); 
+	public void exportReportToPdfFile(Organization organization, String code, Map<String,Object> parameters, String destinationFile) throws Exception {		
+		JasperExportManager.exportReportToPdfFile(executeReport(organization, code, parameters), destinationFile);
 		
 	}
 	
 	@Override
 	public void exportReportToXmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName, boolean isEmbeddingImages) throws Exception {
-		// get  report to execute
-		Report report = reportService.getByCode(organization, code);
-		
-		if (report == null)
-			throw new Exception("The Report with code " + code + " not exist!");
-		
-		// get connection from jpa transaction manager to inject to jasper report template
-		Connection connection = entityManager.unwrap(java.sql.Connection.class);
-				
-		if (connection == null)
-			throw new Exception("We can not get the JPA connection!");
-		
-		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
-		JasperExportManager.exportReportToXmlFile(jasperPrint, destFileName, isEmbeddingImages); 
+		JasperExportManager.exportReportToXmlFile(executeReport(organization, code, parameters), destFileName, isEmbeddingImages); 
 		
 	}
 	
 	@Override
-	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {		
-		// get  report to execute
-		Report report = reportService.getByCode(organization, code);
+	public void exportReportToHtmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {
+		JasperExportManager.exportReportToHtmlFile(executeReport(organization, code, parameters), destFileName);
 		
-		if (report == null)
-			throw new Exception("The Report with code " + code + " not exist!");
-		
-		// get connection from jpa transaction manager to inject to jasper report template
-		Connection connection = entityManager.unwrap(java.sql.Connection.class);
-				
-		if (connection == null)
-			throw new Exception("We can not get the JPA connection!");
-		
-		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
+	}
+	
+	@Override
+	public ByteArrayOutputStream exportReportToHtmlStream(WebApplicationContext context, Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {				
+		JasperPrint jasperPrint = executeReport(organization, code, parameters);
 		
 		// create the stream out report
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -128,25 +97,6 @@ public class ReportManagerServiceImpl implements ReportManagerService {
 		outputStream.close();
 		
 		return outputStream;
-	}
-	
-	@Override
-	public void exportReportToHtmlFile(Organization organization, String code, Map<String,Object> parameters, String destFileName) throws Exception {
-		// get  report to execute
-		Report report = reportService.getByCode(organization, code);
-		
-		if (report == null)
-			throw new Exception("The Report with code " + code + " not exist!");
-		
-		// get connection from jpa transaction manager to inject to jasper report template
-		Connection connection = entityManager.unwrap(java.sql.Connection.class);
-				
-		if (connection == null)
-			throw new Exception("We can not get the JPA connection!");
-		
-		JasperPrint jasperPrint = JasperFillManager.fillReport(new ByteArrayInputStream(report.getTemplate()), parameters, connection);
-		JasperExportManager.exportReportToHtmlFile(jasperPrint, destFileName); 
-		
 	}
 	
 }

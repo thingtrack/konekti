@@ -37,8 +37,8 @@ public class SupplierServiceImpl implements SupplierService {
 	private SequenceService sequenceService;
 	
 	@Override
-	public List<Supplier> getAll() throws Exception {
-		return this.supplierDao.getAll();
+	public List<Supplier> getAll(Organization organization) throws Exception {
+		return this.supplierDao.getAll(organization);
 		
 	}
 
@@ -49,8 +49,8 @@ public class SupplierServiceImpl implements SupplierService {
 	}
 
 	@Override
-	public Supplier getByCode(String code) throws Exception {
-		return this.supplierDao.getByCode(code);
+	public Supplier getByCode(Organization organization, String code) throws Exception {
+		return this.supplierDao.getByCode(organization, code);
 		
 	}
 

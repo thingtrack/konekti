@@ -38,9 +38,10 @@ public class ClientTypeDaoImpl extends JpaDao<ClientType, Integer> implements Cl
 	}
 	
 	@Override
-	public ClientType getByCode(String code) throws Exception {
+	public ClientType getByCode(Organization organization, String code) throws Exception {
 		ClientType clientType = (ClientType)getEntityManager()
-				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.code = :code")
+				.createQuery("SELECT p FROM " + getEntityName() + " p WHERE p.organization = :organization AND p.code = :code")
+				.setParameter("organization", organization)
 				.setParameter("code", code).getSingleResult();
 
 		return clientType;

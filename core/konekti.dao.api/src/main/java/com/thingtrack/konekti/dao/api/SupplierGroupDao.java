@@ -27,13 +27,6 @@ import com.thingtrack.konekti.domain.SupplierGroup;
  */
 public interface SupplierGroupDao extends Dao<SupplierGroup, Integer> {
 	public List<SupplierGroup> getAll(Organization organization) throws Exception;
-	
-	/**
-	 * Supplier Group by its name
-	 * @param name the unique name, not null
-	 * @return {@link SupplierGroup}
-	 * @throws Exception if the name is null
-	 */
-	public SupplierGroup getByName(String name) throws Exception;
+	public SupplierGroup getByName(Organization organization, String name) throws Exception;
 
 }

@@ -37,6 +37,6 @@ public interface ClientTypeDao extends Dao<ClientType, Integer> {
 	 * @return {@code ClientType} which the passed {@code code} belongs to
 	 * @throws Exception if the the {@code code} no belongs to any {@code ClientType} or it is null
 	 */
-	public ClientType getByCode(String code) throws Exception;
+	public ClientType getByCode(Organization organization, String code) throws Exception;
 	
 }
