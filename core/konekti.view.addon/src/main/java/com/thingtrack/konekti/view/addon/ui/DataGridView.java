@@ -30,6 +30,7 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
     private BindingSourceChangeDataGridViewListener listener;
     
 	// Actions for the context menu
+    private static final Action ACTION_COPY_CELL_REGISTER = new Action("Copiar Celda");
     private static final Action ACTION_ADD_REGISTER = new Action("Añadir Registro");
     private static final Action ACTION_EDIT_REGISTER = new Action("Editar Registro");
     private static final Action ACTION_DELETE_REGISTER = new Action("Borrar Registro");
@@ -352,7 +353,8 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 	@Override
 	public Action[] getActions(Object target, Object sender) {
 		List<Action> actions = new ArrayList<Action>();
-		 
+		
+		actions.add(ACTION_COPY_CELL_REGISTER);
 		actions.add(ACTION_ADD_FILTER_REGISTER);
 		actions.add(ACTION_REMOVE_FILTER_REGISTER);
 		actions.add(ACTION_REMOVE_ALL_FILTER_REGISTER);				 
@@ -389,6 +391,13 @@ public class DataGridView extends FilterTable implements BindingSourceComponent,
 				EditionToolbar.ClickNavigationEvent event = (new EditionToolbar(0, null)).new ClickNavigationEvent((Component) sender, target, 0);
 				listenerRemoveButton.deleteButtonClick(event);
 			}
+		}
+		else if (action == ACTION_COPY_CELL_REGISTER) {
+			if (cellSelected == null)
+				return;
+						
+			getWindow().executeJavaScript("window.prompt(\"Copy to clipboard: Ctrl+C, Enter\", \"" + cellSelected.toString() + "\");");
+			
 		}
 		else if (action == ACTION_ADD_FILTER_REGISTER) {	
 			if (propertyIdSelected == null)

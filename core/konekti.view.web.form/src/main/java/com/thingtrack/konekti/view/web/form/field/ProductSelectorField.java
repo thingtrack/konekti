@@ -139,7 +139,10 @@ public class ProductSelectorField extends AbstractField {
 		
 		productField.addListener(new ValueChangeListener() {	
 			@Override
-			public void valueChange(Property.ValueChangeEvent event) {				
+			public void valueChange(Property.ValueChangeEvent event) {
+				if (event.getProperty().getValue() == null)
+					return;
+				
 				String productCode = event.getProperty().getValue().toString();
 		    	
 		    	if (productCode != null && !productCode.isEmpty()) {
@@ -162,11 +165,11 @@ public class ProductSelectorField extends AbstractField {
 		btnAddEntity.setVisible(addEntityVisible);
 	}
 	
-	@Override
+	/*@Override
     public void focus() {
 		productField.focus();
 		
-	}
+	}*/
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void getServices() {
