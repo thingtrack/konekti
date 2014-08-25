@@ -2,7 +2,6 @@ package com.thingtrack.konekti.view.module.sensor.internal;
 
 import com.thingtrack.konekti.service.sensor.api.SensorLocationService;
 import com.thingtrack.konekti.service.sensor.api.SensorMessageService;
-import com.thingtrack.konekti.service.sensor.api.SensorService;
 import com.thingtrack.konekti.service.sensor.api.SensorTelemetryService;
 import com.thingtrack.konekti.view.addon.ui.AbstractView;
 import com.thingtrack.konekti.view.addon.ui.DataGridView;
