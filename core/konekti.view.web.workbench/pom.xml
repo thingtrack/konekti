@@ -56,14 +56,7 @@
 			<version>0.0.1.SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>com.thingtrack</groupId>
-			<artifactId>com.vaadin.addons.osgi.servlet</artifactId>
-			<version>1.0.0</version>
-			<scope>provided</scope>
-		</dependency>
-		
+				
 		<!-- Thingtrack Backend Dependencies -->
 		<dependency>
 			<groupId>com.thingtrack</groupId>
