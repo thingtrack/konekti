@@ -116,7 +116,7 @@ public class EmployeeAgentView extends AbstractView
 			
 			// add visible and collapsed  columns
 			dgEmployeeAgent.setVisibleColumns(new String[] { "agentId", "workNumber", "tittle", "employeeAgentType.description", "shortname", "name", "surname", "email", "phone", "mobile", "workMobile", "fax", "nif", "facebookId", "comment", "seniority", "address.street", "employeeAgentStatus.description" } );       
-			dgEmployeeAgent.setColumnHeaders(new String[] { "Id", "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Usuario", "Estado" } );
+			dgEmployeeAgent.setColumnHeaders(new String[] { "Id", "Número Trabajador", "Titular", "Tipo", "Nombre Corto", "Nombre", "Apellidos", "Email", "Teléfono", "Móvil", "Móbil Empresa", "Fax", "NIF", "Cuenta Facebook", "Comentarios", "Antigüedad", "Dirección", "Estado" } );
 			
 			dgEmployeeAgent.setColumnCollapsed("agentId", true);
 			dgEmployeeAgent.setColumnCollapsed("tittle", true);
@@ -437,7 +437,6 @@ public class EmployeeAgentView extends AbstractView
 				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.comment"),
 				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.seniority"),
 				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.address"),
-				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.user"),
 				  getI18N().getMessage("com.thingtrack.konekti.view.module.employee.internal.EmployeeAgentView.dgEmployeeAgent.column.status")});
 		
 	}
