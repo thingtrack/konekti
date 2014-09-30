@@ -63,9 +63,18 @@ public class UserOrganizationCollectionField extends AbstractField {
 			try {
 				fillTreeTable();
 				
-				// Expand the tree
-				for (Object itemId: userOrganizationTreeTable.getItemIds())
-					userOrganizationTreeTable.setCollapsed(itemId, false);
+				// Expand the tree and remove children in the area item og the tree
+				for (Object organizationItemId: userOrganizationTreeTable.getItemIds()) {
+					userOrganizationTreeTable.setCollapsed(organizationItemId, false);
+					
+					for (Object locationItemId : userOrganizationTreeTable.getChildren(organizationItemId)) {
+						userOrganizationTreeTable.setCollapsed(locationItemId, false);
+						
+						for (Object areaItemId : userOrganizationTreeTable.getChildren(locationItemId))
+							userOrganizationTreeTable.setChildrenAllowed(areaItemId, false);
+					}
+					
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
