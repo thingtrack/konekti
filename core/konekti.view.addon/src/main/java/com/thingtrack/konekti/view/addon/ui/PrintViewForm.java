@@ -36,6 +36,7 @@ public class PrintViewForm extends Window {
 		setModal(true);
 		setResizable(false);
 		center();
+		
 	}
 	
 	public String getReportTittle() {
