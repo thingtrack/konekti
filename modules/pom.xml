@@ -35,6 +35,7 @@
 		<module>konekti.view.module.sensor</module>		
 		<module>konekti.view.module.stock</module>
 		<module>konekti.view.module.supplier</module>
+		<module>konekti.view.module.integration</module>
 	</modules>
 
 	<dependencies>
@@ -106,6 +107,5 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 
 </project>
