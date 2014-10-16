@@ -36,6 +36,7 @@
 		<module>konekti.view.module.stock</module>
 		<module>konekti.view.module.supplier</module>
 		<module>konekti.view.module.integration</module>
+		<module>konekti.view.module.log</module>
 	</modules>
 
 	<dependencies>
