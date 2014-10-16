@@ -39,6 +39,7 @@ public class ConfigurationView extends AbstractView implements
 
 	/*- VaadinEditorProperties={"grid":"RegularGrid,20","showGrid":true,"snapToGrid":true,"snapToObject":true,"movingGuides":false,"snappingDistance":10} */
 
+	
 	private ConfigurationService configurationService;
 	
 	private BindingSource<Configuration> bsConfiguration = new BindingSource<Configuration>(Configuration.class, 0);
