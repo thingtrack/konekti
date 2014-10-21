@@ -47,14 +47,14 @@ public class ConfigurationDaoImpl extends JpaDao<Configuration, Integer> impleme
 		
 		queryString.append( " WHERE p.tag = :tag");
 		
-		if (user.getActiveOrganization() != null)
+		if (user != null && user.getActiveOrganization() != null)
 			queryString.append( " AND (p.organization IS NULL OR p.organization = :organization)");
 			
 		Query query = (Query) getEntityManager().createQuery(queryString.toString());
 		
 		query.setParameter("tag", tag);
 		
-		if (user.getActiveOrganization() != null)
+		if (user != null && user.getActiveOrganization() != null)
 			query.setParameter("organization", user.getActiveOrganization());
 		
 		return (Configuration) query.getSingleResult();
