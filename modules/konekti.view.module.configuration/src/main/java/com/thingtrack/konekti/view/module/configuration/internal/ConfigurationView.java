@@ -88,8 +88,8 @@ public class ConfigurationView extends AbstractView implements
 			
 			// set visible and collapsed columns
 			dgConfiguration.setVisibleColumns(new String[] { "configurationId", "organization.name", "tag", "description", "type", "value", "menuCommandResource.caption" });
-			dgConfiguration.setColumnHeaders(new String[] { "Id", "Organizacion", "Tag", "Descripción", "Tipo", "Valor", "Modulo" });								
-
+			dgConfiguration.setColumnHeaders(new String[] { "Id", "Organizacion", "Tag", "Descripción", "Tipo", "Valor", "Modulo" });																
+			
 			dgConfiguration.setColumnCollapsed("configurationId", true);
 		} catch (Exception ex) {
 			ex.getMessage();
