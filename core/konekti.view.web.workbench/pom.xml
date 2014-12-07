@@ -151,6 +151,14 @@
 	        <version>1.1-rev-1</version>
 	        <scope>provided</scope>
      	</dependency>
+     	
+     	<!-- OSGI Core API -->
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>5.0.0</version>
+			<scope>provided</scope>
+		</dependency>
      </dependencies>
 
 	<!-- ================================================ -->

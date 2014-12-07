@@ -196,10 +196,8 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 	// Overriding getWindow(String) is required to get multiple browser windows/tabs to work
 	/*@Override
 	public Window getWindow(String name) {
-
 		// If the window is identified by name, we are good to go
 		Window w = super.getWindow(name);
-
 		// If not, we must create a new window for this new browser window/tab
 		if (w == null) {			
 			//w = new CalcWindow();
@@ -209,11 +207,9 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			// window in future
 			w.setName(name);
 			addWindow(w);
-
 			// Move to the url to remember the name in the future
 			w.open(new ExternalResource(w.getURL()));
 		}
-
 		return w;
 	}*/
 		
@@ -330,7 +326,7 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 			MenuWorkbench menuDefault = menuResources.get(DEFAULT_MENU_ID);
 
 			for (MenuFolderResource menuFolderResource : menuDefault.getMenuFolderResource()) {
-				// add new header menu item
+				// add new menu item
 				headMenuItem = konektiLayout.getMenuLayout()
 						.addMenuItem(
 								i18n.getMessage(menuFolderResource.getKeyCaption()),
@@ -339,29 +335,37 @@ public class Main extends SpringContextApplication implements IMetadataModuleSer
 
 				// recursive menu manage
 				getMenu(menuFolderResource, headMenuItem, user);
+				
+				// remove menu items if don't have any command
+				if (!headMenuItem.hasChildren())
+					konektiLayout.getMenuLayout().removeItem(headMenuItem);
 			}
-
 		} catch (Exception e) {
 			e.getMessage();
 		}
 	}
 	
-	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId, User user) {		
+	private void getMenu(MenuFolderResource menuFolderResource, MenuItem itemParentId, User user) {
 		for (final MenuResource menuResource : menuFolderResource.getMenuResources()) {
 			if (menuResource instanceof MenuFolderResource) {
-				// add new header menu item
-				MenuItem headMenuItem = konektiLayout.getMenuLayout().addMenuItem(
-								i18n.getMessage(menuFolderResource.getKeyCaption()),
-								getIcon(menuResource.getIcon(),menuResource.getCaption()),
-								itemParentId, null);
+				// add new submenu item
+				MenuItem headMenuResourceItem = konektiLayout.getMenuLayout().addMenuItem(
+							i18n.getMessage(menuFolderResource.getKeyCaption()),
+							getIcon(menuResource.getIcon(),menuResource.getCaption()),
+							itemParentId, null);
 
 				// recursive menu manage
-				getMenu((MenuFolderResource) menuResource, headMenuItem, user);
+				getMenu((MenuFolderResource) menuResource, headMenuResourceItem, user);
+				
+				// remove submenu items if don't have any command
+				if (!headMenuResourceItem.hasChildren())
+					itemParentId.removeChild(headMenuResourceItem);
+				
 			} else {
 				if (((MenuCommandResource) menuResource).getType() == MenuCommandResource.TYPE.SEPARATOR)
 					itemParentId.addSeparator();
 				else {
-					// check if existe VIEW permission for each module for the active user role
+					// check if exist VIEW permission for each module for the active user role
 					if (getCommandPermission(user, (MenuCommandResource) menuResource)) {
 						// default menu command
 						Command defaultCommand = new Command() {
